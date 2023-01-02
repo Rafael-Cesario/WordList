@@ -26,30 +26,6 @@ export const StyledLogin = styled.div`
 		padding: 2rem;
 	}
 
-	.email,
-	.password {
-		margin: 2rem;
-		position: relative;
-
-		input {
-			width: 20rem;
-		}
-
-		label {
-			display: block;
-			margin-bottom: 10px;
-			font-size: 0.9rem;
-		}
-
-		.icon {
-			filter: invert(50%);
-			position: absolute;
-			top: 0;
-			right: 0;
-			margin: 0 1rem;
-		}
-	}
-
 	.confirm {
 		margin: 2rem 0;
 		background-color: #00000050;

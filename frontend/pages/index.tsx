@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useState } from 'react';
+import { CreateAccountForm } from '../components/createAccountForm/createAccountForm';
 import { LoginForm } from '../components/loginForm/loginForm';
 import { StyledMain } from '../styles/styledMain';
 
@@ -30,7 +31,7 @@ const Home = () => {
 				</div>
 
 				{showForm === 'login' && <LoginForm props={{ changeFormState }} />}
-				{showForm === 'create' && <h1>Criar Conta</h1>}
+				{showForm === 'create' && <CreateAccountForm />}
 			</StyledMain>
 		</>
 	);

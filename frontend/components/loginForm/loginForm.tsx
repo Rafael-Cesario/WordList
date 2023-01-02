@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { useState } from 'react';
+import { PasswordInput, TextInput } from '../inputs/inputs';
 import { StyledLogin } from './styledLogin';
 
 interface LoginFormProps {
@@ -10,7 +9,6 @@ interface LoginFormProps {
 
 export const LoginForm = ({ props }: LoginFormProps) => {
 	const { changeFormState } = props;
-	const [showPassword, setShowPassword] = useState(false);
 
 	return (
 		<StyledLogin>
@@ -20,22 +18,8 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 			</button>
 
 			<div className='inputs'>
-				<div className='email'>
-					<label htmlFor='email'>Email</label>
-					<input type='text' placeholder='Email' id='email' />
-				</div>
-
-				<div className='password'>
-					<label htmlFor='password'>Senha</label>
-					<input type={showPassword ? 'text' : 'password'} placeholder='Senha' id='password' />
-					<button className='icon' onClick={() => setShowPassword(!showPassword)}>
-						{showPassword ? (
-							<Image src='/icons/eyeOpen.png' width={20} height={20} alt='icon png' />
-						) : (
-							<Image src='/icons/eyeClose.png' width={20} height={20} alt='icon png' />
-						)}
-					</button>
-				</div>
+				<TextInput props={{ name: 'email' }} />
+				<PasswordInput />
 			</div>
 
 			<button className='confirm'>Login</button>
