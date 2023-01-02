@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { CreateAccountForm } from '../components/createAccountForm/createAccountForm';
-import { LoginForm } from '../components/loginForm/loginForm';
+import { CreateAccountForm } from '../components/forms/createAccountForm';
+import { LoginForm } from '../components/forms/loginForm';
 import { StyledMain } from '../styles/styledMain';
 
 const Home = () => {
 	const [showForm, setShowForm] = useState('');
 
 	const changeFormState = (formName: string) => {
-		if (showForm) return setShowForm('');
+		if (showForm === formName) return setShowForm('');
 		setShowForm(formName);
 	};
 
@@ -31,7 +31,7 @@ const Home = () => {
 				</div>
 
 				{showForm === 'login' && <LoginForm props={{ changeFormState }} />}
-				{showForm === 'create' && <CreateAccountForm />}
+				{showForm === 'create' && <CreateAccountForm props={{ changeFormState }} />}
 			</StyledMain>
 		</>
 	);

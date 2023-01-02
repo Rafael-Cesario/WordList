@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-export const StyledLogin = styled.div`
+export const StyledForm = styled.form`
 	position: absolute;
 	background-color: #151515;
 	width: 80vw;
 	height: 80vh;
 	display: flex;
 
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 
 	display: flex;
 	flex-direction: column;
