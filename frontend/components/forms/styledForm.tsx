@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledForm = styled.form`
+export const StyledForm = styled.div`
 	position: absolute;
 	background-color: #151515;
 	width: 80vw;

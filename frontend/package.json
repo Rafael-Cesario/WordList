@@ -18,6 +18,7 @@
     "@typescript-eslint/parser": "^5.47.1",
     "eslint": "^8.31.0",
     "eslint-plugin-react": "^7.31.11",
+    "immer": "^9.0.17",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

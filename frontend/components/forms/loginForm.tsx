@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { PasswordInput, TextInput } from './inputs/inputs';
 import { StyledForm } from './styledForm';
 
@@ -9,6 +10,7 @@ interface LoginFormProps {
 
 export const LoginForm = ({ props }: LoginFormProps) => {
 	const { changeFormState } = props;
+	const [values, setValues] = useState({});
 
 	return (
 		<StyledForm>
@@ -18,8 +20,8 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 			</button>
 
 			<div className='inputs'>
-				<TextInput props={{ name: 'email', content: 'Email' }} />
-				<PasswordInput props={{ name: 'password', content: 'Senha' }} />
+				<TextInput props={{ name: 'email', content: 'Email', values, setValues }} />
+				<PasswordInput props={{ name: 'password', content: 'Senha', values, setValues }} />
 			</div>
 
 			<button className='confirm'>Login</button>
