@@ -15,7 +15,8 @@
 	"rules": {
 		"indent": ["error", "tab"],
 		"quotes": ["error", "single"],
-		"semi": ["error", "always"]
+		"semi": ["error", "always"],
+		"react/prop-types": "off"
 	},
 
 	"globals": { "React": true }

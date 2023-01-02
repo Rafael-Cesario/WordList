@@ -2,13 +2,22 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { StyledLogin } from './styledLogin';
 
-export const LoginForm = () => {
+interface LoginFormProps {
+	props: {
+		changeFormState: (formName: string) => void;
+	};
+}
+
+export const LoginForm = ({ props }: LoginFormProps) => {
+	const { changeFormState } = props;
 	const [showPassword, setShowPassword] = useState(false);
 
 	return (
 		<StyledLogin>
 			<h1>Login</h1>
-			<button className='close'>x</button>
+			<button onClick={() => changeFormState('login')} className='close'>
+				x
+			</button>
 
 			<div className='inputs'>
 				<div className='email'>

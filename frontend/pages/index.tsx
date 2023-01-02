@@ -29,7 +29,7 @@ const Home = () => {
 					<button onClick={() => changeFormState('create')}>Criar Conta</button>
 				</div>
 
-				{showForm === 'login' && <LoginForm />}
+				{showForm === 'login' && <LoginForm props={{ changeFormState }} />}
 				{showForm === 'create' && <h1>Criar Conta</h1>}
 			</StyledMain>
 		</>
