@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { StyledMain } from '../styles/styledMain';
 
 const Home = () => {
 	return (
@@ -10,9 +11,15 @@ const Home = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main>
-				<h1>Hello World</h1>
-			</main>
+			<StyledMain>
+				<h1>WordList</h1>
+				<p className='para'>Um site para memorizar palavras</p>
+
+				<div className='menu'>
+					<button>Login</button>
+					<button>Criar Conta</button>
+				</div>
+			</StyledMain>
 		</>
 	);
 };
