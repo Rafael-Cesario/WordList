@@ -1,7 +1,16 @@
 import Head from 'next/head';
+import { useState } from 'react';
+import { LoginForm } from '../components/loginForm/loginForm';
 import { StyledMain } from '../styles/styledMain';
 
 const Home = () => {
+	const [showForm, setShowForm] = useState('');
+
+	const changeFormState = (formName: string) => {
+		if (showForm) return setShowForm('');
+		setShowForm(formName);
+	};
+
 	return (
 		<>
 			<Head>
@@ -12,13 +21,16 @@ const Home = () => {
 			</Head>
 
 			<StyledMain>
-				<h1>WordList</h1>
+				<h1 className='title'>WordList</h1>
 				<p className='para'>Um site para memorizar palavras</p>
 
 				<div className='menu'>
-					<button>Login</button>
-					<button>Criar Conta</button>
+					<button onClick={() => changeFormState('login')}>Login</button>
+					<button onClick={() => changeFormState('create')}>Criar Conta</button>
 				</div>
+
+				{showForm === 'login' && <LoginForm />}
+				{showForm === 'create' && <h1>Criar Conta</h1>}
 			</StyledMain>
 		</>
 	);

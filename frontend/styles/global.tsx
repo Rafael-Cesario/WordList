@@ -13,10 +13,26 @@ export const StyledGlobal = createGlobalStyle`
 		color: #ddd;
 	}
 
+	button, input, label {
+		outline:none;
+		border:none;
+	}
+
 	button {
-		outline: none;
-		border: none;
-		background-color: transparent;
 		cursor: pointer;
+		background-color: transparent;
+		color: #ddd;
+	}
+
+	label {
+		cursor: pointer;
+	}
+
+	input {
+		background-color: #00000050;
+		padding: 10px 20px;
+		border-radius: 5px;
+		font-size: 1rem;
+		color: #ddd;
 	}
 `;
