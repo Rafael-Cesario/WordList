@@ -32,7 +32,7 @@ export const TextInput = ({ props }: InputsProps) => {
 			<label htmlFor={name} data-name={content}>
 				{content}
 			</label>
-			<input onChange={e => changeValue(e.target)} type='text' placeholder={content} id={name} required />
+			<input onChange={e => changeValue(e.target)} type='text' value={values[name] || ''} placeholder={content} id={name} required />
 		</StyledInput>
 	);
 };
@@ -56,7 +56,14 @@ export const PasswordInput = ({ props }: InputsProps) => {
 			<label htmlFor={name} data-name={content}>
 				{content}
 			</label>
-			<input onChange={e => changeValue(e.target)} type={showPassword ? 'text' : 'password'} placeholder={content} id={name} required />
+			<input
+				onChange={e => changeValue(e.target)}
+				type={showPassword ? 'text' : 'password'}
+				value={values[name] || ''}
+				placeholder={content}
+				id={name}
+				required
+			/>
 			<button className='icon' onClick={() => setShowPassword(!showPassword)}>
 				{showPassword && <Image src='/icons/eyeOpen.png' width={20} height={20} alt='icon png' />}
 				{showPassword || <Image src='/icons/eyeClose.png' width={20} height={20} alt='icon png' />}

@@ -13,6 +13,7 @@ interface CreateAccountProps {
 export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 	const { changeFormState } = props;
 	const [values, setValues] = useState<{ [key: string]: string }>({});
+	const [showNotification, setShowNotification] = useState(false);
 
 	const submit = () => {
 		const { email, name, password, confirmPassword } = values;
@@ -27,7 +28,15 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 		const hasErrors = verifyValues(fields);
 		if (hasErrors) return;
 
+		// TODO: Create new account
 		console.log('sending values');
+
+		setShowNotification(true);
+		setValues({});
+
+		setTimeout(() => {
+			setShowNotification(false);
+		}, 5000);
 	};
 
 	return (
@@ -47,6 +56,8 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 			<button onClick={() => submit()} className='confirm'>
 				Criar Conta
 			</button>
+
+			{showNotification && <h1 className='notification'>Uma nova conta foi criada</h1>}
 		</StyledForm>
 	);
 };

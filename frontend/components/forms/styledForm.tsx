@@ -34,6 +34,29 @@ export const StyledForm = styled.div`
 		font-weight: bold;
 	}
 
+	.notification {
+		position: absolute;
+		bottom: -10vh;
+		right: -10vw;
+		background-color: forestgreen;
+		border-radius: 5px;
+		padding: 10px 20px;
+		font-weight: normal;
+		font-size: 1rem;
+		margin: 2rem;
+		animation: notification 0.3s ease;
+
+		@keyframes notification {
+			0% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+	}
+
 	.error {
 		label {
 			color: crimson;
