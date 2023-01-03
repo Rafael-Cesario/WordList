@@ -33,4 +33,14 @@ export const StyledForm = styled.div`
 		padding: 10px 20px;
 		font-weight: bold;
 	}
+
+	.error {
+		label {
+			color: crimson;
+		}
+
+		input {
+			border: 1px solid crimson;
+		}
+	}
 `;

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { validations } from '../../utils/validations';
+import { verifyValues } from '../../utils/verifyValues';
 import { PasswordInput, TextInput } from './inputs/inputs';
 import { StyledForm } from './styledForm';
 
@@ -10,7 +12,21 @@ interface LoginFormProps {
 
 export const LoginForm = ({ props }: LoginFormProps) => {
 	const { changeFormState } = props;
-	const [values, setValues] = useState({});
+	const [values, setValues] = useState<{ [key: string]: string }>({});
+
+	const submit = () => {
+		const { email, password } = values;
+
+		const fields = {
+			email: validations.email(email),
+			password: validations.password(password),
+		};
+
+		const hasErrors = verifyValues(fields);
+		if (hasErrors) return;
+
+		console.log('sending values');
+	};
 
 	return (
 		<StyledForm>
@@ -24,7 +40,9 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 				<PasswordInput props={{ name: 'password', content: 'Senha', values, setValues }} />
 			</div>
 
-			<button className='confirm'>Login</button>
+			<button onClick={() => submit()} className='confirm'>
+				Login
+			</button>
 		</StyledForm>
 	);
 };

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { validations } from '../../utils/validations';
+import { verifyValues } from '../../utils/verifyValues';
 import { PasswordInput, TextInput } from './inputs/inputs';
 import { StyledForm } from './styledForm';
 
@@ -10,11 +12,22 @@ interface CreateAccountProps {
 
 export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 	const { changeFormState } = props;
-	const [values, setValues] = useState({});
+	const [values, setValues] = useState<{ [key: string]: string }>({});
 
 	const submit = () => {
-		console.log('form');
-		console.log({ values });
+		const { email, name, password, confirmPassword } = values;
+
+		const fields = {
+			email: validations.email(email),
+			name: validations.name(name),
+			password: validations.password(password),
+			confirmPassword: validations.confirmPassword(password, confirmPassword),
+		};
+
+		const hasErrors = verifyValues(fields);
+		if (hasErrors) return;
+
+		console.log('sending values');
 	};
 
 	return (
