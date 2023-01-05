@@ -3,7 +3,7 @@ import { CreateUserArgs } from '../types/userType';
 
 export const userResolver = {
 	Query: {
-		hello: () => 'Hello World',
+		readUser: (parent: any, args: { email: string }) => userService.readUser(args),
 	},
 
 	Mutation: {

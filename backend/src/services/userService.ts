@@ -9,6 +9,15 @@ class UserService {
 
 		return { message };
 	}
+
+	async readUser(args: { email: string }) {
+		const { email } = args;
+		const user = await userRepository.findByEmail(email);
+		if (user) user.password = '';
+		const message = 'User found';
+
+		return { user, message };
+	}
 }
 
 export const userService = new UserService();
