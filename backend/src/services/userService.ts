@@ -1,4 +1,4 @@
-import { CreateUserArgs } from '../types/userType';
+import { CreateUserArgs } from '../schemas/types/userType';
 
 class UserService {
 	createUser(args: CreateUserArgs) {

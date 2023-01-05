@@ -25,6 +25,10 @@ export const userTypeDefs = `#graphql
 		message: String!
 	}
 
+	type Query {
+		hello: String!
+	}
+
 	type Mutation {
 		createUser ( user: UserInput ) : Response!
 	}
