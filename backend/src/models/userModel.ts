@@ -1,7 +1,9 @@
 import { prop, index, pre, getModelForClass } from '@typegoose/typegoose';
+import { encryptPassword } from '../utils/crypt';
 
 @pre<User>('save', function () {
-	console.log(this.password);
+	const encryptedPassword = encryptPassword(this.password);
+	this.password = encryptedPassword;
 })
 @index({ email: 1 }, { unique: true })
 class User {
