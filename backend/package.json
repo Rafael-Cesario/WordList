@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@apollo/server": "^4.3.0",
 		"@graphql-tools/schema": "^9.0.12",
+		"@typegoose/typegoose": "^10.0.0",
 		"@types/node": "^18.11.18",
 		"dotenv": "^16.0.3",
 		"graphql": "^16.6.0",
