@@ -22,11 +22,12 @@ export const userTypeDefs = `#graphql
 	}
 
 	type Response {
+		user: User
 		message: String!
 	}
 
 	type Query {
-		hello: String!
+		readUser (email: String!) : Response!
 	}
 
 	type Mutation {
