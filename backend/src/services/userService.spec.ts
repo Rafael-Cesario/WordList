@@ -4,8 +4,8 @@ import { UserType } from '../schemas/types/userType';
 import { encryptPassword } from '../utils/crypt';
 import { UserService } from './userService';
 
-class UserRepositoryMock implements UserRepository {
-	private users = [{ email: 'teste@teste.com', name: 'teste', password: '123' }];
+class UserRepositoryMock extends UserRepository {
+	private users: UserType[] = [];
 
 	async createUser(user: UserType) {
 		const hash = encryptPassword(user.password);
