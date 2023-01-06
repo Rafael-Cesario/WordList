@@ -25,4 +25,23 @@ describe('User Service', () => {
 		expect(response).toHaveProperty('message');
 		expect(response.message).toBe('New user created');
 	});
+
+	it('returns a user', async () => {
+		const email = 'teste@teste.com';
+		const response = await userService.readUser({ email });
+
+		expect(response.user.email).toBe(email);
+		expect(response.user.password).toBe('');
+		expect(response.message).toBe('User found');
+	});
+
+	it('Returns a empty user', async () => {
+		const email = 'dummy@teste.com';
+		const response = await userService.readUser({ email });
+
+		expect(response.user).toBeUndefined();
+		expect(response.message).toBe('User not found');
+	});
+
+	it.todo('login a user', () => {});
 });
