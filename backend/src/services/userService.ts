@@ -1,5 +1,5 @@
 import { userRepository } from '../repositories/userRepository';
-import { CreateUserArgs } from '../schemas/types/userType';
+import { CreateUserArgs, LoginArgs } from '../schemas/types/userType';
 
 class UserService {
 	async createUser(args: CreateUserArgs) {
@@ -17,6 +17,13 @@ class UserService {
 		const message = 'User found';
 
 		return { user, message };
+	}
+
+	async login(args: LoginArgs) {
+		const message = 'Login';
+		const token = 'açslkfjç432lk5j23ç4l5kjç23lk45ç23l4k5j';
+
+		return { message, token };
 	}
 }
 

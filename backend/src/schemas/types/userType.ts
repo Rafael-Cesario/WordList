@@ -8,6 +8,13 @@ export type CreateUserArgs = {
 	user: UserType;
 };
 
+export type LoginArgs = {
+	user: {
+		email: string;
+		password: string;
+	};
+};
+
 export const userTypeDefs = `#graphql
 	type User {
 		email: String!
@@ -21,9 +28,19 @@ export const userTypeDefs = `#graphql
 		password: String!
 	}
 
+	input LoginInput {
+		email: String!
+		password: String!
+	}
+
 	type Response {
 		user: User
 		message: String!
+	}
+
+	type LoginResponse {
+		message: String!
+		token: String
 	}
 
 	type Query {
@@ -32,5 +49,6 @@ export const userTypeDefs = `#graphql
 
 	type Mutation {
 		createUser ( user: UserInput ) : Response!
+		login ( user: LoginInput ) : LoginResponse!
 	}
 `;
