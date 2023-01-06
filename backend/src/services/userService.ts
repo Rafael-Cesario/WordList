@@ -1,5 +1,8 @@
+import { GraphQLError } from 'graphql';
 import { userRepository } from '../repositories/userRepository';
 import { CreateUserArgs, LoginArgs } from '../schemas/types/userType';
+import { decryptPassword } from '../utils/crypt';
+import { genToken } from '../utils/token';
 
 class UserService {
 	async createUser(args: CreateUserArgs) {
@@ -20,8 +23,16 @@ class UserService {
 	}
 
 	async login(args: LoginArgs) {
+		const { email, password } = args.user;
+
+		const user = await userRepository.findByEmail(email);
+		if (!user) throw new GraphQLError('Email/password is wrong');
+
+		const wrongPassword = decryptPassword(password, user.password);
+		if (wrongPassword) throw new GraphQLError('Email/password is wrong');
+
 		const message = 'Login';
-		const token = 'açslkfjç432lk5j23ç4l5kjç23lk45ç23l4k5j';
+		const token = genToken(email);
 
 		return { message, token };
 	}
