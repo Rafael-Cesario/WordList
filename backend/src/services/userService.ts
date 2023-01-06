@@ -19,7 +19,7 @@ export class UserService {
 		const { email } = args;
 		const user = await this.userRepository.findByEmail(email);
 		if (user) user.password = '';
-		const message = 'User found';
+		const message = user ? 'User found' : 'User not found';
 
 		return { user, message };
 	}
