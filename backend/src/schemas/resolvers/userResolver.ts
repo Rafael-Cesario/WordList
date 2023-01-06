@@ -1,5 +1,7 @@
-import { userService } from '../../services/userService';
+import { UserService } from '../../services/userService';
 import { CreateUserArgs, LoginArgs } from '../types/userType';
+
+const userService = new UserService();
 
 export const userResolver = {
 	Query: {

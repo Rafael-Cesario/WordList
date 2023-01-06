@@ -2,7 +2,8 @@ import { GraphQLError } from 'graphql';
 import { UserModel } from '../models/userModel';
 import { UserType } from '../schemas/types/userType';
 
-class UserRepository {
+
+export class UserRepository{
 	async createUser(user: UserType) {
 		try {
 			await UserModel.create(user);
@@ -13,7 +14,7 @@ class UserRepository {
 
 	async findByEmail(email: string) {
 		try {
-			const user = await UserModel.findOne({ email });
+			const user = await UserModel.findOne({ email }) as UserType;
 			return user;
 		} catch (error: any) {
 			throw new GraphQLError('Find User: ' + error.message);
