@@ -8,3 +8,22 @@ export const READ_USER = `#graphql
 		}
 	}
 `;
+
+export const CREATE_USER = `#graphql
+	mutation CreateUser ($user: UserInput! ) {
+		createUser (user: $user) {
+			message,
+			user {
+				email, name, password
+			}
+		}
+	}
+`;
+
+export const LOGIN = `#graphql
+	mutation Login ($user:LoginInput!) {
+		login (user: $user ) {
+			message, token
+		}
+	}
+`;
