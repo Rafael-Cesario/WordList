@@ -2,17 +2,8 @@ import mongoose from 'mongoose';
 import { startServer, server } from '../app';
 import { startDatabase } from '../database';
 import { UserModel } from '../models/userModel';
-import { CREATE_USER, READ_USER } from './queries';
 import { test, describe, expect, beforeAll, afterEach, afterAll } from 'vitest';
-
-interface ResponseType {
-	body: {
-		singleResult: {
-			data: { [key: string]: any };
-			errors?: {};
-		};
-	};
-}
+import { createUser, readUser } from './queries';
 
 describe('User', () => {
 	beforeAll(async () => {
@@ -35,20 +26,9 @@ describe('User', () => {
 		password: '123',
 	};
 
-	const createUser = async () => {
-		(await server.executeOperation({
-			query: CREATE_USER,
-			variables: { user },
-		})) as ResponseType;
-	};
-
 	describe('Read user', () => {
 		test('User not found', async () => {
-			const response = (await server.executeOperation({
-				query: READ_USER,
-				variables: { email: 'test@test.com' },
-			})) as ResponseType;
-
+			const response = await readUser(user.email);
 			const data = response.body.singleResult.data.readUser;
 
 			expect(data.message).toBe('User not found');
@@ -56,13 +36,9 @@ describe('User', () => {
 		});
 
 		test('User found', async () => {
-			await createUser();
+			await createUser(user);
 
-			const response = (await server.executeOperation({
-				query: READ_USER,
-				variables: { email: user.email },
-			})) as ResponseType;
-
+			const response = await readUser(user.email);
 			const data = response.body.singleResult.data.readUser;
 
 			expect(data.message).toBe('User found');
