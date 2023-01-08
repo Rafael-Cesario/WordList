@@ -10,5 +10,5 @@ if (environment === 'development ') url += '-development';
 export const startDatabase = async () => {
 	mongoose.set('strictQuery', true);
 	await mongoose.connect(url);
-	console.log('DB connected');
+	environment === 'test' || console.log('DB connected');
 };
