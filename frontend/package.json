@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.3",
     "@next/font": "13.1.1",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
@@ -19,6 +20,7 @@
     "babel-plugin-styled-components": "^2.0.7",
     "eslint": "^8.31.0",
     "eslint-plugin-react": "^7.31.11",
+    "graphql": "^16.6.0",
     "immer": "^9.0.17",
     "next": "13.1.1",
     "react": "18.2.0",
