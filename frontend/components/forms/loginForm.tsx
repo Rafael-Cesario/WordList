@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { login } from '../../services/queries';
-import { validations } from '../../utils/validations';
-import { verifyValues } from '../../utils/verifyValues';
 import { PasswordInput, TextInput } from './inputs/inputs';
 import { StyledForm } from './styledForm';
 
@@ -20,17 +18,8 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 	const submit = async () => {
 		const { email, password } = values;
 
-		const fields = {
-			email: validations.email(email),
-			password: validations.password(password),
-		};
-
-		const hasErrors = verifyValues(fields);
-		if (hasErrors) return;
-
-		console.log('Doing Login');
 		const response = await login({ email, password });
-		console.log({ response });
+		if (response.error) return console.log(response);
 
 		setValues({});
 		router.push('/main');

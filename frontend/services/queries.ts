@@ -1,4 +1,5 @@
-import { LoginInterface, UserInterface } from '../interfaces/userInterface';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { LoginInterface, ResponseInterface, UserInterface } from '../interfaces/userInterface';
 import { client } from './client';
 import { CREATE_USER, LOGIN } from './queriesTypes';
 
@@ -11,11 +12,15 @@ export const createUser = async (user: UserInterface) => {
 	return response;
 };
 
-export const login = async (user: LoginInterface) => {
-	const response = await client.mutate({
-		mutation: LOGIN,
-		variables: { user },
-	});
+export const login = async (user: LoginInterface): Promise<ResponseInterface> => {
+	try {
+		const response = await client.mutate({
+			mutation: LOGIN,
+			variables: { user },
+		});
 
-	return response;
+		return response;
+	} catch (error: any) {
+		return { error: error.message };
+	}
 };
