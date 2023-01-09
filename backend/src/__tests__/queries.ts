@@ -5,7 +5,7 @@ interface ResponseType {
 	body: {
 		singleResult: {
 			data: { [key: string]: any };
-			errors?: {};
+			errors?: { [key: string]: string }[];
 		};
 	};
 }
