@@ -1,4 +1,6 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { login } from '../../services/queries';
 import { validations } from '../../utils/validations';
 import { verifyValues } from '../../utils/verifyValues';
 import { PasswordInput, TextInput } from './inputs/inputs';
@@ -13,8 +15,9 @@ interface LoginFormProps {
 export const LoginForm = ({ props }: LoginFormProps) => {
 	const { changeFormState } = props;
 	const [values, setValues] = useState<{ [key: string]: string }>({});
+	const router = useRouter();
 
-	const submit = () => {
+	const submit = async () => {
 		const { email, password } = values;
 
 		const fields = {
@@ -25,7 +28,12 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 		const hasErrors = verifyValues(fields);
 		if (hasErrors) return;
 
-		console.log('sending values');
+		console.log('Doing Login');
+		const response = await login({ email, password });
+		console.log({ response });
+
+		setValues({});
+		router.push('/main');
 	};
 
 	return (
