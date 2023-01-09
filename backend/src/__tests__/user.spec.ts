@@ -3,7 +3,7 @@ import { startServer, server } from '../app';
 import { startDatabase } from '../database';
 import { UserModel } from '../models/userModel';
 import { test, describe, expect, beforeAll, afterEach, afterAll } from 'vitest';
-import { createUser, readUser } from './queries';
+import { createUser, login, readUser } from './queries';
 
 describe('User', () => {
 	beforeAll(async () => {
@@ -82,5 +82,37 @@ describe('User', () => {
 		});
 	});
 
-	describe.todo('login', () => {});
+	describe('Login', () => {
+		const { email, password } = user;
+
+		test('Returns a token after login', async () => {
+			await createUser(user);
+
+			const response = await login({ user: { email, password } });
+			const data = response.body.singleResult.data.login;
+
+			expect(data.message).toBe('Login');
+			expect(data.token).not.toBeNull();
+		});
+
+		test(`User doesn't exist`, async () => {
+			const response = await login({ user: { email, password } });
+			const error = response.body.singleResult.errors![0];
+			expect(error.message).toBe('Email/password is wrong');
+		});
+
+		test('Email is wrong', async () => {
+			await createUser(user);
+			const response = await login({ user: { email: 'wrong@test.com', password } });
+			const error = response.body.singleResult.errors![0];
+			expect(error.message).toBe('Email/password is wrong');
+		});
+
+		test('Password is wrong', async () => {
+			await createUser(user);
+			const response = await login({ user: { email, password: 'wrong' } });
+			const error = response.body.singleResult.errors![0];
+			expect(error.message).toBe('Email/password is wrong');
+		});
+	});
 });
