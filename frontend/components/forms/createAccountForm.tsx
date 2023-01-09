@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createUser } from '../../services/queries';
 import { validations } from '../../utils/validations';
 import { verifyValues } from '../../utils/verifyValues';
 import { PasswordInput, TextInput } from './inputs/inputs';
@@ -15,7 +16,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 	const [values, setValues] = useState<{ [key: string]: string }>({});
 	const [showNotification, setShowNotification] = useState(false);
 
-	const submit = () => {
+	const submit = async () => {
 		const { email, name, password, confirmPassword } = values;
 
 		const fields = {
@@ -30,6 +31,10 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 
 		// TODO: Create new account
 		console.log('sending values');
+
+		const user = { email, name, password };
+		const response = await createUser(user);
+		console.log({ response });
 
 		setShowNotification(true);
 		setValues({});
