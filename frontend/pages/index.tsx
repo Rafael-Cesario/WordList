@@ -1,16 +1,29 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { CreateAccountForm } from '../components/forms/createAccountForm';
 import { LoginForm } from '../components/forms/loginForm';
+import { getCookies } from '../services/cookies';
 import { StyledMain } from '../styles/styledMain';
 
 const Home = () => {
 	const [showForm, setShowForm] = useState('');
+	const router = useRouter();
 
 	const changeFormState = (formName: string) => {
 		if (showForm === formName) return setShowForm('');
 		setShowForm(formName);
 	};
+
+	const userAuthentication = async () => {
+		const response = await getCookies('token');
+		const authenticated = response.data.cookie;
+		if (authenticated) router.push('/main');
+	};
+
+	useEffect(() => {
+		userAuthentication();
+	}, []);
 
 	return (
 		<>
