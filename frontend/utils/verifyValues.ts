@@ -1,6 +1,10 @@
-import { removeError, sendError } from './error';
+type errorMessage = string;
 
-export const verifyValues = (fields: { [key: string]: string | undefined }) => {
+export const verifyValues = (
+	fields: { [key: string]: errorMessage | undefined },
+	sendError: (error: string) => void,
+	removeError: (key: string) => void
+) => {
 	const hasErrors = Object.values(fields).filter(value => value !== undefined);
 	const errors = Object.entries(fields);
 
