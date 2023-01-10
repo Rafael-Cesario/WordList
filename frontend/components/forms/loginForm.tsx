@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { setCookies } from '../../services/cookies';
 import { login } from '../../services/queries';
 import { removeError, sendError } from '../../utils/error';
 import { validations } from '../../utils/validations';
@@ -27,6 +28,9 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 
 		const response = await login({ email, password });
 		if (typeof response.error === 'object') return response.error.forEach(error => sendError(error));
+
+		const token = response.data?.login.token;
+		await setCookies(token);
 
 		setValues({});
 		router.push('/main');

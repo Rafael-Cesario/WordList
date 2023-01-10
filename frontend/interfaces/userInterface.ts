@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface UserInterface {
 	email: string;
 	name: string;
@@ -10,6 +11,6 @@ export interface LoginInterface {
 }
 
 export interface ResponseInterface {
-	data?: unknown;
+	data?: { [key: string]: any };
 	error?: string | string[];
 }
