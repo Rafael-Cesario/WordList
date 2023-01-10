@@ -11,5 +11,5 @@ export interface LoginInterface {
 
 export interface ResponseInterface {
 	data?: unknown;
-	error?: unknown;
+	error?: string | string[];
 }

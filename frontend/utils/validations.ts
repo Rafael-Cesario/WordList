@@ -23,6 +23,17 @@ class Validations {
 		if (!confirmPassword) return 'confirmPassword: Este campo não pode ficar vazio';
 		if (confirmPassword !== password) return 'confirmPassword: Suas senhas devem ser iguais';
 	}
+
+	emptyFields(fields: { [key: string]: string | undefined }) {
+		const empties: string[] = [];
+		const entries = Object.entries(fields);
+
+		entries.forEach(([key, value]) => {
+			value || empties.push(key + ': Este campo não pode ficar vazio');
+		});
+
+		return empties;
+	}
 }
 
 export const validations = new Validations();

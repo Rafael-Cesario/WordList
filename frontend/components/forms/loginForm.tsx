@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { login } from '../../services/queries';
+import { removeError, sendError } from '../../utils/error';
+import { validations } from '../../utils/validations';
 import { PasswordInput, TextInput } from './inputs/inputs';
 import { StyledForm } from './styledForm';
 
@@ -18,8 +20,13 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 	const submit = async () => {
 		const { email, password } = values;
 
+		const emptyValues = validations.emptyFields({ email, password });
+		if (emptyValues.length) return emptyValues.forEach(errorMessage => sendError(errorMessage));
+
+		['email', 'password'].forEach(value => removeError(value));
+
 		const response = await login({ email, password });
-		if (response.error) return console.log(response);
+		if (typeof response.error === 'object') return response.error.forEach(error => sendError(error));
 
 		setValues({});
 		router.push('/main');

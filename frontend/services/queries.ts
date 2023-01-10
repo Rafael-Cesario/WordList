@@ -21,6 +21,7 @@ export const login = async (user: LoginInterface): Promise<ResponseInterface> =>
 
 		return response;
 	} catch (error: any) {
+		if (error.message.startsWith('Email')) return { error: ['email: Email ou senha incorreta', 'password: Email ou senha incorreta'] };
 		return { error: error.message };
 	}
 };
