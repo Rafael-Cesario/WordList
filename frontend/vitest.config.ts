@@ -7,5 +7,7 @@ export default defineConfig({
 		watch: false,
 		reporters: 'verbose',
 		environment: 'jsdom',
+		globals: true,
+		css: false,
 	},
 });
