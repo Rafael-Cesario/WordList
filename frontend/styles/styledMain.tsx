@@ -7,9 +7,33 @@ export const StyledMain = styled.body`
 		display: flex;
 		justify-content: space-between;
 
-		button {
+		.buttons {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.perfil {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: relative;
+
+			.perfil-buttons {
+				background-color: #181818;
+				border-radius: 5px;
+				padding: 1rem;
+				position: absolute;
+				transform: translate(0, 2rem);
+			}
+		}
+
+		button,
+		a {
 			padding: 5px 10px;
 			font-weight: bold;
+			text-decoration: none;
+			color: #ddd;
+			font-size: 0.8rem;
 
 			:hover {
 				color: #aaa;
