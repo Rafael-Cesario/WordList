@@ -4,7 +4,7 @@ import { setCookies } from '../../../../services/cookies';
 import { login } from '../../../../services/queries';
 import { removeError, sendError } from '../../../../utils/error';
 import { validations } from '../../../../utils/validations';
-import { PasswordInput, TextInput } from '../inputs/inputs';
+import { PasswordInput, TextInput } from '../../../inputs/inputs';
 import { StyledForm } from './styledForm';
 
 interface LoginFormProps {

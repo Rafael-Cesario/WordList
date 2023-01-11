@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { NewList } from '../components/pages/main/newList';
 import { Perfil } from '../components/pages/main/perfil';
 import { StyledMain } from '../styles/styledMain';
 
@@ -12,7 +13,7 @@ const Main = () => {
 
 			<StyledMain>
 				<header className='menus'>
-					<button>Nova lista</button>
+					<NewList />
 
 					<div className='buttons'>
 						<Perfil />
