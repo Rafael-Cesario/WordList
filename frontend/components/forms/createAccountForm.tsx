@@ -30,12 +30,8 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 		const hasErrors = verifyValues(fields, sendError, removeError);
 		if (hasErrors) return;
 
-		// TODO: Create new account
-		console.log('sending values');
-
 		const user = { email, name, password };
-		const response = await createUser(user);
-		console.log({ response });
+		await createUser(user);
 
 		setShowNotification(true);
 		setValues({});
