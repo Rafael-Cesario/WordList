@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { CreateAccountForm } from '../components/forms/createAccountForm';
 import { LoginForm } from '../components/forms/loginForm';
 import { getCookies } from '../services/cookies';
-import { StyledMain } from '../styles/styledMain';
+import { StyledIndex } from '../styles/styledIndex';
 
 const Home = () => {
 	const [showForm, setShowForm] = useState('');
@@ -34,7 +34,7 @@ const Home = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<StyledMain>
+			<StyledIndex>
 				<h1 className='title'>WordList</h1>
 				<p className='para'>Um site para memorizar palavras</p>
 
@@ -45,7 +45,7 @@ const Home = () => {
 
 				{showForm === 'login' && <LoginForm props={{ changeFormState }} />}
 				{showForm === 'create' && <CreateAccountForm props={{ changeFormState }} />}
-			</StyledMain>
+			</StyledIndex>
 		</>
 	);
 };
