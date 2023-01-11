@@ -31,7 +31,16 @@ const setCookie = (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const deleteCookie = (req: NextApiRequest, res: NextApiResponse) => {
-	req.cookies[req.body.name] = '';
+	res.setHeader(
+		'Set-Cookie',
+		cookie.serialize(req.query.name as string, '', {
+			httpOnly: true,
+			secure: process.env.NODE_ENV !== 'development',
+			maxAge: 1, // 1 second
+			sameSite: 'strict',
+			path: '/',
+		})
+	);
 	res.status(200).json({ message: 'Cookie deleted' });
 };
 

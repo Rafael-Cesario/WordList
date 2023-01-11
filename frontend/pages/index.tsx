@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { CreateAccountForm } from '../components/forms/createAccountForm';
-import { LoginForm } from '../components/forms/loginForm';
+import { CreateAccountForm } from '../components/pages/index/forms/createAccountForm';
+import { LoginForm } from '../components/pages/index/forms/loginForm';
 import { getCookies } from '../services/cookies';
 import { StyledIndex } from '../styles/styledIndex';
 

@@ -1,10 +1,18 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { deleteCookies } from '../services/cookies';
 import { StyledMain } from '../styles/styledMain';
 
 const Main = () => {
 	const [showPerfil, setShowPerfil] = useState(false);
+	const router = useRouter();
+
+	const logout = async () => {
+		await deleteCookies('token');
+		router.push('/');
+	};
 
 	return (
 		<>
@@ -19,9 +27,10 @@ const Main = () => {
 					<div className='buttons'>
 						<div className='perfil'>
 							<button onClick={() => setShowPerfil(!showPerfil)}>Perfil</button>
+
 							{showPerfil && (
 								<div className='perfil-buttons'>
-									<button>Sair</button>
+									<button onClick={() => logout()}>Sair</button>
 								</div>
 							)}
 						</div>

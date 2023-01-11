@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledMain = styled.body`
+export const StyledMain = styled.div`
 	margin: 2rem;
 
 	.menus {
