@@ -21,7 +21,7 @@ export const StyledMain = styled.div`
 			font-size: 0.8rem;
 
 			:hover {
-				color: #aaa;
+				color: #00aaff
 			}
 		}
 	}

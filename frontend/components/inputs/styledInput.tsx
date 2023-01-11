@@ -11,6 +11,7 @@ export const StyledInput = styled.div`
 	label {
 		display: block;
 		margin-bottom: 10px;
+		margin-left: 1rem ;
 		font-size: 0.9rem;
 	}
 
