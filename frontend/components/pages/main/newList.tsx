@@ -1,8 +1,6 @@
-import { createList } from '../../../services/queries/queriesList';
 import { FormEvent, useState } from 'react';
 import { TextInput } from '../../inputs/inputs';
 import { StyledNewList } from './styledNewList';
-import { getCookies } from '../../../services/cookies';
 import produce from 'immer';
 
 interface NewListProps {
@@ -20,21 +18,11 @@ export const NewList = ({ props }: NewListProps) => {
 	const createNewList = async (e: FormEvent) => {
 		e.preventDefault();
 
-		// todo : merge into a hook useLists
-
-		// save on db
-		const owner = (await getCookies('user')).data.cookie;
-		const listName = values.name;
-		await createList({ owner, listName });
-
-		// update the ui
 		const newLists = produce(lists, draft => {
-			draft.push(listName);
+			draft.push(values.name);
 		});
 
 		setLists(newLists);
-
-		// clean the input
 		setValues({});
 	};
 
