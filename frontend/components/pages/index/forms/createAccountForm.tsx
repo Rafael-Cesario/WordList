@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createUser } from '../../../../services/queries';
+import { createUser } from '../../../../services/queries/queriesUser';
 import { removeError, sendError } from '../../../../utils/error';
 import { validations } from '../../../../utils/validations';
 import { verifyValues } from '../../../../utils/verifyValues';

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const setCookies = async (cookie: string) => {
+export const setCookies = async (name: string, cookie: string) => {
 	await axios.post('/api/cookies', {
-		name: 'token',
+		name,
 		value: cookie,
 	});
 };

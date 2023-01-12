@@ -9,6 +9,7 @@ export const Perfil = () => {
 
 	const logout = async () => {
 		await deleteCookies('token');
+		await deleteCookies('user');
 		router.push('/');
 	};
 
