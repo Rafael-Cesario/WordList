@@ -7,6 +7,7 @@ export const StyledNewList = styled.div`
 		border-radius: 2px;
 		padding: 1rem;
 		margin: 1rem 0;
+		z-index: 2;
 
 		display: flex;
 		flex-direction: column;

@@ -21,7 +21,7 @@ export const StyledMain = styled.div`
 			font-size: 0.8rem;
 
 			:hover {
-				color: #00aaff
+				color: #00aaff;
 			}
 		}
 	}
@@ -31,19 +31,27 @@ export const StyledMain = styled.div`
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		height: 80vh;
+		min-height: 80vh;
 
 		.lists {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;
+			margin: 0 20vw;
 
 			button {
-				width: 10rem;
-				height: 2rem;
+				width: 15rem;
+				height: 5rem;
 				margin: 1rem;
 				border-radius: 5px;
-				background-color: #162436;
+				background-color: #005090;
+				font-weight: bold;
+				padding: 1rem;
+				transition: 0.1s;
+
+				:hover {
+					transform: scale(1.05);
+				}
 			}
 		}
 	}
