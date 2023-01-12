@@ -31,6 +31,13 @@ export const listTypeDef = `#graphql
 		message: String!
 	}
 
+	type ResponseGetLists {
+		lists: [String]!
+	}
+
+	type Query {
+		getLists(owner:String!): ResponseGetLists!
+	}
 
 	type Mutation {
 		createList ( newList: NewListInput!): CreateListResponse!
