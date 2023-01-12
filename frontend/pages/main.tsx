@@ -1,10 +1,13 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
 import { NewList } from '../components/pages/main/newList';
 import { Perfil } from '../components/pages/main/perfil';
 import { StyledMain } from '../styles/styledMain';
 
 const Main = () => {
+	const [lists, setLists] = useState<string[]>([]);
+
 	return (
 		<>
 			<Head>
@@ -13,7 +16,7 @@ const Main = () => {
 
 			<StyledMain>
 				<header className='menus'>
-					<NewList />
+					<NewList props={{ lists, setLists }} />
 
 					<div className='buttons'>
 						<Perfil />
@@ -27,7 +30,11 @@ const Main = () => {
 				</header>
 
 				<main>
-					<div className='lists'></div>
+					<div className='lists'>
+						{lists.map(list => {
+							return <button key={list}>{list}</button>;
+						})}
+					</div>
 				</main>
 			</StyledMain>
 		</>
