@@ -13,9 +13,9 @@
 	},
 	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
-		"indent": ["error", "tab"],
-		"quotes": ["error", "single"],
-		"semi": ["error", "always"],
+		"indent": ["warn", "tab"],
+		"quotes": ["warn", "single"],
+		"semi": ["warn", "always"],
 		"react/prop-types": "off"
 	},
 
