@@ -1,18 +1,19 @@
+import { createList } from '../../../services/queries/queriesList';
 import { FormEvent, useState } from 'react';
 import { TextInput } from '../../inputs/inputs';
 import { StyledNewList } from './styledNewList';
+import { getCookies } from '../../../services/cookies';
 
 export const NewList = () => {
 	const [showNewList, setShowNewList] = useState(false);
-	const [values, setValues] = useState({});
+	const [values, setValues] = useState<{ [key: string]: string }>({});
 
-	const createList = async (e: FormEvent) => {
+	const createNewList = async (e: FormEvent) => {
 		e.preventDefault();
-		console.log({ values });
 
-		// TODO
-
-		// save new list on db
+		const owner = (await getCookies('user')).data.cookie;
+		const listName = values.name;
+		await createList({ owner, listName });
 
 		// update page with new lists
 
@@ -24,7 +25,7 @@ export const NewList = () => {
 			<button onClick={() => setShowNewList(!showNewList)}>Nova lista</button>
 
 			{showNewList && (
-				<form onSubmit={e => createList(e)}>
+				<form onSubmit={e => createNewList(e)}>
 					<h1>Nova Lista</h1>
 
 					<TextInput
