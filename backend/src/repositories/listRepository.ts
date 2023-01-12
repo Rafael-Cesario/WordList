@@ -9,7 +9,16 @@ export class ListRepository {
 		try {
 			const response = await this.listModel.create(newList);
 		} catch (error: any) {
-			throw new GraphQLError(error.message);
+			throw new GraphQLError('create list: ' + error.message);
+		}
+	}
+
+	async findByOwner(owner: string, listName: string) {
+		try {
+			const list = await this.listModel.findOne({ owner, listName });
+			return list;
+		} catch (error: any) {
+			throw new GraphQLError('find by owner: ' + error.message);
 		}
 	}
 }
