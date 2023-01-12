@@ -13,12 +13,21 @@ export class ListRepository {
 		}
 	}
 
-	async findByOwner(owner: string, listName: string) {
+	async findByOwner(filter: { owner: string; listName: string }) {
 		try {
-			const list = await this.listModel.findOne({ owner, listName });
+			const list = await this.listModel.findOne(filter);
 			return list;
 		} catch (error: any) {
 			throw new GraphQLError('find by owner: ' + error.message);
+		}
+	}
+
+	async findAllByOwner(filter: { owner: string }) {
+		try {
+			const lists = await this.listModel.find(filter);
+			return lists;
+		} catch (error: any) {
+			throw new GraphQLError('find all by owner: ' + error.message);
 		}
 	}
 }
