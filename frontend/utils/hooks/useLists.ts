@@ -5,9 +5,9 @@ import { createList, getLists } from '../../services/queries/queriesList';
 type Lists = string[];
 type SetLists = (lists: Lists) => void;
 
-export const useLists = () => {
-	const [lists, setLists] = useState<string[]>([]);
-	let firstLoad = true;
+export const useLists = (initialState: []) => {
+	const [lists, setLists] = useState<string[]>(initialState);
+	const [firstLoad, setFirstLoad] = useState(false);
 
 	const saveLists = async () => {
 		const owner = (await getCookies('user')).data.cookie;
@@ -17,9 +17,9 @@ export const useLists = () => {
 
 	const loadLists = async () => {
 		const owner = (await getCookies('user')).data.cookie;
-		// const lists = await getLists(owner);
-		// setLists(lists);
-		firstLoad = false;
+		const lists = await getLists(owner);
+		setLists(lists);
+		setFirstLoad(false);
 	};
 
 	useEffect(() => {

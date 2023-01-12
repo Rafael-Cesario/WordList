@@ -7,3 +7,11 @@ export const CREATE_LIST = gql`
 		}
 	}
 `;
+
+export const GET_LISTS = gql`
+	query GetLists($owner: String!) {
+		getLists(owner: $owner) {
+			lists
+		}
+	}
+`;

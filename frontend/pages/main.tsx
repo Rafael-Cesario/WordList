@@ -6,7 +6,7 @@ import { StyledMain } from '../styles/styledMain';
 import { useLists } from '../utils/hooks/useLists';
 
 const Main = () => {
-	const [lists, setLists] = useLists();
+	const [lists, setLists] = useLists([]);
 
 	return (
 		<>
