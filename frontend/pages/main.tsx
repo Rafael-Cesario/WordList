@@ -11,7 +11,7 @@ const Main = () => {
 	return (
 		<>
 			<Head>
-				<title>Main</title>
+				<title>WordList</title>
 			</Head>
 
 			<StyledMain>
@@ -23,9 +23,6 @@ const Main = () => {
 
 						<Link href={'/about'}>Sobre</Link>
 						<Link href={'/usage'}>Dicas de uso</Link>
-						<Link href={'http://github.com/rafael-cesario/wordlist'} target={'_blank'}>
-							Página no Github
-						</Link>
 					</div>
 				</header>
 
