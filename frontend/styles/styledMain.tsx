@@ -40,6 +40,7 @@ export const StyledMain = styled.div`
 			margin: 0 20vw;
 
 			button {
+				text-transform: capitalize;
 				width: 15rem;
 				height: 5rem;
 				margin: 1rem;

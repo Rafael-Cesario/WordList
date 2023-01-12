@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { NewList } from '../components/pages/main/newList';
 import { Perfil } from '../components/pages/main/perfil';
 import { StyledMain } from '../styles/styledMain';
@@ -7,6 +8,7 @@ import { useLists } from '../utils/hooks/useLists';
 
 const Main = () => {
 	const [lists, setLists] = useLists([]);
+	const router = useRouter();
 
 	return (
 		<>
@@ -29,7 +31,13 @@ const Main = () => {
 				<main>
 					<div className='lists'>
 						{lists.map(list => {
-							return <button key={list}>{list}</button>;
+							const link = '/' + list.replace(/-/g, '_').replace(/ /g, '-');
+
+							return (
+								<button onClick={() => router.push(link)} key={list}>
+									{list}
+								</button>
+							);
 						})}
 					</div>
 				</main>
