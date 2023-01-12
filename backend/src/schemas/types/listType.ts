@@ -1,6 +1,12 @@
+export interface ListType {
+	owner: string;
+	listName: string;
+	wordLists: string[][];
+}
+
 export interface CreateListArgs {
 	newList: {
-		belongsTo: string;
+		owner: string;
 		listName: string;
 	};
 }
@@ -11,13 +17,13 @@ export interface CreateListResponse {
 
 export const listTypeDef = `#graphql
 	type List {
-		belongsTo: String!
+		owner: String!
 		listName: String!
 		wordLists: [[String]]!
 	}
 
 	input NewListInput {
-		belongsTo: String!
+		owner: String!
 		listName: String!
 	}
 
