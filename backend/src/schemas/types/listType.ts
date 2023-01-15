@@ -11,8 +11,16 @@ export interface CreateListArgs {
 	};
 }
 
-export interface CreateListResponse {
+export interface MessageResponse {
 	message: string;
+}
+
+export interface ChangesArgs {
+	changes: {
+		owner: string;
+		oldName: string;
+		newName: string;
+	};
 }
 
 export const listTypeDef = `#graphql
@@ -27,7 +35,13 @@ export const listTypeDef = `#graphql
 		listName: String!
 	}
 
-	type CreateListResponse {
+	input ChangesInput {
+		owner: String!
+		oldName: String!
+		newName: String!
+	}
+
+	type MessageResponse {
 		message: String!
 	}
 
@@ -40,6 +54,7 @@ export const listTypeDef = `#graphql
 	}
 
 	type Mutation {
-		createList ( newList: NewListInput!): CreateListResponse!
+		createList ( newList: NewListInput!): MessageResponse!
+		changeListName (changes: ChangesInput): MessageResponse!
 	}
 `;

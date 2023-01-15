@@ -30,4 +30,12 @@ export class ListRepository {
 			throw new GraphQLError('find all by owner: ' + error.message);
 		}
 	}
+
+	async findOneAndUpdate(filter: { owner: string; listName: string }, newValues: { listName: string }) {
+		const list = await this.listModel.findOne(filter);
+		if (!list) throw new GraphQLError('List not found');
+
+		const response = await list.update(newValues);
+		if (!response.acknowledged) throw new GraphQLError('Update fail');
+	}
 }

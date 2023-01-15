@@ -1,11 +1,11 @@
 import { GraphQLError } from 'graphql';
 import { ListRepository } from '../repositories/listRepository';
-import { CreateListArgs, CreateListResponse } from '../schemas/types/listType';
+import { ChangesArgs, CreateListArgs, MessageResponse } from '../schemas/types/listType';
 
 export class ListService {
 	constructor(private listRepository = new ListRepository()) {}
 
-	async createList({ newList }: CreateListArgs): Promise<CreateListResponse> {
+	async createList({ newList }: CreateListArgs): Promise<MessageResponse> {
 		const { owner, listName } = newList;
 
 		const list = await this.listRepository.findByOwner({ owner, listName });
@@ -20,5 +20,15 @@ export class ListService {
 		const lists = await this.listRepository.findAllByOwner({ owner });
 		const listNames = lists.map(list => list.listName);
 		return { lists: listNames };
+	}
+
+	async changeListName({ changes }: ChangesArgs) {
+		const { owner, oldName, newName } = changes;
+
+		const filter = { owner, listName: oldName };
+		const newValues = { listName: newName };
+		await this.listRepository.findOneAndUpdate(filter, newValues);
+
+		return { message: 'list updated' };
 	}
 }
