@@ -23,6 +23,11 @@ export interface ChangesArgs {
 	};
 }
 
+export interface DeleteListArgs {
+	owner: string;
+	listName: string;
+}
+
 export const listTypeDef = `#graphql
 	type List {
 		owner: String!
@@ -56,5 +61,6 @@ export const listTypeDef = `#graphql
 	type Mutation {
 		createList ( newList: NewListInput!): MessageResponse!
 		changeListName (changes: ChangesInput): MessageResponse!
+		deleteList(owner:String!, listName:String!): MessageResponse!
 	}
 `;

@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { ListRepository } from '../repositories/listRepository';
-import { ChangesArgs, CreateListArgs, MessageResponse } from '../schemas/types/listType';
+import { ChangesArgs, CreateListArgs, DeleteListArgs, MessageResponse } from '../schemas/types/listType';
 
 export class ListService {
 	constructor(private listRepository = new ListRepository()) {}
@@ -30,5 +30,11 @@ export class ListService {
 		await this.listRepository.findOneAndUpdate(filter, newValues);
 
 		return { message: 'list updated' };
+	}
+
+	async deleteList(deleteFilter: DeleteListArgs) {
+		await this.listRepository.findOneAndDelete(deleteFilter);
+
+		return { message: 'List deleted' };
 	}
 }

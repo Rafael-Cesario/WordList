@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { ListModel } from '../models/listModel';
-import { ListType } from '../schemas/types/listType';
+import { DeleteListArgs, ListType } from '../schemas/types/listType';
 
 export class ListRepository {
 	constructor(private listModel = ListModel) {}
@@ -37,5 +37,13 @@ export class ListRepository {
 
 		const response = await list.update(newValues);
 		if (!response.acknowledged) throw new GraphQLError('Update fail');
+	}
+
+	async findOneAndDelete(filter: DeleteListArgs) {
+		const list = await this.listModel.findOne(filter);
+		if (!list) throw new GraphQLError('List not found');
+
+		const response = await list.deleteOne();
+		if (!response) throw new GraphQLError('List not deleted');
 	}
 }
