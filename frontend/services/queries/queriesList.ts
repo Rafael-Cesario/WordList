@@ -2,7 +2,7 @@
 
 import { ListType } from '../../interfaces/interfaceList';
 import { client } from '../client';
-import { ChangesInput, CHANGE_LIST_NAME, CREATE_LIST, GET_LISTS } from './queriesTypesList';
+import { ChangesInput, CHANGE_LIST_NAME, CREATE_LIST, DeleteListInput, DELETE_LIST, GET_LISTS } from './queriesTypesList';
 
 class QueriesList {
 	async createList(newList: ListType) {
@@ -37,6 +37,19 @@ class QueriesList {
 			});
 
 			return response.data.changeListName;
+		} catch (error: any) {
+			return error.message;
+		}
+	}
+
+	async deleteList(deleteListArgs: DeleteListInput) {
+		try {
+			const response = await client.mutate({
+				mutation: DELETE_LIST,
+				variables: { ...deleteListArgs },
+			});
+
+			return response.data.deleteList;
 		} catch (error: any) {
 			return error.message;
 		}

@@ -35,7 +35,7 @@ export class ListRepository {
 		const list = await this.listModel.findOne(filter);
 		if (!list) throw new GraphQLError('List not found');
 
-		const response = await list.update(newValues);
+		const response = await list.updateOne(newValues);
 		if (!response.acknowledged) throw new GraphQLError('Update fail');
 	}
 

@@ -34,9 +34,12 @@ export const Configs = ({ props }: ConfigsProps) => {
 		router.push(newURL);
 	};
 
-	// todo
-	const deleteList = () => {
-		return;
+	const deleteList = async () => {
+		const owner = (await getCookies('user')).data.cookie;
+
+		await queriesList.deleteList({ owner, listName });
+
+		router.push('/main');
 	};
 
 	return (
