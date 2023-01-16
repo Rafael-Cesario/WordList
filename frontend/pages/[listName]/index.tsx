@@ -2,8 +2,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Configs } from '../components/list/configs';
-import { StyledList } from '../styles/styledList';
+import { Configs } from '../../components/list/configs';
+import { StyledList } from '../../styles/styledList';
 
 const ListPage = () => {
 	const router = useRouter();
@@ -24,6 +24,11 @@ const ListPage = () => {
 		if (router.isReady) getListName();
 	}, [router]);
 
+	// todo
+	const createList = () => {
+		return;
+	};
+
 	return (
 		<>
 			<Head>
@@ -40,7 +45,7 @@ const ListPage = () => {
 					</div>
 
 					<div className='menus'>
-						<button>Criar Lista</button>
+						<button onClick={() => createList()}>Criar Lista</button>
 						<button onClick={() => setShowConfigs(!showConfigs)}>Configs</button>
 					</div>
 				</header>
