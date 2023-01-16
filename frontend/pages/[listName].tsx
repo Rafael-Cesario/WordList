@@ -1,18 +1,28 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Configs } from '../components/list/configs';
 import { StyledList } from '../styles/styledList';
 
 const ListPage = () => {
 	const router = useRouter();
-	const query = router.query.listName as string;
-	const listName = query.replace(/-/g, ' ').replace(/_/g, '-');
+	const [listName, setListName] = useState('Carregando...');
 
 	const [showConfigs, setShowConfigs] = useState(false);
 
+	// temp
 	const totalWords = 126;
+
+	const getListName = () => {
+		const query = router.query.listName as string;
+		const listName = query.replace(/-/g, ' ').replace(/_/g, '-');
+		setListName(listName);
+	};
+
+	useEffect(() => {
+		if (router.isReady) getListName();
+	}, [router]);
 
 	return (
 		<>

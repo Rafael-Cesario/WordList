@@ -1,4 +1,8 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { getCookies } from '../../services/cookies';
+import { queriesList } from '../../services/queries/queriesList';
+import { ChangesInput } from '../../services/queries/queriesTypesList';
 import { TextInput } from '../inputs/inputs';
 import { StyledConfigs } from './styledConfigs';
 
@@ -11,12 +15,23 @@ interface ConfigsProps {
 
 export const Configs = ({ props }: ConfigsProps) => {
 	const { setShowConfigs, listName } = props;
-	const [values, setValues] = useState({});
+	const router = useRouter();
+	const [values, setValues] = useState<{ [key: string]: string }>({});
 	const [showConfirmButton, setShowConfirmButton] = useState(false);
 
-	// todo
-	const saveConfigs = () => {
-		return;
+	const changeListName = async () => {
+		const owner = (await getCookies('user')).data.cookie;
+		const newURL = '/' + values.listName.replace(/-/g, '_').replace(/ /g, '-');
+
+		const changes: ChangesInput = {
+			owner,
+			oldName: listName,
+			newName: values.listName,
+		};
+
+		await queriesList.changeListName(changes);
+		setShowConfigs(false);
+		router.push(newURL);
 	};
 
 	// todo
@@ -34,14 +49,14 @@ export const Configs = ({ props }: ConfigsProps) => {
 			<TextInput
 				props={{
 					content: 'Nome da lista',
-					name: 'ListName',
+					name: 'listName',
 					values,
 					setValues,
 				}}
 			/>
 
-			<div className="options">
-				<button onClick={() => saveConfigs()}>Salvar configs</button>
+			<div className='options'>
+				<button onClick={() => changeListName()}>Salvar configs</button>
 				<button onClick={() => setShowConfirmButton(!showConfirmButton)}>Deletar lista</button>
 			</div>
 

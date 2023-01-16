@@ -1,33 +1,33 @@
 import { useEffect, useState } from 'react';
 import { getCookies } from '../../services/cookies';
-import { createList, getLists } from '../../services/queries/queriesList';
+import { queriesList } from '../../services/queries/queriesList';
 
 type Lists = string[];
 type SetLists = (lists: Lists) => void;
 
 export const useLists = (initialState: []) => {
 	const [lists, setLists] = useState<string[]>(initialState);
-	const [firstLoad, setFirstLoad] = useState(false);
+	const [firstLoad, setFirstLoad] = useState(true);
 
-	const saveLists = async () => {
+	const createList = async () => {
 		const owner = (await getCookies('user')).data.cookie;
 		const listName = lists[lists.length - 1];
-		await createList({ owner, listName });
+		await queriesList.createList({ owner, listName });
 	};
 
-	const loadLists = async () => {
+	const getLists = async () => {
 		const owner = (await getCookies('user')).data.cookie;
-		const lists = await getLists(owner);
+		const lists = await queriesList.getLists(owner);
 		setLists(lists);
 		setFirstLoad(false);
 	};
 
 	useEffect(() => {
-		loadLists();
+		getLists();
 	}, []);
 
 	useEffect(() => {
-		if (!firstLoad) saveLists();
+		if (!firstLoad) createList();
 	}, [lists]);
 
 	return [lists, setLists] as [Lists, SetLists];

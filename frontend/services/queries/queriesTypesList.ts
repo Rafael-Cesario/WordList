@@ -15,3 +15,25 @@ export const GET_LISTS = gql`
 		}
 	}
 `;
+
+export interface ChangesInput {
+	owner: string;
+	oldName: string;
+	newName: string;
+}
+
+export const CHANGE_LIST_NAME = gql`
+	mutation ChangeListName($changes: ChangesInput) {
+		changeListName(changes: $changes) {
+			message
+		}
+	}
+`;
+
+export const DELETE_LIST = gql`
+	mutation DeleteList($owner: String!, $listName: String) {
+		deleteList(owner: $owner, listName: $listName) {
+			message
+		}
+	}
+`;
