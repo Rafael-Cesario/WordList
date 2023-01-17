@@ -1,32 +1,20 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Configs } from '../../components/list/configs';
 import { getCookies } from '../../services/cookies';
 import { queriesList } from '../../services/queries/queriesList';
 import { StyledList } from '../../styles/styledList';
+import { useRouterQuery } from '../../utils/hooks/useRouterQuery';
 
 const ListPage = () => {
-	const router = useRouter();
-	const [listName, setListName] = useState('Carregando...');
-
+	const [listName] = useRouterQuery('Carregando...');
 	const [showConfigs, setShowConfigs] = useState(false);
 
 	// temp
 	const totalWords = 126;
 
-	const getListName = () => {
-		const query = router.query.listName as string;
-		const listName = query.replace(/-/g, ' ').replace(/_/g, '-');
-		setListName(listName);
-	};
-
-	useEffect(() => {
-		if (router.isReady) getListName();
-	}, [router]);
-
-	const createList = async () => {
+	const createWordList = async () => {
 		const owner = (await getCookies('user')).data.cookie;
 		await queriesList.createWordList({ listName, owner });
 		return;
@@ -48,7 +36,7 @@ const ListPage = () => {
 					</div>
 
 					<div className='menus'>
-						<button onClick={() => createList()}>Criar Lista</button>
+						<button onClick={() => createWordList()}>Criar Lista</button>
 						<button onClick={() => setShowConfigs(!showConfigs)}>Configs</button>
 					</div>
 				</header>
