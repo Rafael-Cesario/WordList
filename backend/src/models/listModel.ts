@@ -1,5 +1,5 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import { ListType } from '../schemas/types/listType';
+import { ListType } from '../interfaces/listInterface';
 
 export class List implements ListType {
 	@prop({ type: String, required: [true, 'owner is required'], lowercase: true })

@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 import { graphql, GraphQLError } from 'graphql';
 import { List, ListModel } from '../models/listModel';
-import { DeleteListArgs, ListType } from '../schemas/types/listType';
+import { DeleteListArgs, ListType } from '../interfaces/listInterface';
 
 export class ListRepository {
 	constructor(private listModel = ListModel) {}

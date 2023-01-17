@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { ListRepository } from '../repositories/listRepository';
-import { ChangesArgs, CreateListArgs, DeleteListArgs, MessageResponse, WordListArgs } from '../schemas/types/listType';
+import { ChangesArgs, CreateListArgs, DeleteListArgs, MessageResponse, WordListArgs } from '../interfaces/listInterface';
 
 export class ListService {
 	constructor(private listRepository = new ListRepository()) {}

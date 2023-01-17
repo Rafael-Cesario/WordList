@@ -1,5 +1,5 @@
 import { ListService } from '../../services/listService';
-import { ChangesArgs, CreateListArgs, DeleteListArgs, WordListArgs } from '../types/listType';
+import { ChangesArgs, CreateListArgs, DeleteListArgs, WordListArgs } from '../../interfaces/listInterface';
 
 const listService = new ListService();
 
