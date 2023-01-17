@@ -28,7 +28,7 @@ export const DeleteList = ({ props }: DeleteListProps) => {
 
 			{showConfirmButton && (
 				<div className='confirm'>
-					<span>Deletar lista {listName} ?</span>
+					<h1>Deletar lista {listName} ?</h1>
 					<div className='choices'>
 						<button onClick={() => deleteList()}>Sim</button>
 						<button onClick={() => setShowConfirmButton(false)}>Não</button>

@@ -12,7 +12,11 @@ export const StyledDeleteList = styled.div`
 		border-radius: 2px;
 		padding: 1rem;
 		margin-top: 3rem;
-		width: 40%;
+		width: 50%;
+
+		h1 {
+			text-align: center;
+		}
 
 		.choices {
 			display: flex;
