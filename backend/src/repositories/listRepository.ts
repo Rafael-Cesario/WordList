@@ -1,5 +1,6 @@
-import { GraphQLError } from 'graphql';
-import { ListModel } from '../models/listModel';
+import { Document } from 'mongoose';
+import { graphql, GraphQLError } from 'graphql';
+import { List, ListModel } from '../models/listModel';
 import { DeleteListArgs, ListType } from '../schemas/types/listType';
 
 export class ListRepository {
@@ -45,5 +46,13 @@ export class ListRepository {
 
 		const response = await list.deleteOne();
 		if (!response) throw new GraphQLError('List not deleted');
+	}
+
+	async updateOne(model: Document<List>, updates: { [key: string]: any }) {
+		try {
+			await model.updateOne({ ...updates });
+		} catch (error: any) {
+			throw new GraphQLError('Update One: ' + error.message);
+		}
 	}
 }

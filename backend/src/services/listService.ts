@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { ListRepository } from '../repositories/listRepository';
-import { ChangesArgs, CreateListArgs, DeleteListArgs, MessageResponse } from '../schemas/types/listType';
+import { ChangesArgs, CreateListArgs, DeleteListArgs, MessageResponse, WordListArgs } from '../schemas/types/listType';
 
 export class ListService {
 	constructor(private listRepository = new ListRepository()) {}
@@ -11,7 +11,7 @@ export class ListService {
 		const list = await this.listRepository.findByOwner({ owner, listName });
 		if (list) throw new GraphQLError('create list: A list with the same name already exist');
 
-		await this.listRepository.createList({ ...newList, wordLists: [] });
+		await this.listRepository.createList({ ...newList, wordLists: { next: [], current: [], done: [] } });
 
 		return { message: 'New list created' };
 	}
@@ -36,5 +36,15 @@ export class ListService {
 		await this.listRepository.findOneAndDelete(deleteFilter);
 
 		return { message: 'List deleted' };
+	}
+
+	async createWordList({ wordList }: WordListArgs) {
+		const { owner, listName } = wordList;
+
+		const list = await this.listRepository.findByOwner({ owner, listName });
+		if (!list) throw new GraphQLError('List not found');
+
+		list.wordLists.next.push([]);
+		await this.listRepository.updateOne(list, { wordLists: list.wordLists });
 	}
 }

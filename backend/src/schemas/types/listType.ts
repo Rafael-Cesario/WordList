@@ -1,7 +1,11 @@
 export interface ListType {
 	owner: string;
 	listName: string;
-	wordLists: string[][];
+	wordLists: {
+		next: string[][];
+		current: string[][];
+		done: string[][];
+	};
 }
 
 export interface CreateListArgs {
@@ -28,6 +32,13 @@ export interface DeleteListArgs {
 	listName: string;
 }
 
+export interface WordListArgs {
+	wordList: {
+		owner: string;
+		listName: string;
+	};
+}
+
 export const listTypeDef = `#graphql
 	type List {
 		owner: String!
@@ -46,6 +57,11 @@ export const listTypeDef = `#graphql
 		newName: String!
 	}
 
+	input WordListInput {
+		owner: String!
+		listName: String!
+	}
+
 	type MessageResponse {
 		message: String!
 	}
@@ -62,5 +78,6 @@ export const listTypeDef = `#graphql
 		createList ( newList: NewListInput!): MessageResponse!
 		changeListName (changes: ChangesInput): MessageResponse!
 		deleteList(owner:String!, listName:String!): MessageResponse!
+		createWordList( wordList: WordListInput!): MessageResponse!
 	}
 `;
