@@ -1,10 +1,8 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { getCookies } from '../../services/cookies';
-import { queriesList } from '../../services/queries/queriesList';
 import { TextInput } from '../inputs/inputs';
 import { StyledConfigs } from './styledConfigs';
 import { SaveConfigs } from './saveConfigs';
+import { DeleteList } from './deleteList';
 
 interface ConfigsProps {
 	props: {
@@ -15,17 +13,7 @@ interface ConfigsProps {
 
 export const Configs = ({ props }: ConfigsProps) => {
 	const { setShowConfigs, listName } = props;
-	const router = useRouter();
 	const [values, setValues] = useState<{ [key: string]: string }>({});
-	const [showConfirmButton, setShowConfirmButton] = useState(false);
-
-	const deleteList = async () => {
-		const owner = (await getCookies('user')).data.cookie;
-
-		await queriesList.deleteList({ owner, listName });
-
-		router.push('/main');
-	};
 
 	return (
 		<StyledConfigs>
@@ -45,18 +33,8 @@ export const Configs = ({ props }: ConfigsProps) => {
 
 			<div className='options'>
 				<SaveConfigs props={{ values, listName, setShowConfigs }} />
-				<button onClick={() => setShowConfirmButton(!showConfirmButton)}>Deletar lista</button>
+				<DeleteList props={{ listName }} />
 			</div>
-
-			{showConfirmButton && (
-				<div className='confirm'>
-					<span>Deletar lista {listName} ?</span>
-					<div className='choices'>
-						<button onClick={() => deleteList()}>Sim</button>
-						<button onClick={() => setShowConfirmButton(false)}>Não</button>
-					</div>
-				</div>
-			)}
 		</StyledConfigs>
 	);
 };
