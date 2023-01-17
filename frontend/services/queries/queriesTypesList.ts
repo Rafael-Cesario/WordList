@@ -42,3 +42,11 @@ export const DELETE_LIST = gql`
 		}
 	}
 `;
+
+export const CREATE_WORD_LIST = gql`
+	mutation CreateWordList($wordList: WordListInput!) {
+		createWordList(wordList: $wordList) {
+			message
+		}
+	}
+`;
