@@ -14,3 +14,19 @@ export interface CreateListArgs {
 export interface CreateListResponse {
 	message: string;
 }
+
+export interface DeleteListInput {
+	owner: string;
+	listName: string;
+}
+
+export interface ChangesInput {
+	owner: string;
+	oldName: string;
+	newName: string;
+}
+
+export interface WordListInput {
+	owner: string;
+	listName: string;
+}
