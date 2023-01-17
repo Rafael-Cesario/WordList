@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { getCookies } from '../../services/cookies';
 import { queriesList } from '../../services/queries/queriesList';
-import { StyledDeleteList } from './styledDeleteList';
+import { StyledDeleteList } from './styles/styledDeleteList';
 
 interface DeleteListProps {
 	props: {
