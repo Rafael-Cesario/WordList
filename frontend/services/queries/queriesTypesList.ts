@@ -16,7 +16,6 @@ export const GET_LISTS = gql`
 	}
 `;
 
-
 export const CHANGE_LIST_NAME = gql`
 	mutation ChangeListName($changes: ChangesInput) {
 		changeListName(changes: $changes) {
@@ -24,7 +23,6 @@ export const CHANGE_LIST_NAME = gql`
 		}
 	}
 `;
-
 
 export const DELETE_LIST = gql`
 	mutation DeleteList($owner: String!, $listName: String!) {

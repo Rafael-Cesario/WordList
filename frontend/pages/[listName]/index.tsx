@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Configs } from '../../components/list/configs';
+import { getCookies } from '../../services/cookies';
+import { queriesList } from '../../services/queries/queriesList';
 import { StyledList } from '../../styles/styledList';
 
 const ListPage = () => {
@@ -24,8 +26,9 @@ const ListPage = () => {
 		if (router.isReady) getListName();
 	}, [router]);
 
-	// todo
-	const createList = () => {
+	const createList = async () => {
+		const owner = (await getCookies('user')).data.cookie;
+		await queriesList.createWordList({ listName, owner });
 		return;
 	};
 
