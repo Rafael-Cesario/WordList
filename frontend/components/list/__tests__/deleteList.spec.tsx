@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom';
 import { describe, test, expect, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { DeleteList } from '../deleteList';
@@ -14,7 +15,7 @@ const handlers = [
 		return res(
 			ctx.data({
 				deleteList: {
-					message: 'list deleted',
+					message: 'list deleted - test environment',
 				},
 			})
 		);
@@ -34,5 +35,7 @@ describe('Delete List Component', () => {
 
 		const button = screen.getByRole('button', { name: 'Deletar lista' });
 		fireEvent.click(button);
+
+		expect(screen.getByText('Deletar lista Test ?')).toBeInTheDocument();
 	});
 });
