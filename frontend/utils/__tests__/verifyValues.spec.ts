@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { verifyValues } from './verifyValues';
+import { verifyValues } from '../verifyValues';
 
 const sendErrorMock = (error: string) => {
 	return error;

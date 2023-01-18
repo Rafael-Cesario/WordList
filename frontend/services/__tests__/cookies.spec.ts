@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import { deleteCookies, getCookies, setCookies } from './cookies';
-import { server } from './mocks/server';
+import { deleteCookies, getCookies, setCookies } from '../cookies';
+import { server } from '../mocks/server';
 
 describe('Cookies tests', () => {
 	beforeAll(() => server.listen());

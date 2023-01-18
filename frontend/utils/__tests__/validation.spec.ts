@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { validations } from './validations';
+import { validations } from '../validations';
 
 describe('Validation', () => {
 	test('email validation', () => {

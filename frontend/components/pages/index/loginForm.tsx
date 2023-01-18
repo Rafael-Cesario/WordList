@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { setCookies } from '../../../services/cookies';
-import { login } from '../../../services/queries/queriesUser';
+import { queriesUser } from '../../../services/queries/queriesUser';
 import { removeError, sendError } from '../../../utils/error';
 import { validations } from '../../../utils/validations';
 import { PasswordInput, TextInput } from '../../inputs/inputs';
@@ -26,8 +26,8 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 
 		['email', 'password'].forEach(value => removeError(value));
 
-		const response = await login({ email, password });
-		if (typeof response.error === 'object') return response.error.forEach(error => sendError(error));
+		const response = await queriesUser.login({ email, password });
+		if (typeof response.error === 'object') return response.error.forEach((error: string) => sendError(error));
 
 		const token = response.data?.login.token;
 		await setCookies('token', token);

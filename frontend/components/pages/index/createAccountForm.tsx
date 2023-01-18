@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createUser } from '../../../services/queries/queriesUser';
+import { queriesUser } from '../../../services/queries/queriesUser';
 import { removeError, sendError } from '../../../utils/error';
 import { validations } from '../../../utils/validations';
 import { verifyValues } from '../../../utils/verifyValues';
@@ -31,7 +31,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 		if (hasErrors) return;
 
 		const user = { email, name, password };
-		await createUser(user);
+		await queriesUser.createUser(user);
 
 		setShowNotification(true);
 		setValues({});

@@ -1,6 +1,6 @@
 import { describe, test, expect, expectTypeOf } from 'vitest';
 import { server } from '../mocks/server';
-import { queriesList } from './queriesList';
+import { queriesList } from '../queries/queriesList';
 
 describe('Queries list', () => {
 	beforeAll(() => server.listen());

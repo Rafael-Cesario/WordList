@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { describe, test, expect } from 'vitest';
-import { removeError, sendError } from './error';
+import { removeError, sendError } from '../error';
 import { render, screen } from '@testing-library/react';
 
 const DummyRender = () => {

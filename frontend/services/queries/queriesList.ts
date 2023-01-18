@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from '../client';
 import { ListType, WordListInput, ChangesInput, DeleteListInput } from '../../interfaces/interfaceList';
-import { CHANGE_LIST_NAME, CREATE_LIST, CREATE_WORD_LIST, DELETE_LIST, GET_LISTS } from './queriesTypesList';
+import { CHANGE_LIST_NAME, CREATE_LIST, CREATE_WORD_LIST, DELETE_LIST, GET_LISTS } from './types/queriesTypesList';
 
 class QueriesList {
 	async createList(newList: ListType) {
