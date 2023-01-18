@@ -13,4 +13,11 @@ describe('Queries list', () => {
 		expect(response).toHaveProperty('message');
 		expect(response.message).toBe('List created');
 	});
+
+	test('Create list, error', async () => {
+		const newList = { listName: '', owner: '' };
+		const response = await queriesList.createList(newList);
+		expect(response).toHaveProperty('error');
+		expect(response.error).toMatch(/ListName\/owner was not provided/);
+	});
 });

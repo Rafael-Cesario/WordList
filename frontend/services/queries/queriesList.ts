@@ -12,7 +12,7 @@ class QueriesList {
 			});
 			return response.data.createList;
 		} catch (error: any) {
-			return error.message;
+			return { error: error.message };
 		}
 	}
 

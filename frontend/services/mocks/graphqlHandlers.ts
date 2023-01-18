@@ -2,6 +2,8 @@ import { graphql } from 'msw';
 
 export const handlers = [
 	graphql.mutation('CreateList', (req, res, ctx) => {
+		const { newList } = req.variables;
+		if (!newList.listName || !newList.owner) throw new Error('ListName/owner was not provided');
 		return res(ctx.data({ createList: { message: 'List created' } }));
 	}),
 
