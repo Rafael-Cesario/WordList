@@ -41,11 +41,15 @@ export class ListRepository {
 	}
 
 	async findOneAndDelete(filter: DeleteListArgs) {
-		const list = await this.listModel.findOne(filter);
-		if (!list) throw new GraphQLError('List not found');
+		try {
+			const list = await this.listModel.findOne(filter);
+			if (!list) throw new GraphQLError('List not found');
 
-		const response = await list.deleteOne();
-		if (!response) throw new GraphQLError('List not deleted');
+			const response = await list.deleteOne();
+			if (!response) throw new GraphQLError('List not deleted');
+		} catch (error: any) {
+			throw new GraphQLError('find one and delete: ' + error.message);
+		}
 	}
 
 	async updateOne(model: Document<List>, updates: { [key: string]: any }) {
