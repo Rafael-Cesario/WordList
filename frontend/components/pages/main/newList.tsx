@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { TextInput } from '../../inputs/inputs';
-import { StyledNewList } from './styledNewList';
+import { StyledNewList } from './styles/styledNewList';
 import produce from 'immer';
 
 interface NewListProps {

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { deleteCookies } from '../../../services/cookies';
-import { StyledPerfil } from './styledPerfil';
+import { StyledPerfil } from './styles/styledPerfil';
 
 export const Perfil = () => {
 	const [showPerfil, setShowPerfil] = useState(false);
