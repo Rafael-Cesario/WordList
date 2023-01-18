@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 export const setCookies = async (name: string, cookie: string) => {
-	await axios.post('/api/cookies', {
-		name,
-		value: cookie,
-	});
+	const response = await axios.post('/api/cookies', { name, value: cookie });
+	return response.data.message;
 };
 
 export const getCookies = async (cookie: string) => {
