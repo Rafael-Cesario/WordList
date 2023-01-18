@@ -10,7 +10,7 @@ class QueriesList {
 				mutation: CREATE_LIST,
 				variables: { newList },
 			});
-			return response;
+			return response.data.createList;
 		} catch (error: any) {
 			return error.message;
 		}
