@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { createUser } from '../../../../services/queries/queriesUser';
-import { removeError, sendError } from '../../../../utils/error';
-import { validations } from '../../../../utils/validations';
-import { verifyValues } from '../../../../utils/verifyValues';
-import { PasswordInput, TextInput } from '../../../inputs/inputs';
+import { createUser } from '../../../services/queries/queriesUser';
+import { removeError, sendError } from '../../../utils/error';
+import { validations } from '../../../utils/validations';
+import { verifyValues } from '../../../utils/verifyValues';
+import { PasswordInput, TextInput } from '../../inputs/inputs';
 import { StyledForm } from './styledForm';
 
 interface CreateAccountProps {
