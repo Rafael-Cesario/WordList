@@ -12,5 +12,5 @@ export const getCookies = async (cookie: string) => {
 
 export const deleteCookies = async (cookie: string) => {
 	const response = await axios.delete('/api/cookies', { params: { name: cookie } });
-	return response;
+	return response.data.message;
 };
