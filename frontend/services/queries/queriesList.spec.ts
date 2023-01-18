@@ -1,4 +1,4 @@
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, expectTypeOf } from 'vitest';
 import { server } from '../mocks/server';
 import { queriesList } from './queriesList';
 
@@ -19,5 +19,17 @@ describe('Queries list', () => {
 		const response = await queriesList.createList(newList);
 		expect(response).toHaveProperty('error');
 		expect(response.error).toMatch(/ListName\/owner was not provided/);
+	});
+
+	test('getLists', async () => {
+		const response = await queriesList.getLists('userEmail');
+		expect(response).toHaveProperty('lists');
+		expectTypeOf(response.lists).toBeArray();
+	});
+
+	test('getLists error', async () => {
+		const response = await queriesList.getLists('');
+		expect(response).toHaveProperty('error');
+		expect(response.error).toMatch(/Owner was not provided/);
 	});
 });
