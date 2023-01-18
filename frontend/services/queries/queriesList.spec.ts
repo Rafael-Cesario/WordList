@@ -32,4 +32,16 @@ describe('Queries list', () => {
 		expect(response).toHaveProperty('error');
 		expect(response.error).toMatch(/Owner was not provided/);
 	});
+
+	test('Change list name', async () => {
+		const response = await queriesList.changeListName({ newName: 'new', oldName: 'old', owner: 'userEmail' });
+		expect(response).toHaveProperty('message');
+		expect(response.message).toMatch(/List name changed/i);
+	});
+
+	test('Change list name, error', async () => {
+		const response = await queriesList.changeListName({ newName: '', oldName: '', owner: '' });
+		expect(response).toHaveProperty('error');
+		expect(response.error).toMatch(/Owner was not provided/i);
+	});
 });
