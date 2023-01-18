@@ -9,7 +9,7 @@ export const setCookies = async (name: string, cookie: string) => {
 
 export const getCookies = async (cookie: string) => {
 	const response = await axios.get('/api/cookies', { params: { name: cookie } });
-	return response;
+	return response.data.cookie;
 };
 
 export const deleteCookies = async (cookie: string) => {

@@ -11,13 +11,13 @@ export const useLists = (initialState: []) => {
 
 	const createList = async () => {
 		if (firstLoad) return;
-		const owner = (await getCookies('user')).data.cookie;
+		const owner = await getCookies('user');
 		const listName = lists[lists.length - 1];
 		await queriesList.createList({ owner, listName });
 	};
 
 	const getLists = async () => {
-		const owner = (await getCookies('user')).data.cookie;
+		const owner = await getCookies('user');
 		const lists = await queriesList.getLists(owner);
 		setLists(lists);
 		setFirstLoad(false);

@@ -16,7 +16,7 @@ export const SaveConfigs = ({ props }: SaveConfigsProps) => {
 	const router = useRouter();
 
 	const changeListName = async () => {
-		const owner = (await getCookies('user')).data.cookie;
+		const owner = await getCookies('user');
 		const newURL = '/' + values.listName.replace(/-/g, '_').replace(/ /g, '-');
 
 		const changes: ChangesInput = {

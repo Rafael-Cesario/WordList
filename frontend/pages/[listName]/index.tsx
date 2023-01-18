@@ -15,7 +15,7 @@ const ListPage = () => {
 	const totalWords = 126;
 
 	const createWordList = async () => {
-		const owner = (await getCookies('user')).data.cookie;
+		const owner = await getCookies('user');
 		await queriesList.createWordList({ listName, owner });
 		return;
 	};
