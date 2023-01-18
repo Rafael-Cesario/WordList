@@ -44,4 +44,28 @@ describe('Queries list', () => {
 		expect(response).toHaveProperty('error');
 		expect(response.error).toMatch(/Owner was not provided/i);
 	});
+
+	test('Delete list', async () => {
+		const response = await queriesList.deleteList({ listName: 'test', owner: 'userEmail' });
+		expect(response).toHaveProperty('message');
+		expect(response.message).toMatch(/List deleted/i);
+	});
+
+	test('Delete list, error', async () => {
+		const response = await queriesList.deleteList({ listName: '', owner: '' });
+		expect(response).toHaveProperty('error');
+		expect(response.error).toMatch(/Owner was not provided/i);
+	});
+
+	test('Create word list', async () => {
+		const response = await queriesList.createWordList({ listName: 'name', owner: 'userEmail' });
+		expect(response).toHaveProperty('message');
+		expect(response.message).toMatch(/Word list created/i);
+	});
+
+	test('Create word list, error', async () => {
+		const response = await queriesList.createWordList({ listName: '', owner: '' });
+		expect(response).toHaveProperty('error');
+		expect(response.error).toMatch(/Owner was not provided/i);
+	});
 });

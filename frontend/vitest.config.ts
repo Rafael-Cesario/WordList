@@ -5,7 +5,7 @@ export default defineConfig({
 	plugins: [react()],
 
 	test: {
-		watch: false,
+		// watch: false,
 		// reporters: 'verbose',
 		environment: 'jsdom',
 		globals: true,

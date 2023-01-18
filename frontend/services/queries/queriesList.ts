@@ -43,7 +43,7 @@ class QueriesList {
 	async createWordList(wordList: WordListInput) {
 		try {
 			const response = await client.mutate({ mutation: CREATE_WORD_LIST, variables: { wordList } });
-			return response;
+			return response.data.createWordList;
 		} catch (error: any) {
 			return { error: error.message };
 		}
