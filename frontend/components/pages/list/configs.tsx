@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextInput } from '../inputs/inputs';
+import { TextInput } from '../../inputs/inputs';
 import { StyledConfigs } from './styles/styledConfigs';
 import { SaveConfigs } from './saveConfigs';
 import { DeleteList } from './deleteList';

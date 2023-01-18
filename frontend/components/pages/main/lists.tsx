@@ -1,4 +1,4 @@
-import { useRouter } from 'next-router-mock';
+import { useRouter } from 'next/router';
 import { StyledLists } from './styles/styledLists';
 
 interface ListsProps {

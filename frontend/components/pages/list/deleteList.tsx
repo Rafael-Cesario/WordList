@@ -18,7 +18,8 @@ export const DeleteList = ({ props }: DeleteListProps) => {
 
 	const deleteList = async () => {
 		const owner = (await getCookies('user')).data.cookie;
-		await queriesList.deleteList({ owner, listName });
+		const response = await queriesList.deleteList({ owner, listName });
+		console.log(response);
 		router.push('/main');
 	};
 

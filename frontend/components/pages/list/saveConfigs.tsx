@@ -1,6 +1,6 @@
-import { getCookies } from '../../services/cookies';
-import { ChangesInput } from '../../interfaces/interfaceList';
-import { queriesList } from '../../services/queries/queriesList';
+import { getCookies } from '../../../services/cookies';
+import { ChangesInput } from '../../../interfaces/interfaceList';
+import { queriesList } from '../../../services/queries/queriesList';
 import { useRouter } from 'next/router';
 
 interface SaveConfigsProps {

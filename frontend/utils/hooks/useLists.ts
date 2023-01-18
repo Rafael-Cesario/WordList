@@ -10,6 +10,7 @@ export const useLists = (initialState: []) => {
 	const [firstLoad, setFirstLoad] = useState(true);
 
 	const createList = async () => {
+		if (firstLoad) return;
 		const owner = (await getCookies('user')).data.cookie;
 		const listName = lists[lists.length - 1];
 		await queriesList.createList({ owner, listName });
@@ -27,7 +28,7 @@ export const useLists = (initialState: []) => {
 	}, []);
 
 	useEffect(() => {
-		if (!firstLoad) createList();
+		createList();
 	}, [lists]);
 
 	return [lists, setLists] as [Lists, SetLists];

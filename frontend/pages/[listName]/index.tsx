@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Configs } from '../../components/list/configs';
+import { Configs } from '../../components/pages/list/configs';
 import { getCookies } from '../../services/cookies';
 import { queriesList } from '../../services/queries/queriesList';
 import { StyledList } from '../../styles/styledList';
