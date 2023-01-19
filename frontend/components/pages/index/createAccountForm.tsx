@@ -16,7 +16,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 	const [values, setValues] = useState<{ [key: string]: string }>({});
 	const [showNotification, setShowNotification] = useState(false);
 
-	const submit = async () => {
+	const validateFields = (values: { email: string; name: string; password: string; confirmPassword: string }) => {
 		const { email, name, password, confirmPassword } = values;
 
 		const fields = {
@@ -27,17 +27,28 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 		};
 
 		const hasErrors = verifyErrors(fields);
+		return hasErrors;
+	};
+
+	const sendNotification = () => {
+		setShowNotification(true);
+
+		setTimeout(() => {
+			setShowNotification(false);
+		}, 5000);
+	};
+
+	const submit = async () => {
+		const { email, name, password, confirmPassword } = values;
+
+		const hasErrors = validateFields({ email, name, password, confirmPassword });
 		if (hasErrors) return;
 
 		const user = { email, name, password };
 		await queriesUser.createUser(user);
 
-		setShowNotification(true);
 		setValues({});
-
-		setTimeout(() => {
-			setShowNotification(false);
-		}, 5000);
+		sendNotification();
 	};
 
 	return (

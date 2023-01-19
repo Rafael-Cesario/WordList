@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { setCookies } from '../../../services/cookies';
 import { queriesUser } from '../../../services/queries/queriesUser';
-import { removeError, sendError } from '../../../utils/error';
 import { validations } from '../../../utils/validations';
 import { verifyErrors } from '../../../utils/verifyErrors';
 import { PasswordInput, TextInput } from '../../inputs/inputs';
@@ -21,7 +20,7 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 
 	const findError = (email: string, password: string) => {
 		const emptyValues = validations.emptyFields({ email, password });
-		const error = verifyErrors(emptyValues, sendError, removeError);
+		const error = verifyErrors(emptyValues);
 		return error;
 	};
 
@@ -41,7 +40,7 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 
 		const response = await queriesUser.login({ email, password });
 		if (response.error.match(/email\/password is wrong/i)) {
-			verifyErrors({ email: 'Email ou senha incorreta', password: 'Email ou senha incorreta' }, sendError, removeError);
+			verifyErrors({ email: 'Email ou senha incorreta', password: 'Email ou senha incorreta' });
 			return;
 		}
 
