@@ -28,7 +28,7 @@ export const TextInput = ({ props }: InputsProps) => {
 	};
 
 	return (
-		<StyledInput className={name}>
+		<StyledInput className={name} role={name}>
 			<label htmlFor={name} data-name={content}>
 				{content}
 			</label>
@@ -52,7 +52,7 @@ export const PasswordInput = ({ props }: InputsProps) => {
 	};
 
 	return (
-		<StyledInput>
+		<StyledInput role={name}>
 			<label htmlFor={name} data-name={content}>
 				{content}
 			</label>

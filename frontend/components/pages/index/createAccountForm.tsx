@@ -59,7 +59,11 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 				Criar Conta
 			</button>
 
-			{showNotification && <h1 className='notification'>Uma nova conta foi criada</h1>}
+			{showNotification && (
+				<h1 className='notification' role={'message'}>
+					Uma nova conta foi criada
+				</h1>
+			)}
 		</StyledForm>
 	);
 };
