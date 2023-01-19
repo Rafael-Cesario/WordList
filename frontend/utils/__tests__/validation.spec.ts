@@ -50,13 +50,13 @@ describe('Validation', () => {
 		const fields = { email: '', password: '' };
 		let empties = validations.emptyFields(fields);
 
-		expect(empties).toBeTypeOf('object');
-		expect(empties[0]).toBe('email: Este campo não pode ficar vazio');
+		expect(empties).toHaveProperty('email');
+		expect(empties.email).toBe('Este campo não pode ficar vazio');
 
 		empties = validations.emptyFields({});
-		expect(empties).toStrictEqual([]);
+		expect(empties).toStrictEqual({});
 
 		empties = validations.emptyFields({ email: 'notEmpty' });
-		expect(empties).toStrictEqual([]);
+		expect(empties).toStrictEqual({});
 	});
 });
