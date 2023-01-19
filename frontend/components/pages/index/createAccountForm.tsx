@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { queriesUser } from '../../../services/queries/queriesUser';
+import { sendNotification } from '../../../utils/sendNotification';
 import { validations } from '../../../utils/validations';
 import { verifyErrors } from '../../../utils/verifyErrors';
 import { PasswordInput, TextInput } from '../../inputs/inputs';
@@ -30,14 +31,6 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 		return hasErrors;
 	};
 
-	const sendNotification = () => {
-		setShowNotification(true);
-
-		setTimeout(() => {
-			setShowNotification(false);
-		}, 5000);
-	};
-
 	const submit = async () => {
 		const { email, name, password, confirmPassword } = values;
 
@@ -48,7 +41,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 		await queriesUser.createUser(user);
 
 		setValues({});
-		sendNotification();
+		sendNotification(setShowNotification);
 	};
 
 	return (
