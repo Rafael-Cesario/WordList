@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { queriesUser } from '../../../services/queries/queriesUser';
 import { removeError, sendError } from '../../../utils/error';
 import { validations } from '../../../utils/validations';
-import { verifyValues } from '../../../utils/verifyValues';
+import { verifyErrors } from '../../../utils/verifyErrors';
 import { PasswordInput, TextInput } from '../../inputs/inputs';
 import { StyledForm } from './styledForm';
 
@@ -27,7 +27,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 			confirmPassword: validations.confirmPassword(password, confirmPassword),
 		};
 
-		const hasErrors = verifyValues(fields, sendError, removeError);
+		const hasErrors = verifyErrors(fields, sendError, removeError);
 		if (hasErrors) return;
 
 		const user = { email, name, password };

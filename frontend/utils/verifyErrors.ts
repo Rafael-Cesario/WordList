@@ -1,6 +1,6 @@
 type errorMessage = string;
 
-export const verifyValues = (
+export const verifyErrors = (
 	fields: { [key: string]: errorMessage | undefined },
 	sendError: (error: string) => void,
 	removeError: (key: string) => void

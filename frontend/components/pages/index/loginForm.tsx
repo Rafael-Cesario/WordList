@@ -4,6 +4,7 @@ import { setCookies } from '../../../services/cookies';
 import { queriesUser } from '../../../services/queries/queriesUser';
 import { removeError, sendError } from '../../../utils/error';
 import { validations } from '../../../utils/validations';
+import { verifyErrors } from '../../../utils/verifyErrors';
 import { PasswordInput, TextInput } from '../../inputs/inputs';
 import { StyledForm } from './styledForm';
 
@@ -18,22 +19,35 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 	const [values, setValues] = useState<{ [key: string]: string }>({});
 	const router = useRouter();
 
+	const findError = (email: string, password: string) => {
+		const emptyValues = validations.emptyFields({ email, password });
+		const error = verifyErrors(emptyValues, sendError, removeError);
+		return error;
+	};
+
+	const saveCookies = async (tokens: { [key: string]: string }) => {
+		const entries = Object.entries(tokens);
+
+		entries.forEach(async ([key, value]) => {
+			await setCookies(key, value);
+		});
+	};
+
 	const submit = async () => {
 		const { email, password } = values;
 
-		const emptyValues = validations.emptyFields({ email, password });
-		if (emptyValues.length) return emptyValues.forEach(errorMessage => sendError(errorMessage));
-
-		['email', 'password'].forEach(value => removeError(value));
+		const error = findError(email, password);
+		if (error) return;
 
 		const response = await queriesUser.login({ email, password });
-		if (typeof response.error === 'object') return response.error.forEach((error: string) => sendError(error));
+		if (response.error.match(/email\/password is wrong/i)) {
+			verifyErrors({ email: 'Email ou senha incorreta', password: 'Email ou senha incorreta' }, sendError, removeError);
+			return;
+		}
 
 		const token = response.data?.login.token;
-		await setCookies('token', token);
-
 		const user = email;
-		await setCookies('user', user);
+		saveCookies({ token, user });
 
 		setValues({});
 		router.push('/main');
