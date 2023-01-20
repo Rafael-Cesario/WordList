@@ -26,5 +26,4 @@ describe('Login component', () => {
 	});
 
 	// email / password is wrong
-	// save Cookies
 });
