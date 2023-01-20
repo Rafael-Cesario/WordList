@@ -51,7 +51,7 @@ describe('Validation', () => {
 		let empties = validations.emptyFields(fields);
 
 		expect(empties).toHaveProperty('email');
-		expect(empties.email).toBe('Este campo não pode ficar vazio');
+		expect(empties.email).toBe('email: Este campo não pode ficar vazio');
 
 		empties = validations.emptyFields({});
 		expect(empties).toStrictEqual({});

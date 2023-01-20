@@ -29,7 +29,7 @@ class Validations {
 		const entries = Object.entries(fields);
 
 		entries.forEach(([key, value]) => {
-			if (!value) empties[key] = 'Este campo não pode ficar vazio';
+			if (!value) empties[key] = `${key}: Este campo não pode ficar vazio`;
 		});
 
 		return empties;
