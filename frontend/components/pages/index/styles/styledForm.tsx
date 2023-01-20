@@ -13,19 +13,6 @@ export const StyledForm = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	h1 {
-		margin: 2rem 0;
-	}
-
-	.close {
-		color: white;
-		position: absolute;
-		top: 0;
-		right: 0;
-		font-size: 1rem;
-		padding: 2rem;
-	}
-
 	.confirm {
 		margin: 2rem 0;
 		background-color: #00000050;

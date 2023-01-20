@@ -4,7 +4,8 @@ import { sendNotification } from '../../../utils/sendNotification';
 import { validations } from '../../../utils/validations';
 import { verifyErrors } from '../../../utils/verifyErrors';
 import { PasswordInput, TextInput } from '../../inputs/inputs';
-import { StyledForm } from './styledForm';
+import { StyledForm } from './styles/styledForm';
+import { Title } from './title';
 
 interface CreateAccountProps {
 	props: {
@@ -17,7 +18,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 	const [values, setValues] = useState<{ [key: string]: string }>({});
 	const [showNotification, setShowNotification] = useState(false);
 
-	const validateFields = (values: { email: string; name: string; password: string; confirmPassword: string }) => {
+	const verifyFields = (values: { email: string; name: string; password: string; confirmPassword: string }) => {
 		const { email, name, password, confirmPassword } = values;
 
 		const fields = {
@@ -34,7 +35,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 	const submit = async () => {
 		const { email, name, password, confirmPassword } = values;
 
-		const hasErrors = validateFields({ email, name, password, confirmPassword });
+		const hasErrors = verifyFields({ email, name, password, confirmPassword });
 		if (hasErrors) return;
 
 		const user = { email, name, password };
@@ -46,10 +47,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 
 	return (
 		<StyledForm>
-			<h1>Criar Conta</h1>
-			<button className='close' onClick={() => changeFormState('create')}>
-				x
-			</button>
+			<Title props={{ changeFormState, formName: 'create' }} />
 
 			<div className='inputs'>
 				<TextInput props={{ name: 'email', content: 'Email', values, setValues }} />

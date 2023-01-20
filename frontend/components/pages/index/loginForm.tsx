@@ -5,7 +5,8 @@ import { queriesUser } from '../../../services/queries/queriesUser';
 import { validations } from '../../../utils/validations';
 import { verifyErrors } from '../../../utils/verifyErrors';
 import { PasswordInput, TextInput } from '../../inputs/inputs';
-import { StyledForm } from './styledForm';
+import { StyledForm } from './styles/styledForm';
+import { Title } from './title';
 
 interface LoginFormProps {
 	props: {
@@ -54,10 +55,7 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 
 	return (
 		<StyledForm>
-			<h1>Login</h1>
-			<button onClick={() => changeFormState('login')} className='close'>
-				x
-			</button>
+			<Title props={{ formName: 'login', changeFormState }} />
 
 			<div className='inputs'>
 				<TextInput props={{ name: 'email', content: 'Email', values, setValues }} />
