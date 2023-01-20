@@ -33,7 +33,7 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 
 		const response = await queriesUser.login({ email, password });
 		if (response.error.match(/email\/password is wrong/i)) {
-			verifyErrors({ email: 'Email ou senha incorreta', password: 'Email ou senha incorreta' });
+			verifyErrors({ email: 'email: Email ou senha incorreta', password: 'password: Email ou senha incorreta' });
 			return;
 		}
 

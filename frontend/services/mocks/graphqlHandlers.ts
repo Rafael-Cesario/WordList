@@ -40,7 +40,7 @@ export const handlers = [
 
 	graphql.mutation('Login', (req, res, ctx) => {
 		const { user } = req.variables;
-		if (!user.email) throw new Error('Email/password is wrong');
+		if (user.email === 'wrong') throw new Error('Email/password is wrong');
 		return res(ctx.data({ login: { message: 'success', token: 'a0sdf8792ç3l4kjas0df8967123ç45lkjasd9f' } }));
 	}),
 

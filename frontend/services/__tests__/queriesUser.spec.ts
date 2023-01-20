@@ -26,7 +26,7 @@ describe('Queries user', () => {
 	});
 
 	test('Login, error', async () => {
-		const response = await queriesUser.login({ email: '', password: '' });
+		const response = await queriesUser.login({ email: 'wrong', password: '' });
 		expect(response).toHaveProperty('error');
 		expect(response.error).toMatch(/Email\/password is wrong/i);
 	});
