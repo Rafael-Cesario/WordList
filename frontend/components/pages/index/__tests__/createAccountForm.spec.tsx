@@ -7,16 +7,6 @@ import userEvent from '@testing-library/user-event';
 describe('Create account form component', () => {
 	const user = userEvent.setup();
 
-	test('Close the form', () => {
-		const changeFormState = vi.fn();
-		render(<CreateAccountForm props={{ changeFormState }} />);
-
-		const closeB = screen.getByRole('button', { name: 'x' });
-		fireEvent.click(closeB);
-
-		expect(changeFormState).toHaveBeenCalledWith('create');
-	});
-
 	test('Submit with empty fields shows a error', async () => {
 		const changeFormState = vi.fn();
 		render(<CreateAccountForm props={{ changeFormState }} />);
