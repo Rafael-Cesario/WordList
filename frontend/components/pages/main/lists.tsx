@@ -17,7 +17,7 @@ export const Lists = ({ props }: ListsProps) => {
 				const link = '/' + list.replace(/-/g, '_').replace(/ /g, '-');
 
 				return (
-					<button onClick={() => router.push(link)} key={list}>
+					<button onClick={() => router.push(link)} key={list} title={'List'}>
 						{list}
 					</button>
 				);
