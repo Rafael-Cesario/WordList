@@ -43,7 +43,7 @@ export const NewList = ({ props }: NewListProps) => {
 						}}
 					/>
 
-					<button>Criar nova lista</button>
+					<button title={'Create new list'}>Criar nova lista</button>
 				</form>
 			)}
 		</StyledNewList>
