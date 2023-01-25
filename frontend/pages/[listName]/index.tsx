@@ -17,7 +17,11 @@ const ListPage = () => {
 	const createWordList = async () => {
 		const owner = await getCookies('user');
 		await queriesList.createWordList({ listName, owner });
-		return;
+	};
+
+	// todo: get wordLists and show on the page;
+	const getWordLists = async () => {
+		const owner = await getCookies('user');
 	};
 
 	return (

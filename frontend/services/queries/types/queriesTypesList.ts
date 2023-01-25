@@ -39,3 +39,17 @@ export const CREATE_WORD_LIST = gql`
 		}
 	}
 `;
+
+export const GET_WORD_LISTS = gql`
+	query GetWordLists($getWordLists: GetWordListsInput!) {
+		getWordLists(getWordLists: $getWordLists) {
+			listName
+			owner
+			wordLists {
+				next
+				current
+				done
+			}
+		}
+	}
+`;

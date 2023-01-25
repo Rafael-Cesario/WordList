@@ -30,3 +30,8 @@ export interface WordListInput {
 	owner: string;
 	listName: string;
 }
+
+export interface GetWordListsInput {
+	owner: string;
+	listName: string;
+}

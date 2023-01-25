@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from '../client';
-import { ListType, WordListInput, ChangesInput, DeleteListInput } from '../../interfaces/interfaceList';
-import { CHANGE_LIST_NAME, CREATE_LIST, CREATE_WORD_LIST, DELETE_LIST, GET_LISTS } from './types/queriesTypesList';
+import { ListType, WordListInput, ChangesInput, DeleteListInput, GetWordListsInput } from '../../interfaces/interfaceList';
+import { CHANGE_LIST_NAME, CREATE_LIST, CREATE_WORD_LIST, DELETE_LIST, GET_LISTS, GET_WORD_LISTS } from './types/queriesTypesList';
 
 class QueriesList {
 	async createList(newList: ListType) {
@@ -44,6 +44,15 @@ class QueriesList {
 		try {
 			const response = await client.mutate({ mutation: CREATE_WORD_LIST, variables: { wordList } });
 			return response.data.createWordList;
+		} catch (error: any) {
+			return { error: error.message };
+		}
+	}
+
+	async getWordLists(getWordLists: GetWordListsInput) {
+		try {
+			const response = await client.query({ query: GET_WORD_LISTS, variables: { getWordLists } });
+			return response;
 		} catch (error: any) {
 			return { error: error.message };
 		}
