@@ -1,7 +1,6 @@
 import { getCookies } from '../../../services/cookies';
 import { ChangesInput } from '../../../interfaces/interfaceList';
 import { queriesList } from '../../../services/queries/queriesList';
-import { useRouter } from 'next/router';
 
 interface SaveConfigsProps {
 	props: {
@@ -13,7 +12,6 @@ interface SaveConfigsProps {
 
 export const SaveConfigs = ({ props }: SaveConfigsProps) => {
 	const { values, listName, setShowConfigs } = props;
-	const router = useRouter();
 
 	const changeListName = async () => {
 		const owner = await getCookies('user');
@@ -27,7 +25,7 @@ export const SaveConfigs = ({ props }: SaveConfigsProps) => {
 
 		await queriesList.changeListName(changes);
 		setShowConfigs(false);
-		router.push(newURL);
+		location.href = newURL;
 	};
 
 	return <button onClick={() => changeListName()}>Salvar configs</button>;

@@ -32,13 +32,13 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 		if (error) return;
 
 		const response = await queriesUser.login({ email, password });
-		if (response.error.match(/email\/password is wrong/i)) {
+		if (response.error && response.error.match(/email\/password is wrong/i)) {
 			verifyErrors({ email: 'email: Email ou senha incorreta', password: 'password: Email ou senha incorreta' });
 			return;
 		}
 
-		const token = response.data?.login.token;
 		const user = email;
+		const token = response.token;
 		saveCookies({ token, user });
 
 		setValues({});
@@ -47,7 +47,7 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 
 	return (
 		<StyledForm>
-			<Title props={{ formName: 'login', changeFormState }} />
+			<Title props={{ formName: 'login', changeFormState, title: 'Login' }} />
 
 			<div className='inputs'>
 				<TextInput props={{ name: 'email', content: 'Email', values, setValues }} />

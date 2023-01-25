@@ -16,8 +16,7 @@ const Home = () => {
 	};
 
 	const userAuthentication = async () => {
-		const response = await getCookies('token');
-		const authenticated = response.data.cookie;
+		const authenticated = await getCookies('token');
 		if (authenticated) router.push('/main');
 	};
 

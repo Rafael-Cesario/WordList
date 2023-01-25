@@ -2,6 +2,8 @@ import { FormEvent, useState } from 'react';
 import { TextInput } from '../../inputs/inputs';
 import { StyledNewList } from './styles/styledNewList';
 import produce from 'immer';
+import { getCookies } from '../../../services/cookies';
+import { queriesList } from '../../../services/queries/queriesList';
 
 interface NewListProps {
 	props: {
@@ -18,17 +20,24 @@ export const NewList = ({ props }: NewListProps) => {
 	const createNewList = async (e: FormEvent) => {
 		e.preventDefault();
 
-		const newLists = produce(lists, draft => {
-			draft.push(values.name);
-		});
+		const owner = await getCookies('user');
+		const listName = values.name;
+		await queriesList.createList({ owner, listName });
 
-		setLists(newLists);
+		setLists(
+			produce(lists, draft => {
+				draft.push(values.name);
+			})
+		);
+		
 		setValues({});
 	};
 
 	return (
 		<StyledNewList>
-			<button title={'Button new list'} onClick={() => setShowNewList(!showNewList)}>Nova lista</button>
+			<button title={'Button new list'} onClick={() => setShowNewList(!showNewList)}>
+				Nova lista
+			</button>
 
 			{showNewList && (
 				<form onSubmit={e => createNewList(e)}>

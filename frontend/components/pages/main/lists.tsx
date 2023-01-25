@@ -11,6 +11,7 @@ export const Lists = ({ props }: ListsProps) => {
 	const { lists } = props;
 	const router = useRouter();
 
+
 	return (
 		<StyledLists>
 			{lists.map(list => {
