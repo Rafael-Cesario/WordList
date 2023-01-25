@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Configs } from '../../components/pages/list/configs';
+import { WordLists } from '../../components/pages/list/wordLists';
 import { getCookies } from '../../services/cookies';
 import { queriesList } from '../../services/queries/queriesList';
 import { StyledList } from '../../styles/styledList';
@@ -11,18 +12,26 @@ const ListPage = () => {
 	const [listName] = useRouterQuery('Carregando...');
 	const [showConfigs, setShowConfigs] = useState(false);
 
+	const [wordLists, setWordLists] = useState({ next: [], current: [], done: [] });
+
 	// temp
-	const totalWords = 126;
+	const totalWords = 0;
 
 	const createWordList = async () => {
 		const owner = await getCookies('user');
 		await queriesList.createWordList({ listName, owner });
 	};
 
-	// todo: get wordLists and show on the page;
 	const getWordLists = async () => {
 		const owner = await getCookies('user');
+		const queryWordLists = await queriesList.getWordLists({ owner, listName });
+		setWordLists(queryWordLists.wordLists);
 	};
+
+	useEffect(() => {
+		const isLoading = listName === 'Carregando...';
+		isLoading || getWordLists();
+	}, [listName]);
 
 	return (
 		<>
@@ -45,7 +54,11 @@ const ListPage = () => {
 					</div>
 				</header>
 
-				<main>{showConfigs && <Configs props={{ setShowConfigs, listName }} />}</main>
+				<main>
+					{showConfigs && <Configs props={{ setShowConfigs, listName }} />}
+
+					<WordLists props={{ wordLists }} />
+				</main>
 			</StyledList>
 		</>
 	);

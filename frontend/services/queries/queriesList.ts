@@ -52,7 +52,7 @@ class QueriesList {
 	async getWordLists(getWordLists: GetWordListsInput) {
 		try {
 			const response = await client.query({ query: GET_WORD_LISTS, variables: { getWordLists } });
-			return response;
+			return response.data.getWordLists;
 		} catch (error: any) {
 			return { error: error.message };
 		}
