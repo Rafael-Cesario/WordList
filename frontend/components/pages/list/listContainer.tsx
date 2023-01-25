@@ -23,7 +23,16 @@ export const ListContainer = ({ props: { status, lists } }: ListContainerProps) 
 
 			<div className='lists'>
 				{lists.map((list, index) => {
-					return <div className='list' key={'next' + index}></div>;
+					const [term, definition] = list;
+
+					return (
+						<div className='list' key={'next' + index}>
+							<div className='words'>
+								<p className='term'>{term}</p>
+								<p className='definition'>{definition}</p>
+							</div>
+						</div>
+					);
 				})}
 			</div>
 		</StyledListContainer>

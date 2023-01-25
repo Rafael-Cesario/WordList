@@ -29,17 +29,41 @@ export const StyledListContainer = styled.div`
 		justify-content: center;
 
 		.list {
+			display: flex;
+			flex-direction: column;
 			cursor: pointer;
 			margin: 1rem;
 			background-color: #005090;
-			width: 10rem;
-			height: 15rem;
+			width: 15rem;
+			height: 21rem;
 			border-radius: 2px;
 			padding: 1rem;
 			transition: 0.3s;
+			overflow: hidden;
 
 			:hover {
-				transform: scale(1.1);
+				transform: scale(1.05);
+			}
+
+			.words {
+				display: flex;
+				margin: 0.5rem 0;
+
+				.term,
+				.definition {
+					width: 50%;
+					background-color: #10101050;
+					border-radius: 2px;
+					padding: 0.5rem;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					white-space: nowrap;
+					text-transform: capitalize;
+				}
+
+				.term {
+					margin-right: 1rem;
+				}
 			}
 		}
 	}

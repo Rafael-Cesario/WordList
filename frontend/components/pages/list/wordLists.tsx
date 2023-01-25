@@ -14,8 +14,6 @@ interface WordListsProps {
 export const WordLists = ({ props: { wordLists } }: WordListsProps) => {
 	const { next, current, done } = wordLists;
 
-	console.log({ next, current, done });
-
 	// todo > placeHolder while loading lists;
 
 	return (
