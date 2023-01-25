@@ -11,6 +11,19 @@ export const StyledGlobal = createGlobalStyle`
 	body {
 		background-color: #101010;
 		color: #ddd;
+
+		::-webkit-scrollbar {
+			background-color: #101010;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: #202020;
+			border-radius: 2px;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background-color: #005090;
+		}
 	}
 
 	button, input, label {
