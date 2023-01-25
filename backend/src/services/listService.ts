@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { ListRepository } from '../repositories/listRepository';
-import { ChangesArgs, CreateListArgs, DeleteListArgs, MessageResponse, WordListArgs } from '../interfaces/listInterface';
+import { ChangesArgs, CreateListArgs, DeleteListArgs, GetWordListsArgs, MessageResponse, WordListArgs } from '../interfaces/listInterface';
 
 export class ListService {
 	constructor(private listRepository = new ListRepository()) {}
@@ -49,4 +49,20 @@ export class ListService {
 
 		return { message: 'New Word List created' };
 	}
+
+	async getWordLists({ getWordLists }: GetWordListsArgs) {
+		const { listName, owner } = getWordLists;
+
+		const getList = await this.listRepository.findByOwner({ owner, listName });
+		if (!getList) throw new GraphQLError('List not found');
+
+		return {
+			owner: getList.owner,
+			listName: getList.listName,
+			wordLists: getList.wordLists,
+		}
+
+	}
+
+	// deleteWordList
 }

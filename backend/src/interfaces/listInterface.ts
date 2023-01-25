@@ -38,3 +38,10 @@ export interface WordListArgs {
 		listName: string;
 	};
 }
+
+export interface GetWordListsArgs {
+	getWordLists: {
+		owner: string;
+		listName: string;
+	};
+}

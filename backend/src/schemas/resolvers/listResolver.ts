@@ -1,11 +1,12 @@
 import { ListService } from '../../services/listService';
-import { ChangesArgs, CreateListArgs, DeleteListArgs, WordListArgs } from '../../interfaces/listInterface';
+import { ChangesArgs, CreateListArgs, DeleteListArgs, GetWordListsArgs, WordListArgs } from '../../interfaces/listInterface';
 
 const listService = new ListService();
 
 export const listResolver = {
 	Query: {
 		getLists: (parent: any, args: { owner: string }) => listService.getLists(args),
+		getWordLists: (parent:any, args: GetWordListsArgs) => listService.getWordLists(args),
 	},
 
 	Mutation: {
