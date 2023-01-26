@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { AddWords } from '../../components/pages/wordList/addWords';
 import { StyledWordList } from '../../styles/styledWordList';
 import { useRouterQuery } from '../../utils/hooks/useRouterQuery';
 
@@ -27,6 +28,10 @@ const WordList = () => {
 						<p>Estudar lista: {listStatus}</p>
 					</div>
 				</header>
+
+				<main>
+					<AddWords />
+				</main>
 			</StyledWordList>
 		</>
 	);
