@@ -15,5 +15,10 @@ export const StyledMenu = styled.div`
 		margin: 0.5rem 0;
 		padding: 0.5rem 2rem;
 		border-radius: 2px;
+		transition: 0.2s;
+
+		:hover {
+			transform: scale(1.05);
+		}
 	}
 `;
