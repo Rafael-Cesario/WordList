@@ -5,25 +5,9 @@ export const Words = () => {
 		['term', 'ddefinitiondefiniti ondefinitiondefinitionde finitiondefinitiondefinitiondefinitio ndefinitiondefinitiondefinitionefinition'],
 		['term', 'definition'],
 		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
-		['term', 'definition'],
 	];
+
+	// todo > get Words from db
 
 	return (
 		<StyledWords className='words'>
