@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { UserRepository } from '../repositories/userRepository';
-import { UserType } from '../schemas/types/userType';
-import { encryptPassword } from '../utils/crypt';
-import { UserService } from './userService';
+import { UserRepository } from '../../repositories/userRepository';
+import { UserType } from '../../schemas/types/userType';
+import { encryptPassword } from '../../utils/crypt';
+import { UserService } from '../userService';
 
 class UserRepositoryMock extends UserRepository {
 	private users: UserType[] = [];

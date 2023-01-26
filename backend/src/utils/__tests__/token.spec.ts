@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { it, expect } from 'vitest';
-import { genToken } from './token';
+import { genToken } from '../token';
 
 it('returns a token', () => {
 	const email = 'teste@teste.com';

@@ -1,5 +1,5 @@
 import { it, expect } from 'vitest';
-import { decryptPassword, encryptPassword } from './crypt';
+import { decryptPassword, encryptPassword } from '../crypt';
 
 it('Encrypt the password', () => {
 	const password = 'VeryStrongPassword';
