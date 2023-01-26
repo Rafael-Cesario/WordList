@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { useRouterQuery } from '../../../utils/hooks/useRouterQuery';
 import { StyledListContainer } from './styles/styledListContainer';
 
 interface ListContainerProps {
@@ -8,6 +10,14 @@ interface ListContainerProps {
 }
 
 export const ListContainer = ({ props: { status, lists } }: ListContainerProps) => {
+	const router = useRouter();
+	const [listName] = useRouterQuery('');
+
+	const goToList = (listIndex: number) => {
+		const name = listName.replace(/-/g, '_').replace(/ /g, '-');
+		router.push(`/${name}/${listIndex}`);
+	};
+
 	if (!lists.length) {
 		return (
 			<StyledListContainer>
@@ -26,7 +36,7 @@ export const ListContainer = ({ props: { status, lists } }: ListContainerProps) 
 					const [term, definition] = list;
 
 					return (
-						<div className='list' key={'next' + index}>
+						<div className='list' key={'next' + index} onClick={() => goToList(index)}>
 							<div className='words'>
 								<p className='term'>{term}</p>
 								<p className='definition'>{definition}</p>
