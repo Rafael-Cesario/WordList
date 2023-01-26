@@ -1,12 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { AddWords } from '../../components/pages/wordList/addWords';
+import { Menu } from '../../components/pages/wordList/menu';
+import { StyledMain } from '../../components/pages/wordList/styles/styledMain';
 import { StyledWordList } from '../../styles/styledWordList';
 import { useRouterQuery } from '../../utils/hooks/useRouterQuery';
 
 const WordList = () => {
 	const { link, listName } = useRouterQuery('Carregando...');
 
+	// temp
 	const totalWords = 100;
 	const listStatus = 'Diariamente';
 
@@ -29,9 +32,10 @@ const WordList = () => {
 					</div>
 				</header>
 
-				<main>
+				<StyledMain>
+					<Menu />
 					<AddWords />
-				</main>
+				</StyledMain>
 			</StyledWordList>
 		</>
 	);
