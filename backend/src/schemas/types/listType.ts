@@ -2,13 +2,7 @@ export const listTypeDef = `#graphql
 	type List {
 		owner: String!
 		listName: String!
-		wordLists: WordLists!
-	}
-
-	type WordLists {
-		next: [[String]]!
-		current: [[String]]!
-		done: [[String]]!
+		wordLists: WordList!
 	}
 
 	input NewListInput {
@@ -22,16 +16,6 @@ export const listTypeDef = `#graphql
 		newName: String!
 	}
 
-	input WordListInput {
-		owner: String!
-		listName: String!
-	}
-
-	input GetWordListsInput {
-		owner: String!
-		listName: String!
-	}
-
 	type MessageResponse {
 		message: String!
 	}
@@ -42,13 +26,11 @@ export const listTypeDef = `#graphql
 
 	type Query {
 		getLists(owner:String!): ResponseGetLists!
-		getWordLists(getWordLists: GetWordListsInput!): List!
 	}
 
 	type Mutation {
 		createList ( newList: NewListInput!): MessageResponse!
 		changeListName (changes: ChangesInput): MessageResponse!
 		deleteList(owner:String!, listName:String!): MessageResponse!
-		createWordList( wordList: WordListInput!): MessageResponse!
 	}
 `;
