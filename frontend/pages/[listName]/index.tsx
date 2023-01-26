@@ -9,7 +9,7 @@ import { StyledList } from '../../styles/styledList';
 import { useRouterQuery } from '../../utils/hooks/useRouterQuery';
 
 const ListPage = () => {
-	const [listName] = useRouterQuery('Carregando...');
+	const { listName } = useRouterQuery('Carregando...');
 	const [showConfigs, setShowConfigs] = useState(false);
 
 	const [wordLists, setWordLists] = useState({ next: [], current: [], done: [] });

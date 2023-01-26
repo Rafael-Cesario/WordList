@@ -11,11 +11,10 @@ interface ListContainerProps {
 
 export const ListContainer = ({ props: { status, lists } }: ListContainerProps) => {
 	const router = useRouter();
-	const [listName] = useRouterQuery('');
+	const { link } = useRouterQuery('');
 
 	const goToList = (listIndex: number) => {
-		const name = listName.replace(/-/g, '_').replace(/ /g, '-');
-		router.push(`/${name}/${listIndex}`);
+		router.push(`/${link}/${listIndex}`);
 	};
 
 	if (!lists.length) {

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 export const useRouterQuery = (initialState: string) => {
 	const [listName, setListName] = useState(initialState);
 	const router = useRouter();
+	const link = router.query.listName as string;
 
 	const getListName = () => {
 		const query = router.query.listName as string;
@@ -15,5 +16,5 @@ export const useRouterQuery = (initialState: string) => {
 		if (router.isReady) getListName();
 	}, [router]);
 
-	return [listName, setListName] as [string, (newName: string) => void];
+	return { listName, link };
 };
