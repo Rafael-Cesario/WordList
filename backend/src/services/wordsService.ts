@@ -1,22 +1,6 @@
 import { GraphQLError } from 'graphql';
+import { IAddWords, IGetWords, IRemoveWords } from '../interfaces/wordsInterface';
 import { WordsRepository } from '../repositories/wordListRepository';
-
-export interface IAddWords {
-	term: string;
-	definition: string;
-	listName: string;
-	owner: string;
-	listIndex: number;
-	status: 'next' | 'current' | 'done';
-}
-
-export interface IRemoveWords {
-	owner: string;
-	listName: string;
-	listIndex: number;
-	wordIndex: number;
-	status: 'next' | 'current' | 'done';
-}
 
 export class WordsService {
 	constructor(private wordListRepository = new WordsRepository()) {}
@@ -29,6 +13,15 @@ export class WordsService {
 		await this.wordListRepository.saveList({ owner, listName, list });
 
 		return { message: 'New word added' };
+	}
+
+	async getWords({ owner, listName, listIndex, status }: IGetWords) {
+		const list = await this.wordListRepository.getList({ listName, owner });
+		if (!list) throw new GraphQLError('List not found');
+
+		const words = list.wordLists[status][listIndex];
+
+		return { words };
 	}
 
 	// todo > rename word
