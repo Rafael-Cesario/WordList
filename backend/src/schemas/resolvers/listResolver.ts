@@ -3,10 +3,12 @@ import { ChangesArgs, CreateListArgs, DeleteListArgs, GetWordListsArgs, WordList
 
 const listService = new ListService();
 
+// todo > move wordLists resolvers to another file
+
 export const listResolver = {
 	Query: {
 		getLists: (parent: any, args: { owner: string }) => listService.getLists(args),
-		getWordLists: (parent:any, args: GetWordListsArgs) => listService.getWordLists(args),
+		getWordLists: (parent: any, args: GetWordListsArgs) => listService.getWordLists(args),
 	},
 
 	Mutation: {

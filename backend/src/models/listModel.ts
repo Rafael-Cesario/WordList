@@ -10,9 +10,9 @@ export class List implements ListType {
 
 	@prop({ type: Object, required: [true, 'wordLists is required'] })
 	public wordLists!: {
-		next: string[][];
-		current: string[][];
-		done: string[][];
+		next: string[][][];
+		current: string[][][];
+		done: string[][][];
 	};
 }
 

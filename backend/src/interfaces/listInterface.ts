@@ -2,9 +2,9 @@ export interface ListType {
 	owner: string;
 	listName: string;
 	wordLists: {
-		next: string[][];
-		current: string[][];
-		done: string[][];
+		next: string[][][];
+		current: string[][][];
+		done: string[][][];
 	};
 }
 
