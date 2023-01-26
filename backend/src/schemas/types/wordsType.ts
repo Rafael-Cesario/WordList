@@ -12,7 +12,16 @@ export const wordsTypeDef = `#graphql
 		status: String!
 	}
 
+	input IRemoveWords {
+		owner: String!
+		listName: String!
+		status: String!
+		listIndex: Int!
+		wordIndex: Int!
+	}
+
 	type Mutation {
 		addWords(words: IAddWords!): TResponse!
+		removeWords(words: IRemoveWords!): TResponse!
 	}
 `;

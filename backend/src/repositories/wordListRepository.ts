@@ -9,7 +9,6 @@ interface IGetList {
 interface ISaveList {
 	owner: string;
 	listName: string;
-	status: string;
 	list: {
 		wordLists: {
 			next: string[][][];
