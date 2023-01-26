@@ -1,13 +1,9 @@
 import styled from 'styled-components';
 
-export const StyledWordList = styled.div`
-	margin: 2rem;
-
-	header {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		justify-items: center;
-	}
+export const StyledHeader = styled.header`
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	justify-items: center;
 
 	.link {
 		justify-self: start;

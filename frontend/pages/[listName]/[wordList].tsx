@@ -1,18 +1,10 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { AddWords } from '../../components/pages/wordList/addWords';
+import { Header } from '../../components/pages/wordList/header';
 import { Menu } from '../../components/pages/wordList/menu';
-import { StyledMain } from '../../components/pages/wordList/styles/styledMain';
-import { StyledWordList } from '../../styles/styledWordList';
-import { useRouterQuery } from '../../utils/hooks/useRouterQuery';
+import { StyledWordList } from '../../components/pages/wordList/styles/styledWordList';
 
 const WordList = () => {
-	const { link, listName } = useRouterQuery('Carregando...');
-
-	// temp
-	const totalWords = 100;
-	const listStatus = 'Diariamente';
-
 	return (
 		<>
 			<Head>
@@ -20,22 +12,12 @@ const WordList = () => {
 			</Head>
 
 			<StyledWordList>
-				<header>
-					<Link className='link' href={`/${link}`}>
-						Voltar
-					</Link>
-					<h1 className='title'>{listName}</h1>
+				<Header />
 
-					<div className='info'>
-						<p>Palavras: {totalWords}</p>
-						<p>Estudar lista: {listStatus}</p>
-					</div>
-				</header>
-
-				<StyledMain>
+				<main>
 					<Menu />
 					<AddWords />
-				</StyledMain>
+				</main>
 			</StyledWordList>
 		</>
 	);
