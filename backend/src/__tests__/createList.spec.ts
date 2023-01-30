@@ -34,6 +34,8 @@ describe('Creat List Query', () => {
 	test('Create a new list', async () => {
 		const newList = { listName: 'sameName', owner: 'UserEmail' };
 		const response = await queriesList.createList(newList);
+		const list = await ListModel.findOne({ ...newList });
+		expect(list!.owner).toBe('useremail');
 		expect(response.data).toHaveProperty('createList');
 		expect(response.data.createList.message).toBe('New list created');
 	});

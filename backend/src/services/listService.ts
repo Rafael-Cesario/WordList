@@ -12,7 +12,6 @@ export class ListService {
 		if (list) throw new GraphQLError('create list: A list with the same name already exist');
 
 		await this.listRepository.createList({ ...newList, wordLists: { next: [], current: [], done: [] } });
-
 		return { message: 'New list created' };
 	}
 
