@@ -10,10 +10,12 @@ export const server = new ApolloServer({
 	formatError: error => ({ message: error.message }),
 });
 
-export const startServer = async () => {
+export const startServer = async (port?: number) => {
 	const { url } = await startStandaloneServer(server, {
-		listen: { port: 4000 },
+		listen: { port: port ?? 4000 },
 	});
 
 	testEnvironment || console.log('Server: ' + url);
+
+	return { url, server };
 };

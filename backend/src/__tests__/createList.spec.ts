@@ -9,7 +9,7 @@ const queriesList = new QueriesList();
 
 describe('Creat List Query', () => {
 	beforeAll(async () => {
-		await startServer();
+		await startServer(0);
 		await startDatabase();
 	});
 

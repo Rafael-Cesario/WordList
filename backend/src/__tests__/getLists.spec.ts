@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { describe, test, expect, beforeAll, afterAll, afterEach } from 'vitest';
+import { describe, beforeAll, afterAll, afterEach } from 'vitest';
 import { startServer } from '../app';
 import { startDatabase } from '../database';
 import { ListModel } from '../models/listModel';
@@ -9,7 +9,7 @@ const queriesList = new QueriesList();
 
 describe('Get lists query', () => {
 	beforeAll(async () => {
-		await startServer();
+		await startServer(0);
 		await startDatabase();
 	});
 

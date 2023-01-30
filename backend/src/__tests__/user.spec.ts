@@ -7,7 +7,7 @@ import { createUser, login, readUser } from './utils/queriesUser';
 
 describe('User', () => {
 	beforeAll(async () => {
-		await startServer();
+		await startServer(0);
 		await startDatabase();
 	});
 
