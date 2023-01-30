@@ -1,7 +1,7 @@
 import { server } from '../../app';
 import { LoginArgs, UserType } from '../../schemas/types/userType';
-import { CREATE_USER, LOGIN, READ_USER } from './queriesType';
-import { ResponseType } from '../interfaces/queriesInterface';
+import { CREATE_USER, LOGIN, READ_USER } from './Types/queriesTypeUser';
+import { ResponseType } from './interfaces/queriesInterface';
 
 export const readUser = async (email: string) => {
 	const response = (await server.executeOperation({

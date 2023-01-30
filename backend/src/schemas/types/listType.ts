@@ -30,7 +30,7 @@ export const listTypeDef = `#graphql
 
 	type Mutation {
 		createList ( newList: NewListInput!): MessageResponse!
-		changeListName (changes: ChangesInput): MessageResponse!
+		changeListName (changes: ChangesInput!): MessageResponse!
 		deleteList(owner:String!, listName:String!): MessageResponse!
 	}
 `;
