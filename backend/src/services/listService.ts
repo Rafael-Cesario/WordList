@@ -60,8 +60,7 @@ export class ListService {
 			owner: getList.owner,
 			listName: getList.listName,
 			wordLists: getList.wordLists,
-		}
-
+		};
 	}
 
 	// deleteWordList
