@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import { afterAll, afterEach, beforeAll, describe, expect, test } from 'vitest';
-import { startServer } from '../app';
-import { startDatabase } from '../database';
-import { ListModel } from '../models/listModel';
-import { QueriesList } from './utils/queriesList';
+import { startServer } from '../../app';
+import { startDatabase } from '../../database';
+import { ListModel } from '../../models/listModel';
+import { QueriesList } from '../utils/queriesList';
 
 const queriesList = new QueriesList();
 
