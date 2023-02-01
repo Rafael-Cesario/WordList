@@ -1,11 +1,11 @@
 import { GraphQLError } from 'graphql';
+import { IChangeListName, ICreateList, IDeleteList } from '../interfaces/interfacesList';
 import { ListRepository } from '../repositories/listRepository';
-import { ChangesArgs, CreateListArgs, DeleteListArgs, GetWordListsArgs, MessageResponse, WordListArgs } from '../interfaces/listInterface';
 
 export class ListService {
 	constructor(private listRepository = new ListRepository()) {}
 
-	async createList({ newList }: CreateListArgs): Promise<MessageResponse> {
+	async createList({ newList }: { newList: ICreateList }) {
 		const { owner, listName } = newList;
 
 		const list = await this.listRepository.findByOwner({ owner, listName });
@@ -21,7 +21,7 @@ export class ListService {
 		return { lists: listNames };
 	}
 
-	async changeListName({ changes }: ChangesArgs) {
+	async changeListName({ changes }: { changes: IChangeListName }) {
 		const { owner, oldName, newName } = changes;
 
 		const filter = { owner, listName: oldName };
@@ -31,7 +31,7 @@ export class ListService {
 		return { message: 'list updated' };
 	}
 
-	async deleteList(deleteFilter: DeleteListArgs) {
+	async deleteList(deleteFilter: IDeleteList) {
 		await this.listRepository.findOneAndDelete(deleteFilter);
 
 		return { message: 'List deleted' };

@@ -1,5 +1,5 @@
 import { ServiceWordList } from '../../services/serviceWordList';
-import { ICreateWordList, IGetWordLists } from '../../__tests__/utils/interfaces/interfacesWordList';
+import { ICreateWordList, IGetWordLists } from '../../interfaces/interfacesWordList';
 
 const serviceWordList = new ServiceWordList();
 

@@ -1,20 +1,3 @@
-export type UserType = {
-	email: string;
-	name: string;
-	password: string;
-};
-
-export type CreateUserArgs = {
-	user: UserType;
-};
-
-export type LoginArgs = {
-	user: {
-		email: string;
-		password: string;
-	};
-};
-
 export const userTypeDefs = `#graphql
 	type User {
 		email: String!

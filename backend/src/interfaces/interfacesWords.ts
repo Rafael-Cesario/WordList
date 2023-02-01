@@ -21,3 +21,20 @@ export interface IGetWords {
 	listIndex: number;
 	status: 'next' | 'current' | 'done';
 }
+
+export interface IGetList {
+	owner: string;
+	listName: string;
+}
+
+export interface ISaveList {
+	owner: string;
+	listName: string;
+	list: {
+		wordLists: {
+			next: string[][][];
+			current: string[][][];
+			done: string[][][];
+		};
+	};
+}

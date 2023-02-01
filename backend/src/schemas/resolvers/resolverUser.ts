@@ -1,5 +1,5 @@
+import { ICreateUser, ILogin } from '../../interfaces/interfacesUser';
 import { UserService } from '../../services/serviceUser';
-import { CreateUserArgs, LoginArgs } from '../types/userType';
 
 const userService = new UserService();
 
@@ -9,7 +9,7 @@ export const userResolver = {
 	},
 
 	Mutation: {
-		createUser: (parent: any, args: CreateUserArgs) => userService.createUser(args),
-		login: (parent: any, args: LoginArgs) => userService.login(args),
+		createUser: (parent: any, args: { user: ICreateUser }) => userService.createUser(args),
+		login: (parent: any, args: { user: ILogin }) => userService.login(args),
 	},
 };

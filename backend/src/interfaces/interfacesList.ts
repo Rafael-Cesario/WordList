@@ -1,3 +1,17 @@
+export interface IListType {
+	owner: string;
+	listName: string;
+	wordLists: {
+		next: string[][][];
+		current: string[][][];
+		done: string[][][];
+	};
+}
+
+export interface IMessageResponse {
+	message: string;
+}
+
 export interface ICreateList {
 	owner: string;
 	listName: string;

@@ -1,8 +1,8 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { listResolver } from './resolvers/listResolver';
+import { listResolver } from './resolvers/resolverList';
 import { resolverWordList } from './resolvers/resolverWordList';
-import { userResolver } from './resolvers/userResolver';
-import { wordsResolver } from './resolvers/wordsResolver';
+import { userResolver } from './resolvers/resolverUser';
+import { wordsResolver } from './resolvers/resolverWords';
 import { listTypeDef } from './types/listType';
 import { userTypeDefs } from './types/userType';
 import { wordListTypeDefs } from './types/wordListType';

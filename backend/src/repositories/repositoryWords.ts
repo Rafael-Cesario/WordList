@@ -1,22 +1,6 @@
 import { GraphQLError } from 'graphql';
+import { IGetList, ISaveList } from '../interfaces/interfacesWords';
 import { ListModel } from '../models/listModel';
-
-interface IGetList {
-	owner: string;
-	listName: string;
-}
-
-interface ISaveList {
-	owner: string;
-	listName: string;
-	list: {
-		wordLists: {
-			next: string[][][];
-			current: string[][][];
-			done: string[][][];
-		};
-	};
-}
 
 export class WordsRepository {
 	async getList({ owner, listName }: IGetList) {

@@ -1,5 +1,5 @@
 import { prop, index, pre, getModelForClass } from '@typegoose/typegoose';
-import { UserType } from '../schemas/types/userType';
+import { IUserType } from '../interfaces/interfacesUser';
 import { encryptPassword } from '../utils/crypt';
 
 @pre<User>('save', function () {
@@ -7,7 +7,7 @@ import { encryptPassword } from '../utils/crypt';
 	this.password = encryptedPassword;
 })
 @index({ email: 1 }, { unique: true })
-class User implements UserType {
+class User implements IUserType {
 	@prop({ type: String, required: [true, 'Email is required'], lowercase: true })
 	public email!: string;
 

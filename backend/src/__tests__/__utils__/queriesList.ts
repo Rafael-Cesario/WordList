@@ -1,6 +1,6 @@
 import { server } from '../../app';
-import { IChangeListName, ICreateList, IDeleteList, IGetLists } from './interfaces/interfacesList';
-import { ResponseType } from './interfaces/queriesInterface';
+import { IChangeListName, ICreateList, IDeleteList, IGetLists } from '../../interfaces/interfacesList';
+import { ResponseType } from '../../interfaces/queriesInterface';
 import { QueriesTypeList } from './Types/queriesTypeList';
 
 const queriesTypeList = new QueriesTypeList();

@@ -1,8 +1,8 @@
 import { prop, getModelForClass, modelOptions } from '@typegoose/typegoose';
-import { ListType } from '../interfaces/listInterface';
+import { IListType } from '../interfaces/interfacesList';
 
 @modelOptions({ options: { allowMixed: 0 } })
-export class List implements ListType {
+export class List implements IListType {
 	@prop({ type: String, required: [true, 'owner is required'], lowercase: true })
 	public owner!: string;
 

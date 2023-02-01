@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
+import { IUserType } from '../../interfaces/interfacesUser';
 import { UserRepository } from '../../repositories/userRepository';
-import { UserType } from '../../schemas/types/userType';
 import { encryptPassword } from '../../utils/crypt';
 import { UserService } from '../serviceUser';
 
 class UserRepositoryMock extends UserRepository {
-	private users: UserType[] = [];
+	private users: IUserType[] = [];
 
-	async createUser(user: UserType) {
+	async createUser(user: IUserType) {
 		const hash = encryptPassword(user.password);
 		user.password = hash;
 		this.users.push(user);

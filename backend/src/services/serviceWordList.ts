@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { ListRepository } from '../repositories/listRepository';
-import { ICreateWordList, IGetWordLists } from '../__tests__/utils/interfaces/interfacesWordList';
+import { ICreateWordList, IGetWordLists } from '../interfaces/interfacesWordList';
 
 export class ServiceWordList {
 	constructor(private listRepository = new ListRepository()) {}

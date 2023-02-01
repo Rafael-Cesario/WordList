@@ -1,12 +1,12 @@
 import { Document } from 'mongoose';
-import { graphql, GraphQLError } from 'graphql';
+import { GraphQLError } from 'graphql';
 import { List, ListModel } from '../models/listModel';
-import { DeleteListArgs, ListType } from '../interfaces/listInterface';
+import { IDeleteList, IListType } from '../interfaces/interfacesList';
 
 export class ListRepository {
 	constructor(private listModel = ListModel) {}
 
-	async createList(newList: ListType) {
+	async createList(newList: IListType) {
 		try {
 			const response = await this.listModel.create(newList);
 		} catch (error: any) {
@@ -40,7 +40,7 @@ export class ListRepository {
 		if (!response.acknowledged) throw new GraphQLError('Update fail');
 	}
 
-	async findOneAndDelete(filter: DeleteListArgs) {
+	async findOneAndDelete(filter: IDeleteList) {
 		try {
 			const list = await this.listModel.findOne(filter);
 			if (!list) throw new GraphQLError('List not found');

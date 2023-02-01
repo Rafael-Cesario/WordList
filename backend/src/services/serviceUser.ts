@@ -1,13 +1,13 @@
 import { GraphQLError } from 'graphql';
+import { ICreateUser, ILogin } from '../interfaces/interfacesUser';
 import { UserRepository } from '../repositories/userRepository';
-import { CreateUserArgs, LoginArgs } from '../schemas/types/userType';
 import { decryptPassword } from '../utils/crypt';
 import { genToken } from '../utils/token';
 
 export class UserService {
 	constructor(private userRepository: UserRepository = new UserRepository()) {}
 
-	async createUser(args: CreateUserArgs) {
+	async createUser(args: { user: ICreateUser }) {
 		const { email, name, password } = args.user;
 		const newUser = await this.userRepository.createUser({ email, name, password });
 		const message = 'New user created';
@@ -24,7 +24,7 @@ export class UserService {
 		return { user, message };
 	}
 
-	async login(args: LoginArgs) {
+	async login(args: { user: ILogin }) {
 		const { email, password } = args.user;
 
 		const user = await this.userRepository.findByEmail(email);

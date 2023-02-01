@@ -1,5 +1,5 @@
 import { WordsService } from '../../services/serviceWords';
-import { IAddWords, IGetWords, IRemoveWords } from '../../interfaces/wordsInterface';
+import { IAddWords, IGetWords, IRemoveWords } from '../../interfaces/interfacesWords';
 
 const wordsService = new WordsService();
 

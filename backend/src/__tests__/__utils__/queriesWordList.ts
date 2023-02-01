@@ -1,6 +1,6 @@
 import { server } from '../../app';
-import { ICreateWordList, IGetWordLists } from './interfaces/interfacesWordList';
-import { ResponseType } from './interfaces/queriesInterface';
+import { ICreateWordList, IGetWordLists } from '../../interfaces/interfacesWordList';
+import { ResponseType } from '../../interfaces/queriesInterface';
 import { QueriesTypeWordList } from './Types/queriesTypeWordList';
 
 const queriesTypeWordList = new QueriesTypeWordList();
