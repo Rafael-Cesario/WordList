@@ -2,7 +2,9 @@ export class QueriesTypeWordList {
 	GET_WORD_LISTS = `#graphql
 		query GetWordLists ($getWordLists: GetWordListInput!){
 			getWordLists(getWordLists: $getWordLists){
-				list { owner, listName, wordLists }
+				owner, listName, wordLists {
+					next, current, done
+				}
 			}
 		}
 	`;

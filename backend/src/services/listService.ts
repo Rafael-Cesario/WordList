@@ -46,7 +46,7 @@ export class ListService {
 		list.wordLists.next.push([]);
 		await this.listRepository.updateOne(list, { wordLists: list.wordLists });
 
-		return { message: 'New Word List created' };
+		return { message: 'New wordList created' };
 	}
 
 	async getWordLists({ getWordLists }: GetWordListsArgs) {
