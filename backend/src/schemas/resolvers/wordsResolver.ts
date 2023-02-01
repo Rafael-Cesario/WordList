@@ -1,4 +1,4 @@
-import { WordsService } from '../../services/wordsService';
+import { WordsService } from '../../services/serviceWords';
 import { IAddWords, IGetWords, IRemoveWords } from '../../interfaces/wordsInterface';
 
 const wordsService = new WordsService();

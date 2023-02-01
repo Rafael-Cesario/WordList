@@ -36,31 +36,4 @@ export class ListService {
 
 		return { message: 'List deleted' };
 	}
-
-	async createWordList({ wordList }: WordListArgs) {
-		const { owner, listName } = wordList;
-
-		const list = await this.listRepository.findByOwner({ owner, listName });
-		if (!list) throw new GraphQLError('List not found');
-
-		list.wordLists.next.push([]);
-		await this.listRepository.updateOne(list, { wordLists: list.wordLists });
-
-		return { message: 'New wordList created' };
-	}
-
-	async getWordLists({ getWordLists }: GetWordListsArgs) {
-		const { listName, owner } = getWordLists;
-
-		const getList = await this.listRepository.findByOwner({ owner, listName });
-		if (!getList) throw new GraphQLError('List not found');
-
-		return {
-			owner: getList.owner,
-			listName: getList.listName,
-			wordLists: getList.wordLists,
-		};
-	}
-
-	// deleteWordList
 }

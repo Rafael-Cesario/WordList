@@ -1,4 +1,4 @@
-import { UserService } from '../../services/userService';
+import { UserService } from '../../services/serviceUser';
 import { CreateUserArgs, LoginArgs } from '../types/userType';
 
 const userService = new UserService();
