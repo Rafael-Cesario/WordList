@@ -37,6 +37,7 @@ describe('Creat List Query', () => {
 		const list = await ListModel.findOne({ ...newList });
 		expect(list!.owner).toBe('useremail');
 		expect(response.data).toHaveProperty('createList');
+		expect(list!.listName).toBe(newList.listName.toLowerCase());
 		expect(response.data.createList.message).toBe('New list created');
 	});
 

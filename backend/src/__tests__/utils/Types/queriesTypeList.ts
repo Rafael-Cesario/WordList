@@ -16,7 +16,7 @@ export class QueriesTypeList {
 	`;
 
 	DELETE_LIST = `#graphql
-		mutation DeleteList ($owner: String!, listName: String!) {
+		mutation DeleteList ($owner: String!, $listName: String!) {
 			deleteList(owner:$owner, listName:$listName) {
 				message
 			}
