@@ -3,7 +3,7 @@ import { startServer } from '../../app';
 import { startDatabase } from '../../database';
 import { UserModel } from '../../models/userModel';
 import { test, describe, expect, beforeAll, afterEach, afterAll } from 'vitest';
-import { createUser, login } from '../utils/queriesUser';
+import { createUser, login } from '../__utils__/queriesUser';
 
 describe('User', () => {
 	beforeAll(async () => {

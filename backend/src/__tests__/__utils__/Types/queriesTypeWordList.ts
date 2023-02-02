@@ -24,4 +24,12 @@ export class QueriesTypeWordList {
 			}
 		}
 	`;
+
+	CHANGE_WORDLIST_STATUS = `#graphql
+		mutation ChangeWordListStatus($changeWordListStatus: IChangeWordListStatus!){
+			changeWordListStatus(changeWordListStatus: $changeWordListStatus){
+				message
+			}
+		}
+	`;
 }
