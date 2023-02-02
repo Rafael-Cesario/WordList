@@ -28,11 +28,11 @@ export const wordListTypeDefs = `#graphql
 		owner: String!
 		listName: String!
 		wordListStatus: String!
-		wordListIndex: String!
+		wordListIndex: Int!
 	}
 
 	type Mutation {
 		createWordList( wordList: WordListInput!): MessageResponse!
-		deleteWordList( deleteWordList: IDeleteWordList): MessageResponse!
+		deleteWordList( deleteWordList: IDeleteWordList!): MessageResponse!
 	}
 `;

@@ -3,8 +3,8 @@ import { afterAll, afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { startServer } from '../../app';
 import { startDatabase } from '../../database';
 import { ListModel } from '../../models/listModel';
-import { QueriesList } from '../utils/queriesList';
-import { QueriesWordList } from '../utils/queriesWordList';
+import { QueriesList } from '../__utils__/queriesList';
+import { QueriesWordList } from '../__utils__/queriesWordList';
 
 const queriesList = new QueriesList();
 const queriesWordList = new QueriesWordList();

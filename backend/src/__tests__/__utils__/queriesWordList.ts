@@ -1,5 +1,5 @@
 import { server } from '../../app';
-import { ICreateWordList, IGetWordLists } from '../../interfaces/interfacesWordList';
+import { ICreateWordList, IDeleteWordList, IGetWordLists } from '../../interfaces/interfacesWordList';
 import { ResponseType } from '../../interfaces/queriesInterface';
 import { QueriesTypeWordList } from './Types/queriesTypeWordList';
 
@@ -19,6 +19,15 @@ export class QueriesWordList {
 		const response = (await server.executeOperation({
 			query: queriesTypeWordList.CREATE_WORD_LIST,
 			variables: { wordList },
+		})) as ResponseType;
+
+		return response.body.singleResult;
+	}
+
+	async deleteWordList(deleteWordList: IDeleteWordList) {
+		const response = (await server.executeOperation({
+			query: queriesTypeWordList.DELETE_WORDLIST,
+			variables: { deleteWordList },
 		})) as ResponseType;
 
 		return response.body.singleResult;

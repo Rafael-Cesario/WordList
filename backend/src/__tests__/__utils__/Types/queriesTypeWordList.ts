@@ -16,4 +16,12 @@ export class QueriesTypeWordList {
 			}
 		}
 	`;
+
+	DELETE_WORDLIST = `#graphql
+		mutation DeleteWordList($deleteWordList: IDeleteWordList!) {
+			deleteWordList(deleteWordList: $deleteWordList) {
+				message
+			}
+		}
+	`;
 }
