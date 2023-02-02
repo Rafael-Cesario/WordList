@@ -5,10 +5,10 @@ import { userResolver } from './resolvers/resolverUser';
 import { wordsResolver } from './resolvers/resolverWords';
 import { listTypeDef } from './types/listType';
 import { userTypeDefs } from './types/userType';
-import { wordListTypeDefs } from './types/wordListType';
+import { typeDefsWordList } from './types/typeWordList';
 import { wordsTypeDef } from './types/wordsType';
 
 export const schema = makeExecutableSchema({
-	typeDefs: [userTypeDefs, listTypeDef, wordListTypeDefs, wordsTypeDef],
+	typeDefs: [userTypeDefs, listTypeDef, typeDefsWordList, wordsTypeDef],
 	resolvers: [userResolver, listResolver, resolverWordList, wordsResolver],
 });

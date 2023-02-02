@@ -1,4 +1,4 @@
-export const wordListTypeDefs = `#graphql
+export const typeDefsWordList = `#graphql
 	type WordList {
 		next: [[String]]!
 		current: [[String]]!
@@ -31,8 +31,17 @@ export const wordListTypeDefs = `#graphql
 		wordListIndex: Int!
 	}
 
+	input IChangeWordListStatus {
+		owner: String!
+		listName: String!
+		wordListIndex: Int!
+		wordListStatusOld: String! 
+		wordListStatusNew: String! 
+	}
+
 	type Mutation {
 		createWordList( wordList: WordListInput!): MessageResponse!
 		deleteWordList( deleteWordList: IDeleteWordList!): MessageResponse!
+		changeWordListStatus( changeWordListStatus: IChangeWordListStatus!): MessageResponse!
 	}
 `;

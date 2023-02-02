@@ -14,3 +14,11 @@ export interface IDeleteWordList {
 	wordListStatus: 'next' | 'current' | 'done';
 	wordListIndex: number;
 }
+
+export interface IChangeWordListStatus {
+	owner: string;
+	listName: string;
+	wordListIndex: number;
+	wordListStatusOld: 'next' | 'current' | 'done';
+	wordListStatusNew: 'next' | 'current' | 'done';
+}
