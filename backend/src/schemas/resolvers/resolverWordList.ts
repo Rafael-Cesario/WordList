@@ -1,5 +1,5 @@
 import { ServiceWordList } from '../../services/serviceWordList';
-import { ICreateWordList, IGetWordLists } from '../../interfaces/interfacesWordList';
+import { ICreateWordList, IDeleteWordList, IGetWordLists } from '../../interfaces/interfacesWordList';
 
 const serviceWordList = new ServiceWordList();
 
@@ -10,5 +10,6 @@ export const resolverWordList = {
 
 	Mutation: {
 		createWordList: (parent: any, args: { wordList: ICreateWordList }) => serviceWordList.createWordList(args),
+		deleteWordList: (parent: any, args: { deleteWordList: IDeleteWordList }) => serviceWordList.deleteWordList(args),
 	},
 };

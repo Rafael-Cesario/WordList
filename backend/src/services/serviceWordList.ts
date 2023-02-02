@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { ListRepository } from '../repositories/listRepository';
-import { ICreateWordList, IGetWordLists } from '../interfaces/interfacesWordList';
+import { ICreateWordList, IDeleteWordList, IGetWordLists } from '../interfaces/interfacesWordList';
 
 export class ServiceWordList {
 	constructor(private listRepository = new ListRepository()) {}
@@ -30,5 +30,18 @@ export class ServiceWordList {
 		};
 	}
 
-	// deleteWordList
+	async deleteWordList({ deleteWordList }: { deleteWordList: IDeleteWordList }) {
+		const { owner, listName, wordListIndex, wordListStatus } = deleteWordList;
+
+		const getList = await this.listRepository.findByOwner({ owner, listName });
+		if (!getList) throw new GraphQLError('List not found');
+
+		const wordLists = getList.wordLists[wordListStatus];
+		wordLists.splice(wordListIndex, 1);
+
+		await this.listRepository.updateOne(getList, { wordLists: getList.wordLists });
+		return { message: 'WordList deleted' };
+	}
+
+	// todo > change wordList status
 }
