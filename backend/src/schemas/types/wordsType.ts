@@ -1,6 +1,6 @@
 export const wordsTypeDef = `#graphql
 	type Words {
-		words: [String]!
+		words: [[String]]!
 	}
 
 	type TResponse {
