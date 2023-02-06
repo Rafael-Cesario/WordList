@@ -38,3 +38,12 @@ export interface ISaveList {
 		};
 	};
 }
+
+export interface IRenameWords {
+	owner: string;
+	listName: string;
+	listStatus: 'next' | 'current' | 'done';
+	listIndex: number;
+	wordIndex: number;
+	newWords: string[];
+}

@@ -31,6 +31,15 @@ export const wordsTypeDef = `#graphql
 		listIndex: Int!
 	}
 
+	input IRenameWords {
+		owner: String!
+		listName:String!
+		listStatus: String!
+		listIndex: Int!
+		wordIndex: Int!
+		newWords: [String!]!
+	}
+
 	type Query {
 		getWords(words: IGetWords!): Words!
 	}
@@ -38,5 +47,6 @@ export const wordsTypeDef = `#graphql
 	type Mutation {
 		addWords(words: IAddWords!): TResponse!
 		removeWords(words: IRemoveWords!): TResponse!
+		renameWords(words: IRenameWords!): TResponse!
 	}
 `;

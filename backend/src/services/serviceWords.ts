@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql';
-import { IAddWords, IGetWords, IRemoveWords } from '../interfaces/interfacesWords';
+import { IAddWords, IGetWords, IRemoveWords, IRenameWords } from '../interfaces/interfacesWords';
 import { WordsRepository } from '../repositories/repositoryWords';
 
 export class WordsService {
@@ -24,7 +24,15 @@ export class WordsService {
 		return { words };
 	}
 
-	// todo > rename word
+	async renameWords({ owner, listName, listStatus, listIndex, wordIndex, newWords }: IRenameWords) {
+		const list = await this.wordListRepository.getList({ listName, owner });
+		if (!list) throw new GraphQLError('List not found');
+
+		list.wordLists[listStatus][listIndex][wordIndex] = newWords;
+		await this.wordListRepository.saveList({ owner, listName, list });
+
+		return { message: 'Words updated' };
+	}
 
 	async removeWords({ owner, listName, listIndex, wordIndex, status }: IRemoveWords) {
 		const list = await this.wordListRepository.getList({ listName, owner });

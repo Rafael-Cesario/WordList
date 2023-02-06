@@ -19,6 +19,7 @@ class UserRepositoryMock extends UserRepository {
 		return user;
 	}
 }
+
 describe('User Service', () => {
 	const userService = new UserService(new UserRepositoryMock());
 

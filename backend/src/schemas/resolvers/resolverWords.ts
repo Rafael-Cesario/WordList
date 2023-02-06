@@ -1,5 +1,5 @@
 import { WordsService } from '../../services/serviceWords';
-import { IAddWords, IGetWords, IRemoveWords } from '../../interfaces/interfacesWords';
+import { IAddWords, IGetWords, IRemoveWords, IRenameWords } from '../../interfaces/interfacesWords';
 
 const wordsService = new WordsService();
 
@@ -11,5 +11,6 @@ export const wordsResolver = {
 	Mutation: {
 		addWords: (parent: any, { words }: { words: IAddWords }) => wordsService.addWords(words),
 		removeWords: (parent: any, { words }: { words: IRemoveWords }) => wordsService.removeWords(words),
+		renameWords: (parent: any, {words}: {words: IRenameWords}) => wordsService.renameWords(words),
 	},
 };
