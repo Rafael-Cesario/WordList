@@ -1,8 +1,8 @@
 export const typeDefsWordList = `#graphql
 	type WordList {
-		next: [[String]]!
-		current: [[String]]!
-		done: [[String]]!
+		next: [[[String]]]!
+		current: [[[String]]]!
+		done: [[[String]]]!
 	}
 
 	type MessageResponse {
