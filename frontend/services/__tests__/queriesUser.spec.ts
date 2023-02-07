@@ -1,5 +1,5 @@
 import { describe, test } from 'vitest';
-import { server } from '../mocks/server';
+import { server } from './__mocks__/server';
 import { queriesUser } from '../queries/queriesUser';
 
 describe('Queries user', () => {

@@ -3,7 +3,7 @@ import { describe, test, expect, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { LoginForm } from '../loginForm';
 import userEvent from '@testing-library/user-event';
-import { server } from '../../../../services/mocks/server';
+import { server } from '../../../../services/__tests__/__mocks__/server';
 
 vi.mock('next/router', () => require('next-router-mock'));
 vi.mock('next/dist/client/router', () => require('next-router-mock'));

@@ -1,5 +1,5 @@
 import { describe, test, expect, expectTypeOf } from 'vitest';
-import { server } from '../mocks/server';
+import { server } from './__mocks__/server';
 import { queriesList } from '../queries/queriesList';
 
 describe('Queries list', () => {
