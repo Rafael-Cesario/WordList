@@ -1,13 +1,8 @@
+import { useQueriesWords } from '../../../utils/hooks/useQueriesWords';
 import { StyledWords } from './styles/styledWords';
 
 export const Words = () => {
-	const words: string[][] = [
-		['term', 'ddefinitiondefiniti ondefinitiondefinitionde finitiondefinitiondefinitiondefinitio ndefinitiondefinitiondefinitionefinition'],
-		['term', 'definition'],
-		['term', 'definition'],
-	];
-
-	// todo > get Words from db
+	const { words } = useQueriesWords();
 
 	return (
 		<StyledWords className='words'>

@@ -3,22 +3,22 @@ export interface IAddWords {
 	definition: string;
 	listName: string;
 	owner: string;
-	listIndex: number;
+	listIndex: string;
 	status: 'next' | 'current' | 'done';
 }
 
 export interface IRemoveWords {
 	owner: string;
 	listName: string;
-	listIndex: number;
-	wordIndex: number;
+	listIndex: string;
+	wordIndex: string;
 	status: 'next' | 'current' | 'done';
 }
 
 export interface IGetWords {
 	owner: string;
 	listName: string;
-	listIndex: number;
+	listIndex: string;
 	status: 'next' | 'current' | 'done';
 }
 
@@ -43,7 +43,7 @@ export interface IRenameWords {
 	owner: string;
 	listName: string;
 	listStatus: 'next' | 'current' | 'done';
-	listIndex: number;
-	wordIndex: number;
+	listIndex: string;
+	wordIndex: string;
 	newWords: string[];
 }

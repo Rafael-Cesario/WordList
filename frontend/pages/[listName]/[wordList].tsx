@@ -18,7 +18,7 @@ const WordList = () => {
 				<main>
 					<Menu />
 					<AddWords />
-					<Words/>
+					<Words />
 				</main>
 			</StyledWordList>
 		</>

@@ -3,18 +3,23 @@ import { useRouter } from 'next/router';
 
 export const useRouterQuery = (initialState: string) => {
 	const [listName, setListName] = useState(initialState);
+	const [listIndex, setListIndex] = useState('');
+
 	const router = useRouter();
 	const link = router.query.listName as string;
 
-	const getListName = () => {
-		const query = router.query.listName as string;
-		const listName = query.replace(/-/g, ' ').replace(/_/g, '-');
+	const getQueries = () => {
+		const queryListName = router.query.listName as string;
+		const listName = queryListName.replace(/-/g, ' ').replace(/_/g, '-');
 		setListName(listName);
+
+		const queryListIndex = router.query.wordList as string;
+		setListIndex(queryListIndex);
 	};
 
 	useEffect(() => {
-		if (router.isReady) getListName();
+		if (router.isReady) getQueries();
 	}, [router]);
 
-	return { listName, link };
+	return { listName, link, listIndex };
 };
