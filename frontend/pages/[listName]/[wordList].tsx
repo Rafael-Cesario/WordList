@@ -16,7 +16,7 @@ const WordList = () => {
 			</Head>
 
 			<StyledWordList>
-				<Header />
+				<Header props={{ words }} />
 
 				<main>
 					<Menu />
