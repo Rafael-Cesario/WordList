@@ -4,7 +4,7 @@ import { Options } from './options';
 import { StyledWordsContainer } from './styles/styledWords';
 
 export const WordsContainer = () => {
-	const [showOptions, setShowOptions] = useState([false, 0]);
+	const [showOptions, setShowOptions] = useState({ show: false, index: 0 });
 	const { words } = useContext(ContextWords);
 
 	if (!words.length)
@@ -18,8 +18,8 @@ export const WordsContainer = () => {
 		<StyledWordsContainer className='words'>
 			{words.map(([term, definition], index) => {
 				return (
-					<div key={`${term}-${index}`} className='word' onClick={() => setShowOptions([!showOptions[0], index])}>
-						{showOptions[0] && index === showOptions[1] && <Options props={{ index }} />}
+					<div key={`${term}-${index}`} className='word' onClick={() => setShowOptions({ show: !showOptions.show, index })}>
+						{showOptions.show && index === showOptions.index && <Options props={{ index }} />}
 
 						<p>{term}</p>
 						<p>{definition}</p>
