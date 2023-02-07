@@ -19,4 +19,8 @@ export const StyledAddWords = styled.div`
 		width: 100%;
 		background-color: #005090;
 	}
+
+	.error {
+		color: crimson;
+	}
 `;

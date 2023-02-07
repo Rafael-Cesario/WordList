@@ -2,6 +2,8 @@ import { FormEvent, useContext, useState } from 'react';
 import { TextInput } from '../../inputs/inputs';
 import { ContextWords } from './context/contextWords';
 import { StyledAddWords } from './styles/styledAddWords';
+import { sendError } from './utils/sendError';
+import { findWord } from './utils/findWord';
 
 export const AddWords = () => {
 	const [values, setValues] = useState<{ [key: string]: string }>({ term: '', definition: '' });
@@ -10,7 +12,8 @@ export const AddWords = () => {
 	const addNewWord = async (e: FormEvent) => {
 		e.preventDefault();
 
-		// todo > verify for repeated words
+		const hasWord = findWord(words, values.term);
+		if (hasWord) return sendError('term', 'Esta palavras já foi adicionada');
 
 		await addWords([values.term, values.definition]);
 
