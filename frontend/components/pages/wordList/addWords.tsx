@@ -2,13 +2,23 @@ import { FormEvent, useState } from 'react';
 import { TextInput } from '../../inputs/inputs';
 import { StyledAddWords } from './styles/styledAddWords';
 
-export const AddWords = () => {
-	const [values, setValues] = useState({});
+interface AddWordsProps {
+	props: {
+		addWords: (words: [string, string]) => Promise<void>;
+	};
+}
 
-	const addNewWord = (e: FormEvent) => {
+export const AddWords = ({ props: { addWords } }: AddWordsProps) => {
+	const [values, setValues] = useState<{ [key: string]: string }>({ term: '', definition: '' });
+
+	const addNewWord = async (e: FormEvent) => {
 		e.preventDefault();
-		console.log({ values });
-		setValues({});
+
+		// todo > verify for repeated words
+
+		await addWords([values.term, values.definition]);
+
+		setValues({ term: '', definition: '' });
 		const termInput = document.querySelector('#term') as HTMLInputElement;
 		termInput.focus();
 	};

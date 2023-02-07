@@ -1,9 +1,12 @@
-import { useQueriesWords } from '../../../utils/hooks/useQueriesWords';
 import { StyledWords } from './styles/styledWords';
 
-export const Words = () => {
-	const { words } = useQueriesWords();
+interface WordsProps {
+	props: {
+		words: string[][];
+	};
+}
 
+export const Words = ({ props: { words } }: WordsProps) => {
 	return (
 		<StyledWords className='words'>
 			{words.map(([term, definition], index) => {

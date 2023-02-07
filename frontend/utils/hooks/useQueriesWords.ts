@@ -1,3 +1,4 @@
+import produce from 'immer';
 import { useEffect, useState } from 'react';
 import { getCookies } from '../../services/cookies';
 import { QueriesWords } from '../../services/queries/queriesWords';
@@ -20,13 +21,27 @@ export const useQueriesWords = () => {
 		setWords(getWords.words);
 	};
 
-	const addWords = async (words: [string, string]) => {
-		console.log({ words });
+	const addWords = async (inputWords: [string, string]) => {
+		// todo > get status from database
+		const status: 'next' | 'current' | 'done' = 'next';
+		const [term, definition] = inputWords;
+		const owner = await getCookies('user');
+
+		const variableWords = { listName, owner, definition, term, listIndex, status };
+
+		// todo > handle if error
+		await queriesWords.addWords({ words: variableWords });
+
+		const newWords = produce(words, draft => {
+			draft.push(inputWords);
+		});
+
+		setWords(newWords);
 	};
 
 	useEffect(() => {
 		getWords();
 	}, [listName]);
 
-	return { words, addWords };
+	return { words, addWords: addWords };
 };

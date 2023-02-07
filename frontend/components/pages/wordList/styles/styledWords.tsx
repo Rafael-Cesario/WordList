@@ -6,6 +6,8 @@ export const StyledWords = styled.div`
 	padding: 2rem;
 	width: 80%;
 	max-width: 1000px;
+	display: flex;
+	flex-direction: column-reverse;
 
 	.word {
 		display: flex;
