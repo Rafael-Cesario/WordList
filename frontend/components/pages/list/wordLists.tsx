@@ -4,17 +4,15 @@ import { StyledWordLists } from './styles/styledWordLists';
 interface WordListsProps {
 	props: {
 		wordLists: {
-			next: string[][];
-			current: string[][];
-			done: string[][];
+			next: string[][][];
+			current: string[][][];
+			done: string[][][];
 		};
 	};
 }
 
 export const WordLists = ({ props: { wordLists } }: WordListsProps) => {
 	const { next, current, done } = wordLists;
-
-	// todo > placeHolder while loading lists;
 
 	return (
 		<StyledWordLists>

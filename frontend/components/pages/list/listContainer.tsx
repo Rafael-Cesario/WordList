@@ -5,7 +5,7 @@ import { StyledListContainer } from './styles/styledListContainer';
 interface ListContainerProps {
 	props: {
 		status: string;
-		lists: string[][];
+		lists: string[][][];
 	};
 }
 
@@ -26,20 +26,24 @@ export const ListContainer = ({ props: { status, lists } }: ListContainerProps) 
 		);
 	}
 
+	console.log({ lists });
+
 	return (
 		<StyledListContainer>
 			<h1>{status}</h1>
 
 			<div className='lists'>
 				{lists.map((list, index) => {
-					const [term, definition] = list;
-
 					return (
 						<div className='list' key={'next' + index} onClick={() => goToList(index)}>
-							<div className='words'>
-								<p className='term'>{term}</p>
-								<p className='definition'>{definition}</p>
-							</div>
+							{list.map(([term, definition], index) => {
+								return (
+									<div key={index} className='words'>
+										<p className='term'>{term}</p>
+										<p className='definition'>{definition}</p>
+									</div>
+								);
+							})}
 						</div>
 					);
 				})}
