@@ -12,7 +12,7 @@ export const wordsTypeDef = `#graphql
 		listName: String!
 		term: String!
 		definition: String!
-		listIndex: Int!
+		listIndex: String!
 		status: String!
 	}
 
@@ -20,23 +20,23 @@ export const wordsTypeDef = `#graphql
 		owner: String!
 		listName: String!
 		status: String!
-		listIndex: Int!
-		wordIndex: Int!
+		listIndex: String!
+		wordIndex: String!
 	}
 
 	input IGetWords {
 		owner: String!
 		listName: String!
 		status: String!
-		listIndex: Int!
+		listIndex: String!
 	}
 
 	input IRenameWords {
 		owner: String!
 		listName:String!
 		listStatus: String!
-		listIndex: Int!
-		wordIndex: Int!
+		listIndex: String!
+		wordIndex: String!
 		newWords: [String!]!
 	}
 
