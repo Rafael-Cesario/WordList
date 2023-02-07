@@ -1,15 +1,11 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { TextInput } from '../../inputs/inputs';
+import { ContextWords } from './context/contextWords';
 import { StyledAddWords } from './styles/styledAddWords';
 
-interface AddWordsProps {
-	props: {
-		addWords: (words: [string, string]) => Promise<void>;
-	};
-}
-
-export const AddWords = ({ props: { addWords } }: AddWordsProps) => {
+export const AddWords = () => {
 	const [values, setValues] = useState<{ [key: string]: string }>({ term: '', definition: '' });
+	const { words, addWords } = useContext(ContextWords);
 
 	const addNewWord = async (e: FormEvent) => {
 		e.preventDefault();

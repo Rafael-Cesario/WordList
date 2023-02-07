@@ -1,13 +1,16 @@
+import { useContext } from 'react';
+import { ContextWords } from './context/contextWords';
 import { StyledOptions } from './styles/styledOptions';
 
 interface OptionsProps {
 	props: {
 		index: number;
-		removeWords: (index: string) => Promise<void>;
 	};
 }
 
-export const Options = ({ props: { index, removeWords } }: OptionsProps) => {
+export const Options = ({ props: { index } }: OptionsProps) => {
+	const { removeWords } = useContext(ContextWords);
+
 	// todo rename Word
 	const renameWord = () => {
 		return;

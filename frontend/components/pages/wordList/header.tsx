@@ -1,16 +1,17 @@
 import Link from 'next/link';
+import { useContext, useEffect, useState } from 'react';
 import { useRouterQuery } from '../../../utils/hooks/useRouterQuery';
+import { ContextWords } from './context/contextWords';
 import { StyledHeader } from './styles/styledHeader';
 
-interface HeaderProps {
-	props: {
-		words: string[][];
-	};
-}
-
-export const Header = ({ props: { words } }: HeaderProps) => {
+export const Header = () => {
 	const { link, listName } = useRouterQuery('Carregando...');
-	const totalWords = words.length;
+	const [totalWords, setTotalWords] = useState(0);
+	const { words } = useContext(ContextWords);
+
+	useEffect(() => {
+		setTotalWords(words.length);
+	}, [words]);
 
 	// todo > list status
 	const listStatus = 'Próximas';
