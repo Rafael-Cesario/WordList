@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledWords = styled.div`
+export const StyledWordsContainer = styled.div`
 	background-color: #151515;
 	margin: 2rem;
 	padding: 2rem;
@@ -8,6 +8,7 @@ export const StyledWords = styled.div`
 	max-width: 1000px;
 	display: flex;
 	flex-direction: column-reverse;
+	position: relative;
 
 	.word {
 		display: flex;

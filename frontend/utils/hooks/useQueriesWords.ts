@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { useEffect, useState } from 'react';
+import { IRemoveWords } from '../../interfaces/interfaceWords';
 import { getCookies } from '../../services/cookies';
 import { QueriesWords } from '../../services/queries/queriesWords';
 import { useRouterQuery } from './useRouterQuery';
@@ -39,9 +40,24 @@ export const useQueriesWords = () => {
 		setWords(newWords);
 	};
 
+	const removeWords = async (index: string) => {
+		// todo > placeHolder status
+		const status = 'next';
+		const owner = await getCookies('user');
+		const wordIndex = String(index);
+		const queryVariables: IRemoveWords = { owner, listName, listIndex, status, wordIndex };
+		await queriesWords.removeWords({ words: queryVariables });
+
+		setWords(
+			produce(words, draft => {
+				draft.splice(Number(wordIndex), 1);
+			})
+		);
+	};
+
 	useEffect(() => {
 		getWords();
 	}, [listName]);
 
-	return { words, addWords: addWords };
+	return { words, addWords, removeWords };
 };
