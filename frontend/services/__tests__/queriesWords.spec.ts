@@ -74,5 +74,23 @@ describe('Queries words', () => {
 		});
 	});
 
-	// todo > Remove words
+	describe('Remove words', () => {
+		const words = {
+			listIndex: '0',
+			listName: 'list01',
+			owner: 'user',
+			status: 'next' as StatusType,
+			wordIndex: '0',
+		};
+
+		test('Remove words', async () => {
+			const removeWords = await queriesWords.removeWords({ words });
+			expect(removeWords.message).toBe('Words removed');
+		});
+
+		test('Remove words error', async () => {
+			const removeWords = await queriesWords.removeWords({ words: { ...words, listName: '' } });
+			expect(removeWords.error).toMatch(/ListName was not provided/i);
+		});
+	});
 });
