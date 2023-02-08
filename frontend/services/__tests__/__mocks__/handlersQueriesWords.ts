@@ -3,26 +3,26 @@ import { IAddWords, IGetWords, IRemoveWords, IRenameWords } from '../../../inter
 
 export const handlersQueriesWords = [
 	graphql.query('GetWords', (req, res, ctx) => {
-		const { listName } = req.variables as IGetWords;
+		const { listName } = req.variables.words as IGetWords;
 		if (!listName) throw new Error('ListName was not provided');
-		return res(ctx.data({ getWords: [['word01', 'word0101']] }));
+		return res(ctx.data({ getWords: { words: [['word01', 'word0101']] } }));
 	}),
 
 	graphql.mutation('AddWords', (req, res, ctx) => {
-		const { listName } = req.variables as IAddWords;
+		const { listName } = req.variables.words as IAddWords;
 		if (!listName) throw new Error('ListName was not provided');
 		return res(ctx.data({ addWords: { message: 'New word added' } }));
 	}),
 
 	graphql.mutation('RemoveWords', (req, res, ctx) => {
-		const { listName } = req.variables as IRemoveWords;
+		const { listName } = req.variables.words as IRemoveWords;
 		if (!listName) throw new Error('ListName was not provided');
-		return res(ctx.data({ removeWords: { message: 'Word removed' } }));
+		return res(ctx.data({ removeWords: { message: 'Words removed' } }));
 	}),
 
 	graphql.mutation('RenameWords', (req, res, ctx) => {
-		const { listName } = req.variables as IRenameWords;
+		const { listName } = req.variables.words as IRenameWords;
 		if (!listName) throw new Error('ListName was not provided');
-		return res(ctx.data({ renameWords: { message: 'Word updated' } }));
+		return res(ctx.data({ renameWords: { message: 'Words updated' } }));
 	}),
 ];
