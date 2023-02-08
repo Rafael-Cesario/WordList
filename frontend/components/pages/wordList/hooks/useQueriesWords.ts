@@ -1,9 +1,9 @@
 import produce from 'immer';
 import { useEffect, useState } from 'react';
-import { IRemoveWords } from '../../interfaces/interfaceWords';
-import { getCookies } from '../../services/cookies';
-import { QueriesWords } from '../../services/queries/queriesWords';
-import { useRouterQuery } from './useRouterQuery';
+import { IRemoveWords } from '../../../../interfaces/interfaceWords';
+import { getCookies } from '../../../../services/cookies';
+import { QueriesWords } from '../../../../services/queries/queriesWords';
+import { useRouterQuery } from '../../../../utils/hooks/useRouterQuery';
 
 export const useQueriesWords = () => {
 	const [words, setWords] = useState<string[][]>([]);
@@ -55,9 +55,29 @@ export const useQueriesWords = () => {
 		);
 	};
 
+	const renameWords = async (wordIndex: string, values: { term: string; definition: string }) => {
+		// todo > status
+		const listStatus = 'next';
+		const owner = await getCookies('user');
+
+		const newWords = [values.term || words[Number(wordIndex)][0], values.definition || words[Number(wordIndex)][1]];
+
+		// todo > handle error , send notification
+		await queriesWords.renameWords({
+			words: {
+				owner,
+				listIndex,
+				listName,
+				listStatus,
+				wordIndex,
+				newWords,
+			},
+		});
+	};
+
 	useEffect(() => {
 		getWords();
 	}, [listName]);
 
-	return { words, addWords, removeWords };
+	return { words, addWords, removeWords, renameWords };
 };

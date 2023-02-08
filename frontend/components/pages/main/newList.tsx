@@ -29,7 +29,7 @@ export const NewList = ({ props }: NewListProps) => {
 				draft.push(values.name);
 			})
 		);
-		
+
 		setValues({});
 	};
 

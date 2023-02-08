@@ -5,20 +5,16 @@ import { StyledOptions } from './styles/styledOptions';
 interface OptionsProps {
 	props: {
 		index: number;
+		values: { term: string; definition: string };
 	};
 }
 
-export const Options = ({ props: { index } }: OptionsProps) => {
-	const { removeWords } = useContext(ContextWords);
-
-	// todo rename Word
-	const renameWord = () => {
-		return;
-	};
+export const Options = ({ props: { index, values } }: OptionsProps) => {
+	const { removeWords, renameWords } = useContext(ContextWords);
 
 	return (
 		<StyledOptions>
-			<button onClick={() => renameWord()}>Editar</button>
+			<button onClick={() => renameWords(String(index), values)}>Salvar</button>
 			<button onClick={() => removeWords(String(index))}>Excluir</button>
 		</StyledOptions>
 	);
