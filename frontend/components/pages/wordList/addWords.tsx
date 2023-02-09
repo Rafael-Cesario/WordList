@@ -18,6 +18,7 @@ export const AddWords = () => {
 		await addWords([values.term, values.definition]);
 
 		setValues({ term: '', definition: '' });
+
 		const termInput = document.querySelector('#term') as HTMLInputElement;
 		termInput.focus();
 	};
