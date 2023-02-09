@@ -1,7 +1,7 @@
-import produce from 'immer';
-import Image from 'next/image';
-import { useState } from 'react';
-import { StyledInput } from './styledInput';
+import produce from "immer";
+import Image from "next/image";
+import { useState } from "react";
+import { StyledInput } from "./styledInput";
 
 type Values = { [key: string]: string };
 
@@ -32,7 +32,7 @@ export const TextInput = ({ props }: InputsProps) => {
 			<label htmlFor={name} data-name={content}>
 				{content}
 			</label>
-			<input onChange={e => changeValue(e.target)} type='text' value={values[name] || ''} placeholder={content} id={name} required />
+			<input onChange={e => changeValue(e.target)} type='text' value={values[name] || ""} placeholder={content} id={name} required />
 		</StyledInput>
 	);
 };
@@ -58,8 +58,8 @@ export const PasswordInput = ({ props }: InputsProps) => {
 			</label>
 			<input
 				onChange={e => changeValue(e.target)}
-				type={showPassword ? 'text' : 'password'}
-				value={values[name] || ''}
+				type={showPassword ? "text" : "password"}
+				value={values[name] || ""}
 				placeholder={content}
 				id={name}
 				required

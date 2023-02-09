@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { getCookies } from '../../../services/cookies';
-import { queriesList } from '../../../services/queries/queriesList';
-import { StyledDeleteList } from './styles/styledDeleteList';
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { getCookies } from "../../../services/cookies";
+import { queriesList } from "../../../services/queries/queriesList";
+import { StyledDeleteList } from "./styles/styledDeleteList";
 
 interface DeleteListProps {
 	props: {
@@ -17,9 +17,9 @@ export const DeleteList = ({ props }: DeleteListProps) => {
 	const router = useRouter();
 
 	const deleteList = async () => {
-		const owner = await getCookies('user');
+		const owner = await getCookies("user");
 		await queriesList.deleteList({ owner, listName });
-		router.push('/main');
+		router.push("/main");
 	};
 
 	return (

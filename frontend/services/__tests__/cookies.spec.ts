@@ -1,24 +1,24 @@
-import { describe, test, expect } from 'vitest';
-import { deleteCookies, getCookies, setCookies } from '../cookies';
-import { server } from './__mocks__/server';
+import { describe, test, expect } from "vitest";
+import { deleteCookies, getCookies, setCookies } from "../cookies";
+import { server } from "./__mocks__/server";
 
-describe('Cookies tests', () => {
+describe("Cookies tests", () => {
 	beforeAll(() => server.listen());
 	afterEach(() => server.resetHandlers());
 	afterAll(() => server.close());
 
-	test('returns the user email', async () => {
-		const response = await getCookies('user');
-		expect(response).toBe('UserEmail');
+	test("returns the user email", async () => {
+		const response = await getCookies("user");
+		expect(response).toBe("UserEmail");
 	});
 
-	test('Set a new cookie', async () => {
-		const response = await setCookies('user', 'UserEmail');
-		expect(response).toBe('Cookie set');
+	test("Set a new cookie", async () => {
+		const response = await setCookies("user", "UserEmail");
+		expect(response).toBe("Cookie set");
 	});
 
-	test('Delete cookie', async () => {
-		const response = await deleteCookies('user');
-		expect(response).toBe('Cookie deleted');
+	test("Delete cookie", async () => {
+		const response = await deleteCookies("user");
+		expect(response).toBe("Cookie deleted");
 	});
 });

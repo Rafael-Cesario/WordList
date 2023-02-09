@@ -1,7 +1,7 @@
-import { StyledMenu } from './styles/styledMenu';
+import { StyledMenu } from "./styles/styledMenu";
 
 export const Menu = () => {
-	const answerWith = 'Definição';
+	const answerWith = "Definição";
 
 	return (
 		<StyledMenu>

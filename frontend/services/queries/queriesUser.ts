@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { LoginInterface, UserInterface } from '../../interfaces/interfaceUser';
-import { client } from '../client';
-import { CREATE_USER, LOGIN } from './types/queriesTypesUser';
+import { LoginInterface, UserInterface } from "../../interfaces/interfaceUser";
+import { client } from "../client";
+import { CREATE_USER, LOGIN } from "./types/queriesTypesUser";
 
 class QueriesUser {
 	async createUser(user: UserInterface) {

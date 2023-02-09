@@ -1,21 +1,21 @@
-import produce from 'immer';
-import { useEffect, useState } from 'react';
-import { IRemoveWords } from '../../../../interfaces/interfaceWords';
-import { getCookies } from '../../../../services/cookies';
-import { QueriesWords } from '../../../../services/queries/queriesWords';
-import { useRouterQuery } from '../../../../utils/hooks/useRouterQuery';
+import produce from "immer";
+import { useEffect, useState } from "react";
+import { IRemoveWords } from "../../../../interfaces/interfaceWords";
+import { getCookies } from "../../../../services/cookies";
+import { QueriesWords } from "../../../../services/queries/queriesWords";
+import { useRouterQuery } from "../../../../utils/hooks/useRouterQuery";
 
 export const useQueriesWords = () => {
 	const [words, setWords] = useState<string[][]>([]);
-	const { listName, listIndex } = useRouterQuery('');
+	const { listName, listIndex } = useRouterQuery("");
 	const queriesWords = new QueriesWords();
 
 	const getWords = async () => {
 		if (!listName) return;
 
 		// todo > get status from database
-		const status: 'next' | 'current' | 'done' = 'next';
-		const owner = await getCookies('user');
+		const status: "next" | "current" | "done" = "next";
+		const owner = await getCookies("user");
 		const words = { owner, listName, listIndex, status };
 
 		const getWords = await queriesWords.getWords({ words });
@@ -24,9 +24,9 @@ export const useQueriesWords = () => {
 
 	const addWords = async (inputWords: [string, string]) => {
 		// todo > get status from database
-		const status: 'next' | 'current' | 'done' = 'next';
+		const status: "next" | "current" | "done" = "next";
 		const [term, definition] = inputWords;
-		const owner = await getCookies('user');
+		const owner = await getCookies("user");
 
 		const variableWords = { listName, owner, definition, term, listIndex, status };
 
@@ -42,8 +42,8 @@ export const useQueriesWords = () => {
 
 	const removeWords = async (index: string) => {
 		// todo > placeHolder status
-		const status = 'next';
-		const owner = await getCookies('user');
+		const status = "next";
+		const owner = await getCookies("user");
 		const wordIndex = String(index);
 		const queryVariables: IRemoveWords = { owner, listName, listIndex, status, wordIndex };
 		await queriesWords.removeWords({ words: queryVariables });
@@ -57,8 +57,8 @@ export const useQueriesWords = () => {
 
 	const renameWords = async (wordIndex: string, values: { term: string; definition: string }) => {
 		// todo > status
-		const listStatus = 'next';
-		const owner = await getCookies('user');
+		const listStatus = "next";
+		const owner = await getCookies("user");
 
 		const newWords = [values.term || words[Number(wordIndex)][0], values.definition || words[Number(wordIndex)][1]];
 

@@ -1,16 +1,16 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { deleteCookies } from '../../../services/cookies';
-import { StyledPerfil } from './styles/styledPerfil';
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { deleteCookies } from "../../../services/cookies";
+import { StyledPerfil } from "./styles/styledPerfil";
 
 export const Perfil = () => {
 	const [showPerfil, setShowPerfil] = useState(false);
 	const router = useRouter();
 
 	const logout = async () => {
-		await deleteCookies('token');
-		await deleteCookies('user');
-		router.push('/');
+		await deleteCookies("token");
+		await deleteCookies("user");
+		router.push("/");
 	};
 
 	return (

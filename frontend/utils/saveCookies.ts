@@ -1,4 +1,4 @@
-import { setCookies } from '../services/cookies';
+import { setCookies } from "../services/cookies";
 
 export const saveCookies = async (
 	cookies: { [key: string]: string },

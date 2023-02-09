@@ -1,9 +1,9 @@
-import { FormEvent, useState } from 'react';
-import { TextInput } from '../../inputs/inputs';
-import { StyledNewList } from './styles/styledNewList';
-import produce from 'immer';
-import { getCookies } from '../../../services/cookies';
-import { queriesList } from '../../../services/queries/queriesList';
+import { FormEvent, useState } from "react";
+import { TextInput } from "../../inputs/inputs";
+import { StyledNewList } from "./styles/styledNewList";
+import produce from "immer";
+import { getCookies } from "../../../services/cookies";
+import { queriesList } from "../../../services/queries/queriesList";
 
 interface NewListProps {
 	props: {
@@ -20,7 +20,7 @@ export const NewList = ({ props }: NewListProps) => {
 	const createNewList = async (e: FormEvent) => {
 		e.preventDefault();
 
-		const owner = await getCookies('user');
+		const owner = await getCookies("user");
 		const listName = values.name;
 		await queriesList.createList({ owner, listName });
 
@@ -35,24 +35,24 @@ export const NewList = ({ props }: NewListProps) => {
 
 	return (
 		<StyledNewList>
-			<button title={'Button new list'} onClick={() => setShowNewList(!showNewList)}>
+			<button title={"Button new list"} onClick={() => setShowNewList(!showNewList)}>
 				Nova lista
 			</button>
 
 			{showNewList && (
 				<form onSubmit={e => createNewList(e)}>
-					<h1 title={'New list'}>Nova Lista</h1>
+					<h1 title={"New list"}>Nova Lista</h1>
 
 					<TextInput
 						props={{
-							content: 'Nome',
-							name: 'name',
+							content: "Nome",
+							name: "name",
 							values,
 							setValues,
 						}}
 					/>
 
-					<button title={'Create new list'}>Criar nova lista</button>
+					<button title={"Create new list"}>Criar nova lista</button>
 				</form>
 			)}
 		</StyledNewList>

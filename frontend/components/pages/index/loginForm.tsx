@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { queriesUser } from '../../../services/queries/queriesUser';
-import { saveCookies } from '../../../utils/saveCookies';
-import { validations } from '../../../utils/validations';
-import { verifyErrors } from '../../../utils/verifyErrors';
-import { PasswordInput, TextInput } from '../../inputs/inputs';
-import { StyledForm } from './styles/styledForm';
-import { Title } from './title';
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { queriesUser } from "../../../services/queries/queriesUser";
+import { saveCookies } from "../../../utils/saveCookies";
+import { validations } from "../../../utils/validations";
+import { verifyErrors } from "../../../utils/verifyErrors";
+import { PasswordInput, TextInput } from "../../inputs/inputs";
+import { StyledForm } from "./styles/styledForm";
+import { Title } from "./title";
 
 interface LoginFormProps {
 	props: {
@@ -33,7 +33,7 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 
 		const response = await queriesUser.login({ email, password });
 		if (response.error && response.error.match(/email\/password is wrong/i)) {
-			verifyErrors({ email: 'email: Email ou senha incorreta', password: 'password: Email ou senha incorreta' });
+			verifyErrors({ email: "email: Email ou senha incorreta", password: "password: Email ou senha incorreta" });
 			return;
 		}
 
@@ -42,16 +42,16 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 		saveCookies({ token, user });
 
 		setValues({});
-		router.push('/main');
+		router.push("/main");
 	};
 
 	return (
 		<StyledForm>
-			<Title props={{ formName: 'login', changeFormState, title: 'Login' }} />
+			<Title props={{ formName: "login", changeFormState, title: "Login" }} />
 
 			<div className='inputs'>
-				<TextInput props={{ name: 'email', content: 'Email', values, setValues }} />
-				<PasswordInput props={{ name: 'password', content: 'Senha', values, setValues }} />
+				<TextInput props={{ name: "email", content: "Email", values, setValues }} />
+				<PasswordInput props={{ name: "password", content: "Senha", values, setValues }} />
 			</div>
 
 			<button onClick={() => submit()} className='confirm'>

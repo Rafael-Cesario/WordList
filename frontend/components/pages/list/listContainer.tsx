@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
-import { useRouterQuery } from '../../../utils/hooks/useRouterQuery';
-import { StyledListContainer } from './styles/styledListContainer';
+import { useRouter } from "next/router";
+import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
+import { StyledListContainer } from "./styles/styledListContainer";
 
 interface ListContainerProps {
 	props: {
@@ -11,7 +11,7 @@ interface ListContainerProps {
 
 export const ListContainer = ({ props: { status, lists } }: ListContainerProps) => {
 	const router = useRouter();
-	const { link } = useRouterQuery('');
+	const { link } = useRouterQuery("");
 
 	const goToList = (listIndex: number) => {
 		router.push(`/${link}/${listIndex}`);
@@ -35,7 +35,7 @@ export const ListContainer = ({ props: { status, lists } }: ListContainerProps) 
 			<div className='lists'>
 				{lists.map((list, index) => {
 					return (
-						<div className='list' key={'next' + index} onClick={() => goToList(index)}>
+						<div className='list' key={"next" + index} onClick={() => goToList(index)}>
 							{list.map(([term, definition], index) => {
 								return (
 									<div key={index} className='words'>

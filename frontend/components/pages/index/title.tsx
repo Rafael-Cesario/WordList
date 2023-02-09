@@ -1,9 +1,9 @@
-import { StyledTitle } from './styles/styledTitle';
+import { StyledTitle } from "./styles/styledTitle";
 
 export interface TitleProps {
 	props: {
 		title: string;
-		formName: 'login' | 'create';
+		formName: "login" | "create";
 		changeFormState: (newState: string) => void;
 	};
 }

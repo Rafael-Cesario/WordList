@@ -1,4 +1,4 @@
-import { sendError, removeError } from './error';
+import { sendError, removeError } from "./error";
 
 type errorMessage = string;
 

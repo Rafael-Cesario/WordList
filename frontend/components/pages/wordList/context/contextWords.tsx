@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { createContext, ReactNode } from 'react';
-import { useQueriesWords } from '../hooks/useQueriesWords';
+import { createContext, ReactNode } from "react";
+import { useQueriesWords } from "../hooks/useQueriesWords";
 
 interface ContextProps {
 	children: ReactNode;

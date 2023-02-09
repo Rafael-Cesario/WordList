@@ -1,18 +1,18 @@
-import { describe, test, expect } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, test, expect } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
 
-import { TextInput } from './inputs';
+import { TextInput } from "./inputs";
 
-describe('Inputs component', () => {
-	const content = 'Test';
-	const name = 'test-input';
+describe("Inputs component", () => {
+	const content = "Test";
+	const name = "test-input";
 	let values: { [key: string]: string } = {};
 
 	const setValues = (newValues: { [key: string]: string }) => {
 		values = newValues;
 	};
 
-	test('Text input set new values onChange', () => {
+	test("Text input set new values onChange", () => {
 		render(
 			<TextInput
 				props={{
@@ -24,9 +24,9 @@ describe('Inputs component', () => {
 			/>
 		);
 
-		const input = screen.getByPlaceholderText('Test') as HTMLInputElement;
+		const input = screen.getByPlaceholderText("Test") as HTMLInputElement;
 
-		fireEvent.change(input, { target: { value: 'test value' } });
-		expect(values['test-input']).toBe('test value');
+		fireEvent.change(input, { target: { value: "test value" } });
+		expect(values["test-input"]).toBe("test value");
 	});
 });

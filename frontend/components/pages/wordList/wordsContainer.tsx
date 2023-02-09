@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react';
-import { ContextWords } from './context/contextWords';
-import { Options } from './options';
-import { StyledWordsContainer } from './styles/styledWordsContainer';
+import { useContext, useState } from "react";
+import { ContextWords } from "./context/contextWords";
+import { Options } from "./options";
+import { StyledWordsContainer } from "./styles/styledWordsContainer";
 
 export const WordsContainer = () => {
 	const [options, setOptions] = useState({ show: false, index: 0 });
-	const [values, setValues] = useState({ term: '', definition: '' });
+	const [values, setValues] = useState({ term: "", definition: "" });
 	const { words } = useContext(ContextWords);
 
 	const showOptions = (input: HTMLInputElement, value: string, index: number) => {

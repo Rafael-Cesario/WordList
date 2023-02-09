@@ -1,6 +1,6 @@
-import { getCookies } from '../../../services/cookies';
-import { ChangesInput } from '../../../interfaces/interfaceList';
-import { queriesList } from '../../../services/queries/queriesList';
+import { getCookies } from "../../../services/cookies";
+import { ChangesInput } from "../../../interfaces/interfaceList";
+import { queriesList } from "../../../services/queries/queriesList";
 
 interface SaveConfigsProps {
 	props: {
@@ -14,8 +14,8 @@ export const SaveConfigs = ({ props }: SaveConfigsProps) => {
 	const { values, listName, setShowConfigs } = props;
 
 	const changeListName = async () => {
-		const owner = await getCookies('user');
-		const newURL = '/' + values.listName.replace(/-/g, '_').replace(/ /g, '-');
+		const owner = await getCookies("user");
+		const newURL = "/" + values.listName.replace(/-/g, "_").replace(/ /g, "-");
 
 		const changes: ChangesInput = {
 			owner,

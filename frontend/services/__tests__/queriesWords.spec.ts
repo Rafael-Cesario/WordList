@@ -1,95 +1,95 @@
-import { describe, test, expect } from 'vitest';
-import { QueriesWords } from '../queries/queriesWords';
-import { server } from './__mocks__/server';
+import { describe, test, expect } from "vitest";
+import { QueriesWords } from "../queries/queriesWords";
+import { server } from "./__mocks__/server";
 
-type StatusType = 'next' | 'current' | 'done';
+type StatusType = "next" | "current" | "done";
 
-describe('Queries words', () => {
+describe("Queries words", () => {
 	beforeAll(() => server.listen());
 	afterEach(() => server.resetHandlers());
 	afterAll(() => server.close());
 
 	const queriesWords = new QueriesWords();
 
-	describe('Add words', () => {
+	describe("Add words", () => {
 		const words = {
-			listName: 'list01',
-			owner: 'user',
-			listIndex: '0',
-			definition: 'def',
-			term: 'term',
-			status: 'next' as StatusType,
+			listName: "list01",
+			owner: "user",
+			listIndex: "0",
+			definition: "def",
+			term: "term",
+			status: "next" as StatusType,
 		};
 
-		test('Add words', async () => {
+		test("Add words", async () => {
 			const addWords = await queriesWords.addWords({ words });
 			const message = addWords.message;
-			expect(message).toBe('New word added');
+			expect(message).toBe("New word added");
 		});
 
-		test('Add words, error', async () => {
-			const addWords = await queriesWords.addWords({ words: { ...words, listName: '' } });
+		test("Add words, error", async () => {
+			const addWords = await queriesWords.addWords({ words: { ...words, listName: "" } });
 			const message = addWords.error;
 			expect(message).toMatch(/ListName was not provided/i);
 		});
 	});
 
-	describe('GetWords', () => {
+	describe("GetWords", () => {
 		const words = {
-			listIndex: '0',
-			listName: 'list01',
-			owner: 'user',
-			status: 'next' as StatusType,
+			listIndex: "0",
+			listName: "list01",
+			owner: "user",
+			status: "next" as StatusType,
 		};
 
-		test('Get Words', async () => {
+		test("Get Words", async () => {
 			const getWords = await queriesWords.getWords({ words });
-			expect(getWords).toMatchObject({ words: [['word01', 'word0101']] });
+			expect(getWords).toMatchObject({ words: [["word01", "word0101"]] });
 		});
 
-		test('Get words error', async () => {
-			const getWords = await queriesWords.getWords({ words: { ...words, listName: '' } });
+		test("Get words error", async () => {
+			const getWords = await queriesWords.getWords({ words: { ...words, listName: "" } });
 			expect(getWords.error).toMatch(/Listname was not provided/i);
 		});
 	});
 
-	describe('RenameWords', () => {
+	describe("RenameWords", () => {
 		const words = {
-			listIndex: '0',
-			listName: 'list01',
-			listStatus: 'next' as StatusType,
-			newWords: ['word01', 'word02'],
-			owner: 'user',
-			wordIndex: '0',
+			listIndex: "0",
+			listName: "list01",
+			listStatus: "next" as StatusType,
+			newWords: ["word01", "word02"],
+			owner: "user",
+			wordIndex: "0",
 		};
 
-		test('Rename words', async () => {
+		test("Rename words", async () => {
 			const renameWords = await queriesWords.renameWords({ words });
-			expect(renameWords.message).toBe('Words updated');
+			expect(renameWords.message).toBe("Words updated");
 		});
 
-		test('Rename words error', async () => {
-			const renameWords = await queriesWords.renameWords({ words: { ...words, listName: '' } });
+		test("Rename words error", async () => {
+			const renameWords = await queriesWords.renameWords({ words: { ...words, listName: "" } });
 			expect(renameWords.error).toMatch(/Listname was not provided/i);
 		});
 	});
 
-	describe('Remove words', () => {
+	describe("Remove words", () => {
 		const words = {
-			listIndex: '0',
-			listName: 'list01',
-			owner: 'user',
-			status: 'next' as StatusType,
-			wordIndex: '0',
+			listIndex: "0",
+			listName: "list01",
+			owner: "user",
+			status: "next" as StatusType,
+			wordIndex: "0",
 		};
 
-		test('Remove words', async () => {
+		test("Remove words", async () => {
 			const removeWords = await queriesWords.removeWords({ words });
-			expect(removeWords.message).toBe('Words removed');
+			expect(removeWords.message).toBe("Words removed");
 		});
 
-		test('Remove words error', async () => {
-			const removeWords = await queriesWords.removeWords({ words: { ...words, listName: '' } });
+		test("Remove words error", async () => {
+			const removeWords = await queriesWords.removeWords({ words: { ...words, listName: "" } });
 			expect(removeWords.error).toMatch(/ListName was not provided/i);
 		});
 	});

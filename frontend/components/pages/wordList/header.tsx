@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
-import { useRouterQuery } from '../../../utils/hooks/useRouterQuery';
-import { ContextWords } from './context/contextWords';
-import { StyledHeader } from './styles/styledHeader';
+import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
+import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
+import { ContextWords } from "./context/contextWords";
+import { StyledHeader } from "./styles/styledHeader";
 
 export const Header = () => {
-	const { link, listName } = useRouterQuery('Carregando...');
+	const { link, listName } = useRouterQuery("Carregando...");
 	const [totalWords, setTotalWords] = useState(0);
 	const { words } = useContext(ContextWords);
 
@@ -14,7 +14,7 @@ export const Header = () => {
 	}, [words]);
 
 	// todo > list status
-	const listStatus = 'Próximas';
+	const listStatus = "Próximas";
 
 	return (
 		<StyledHeader>

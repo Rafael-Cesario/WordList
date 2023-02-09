@@ -1,7 +1,7 @@
-import { test, vi, expect } from 'vitest';
-import { sendNotification } from '../sendNotification';
+import { test, vi, expect } from "vitest";
+import { sendNotification } from "../sendNotification";
 
-test('Show notification and remove after timeout', () => {
+test("Show notification and remove after timeout", () => {
 	vi.useFakeTimers();
 
 	const setNotification = vi.fn();

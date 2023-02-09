@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import { StyledLists } from './styles/styledLists';
+import { useRouter } from "next/router";
+import { StyledLists } from "./styles/styledLists";
 
 interface ListsProps {
 	props: {
@@ -15,10 +15,10 @@ export const Lists = ({ props }: ListsProps) => {
 	return (
 		<StyledLists>
 			{lists.map(list => {
-				const link = '/' + list.replace(/-/g, '_').replace(/ /g, '-');
+				const link = "/" + list.replace(/-/g, "_").replace(/ /g, "-");
 
 				return (
-					<button onClick={() => router.push(link)} key={list} title={'List'}>
+					<button onClick={() => router.push(link)} key={list} title={"List"}>
 						{list}
 					</button>
 				);

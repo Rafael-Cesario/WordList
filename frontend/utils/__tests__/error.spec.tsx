@@ -1,7 +1,7 @@
-import '@testing-library/jest-dom';
-import { describe, test, expect } from 'vitest';
-import { removeError, sendError } from '../error';
-import { render, screen } from '@testing-library/react';
+import "@testing-library/jest-dom";
+import { describe, test, expect } from "vitest";
+import { removeError, sendError } from "../error";
+import { render, screen } from "@testing-library/react";
 
 const DummyRender = () => {
 	return (
@@ -14,29 +14,29 @@ const DummyRender = () => {
 	);
 };
 
-describe('Utils, error', () => {
-	test('Change the input style and label text', () => {
+describe("Utils, error", () => {
+	test("Change the input style and label text", () => {
 		render(<DummyRender />);
-		sendError('email: Error here');
+		sendError("email: Error here");
 
-		const input = screen.getByPlaceholderText('Email');
-		const label = screen.getByText('Error here');
+		const input = screen.getByPlaceholderText("Email");
+		const label = screen.getByText("Error here");
 		const divClass = input.parentElement?.className;
 
-		expect(label).toHaveTextContent('Error here');
-		expect(divClass).toBe('error');
+		expect(label).toHaveTextContent("Error here");
+		expect(divClass).toBe("error");
 	});
 
-	test('Remove the style and change back the label text', () => {
+	test("Remove the style and change back the label text", () => {
 		render(<DummyRender />);
-		sendError('email: Error here');
-		removeError('email');
+		sendError("email: Error here");
+		removeError("email");
 
-		const input = screen.getByPlaceholderText('Email');
-		const label = screen.getByText('Email');
+		const input = screen.getByPlaceholderText("Email");
+		const label = screen.getByText("Email");
 		const divClass = input.parentElement?.className;
 
-		expect(label).toHaveTextContent('Email');
-		expect(divClass).toBe('');
+		expect(label).toHaveTextContent("Email");
+		expect(divClass).toBe("");
 	});
 });

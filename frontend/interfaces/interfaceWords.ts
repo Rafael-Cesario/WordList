@@ -4,7 +4,7 @@ export interface IAddWords {
 	listName: string;
 	owner: string;
 	listIndex: string;
-	status: 'next' | 'current' | 'done';
+	status: "next" | "current" | "done";
 }
 
 export interface IRemoveWords {
@@ -12,14 +12,14 @@ export interface IRemoveWords {
 	listName: string;
 	listIndex: string;
 	wordIndex: string;
-	status: 'next' | 'current' | 'done';
+	status: "next" | "current" | "done";
 }
 
 export interface IGetWords {
 	owner: string;
 	listName: string;
 	listIndex: string;
-	status: 'next' | 'current' | 'done';
+	status: "next" | "current" | "done";
 }
 
 export interface IGetList {
@@ -42,7 +42,7 @@ export interface ISaveList {
 export interface IRenameWords {
 	owner: string;
 	listName: string;
-	listStatus: 'next' | 'current' | 'done';
+	listStatus: "next" | "current" | "done";
 	listIndex: string;
 	wordIndex: string;
 	newWords: string[];

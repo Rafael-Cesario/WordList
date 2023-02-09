@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const READ_USER = gql`
 	query ReadUser($email: String!) {

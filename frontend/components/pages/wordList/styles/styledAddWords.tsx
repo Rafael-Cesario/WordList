@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledAddWords = styled.div`
 	margin: 2rem;
