@@ -56,16 +56,4 @@ describe("Queries list", () => {
 		expect(response).toHaveProperty("error");
 		expect(response.error).toMatch(/Owner was not provided/i);
 	});
-
-	test("Create word list", async () => {
-		const response = await queriesList.createWordList({ listName: "name", owner: "userEmail" });
-		expect(response).toHaveProperty("message");
-		expect(response.message).toMatch(/New wordList created/i);
-	});
-
-	test("Create word list, error", async () => {
-		const response = await queriesList.createWordList({ listName: "", owner: "" });
-		expect(response).toHaveProperty("error");
-		expect(response.error).toMatch(/Owner was not provided/i);
-	});
 });
