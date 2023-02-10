@@ -5,6 +5,7 @@ import { ContextWords } from "../context/contextWords";
 import { WordsContainer } from "../wordsContainer";
 
 const renameWords = vi.fn();
+const removeWords = vi.fn();
 
 const renderWordsContainer = (words: string[][]) => {
 	render(
@@ -12,8 +13,8 @@ const renderWordsContainer = (words: string[][]) => {
 			value={{
 				words,
 				renameWords,
+				removeWords,
 				addWords: vi.fn(),
-				removeWords: vi.fn(),
 			}}>
 			<WordsContainer />
 		</ContextWords.Provider>
@@ -53,5 +54,22 @@ describe("Options", () => {
 		});
 
 		expect(renameWords).toHaveBeenCalledWith("0", { term: "New word", definition: "" });
+	});
+
+	test("Delete word", async () => {
+		renderWordsContainer([
+			["word01", "word0101"],
+			["word02", "word0202"],
+		]);
+
+		const inputWord = screen.getByPlaceholderText("word02");
+		inputWord.focus();
+		await waitFor(async () => await screen.findByText("Excluir"));
+
+		act(() => {
+			fireEvent.click(screen.getByText("Excluir"));
+		});
+
+		expect(removeWords).toHaveBeenCalledWith("1");
 	});
 });
