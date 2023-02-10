@@ -1,16 +1,22 @@
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, test, vi, afterEach, beforeEach } from "vitest";
+import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, test, vi, afterEach, beforeEach, afterAll } from "vitest";
 import { NewList } from "../newList";
+import { server } from "../../../../services/__tests__/__mocks__/server";
 
 describe("New list component", () => {
 	const lists: string[] = [];
 	const setLists = vi.fn();
 
+	beforeAll(() => server.listen());
+
 	beforeEach(() => {
+		server.resetHandlers();
 		render(<NewList props={{ lists, setLists }} />);
 	});
+
+	afterAll(() => server.close());
 
 	afterEach(() => {
 		vi.restoreAllMocks();
@@ -26,16 +32,21 @@ describe("New list component", () => {
 	});
 
 	test("Add new lists", async () => {
-		const button = screen.getByTitle("Button new list");
-		fireEvent.click(button);
+		act(() => {
+			fireEvent.click(screen.getByTitle("Button new list"));
+		});
 
-		const input = screen.getByPlaceholderText("Nome");
-		await userEvent.type(input, "DummyList");
+		await waitFor(async () => await screen.findByPlaceholderText("Nome"));
 
-		const createListButton = screen.getByTitle("Create new list");
-		fireEvent.click(createListButton);
+		await act(async () => {
+			const input = screen.getByPlaceholderText("Nome");
+			const createListButton = screen.getByTitle("Create new list");
+
+			await userEvent.type(input, "DummyList");
+			fireEvent.click(createListButton);
+		});
 
 		expect(setLists).toHaveBeenCalledWith(["DummyList"]);
-		expect(input).toHaveValue("");
+		expect(screen.getByPlaceholderText("Nome")).toHaveValue("");
 	});
 });
