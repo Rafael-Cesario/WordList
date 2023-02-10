@@ -1,6 +1,7 @@
 import { StyledMenu } from "./styles/styledMenu";
 
 export const Menu = () => {
+	// todo > answer with
 	const answerWith = "Definição";
 
 	return (

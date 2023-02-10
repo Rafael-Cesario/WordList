@@ -1,17 +1,12 @@
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { ContextWords } from "./context/contextWords";
 import { StyledHeader } from "./styles/styledHeader";
 
 export const Header = () => {
 	const { link, listName } = useRouterQuery("Carregando...");
-	const [totalWords, setTotalWords] = useState(0);
 	const { words } = useContext(ContextWords);
-
-	useEffect(() => {
-		setTotalWords(words.length);
-	}, [words]);
 
 	// todo > list status
 	const listStatus = "Próximas";
@@ -24,7 +19,7 @@ export const Header = () => {
 			<h1 className='title'>{listName}</h1>
 
 			<div className='info'>
-				<p>Palavras na lista: {totalWords}</p>
+				<p>Palavras na lista: {words.length}</p>
 				<p>Estudar lista: {listStatus}</p>
 			</div>
 		</StyledHeader>
