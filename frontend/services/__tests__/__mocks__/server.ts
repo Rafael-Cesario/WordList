@@ -1,6 +1,10 @@
 import { setupServer } from "msw/node";
-import { handlers as graphqlHandlers } from "./graphqlHandlers";
-import { handlers as restHandlers } from "./restHandlers";
-import { handlersQueriesWords } from "./handlersQueriesWords";
+import { handlers as graphqlHandlers } from "./handlers/list";
+import { handlers as restHandlers } from "./handlers/cookies";
+import { handlersQueriesWords } from "./handlers/words";
+import { handlersQueriesWordList } from "./handlers/wordList";
+import { handlersUser } from "./handlers/user";
 
-export const server = setupServer(...graphqlHandlers, ...restHandlers, ...handlersQueriesWords);
+const handlers = [...graphqlHandlers, ...restHandlers, ...handlersQueriesWords, ...handlersQueriesWordList, ...handlersUser];
+
+export const server = setupServer(...handlers);

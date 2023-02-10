@@ -60,7 +60,7 @@ describe("Queries list", () => {
 	test("Create word list", async () => {
 		const response = await queriesList.createWordList({ listName: "name", owner: "userEmail" });
 		expect(response).toHaveProperty("message");
-		expect(response.message).toMatch(/Word list created/i);
+		expect(response.message).toMatch(/New wordList created/i);
 	});
 
 	test("Create word list, error", async () => {

@@ -1,5 +1,5 @@
 import { graphql } from "msw";
-import { IAddWords, IGetWords, IRemoveWords, IRenameWords } from "../../../interfaces/interfaceWords";
+import { IAddWords, IGetWords, IRemoveWords, IRenameWords } from "../../../../interfaces/interfaceWords";
 
 export const handlersQueriesWords = [
 	graphql.query("GetWords", (req, res, ctx) => {
