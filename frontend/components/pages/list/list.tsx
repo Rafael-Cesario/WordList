@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getCookies } from "../../../services/cookies";
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
+import { StyledList } from "./styles/styledList";
 import { WordLists } from "./wordLists";
 
 export const List = () => {
@@ -21,8 +22,8 @@ export const List = () => {
 	}, [listName]);
 
 	return (
-		<main>
+		<StyledList>
 			<WordLists props={{ wordLists }} />
-		</main>
+		</StyledList>
 	);
 };

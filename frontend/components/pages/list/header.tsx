@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { Configs } from "./configs";
 import { CreateWordList } from "./createWordList";
+import { StyledHeader } from "./styles/styledHeader";
 
 export const Header = () => {
 	const { listName } = useRouterQuery("Carregando...");
@@ -12,7 +13,7 @@ export const Header = () => {
 	const totalWords = 0;
 
 	return (
-		<header>
+		<StyledHeader>
 			<Link href={"/main"}> Voltar </Link>
 
 			<div className='title'>
@@ -26,6 +27,6 @@ export const Header = () => {
 			</div>
 
 			{showConfigs && <Configs props={{ setShowConfigs, listName }} />}
-		</header>
+		</StyledHeader>
 	);
 };

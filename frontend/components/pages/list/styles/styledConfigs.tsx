@@ -2,10 +2,14 @@ import styled from "styled-components";
 
 export const StyledConfigs = styled.div`
 	position: absolute;
-	margin: 2rem;
-	background-color: #151515;
 	padding: 1rem;
 	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+	transform: translate(-50%, -50%);
+	background-color: #151515;
+	box-shadow: 5px 5px 5px #10101020;
 
 	display: flex;
 	flex-direction: column;
