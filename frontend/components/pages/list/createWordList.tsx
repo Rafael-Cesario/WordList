@@ -11,16 +11,16 @@ export const CreateWordList = () => {
 	const queriesWordList = new QueriesWordList();
 
 	const createWordList = async () => {
-		const owner = await getCookies("user");
-
-		// todo > handler error case
-		await queriesWordList.createWordList({ listName, owner });
-
 		const newState = produce(wordList, draft => {
 			draft.next.push([]);
 		});
 
 		setWordList(newState);
+
+		const owner = await getCookies("user");
+
+		// todo > handler error case
+		await queriesWordList.createWordList({ listName, owner });
 	};
 
 	return <button onClick={() => createWordList()}>Criar Lista</button>;

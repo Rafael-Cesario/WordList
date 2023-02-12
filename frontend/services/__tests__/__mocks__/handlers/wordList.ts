@@ -23,7 +23,7 @@ export const handlersQueriesWordList = [
 	graphql.mutation("CreateWordList", (req, res, ctx) => {
 		const { owner } = req.variables.wordList as ICreateWordList;
 		if (!owner) throw new Error("Owner was not provided");
-		return res(ctx.data({ createWordList: { message: "New wordList created" } }));
+		return res(ctx.data({ createWordList: { message: "New wordList created - mock" } }));
 	}),
 
 	graphql.mutation("DeleteWordList", (req, res, ctx) => {
