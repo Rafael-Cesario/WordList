@@ -26,8 +26,6 @@ export const ListContainer = ({ props: { status, lists } }: ListContainerProps) 
 		);
 	}
 
-	console.log({ lists });
-
 	return (
 		<StyledListContainer>
 			<h1>{status}</h1>

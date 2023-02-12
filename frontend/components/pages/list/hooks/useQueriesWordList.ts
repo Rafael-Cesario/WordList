@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { getCookies } from "../../../../services/cookies";
 import { QueriesWordList } from "../../../../services/queries/queriesWordList";
 import { useRouterQuery } from "../../../../utils/hooks/useRouterQuery";
+import { WordListType } from "../contexts/contextWordList";
 
 export const useQueriesWordList = () => {
 	const { listName } = useRouterQuery("");
 	const queriesWordList = new QueriesWordList();
 
-	const [wordList, setWordList] = useState({
+	const [wordList, setWordList] = useState<WordListType>({
 		next: [],
 		current: [],
 		done: [],
