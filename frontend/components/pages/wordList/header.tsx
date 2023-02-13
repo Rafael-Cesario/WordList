@@ -5,11 +5,14 @@ import { ContextWords } from "./context/contextWords";
 import { StyledHeader } from "./styles/styledHeader";
 
 export const Header = () => {
-	const { link, listName } = useRouterQuery("Carregando...");
+	const { link, listName, listStatus } = useRouterQuery("Carregando...");
 	const { words } = useContext(ContextWords);
 
-	// todo > list status
-	const listStatus = "Próximas";
+	const status: { [key: string]: string } = {
+		next: "Próximas",
+		current: "Estudando",
+		done: "Finalizadas",
+	};
 
 	return (
 		<StyledHeader>
@@ -20,7 +23,7 @@ export const Header = () => {
 
 			<div className='info'>
 				<p>Palavras na lista: {words?.length}</p>
-				<p>Estudar lista: {listStatus}</p>
+				<p>Estudar lista: {status[listStatus]}</p>
 			</div>
 		</StyledHeader>
 	);

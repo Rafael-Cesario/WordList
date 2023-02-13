@@ -1,3 +1,5 @@
+export type TypeListStatus = "next" | "current" | "done";
+
 export interface IGetWordLists {
 	owner: string;
 	listName: string;

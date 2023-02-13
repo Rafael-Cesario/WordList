@@ -5,8 +5,7 @@ import { useRouterQuery } from "./useRouterQuery";
 import { WordListType } from "../../components/pages/list/contexts/contextWordList";
 import { useRouter } from "next/router";
 import produce from "immer";
-
-type TypeListStatus = "next" | "current" | "done";
+import { TypeListStatus } from "../../interfaces/interfaceWordList";
 
 const status: { [key: string]: TypeListStatus } = {
 	next: "current",
@@ -37,12 +36,11 @@ export const useQueriesWordList = () => {
 	const deleteWordList = async () => {
 		const owner = await getCookies("user");
 
-		// todo > ListStatus
 		await queriesWordList.deleteWordList({
 			listName,
 			owner,
 			wordListIndex: Number(listIndex),
-			wordListStatus: "next",
+			wordListStatus: listStatus as TypeListStatus,
 		});
 
 		router.push(`/${listName}`);
