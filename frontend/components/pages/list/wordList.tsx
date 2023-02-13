@@ -7,17 +7,18 @@ interface PropsWordList {
 	props: {
 		index: number;
 		list: string[][];
+		status: string;
 	};
 }
 
-export const WordList = ({ props: { index, list } }: PropsWordList) => {
+export const WordList = ({ props: { index, list, status } }: PropsWordList) => {
 	const router = useRouter();
 	const { link } = useRouterQuery("");
 
-	if (!list.length) return <EmptyWordList props={{ index }} />;
+	if (!list.length) return <EmptyWordList props={{ index, status }} />;
 
 	return (
-		<StyledWordList className='list' key={"next" + index} onClick={() => router.push(`/${link}/${index}`)}>
+		<StyledWordList className='list' key={status + index} onClick={() => router.push(`/${link}/${status}-${index}`)}>
 			{list.map(([term, definition], index) => {
 				return (
 					<div key={index} className='words'>

@@ -9,10 +9,10 @@ export const ListContainer = () => {
 
 	return (
 		<StyledListContainer>
-			<div className="wordLists">
-				<WordListContainer props={{ status: "Próximas", lists: next }} />
-				<WordListContainer props={{ status: "Estudando", lists: current }} />
-				<WordListContainer props={{ status: "Finalizadas", lists: done }} />
+			<div className='wordLists'>
+				<WordListContainer props={{ status: ["Próximas", "next"], lists: next }} />
+				<WordListContainer props={{ status: ["Estudando", "current"], lists: current }} />
+				<WordListContainer props={{ status: ["Finalizadas", "done"], lists: done }} />
 			</div>
 		</StyledListContainer>
 	);

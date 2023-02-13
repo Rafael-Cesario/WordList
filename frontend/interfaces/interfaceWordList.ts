@@ -18,7 +18,7 @@ export interface IDeleteWordList {
 export interface IChangeWordListStatus {
 	owner: string;
 	listName: string;
-	wordListIndex: string;
+	wordListIndex: number;
 	wordListStatusOld: "next" | "current" | "done";
 	wordListStatusNew: "next" | "current" | "done";
 }
