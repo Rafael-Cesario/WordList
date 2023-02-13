@@ -1,16 +1,33 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { Configs } from "./configs";
+import { ContextWordList } from "./contexts/contextWordList";
 import { CreateWordList } from "./createWordList";
 import { StyledHeader } from "./styles/styledHeader";
 
 export const Header = () => {
 	const { listName } = useRouterQuery("Carregando...");
 	const [showConfigs, setShowConfigs] = useState(false);
+	const [totalWords, setTotalWords] = useState(0);
+	const { wordList } = useContext(ContextWordList);
 
-	// temp
-	const totalWords = 0;
+	const getTotalWords = () => {
+		const keys = Object.keys(wordList) as ("next" | "current" | "done")[];
+		let count = 0;
+
+		keys.forEach(key => {
+			wordList[key].forEach(list => {
+				count += list.length;
+			});
+		});
+
+		setTotalWords(count);
+	};
+
+	useEffect(() => {
+		getTotalWords();
+	}, [wordList]);
 
 	return (
 		<StyledHeader>

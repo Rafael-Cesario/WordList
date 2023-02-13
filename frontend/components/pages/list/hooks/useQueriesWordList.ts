@@ -18,7 +18,8 @@ export const useQueriesWordList = () => {
 		if (!listName) return;
 		const owner = await getCookies("user");
 		const response = await queriesWordList.getWordLists({ listName, owner });
-		setWordList(response.wordLists);
+		const { next, current, done } = response.wordLists;
+		setWordList({ next, current, done });
 	};
 
 	useEffect(() => {
