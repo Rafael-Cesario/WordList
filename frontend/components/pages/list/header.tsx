@@ -35,7 +35,7 @@ export const Header = () => {
 
 			<div className='title'>
 				<h1>{listName}</h1>
-				<span>{totalWords} palavras</span>
+				<span role={"wordsCount"}>{totalWords} palavras</span>
 			</div>
 
 			<div className='menus'>
