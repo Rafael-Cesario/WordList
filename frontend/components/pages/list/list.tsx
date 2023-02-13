@@ -1,10 +1,10 @@
 import { StyledList } from "./styles/styledList";
-import { WordLists } from "./wordLists";
+import { WordListContainer } from "./wordListContainer";
 
 export const List = () => {
 	return (
 		<StyledList>
-			<WordLists />
+			<WordListContainer />
 		</StyledList>
 	);
 };

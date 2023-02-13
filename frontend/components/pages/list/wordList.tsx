@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
+import { EmptyWordList } from "./emptyWordList";
 
 interface PropsWordList {
 	props: {
@@ -11,6 +12,8 @@ interface PropsWordList {
 export const WordList = ({ props: { index, list } }: PropsWordList) => {
 	const router = useRouter();
 	const { link } = useRouterQuery("");
+
+	if (!list.length) return <EmptyWordList props={{ index }} />;
 
 	return (
 		<div className='list' key={"next" + index} onClick={() => router.push(`/${link}/${index}`)}>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledWordLists = styled.div`
+export const StyledWordListContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	position: relative;
