@@ -52,7 +52,7 @@ export const StyledListContainer = styled.div`
 				.term,
 				.definition {
 					width: 50%;
-					background-color: #10101050;
+					background-color: #202020;
 					border-radius: 2px;
 					padding: 0.5rem;
 					text-overflow: ellipsis;
