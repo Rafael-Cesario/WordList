@@ -12,6 +12,7 @@ interface IContextWordList {
 	wordList: WordListType;
 	setWordList: (newState: WordListType) => void;
 	deleteWordList: () => Promise<void>;
+	changeWordListStatus: () => Promise<void>;
 }
 
 const defaultValues: IContextWordList = {
@@ -22,12 +23,13 @@ const defaultValues: IContextWordList = {
 	},
 	setWordList: () => {},
 	deleteWordList: () => Promise.resolve(),
+	changeWordListStatus: () => Promise.resolve(),
 };
 
 export const ContextWordList = createContext<IContextWordList>(defaultValues);
 
 export const ContextWordListProvider = ({ children }: { children: ReactNode }) => {
-	const { wordList, setWordList, deleteWordList } = useQueriesWordList();
+	const { wordList, setWordList, deleteWordList, changeWordListStatus } = useQueriesWordList();
 
-	return <ContextWordList.Provider value={{ wordList, setWordList, deleteWordList }}>{children}</ContextWordList.Provider>;
+	return <ContextWordList.Provider value={{ wordList, setWordList, deleteWordList, changeWordListStatus }}>{children}</ContextWordList.Provider>;
 };
