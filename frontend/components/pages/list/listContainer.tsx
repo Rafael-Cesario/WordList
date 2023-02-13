@@ -1,25 +1,18 @@
-import { Emptylist } from "./emptyList";
-import { StyledListContainer } from "./styles/styledListContainer";
-import { WordList } from "./wordList";
+import { useContext } from "react";
+import { ContextWordList } from "./contexts/contextWordList";
+import { WordListContainer } from "./wordListContainer";
+import { StyledListContainer as StyledListContainer } from "./styles/styledListContainer";
 
-interface ListContainerProps {
-	props: {
-		status: string;
-		lists: string[][][];
-	};
-}
-
-export const ListContainer = ({ props: { status, lists } }: ListContainerProps) => {
-	if (!lists.length) return <Emptylist props={{ status }} />;
+export const ListContainer = () => {
+	const { wordList } = useContext(ContextWordList);
+	const { next, current, done } = wordList;
 
 	return (
 		<StyledListContainer>
-			<h1>{status}</h1>
-
-			<div className='lists'>
-				{lists.map((list, index) => (
-					<WordList key={`${list[0]}-${index}`} props={{ index, list }} />
-				))}
+			<div className="wordLists">
+				<WordListContainer props={{ status: "Próximas", lists: next }} />
+				<WordListContainer props={{ status: "Estudando", lists: current }} />
+				<WordListContainer props={{ status: "Finalizadas", lists: done }} />
 			</div>
 		</StyledListContainer>
 	);
