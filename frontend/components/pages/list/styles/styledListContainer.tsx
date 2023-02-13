@@ -10,6 +10,6 @@ export const StyledListContainer = styled.div`
 		flex-direction: column;
 		position: relative;
 		margin: 5rem 1rem;
-		max-width: 90%;
+		width: 90%;
 	}
 `;

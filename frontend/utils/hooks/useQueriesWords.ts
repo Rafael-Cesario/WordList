@@ -1,9 +1,9 @@
 import produce from "immer";
 import { useEffect, useState } from "react";
-import { IRemoveWords } from "../../../../interfaces/interfaceWords";
-import { getCookies } from "../../../../services/cookies";
-import { QueriesWords } from "../../../../services/queries/queriesWords";
-import { useRouterQuery } from "../../../../utils/hooks/useRouterQuery";
+import { IRemoveWords } from "../../interfaces/interfaceWords";
+import { getCookies } from "../../services/cookies";
+import { QueriesWords } from "../../services/queries/queriesWords";
+import { useRouterQuery } from "./useRouterQuery";
 
 export const useQueriesWords = () => {
 	const [words, setWords] = useState<string[][]>([]);

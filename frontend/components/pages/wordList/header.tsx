@@ -19,7 +19,7 @@ export const Header = () => {
 			<h1 className='title'>{listName}</h1>
 
 			<div className='info'>
-				<p>Palavras na lista: {words.length}</p>
+				<p>Palavras na lista: {words?.length}</p>
 				<p>Estudar lista: {listStatus}</p>
 			</div>
 		</StyledHeader>

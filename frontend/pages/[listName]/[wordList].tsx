@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { ContextWordListProvider } from "../../components/pages/list/contexts/contextWordList";
 import { AddWords } from "../../components/pages/wordList/addWords";
 import { ContextWordsProvider } from "../../components/pages/wordList/context/contextWords";
 import { Header } from "../../components/pages/wordList/header";
@@ -8,21 +9,23 @@ import { WordsContainer } from "../../components/pages/wordList/wordsContainer";
 
 const WordList = () => {
 	return (
-		<ContextWordsProvider>
-			<Head>
-				<title>WordList</title>
-			</Head>
+		<ContextWordListProvider>
+			<ContextWordsProvider>
+				<Head>
+					<title>WordList</title>
+				</Head>
 
-			<StyledWordList>
-				<Header />
+				<StyledWordList>
+					<Header />
 
-				<main>
-					<Menu />
-					<AddWords />
-					<WordsContainer />
-				</main>
-			</StyledWordList>
-		</ContextWordsProvider>
+					<main>
+						<Menu />
+						<AddWords />
+						<WordsContainer />
+					</main>
+				</StyledWordList>
+			</ContextWordsProvider>
+		</ContextWordListProvider>
 	);
 };
 

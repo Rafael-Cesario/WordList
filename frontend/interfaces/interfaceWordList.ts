@@ -12,7 +12,7 @@ export interface IDeleteWordList {
 	owner: string;
 	listName: string;
 	wordListStatus: "next" | "current" | "done";
-	wordListIndex: string;
+	wordListIndex: number;
 }
 
 export interface IChangeWordListStatus {

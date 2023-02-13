@@ -22,7 +22,7 @@ export const WordsContainer = () => {
 		}, 100);
 	};
 
-	if (!words.length)
+	if (!words?.length)
 		return (
 			<StyledWordsContainer>
 				<p>Suas palavras aparecerão aqui</p>
