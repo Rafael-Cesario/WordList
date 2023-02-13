@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ContextWordList } from "./contexts/contextWordList";
 import { ListContainer } from "./listContainer";
-import { StyledWordListContainer } from "./styles/styledWordLists";
+import { StyledWordListContainer } from "./styles/styledWordListContainer";
 
 export const WordListContainer = () => {
 	const { wordList } = useContext(ContextWordList);

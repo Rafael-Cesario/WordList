@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { EmptyWordList } from "./emptyWordList";
+import { StyledWordList } from "./styles/styledWordList";
 
 interface PropsWordList {
 	props: {
@@ -16,7 +17,7 @@ export const WordList = ({ props: { index, list } }: PropsWordList) => {
 	if (!list.length) return <EmptyWordList props={{ index }} />;
 
 	return (
-		<div className='list' key={"next" + index} onClick={() => router.push(`/${link}/${index}`)}>
+		<StyledWordList className='list' key={"next" + index} onClick={() => router.push(`/${link}/${index}`)}>
 			{list.map(([term, definition], index) => {
 				return (
 					<div key={index} className='words'>
@@ -25,6 +26,6 @@ export const WordList = ({ props: { index, list } }: PropsWordList) => {
 					</div>
 				);
 			})}
-		</div>
+		</StyledWordList>
 	);
 };
