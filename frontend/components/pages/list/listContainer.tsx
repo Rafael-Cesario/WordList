@@ -1,6 +1,7 @@
-import { useRouter } from "next/router";
-import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
+import { Emptylist } from "./emptyList";
+import { EmptyWordList } from "./emptyWordList";
 import { StyledListContainer } from "./styles/styledListContainer";
+import { WordList } from "./wordList";
 
 interface ListContainerProps {
 	props: {
@@ -10,21 +11,7 @@ interface ListContainerProps {
 }
 
 export const ListContainer = ({ props: { status, lists } }: ListContainerProps) => {
-	const router = useRouter();
-	const { link } = useRouterQuery("");
-
-	const goToList = (listIndex: number) => {
-		router.push(`/${link}/${listIndex}`);
-	};
-
-	if (!lists.length) {
-		return (
-			<StyledListContainer>
-				<h1>{status}</h1>
-				<p>Você ainda não tem nenhuma lista com este status</p>
-			</StyledListContainer>
-		);
-	}
+	if (!lists.length) return <Emptylist props={{ status }} />;
 
 	return (
 		<StyledListContainer>
@@ -32,18 +19,9 @@ export const ListContainer = ({ props: { status, lists } }: ListContainerProps) 
 
 			<div className='lists'>
 				{lists.map((list, index) => {
-					return (
-						<div className='list' key={"next" + index} onClick={() => goToList(index)}>
-							{list.map(([term, definition], index) => {
-								return (
-									<div key={index} className='words'>
-										<p className='term'>{term}</p>
-										<p className='definition'>{definition}</p>
-									</div>
-								);
-							})}
-						</div>
-					);
+					if (!list.length) return <EmptyWordList props={{ index }} />;
+
+					return <WordList key={`${list[0]}-${index}`} props={{ index, list }} />;
 				})}
 			</div>
 		</StyledListContainer>
