@@ -79,9 +79,13 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 				<input value={value} onChange={e => setValue(e.target.value)} className='answer' type='text' placeholder='Resposta' />
 
 				<div className='buttons'>
-					{answerState && <button onClick={() => setAnswerState("right")}>Marcar como correta</button>}
+					{answerState === "wrong" && (
+						<button type='button' onClick={() => setAnswerState("right")}>
+							Marcar como correta
+						</button>
+					)}
 					<button>Confirmar</button>
-					<button>Não sei</button>
+					<button type='button'>Não sei</button>
 				</div>
 			</form>
 

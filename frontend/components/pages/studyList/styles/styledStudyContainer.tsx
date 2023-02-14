@@ -5,6 +5,7 @@ export const StyledStudyContainer = styled.div`
 	margin: 4rem;
 	padding: 4rem;
 	width: 80%;
+	max-width: 1000px;
 
 	.question h1 {
 		margin: 2rem 0;

@@ -5,6 +5,7 @@ export const StyledEndList = styled.div`
 	flex-direction: column;
 	align-items: center;
 	width: 80%;
+	max-width: 1000px;
 
 	h1 {
 		margin: 2rem 0;
