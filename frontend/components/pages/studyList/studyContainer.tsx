@@ -1,40 +1,16 @@
 import produce from "immer";
-import { useEffect, useState } from "react";
-import { TypeListStatus } from "../../../interfaces/interfaceWordList";
-import { QueriesWords } from "../../../services/queries/queriesWords";
-import { useLocalData } from "../../../utils/hooks/useLocalData";
+import { useState } from "react";
 import { StyledStudyContainer } from "./styles/styledStudyContainer";
 
 interface PropsStudyContaienr {
 	props: {
 		setHaveListEnd: (state: boolean) => void;
+		words: string[][];
+		setWords: (words: string[][]) => void;
 	};
 }
 
-export const StudyContainer = ({ props: { setHaveListEnd } }: PropsStudyContaienr) => {
-	const queriesWords = new QueriesWords();
-	const [words, setWords] = useState([["", ""]]);
-	const { listIndex, listName, listStatus, owner } = useLocalData();
-
-	const getWords = async () => {
-		if (!listName) return;
-
-		const getWords = await queriesWords.getWords({
-			words: {
-				listIndex,
-				listName,
-				owner,
-				status: listStatus as TypeListStatus,
-			},
-		});
-
-		setWords(getWords.words);
-	};
-
-	useEffect(() => {
-		getWords();
-	}, [listName]);
-
+export const StudyContainer = ({ props: { setHaveListEnd, words, setWords } }: PropsStudyContaienr) => {
 	const [wordIndex, setWordIndex] = useState(0);
 	const [value, setValue] = useState("");
 	const [answerState, setAnswerState] = useState("");
