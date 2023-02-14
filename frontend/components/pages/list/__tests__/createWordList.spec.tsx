@@ -1,5 +1,6 @@
 import { describe, test, expect, beforeAll, afterAll, afterEach, vi } from "vitest";
-import { ContextWordList, WordListType } from "../contexts/contextWordList";
+import { ContextWordList } from "../../../../contexts/contextWordList";
+import { WordListType } from "../../../../interfaces/interfaceWordList";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { server } from "../../../../services/__tests__/__mocks__/server";
 import { CreateWordList } from "../createWordList";
@@ -31,7 +32,7 @@ describe("Create word List", () => {
 		const setWordList = vi.fn();
 
 		render(
-			<ContextWordList.Provider value={{ wordList, setWordList }}>
+			<ContextWordList.Provider value={{ wordList, setWordList, changeWordListStatus: vi.fn(), deleteWordList: vi.fn() }}>
 				<CreateWordList />
 			</ContextWordList.Provider>
 		);

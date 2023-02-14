@@ -47,3 +47,10 @@ export interface IRenameWords {
 	wordIndex: string;
 	newWords: string[];
 }
+
+export interface IContextWords {
+	words: string[][];
+	addWords: (inputWords: [string, string]) => Promise<void>;
+	removeWords: (index: string) => Promise<void>;
+	renameWords: (index: string, values: { term: string; definition: string }) => Promise<void>;
+}

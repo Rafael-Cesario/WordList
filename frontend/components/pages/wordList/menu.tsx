@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ContextWordList } from "../list/contexts/contextWordList";
+import { ContextWordList } from "../../../contexts/contextWordList";
 import { StyledMenu } from "./styles/styledMenu";
 
 export const Menu = () => {

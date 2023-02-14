@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { Configs } from "./configs";
-import { ContextWordList } from "./contexts/contextWordList";
+import { ContextWordList } from "../../../contexts/contextWordList";
 import { CreateWordList } from "./createWordList";
 import { StyledHeader } from "./styles/styledHeader";
 

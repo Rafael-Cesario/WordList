@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useState } from "react";
 import { TextInput } from "../../inputs/inputs";
-import { ContextWords } from "./context/contextWords";
+import { ContextWords } from "../../../contexts/contextWords";
 import { StyledAddWords } from "./styles/styledAddWords";
 import { sendError } from "./utils/sendError";
 import { findWord } from "./utils/findWord";

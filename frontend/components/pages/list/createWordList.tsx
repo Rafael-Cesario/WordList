@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { getCookies } from "../../../services/cookies";
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
-import { ContextWordList } from "./contexts/contextWordList";
+import { ContextWordList } from "../../../contexts/contextWordList";
 
 export const CreateWordList = () => {
 	const { wordList, setWordList } = useContext(ContextWordList);

@@ -24,3 +24,16 @@ export interface IChangeWordListStatus {
 	wordListStatusOld: "next" | "current" | "done";
 	wordListStatusNew: "next" | "current" | "done";
 }
+
+export type WordListType = {
+	next: string[][][];
+	current: string[][][];
+	done: string[][][];
+};
+
+export interface IContextWordList {
+	wordList: WordListType;
+	setWordList: (newState: WordListType) => void;
+	deleteWordList: () => Promise<void>;
+	changeWordListStatus: () => Promise<void>;
+}

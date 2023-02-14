@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ContextWords } from "./context/contextWords";
+import { ContextWords } from "../../../contexts/contextWords";
 import { StyledOptions } from "./styles/styledOptions";
 
 interface OptionsProps {

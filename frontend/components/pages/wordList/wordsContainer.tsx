@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ContextWords } from "./context/contextWords";
+import { ContextWords } from "../../../contexts/contextWords";
 import { Options } from "./options";
 import { StyledWordsContainer } from "./styles/styledWordsContainer";
 

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
-import { ContextWords } from "./context/contextWords";
 import { StyledHeader } from "./styles/styledHeader";
+import { ContextWords } from "../../../contexts/contextWords";
 
 export const Header = () => {
 	const { link, listName, listStatus } = useRouterQuery("Carregando...");

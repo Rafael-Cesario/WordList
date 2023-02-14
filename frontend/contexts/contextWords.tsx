@@ -1,27 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, ReactNode } from "react";
-import { useQueriesWords } from "../../../../utils/hooks/useQueriesWords";
+import { IContextWords } from "../interfaces/interfaceWords";
+import { useQueriesWords } from "../utils/hooks/useQueriesWords";
 
-interface ContextProps {
-	children: ReactNode;
-}
-
-interface IDefaultValues {
-	words: string[][];
-	addWords: (inputWords: [string, string]) => Promise<void>;
-	removeWords: (index: string) => Promise<void>;
-	renameWords: (index: string, values: { term: string; definition: string }) => Promise<void>;
-}
-
-export const ContextWords = createContext<IDefaultValues>({
+export const ContextWords = createContext<IContextWords>({
 	words: [],
 	addWords: (inputWords: [string, string]) => Promise.resolve(),
 	removeWords: (index: string) => Promise.resolve(),
 	renameWords: (index: string, values: { term: string; definition: string }) => Promise.resolve(),
 });
 
-export const ContextWordsProvider = ({ children }: ContextProps) => {
+export const ContextWordsProvider = ({ children }: { children: ReactNode }) => {
 	const { words, addWords, removeWords, renameWords } = useQueriesWords();
 
 	return (

@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { describe, test, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { ContextWordList } from "../contexts/contextWordList";
+import { ContextWordList } from "../../../../contexts/contextWordList";
 import { Header } from "../header";
 
 vi.mock("next/router", () => ({
@@ -32,6 +32,8 @@ const renderHeader = () => {
 						[[], []],
 					],
 				},
+				changeWordListStatus: vi.fn(),
+				deleteWordList: vi.fn(),
 			}}>
 			<Header />
 		</ContextWordList.Provider>

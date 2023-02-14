@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ContextWordList } from "./contexts/contextWordList";
+import { ContextWordList } from "../../../contexts/contextWordList";
 import { WordListContainer } from "./wordListContainer";
 import { StyledListContainer as StyledListContainer } from "./styles/styledListContainer";
 

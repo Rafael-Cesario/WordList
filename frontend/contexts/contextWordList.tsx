@@ -1,19 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, ReactNode } from "react";
-import { useQueriesWordList } from "../../../../utils/hooks/useQueriesWordList";
-
-export type WordListType = {
-	next: string[][][];
-	current: string[][][];
-	done: string[][][];
-};
-
-interface IContextWordList {
-	wordList: WordListType;
-	setWordList: (newState: WordListType) => void;
-	deleteWordList: () => Promise<void>;
-	changeWordListStatus: () => Promise<void>;
-}
+import { IContextWordList } from "../interfaces/interfaceWordList";
+import { useQueriesWordList } from "../utils/hooks/useQueriesWordList";
 
 const defaultValues: IContextWordList = {
 	wordList: {
