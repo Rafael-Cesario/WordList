@@ -4,6 +4,7 @@ export const StyledEndList = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 80%;
 
 	h1 {
 		margin: 2rem 0;
@@ -21,10 +22,12 @@ export const StyledEndList = styled.div`
 		background-color: #151515;
 		padding: 2rem;
 		border-radius: 2px;
+		width: 100%;
 
 		.word {
 			display: flex;
 			flex-wrap: wrap;
+			width: 100%;
 
 			p:first-child {
 				margin-right: 1rem;
@@ -34,6 +37,8 @@ export const StyledEndList = styled.div`
 				background-color: #101010;
 				padding: 0.5rem 1rem;
 				border-radius: 2px;
+				margin: 0.2rem 0;
+				width: 45%;
 			}
 		}
 	}

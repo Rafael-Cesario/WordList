@@ -17,7 +17,7 @@ export const StyledWordsContainer = styled.div`
 		.term,
 		.definition {
 			width: 44%;
-			margin: 1rem 0;
+			margin: 0.3rem 0;
 
 			::placeholder {
 				color: #ddd;
