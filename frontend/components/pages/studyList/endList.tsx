@@ -1,18 +1,19 @@
+import { useRouter } from "next/router";
 import { StyledEndList } from "./styles/styledEndList";
 
 interface PropsEndList {
 	props: {
-		setHaveListEnd: (state: boolean) => void;
 		words: string[][];
-		setWords: (words: string[][]) => void;
 	};
 }
 
-export const EndList = ({ props: { setHaveListEnd, setWords, words } }: PropsEndList) => {
+export const EndList = ({ props: { words } }: PropsEndList) => {
+	const router = useRouter();
+
 	return (
 		<StyledEndList>
 			<h1>Fim</h1>
-			<button>Estudar lista novamente</button>
+			<button onClick={() => router.reload()}>Estudar lista novamente</button>
 
 			<div className='words'>
 				{words.map(([term, definition], index) => {

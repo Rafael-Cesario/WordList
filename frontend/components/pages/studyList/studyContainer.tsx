@@ -1,65 +1,93 @@
 import produce from "immer";
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { StyledStudyContainer } from "./styles/styledStudyContainer";
 
 interface PropsStudyContaienr {
 	props: {
-		setHaveListEnd: (state: boolean) => void;
 		words: string[][];
-		setWords: (words: string[][]) => void;
+		setHaveListEnd: (state: boolean) => void;
 	};
 }
 
-export const StudyContainer = ({ props: { setHaveListEnd, words, setWords } }: PropsStudyContaienr) => {
+export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyContaienr) => {
+	const [studyWords, setStudyWords] = useState(words);
 	const [wordIndex, setWordIndex] = useState(0);
 	const [value, setValue] = useState("");
 	const [answerState, setAnswerState] = useState("");
 
-	const showAnswer = () => {
+	useEffect(() => {
+		setStudyWords(words);
+	}, [words]);
+
+	const showAnswer = (e: FormEvent) => {
+		e.preventDefault();
+		if (answerState) return nextQuestion();
+
 		const answer = document.querySelector("#answer") as HTMLTitleElement;
 		answer.classList.toggle("hide");
 
 		console.log({ answer: answer.textContent, value });
 		const isAnswerRight = answer.textContent === value ? "right" : "wrong";
 		answer.classList.toggle(isAnswerRight);
-		setAnswerState(isAnswerRight ? isAnswerRight : "");
+		setAnswerState(isAnswerRight);
 	};
 
 	const nextQuestion = () => {
-		showAnswer();
+		if (!answerState) return;
 
-		console.log({ answerState });
+		const answer = document.querySelector("#answer") as HTMLTitleElement;
+		answer.classList.toggle("hide");
+
+		console.log({ answer: answer.textContent, value });
+		const isAnswerRight = answer.textContent === value ? "right" : "wrong";
+		answer.classList.toggle(isAnswerRight);
+		setAnswerState(isAnswerRight);
+
 		if (answerState === "right") {
-			const newWords = produce(words, draft => {
+			const newWords = produce(studyWords, draft => {
 				draft.splice(wordIndex, 1);
 			});
 
-			setWords(newWords);
-
 			if (!newWords.length) return setHaveListEnd(true);
+
+			if (wordIndex === 10 || wordIndex === newWords.length - 1 || newWords.length === 1) setWordIndex(0);
+			else setWordIndex(wordIndex + 1);
+
+			setValue("");
+			setStudyWords(newWords);
+			setAnswerState("");
+			return;
 		}
 
-		if (wordIndex === 10 || wordIndex === words.length - 1) setWordIndex(0);
+		if (wordIndex === 10 || wordIndex === studyWords.length - 1 || studyWords.length === 1) setWordIndex(0);
 		else setWordIndex(wordIndex + 1);
+
+		setAnswerState("");
+		setValue("");
 	};
 
 	return (
 		<StyledStudyContainer>
 			<div className='question'>
-				<h1>{words[wordIndex][0]}</h1>
+				<h1>{studyWords[wordIndex][0]}</h1>
 				<h1 id='answer' className='hide'>
-					{words[wordIndex][1]}
+					{studyWords[wordIndex][1]}
 				</h1>
 			</div>
 
-			<input onChange={e => setValue(e.target.value)} className='answer' type='text' placeholder='Resposta' />
+			<form onSubmit={e => showAnswer(e)}>
+				<input value={value} onChange={e => setValue(e.target.value)} className='answer' type='text' placeholder='Resposta' />
 
-			<div className='buttons'>
-				<button onClick={() => nextQuestion()}>Confirmar</button>
-				<button>Não sei</button>
-			</div>
+				<div className='buttons'>
+					{answerState && <button onClick={() => setAnswerState("right")}>Marcar como correta</button>}
+					<button>Confirmar</button>
+					<button>Não sei</button>
+				</div>
+			</form>
 
-			<h2 className='words-left'>xx palavras até terminar a lista</h2>
+			<h2 className='words-left'>
+				{studyWords.length} {studyWords.length > 1 ? "palavras" : "palavra"} para o fim da lista
+			</h2>
 		</StyledStudyContainer>
 	);
 };

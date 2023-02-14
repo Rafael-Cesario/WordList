@@ -9,7 +9,6 @@ export const StyledStudyContainer = styled.div`
 	.question h1 {
 		margin: 2rem 0;
 		font-weight: normal;
-		transition: 0.2s;
 	}
 
 	.hide {

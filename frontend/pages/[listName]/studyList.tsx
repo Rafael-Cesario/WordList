@@ -13,7 +13,7 @@ const StudyList = () => {
 	const queriesWords = new QueriesWords();
 	const { link } = useRouterQuery("");
 	const { listIndex, listName, listStatus, owner } = useLocalData();
-	const [haveListEnd, setHaveListEnd] = useState(true);
+	const [haveListEnd, setHaveListEnd] = useState(false);
 	const [words, setWords] = useState([["", ""]]);
 
 	const getWords = async () => {
@@ -40,8 +40,8 @@ const StudyList = () => {
 			<PageHead title={"WordList Study List"} />
 			<Link href={`/${link}/${listStatus}-${listIndex}`}>Voltar</Link>
 
-			{haveListEnd || <StudyContainer props={{ setHaveListEnd, setWords, words }} />}
-			{haveListEnd && <EndList props={{ setHaveListEnd, setWords, words }} />}
+			{haveListEnd || <StudyContainer props={{ setHaveListEnd, words }} />}
+			{haveListEnd && <EndList props={{ words }} />}
 		</StyledStudyList>
 	);
 };
