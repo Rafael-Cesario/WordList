@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useLocalData = () => {
-	const [{ listName, listIndex, listStatus, owner }, setData] = useState({ listIndex: 0, listName: "", listStatus: "", owner: "" });
+	const [{ listName, listIndex, listStatus, owner }, setData] = useState({ listIndex: "0", listName: "", listStatus: "next", owner: "" });
 
 	const getDataFromLocalStorage = () => {
 		const storage = localStorage.getItem("listData");
