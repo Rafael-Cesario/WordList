@@ -1,6 +1,7 @@
-import { getCookies } from "../../../services/cookies";
+import { useRouter } from "next/router";
 import { ChangesInput } from "../../../interfaces/interfaceList";
 import { queriesList } from "../../../services/queries/queriesList";
+import { IStorage } from "../../../interfaces/storage";
 
 interface SaveConfigsProps {
 	props: {
@@ -11,10 +12,15 @@ interface SaveConfigsProps {
 }
 
 export const SaveConfigs = ({ props }: SaveConfigsProps) => {
+	const router = useRouter();
 	const { values, listName, setShowConfigs } = props;
 
 	const changeListName = async () => {
-		const owner = await getCookies("user");
+		const storage = localStorage.getItem("wordList");
+		if (!storage) throw new Error("delete List");
+
+		const data = JSON.parse(storage) as IStorage;
+		const owner = data.owner;
 		const newURL = "/" + values.listName.replace(/-/g, "_").replace(/ /g, "-");
 
 		const changes: ChangesInput = {
@@ -24,8 +30,11 @@ export const SaveConfigs = ({ props }: SaveConfigsProps) => {
 		};
 
 		await queriesList.changeListName(changes);
+		localStorage.setItem("wordList", JSON.stringify({ ...data, listName: values.listName }));
+
 		setShowConfigs(false);
-		location.href = newURL;
+
+		router.push(newURL);
 	};
 
 	return <button onClick={() => changeListName()}>Salvar configs</button>;

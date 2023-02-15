@@ -17,7 +17,7 @@ export const GET_LISTS = gql`
 `;
 
 export const CHANGE_LIST_NAME = gql`
-	mutation ChangeListName($changes: ChangesInput) {
+	mutation ChangeListName($changes: ChangesInput!) {
 		changeListName(changes: $changes) {
 			message
 		}

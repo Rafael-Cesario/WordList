@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { IStorage } from "../../../interfaces/storage";
-import { getCookies } from "../../../services/cookies";
 import { queriesList } from "../../../services/queries/queriesList";
 import { StyledDeleteList } from "./styles/styledDeleteList";
 

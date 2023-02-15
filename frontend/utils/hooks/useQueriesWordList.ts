@@ -2,15 +2,28 @@ import useSWR from "swr";
 import { request } from "graphql-request";
 import { RequestDocument } from "graphql-request/dist/types";
 import { QueriesTypeWordList } from "../../services/queries/types/queriesTypeWordList";
+import { useEffect, useState } from "react";
+import { IStorage } from "../../interfaces/storage";
+import { IGetWordLists } from "../../interfaces/interfaceWordList";
 
 export const useQueriesWordListSWR = () => {
+	const [{ listName, owner }, setStorage] = useState<IStorage>({ listName: "", owner: "" });
 	const queriesTypeWordList = new QueriesTypeWordList();
+
 	// todo > get listname and owner from local storage
-	const getWordLists = { listName: "list01", owner: "rafael@hotmail.com" };
+	const getWordLists = { listName, owner };
 
-	const fetcher = (query: RequestDocument) => request("http://localhost:4000", query, { getWordLists });
+	const fetcher = ([query, getWordLists]: [RequestDocument, IGetWordLists]) => request("http://localhost:4000", query, { getWordLists });
 
-	const { data, error, isLoading, mutate } = useSWR(queriesTypeWordList.GET_WORDlISTS, fetcher);
+	const { data, error, isLoading, mutate } = useSWR([queriesTypeWordList.GET_WORDlISTS, getWordLists], fetcher);
+
+	useEffect(() => {
+		const storage = localStorage.getItem("wordList");
+		if (!storage) return console.log("Error lists");
+
+		const data = JSON.parse(storage) as IStorage;
+		setStorage(data);
+	}, []);
 
 	return {
 		data: data?.getWordLists?.wordLists,
