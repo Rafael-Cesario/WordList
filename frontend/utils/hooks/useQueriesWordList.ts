@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getCookies } from "../../services/cookies";
 import { QueriesWordList } from "../../services/queries/queriesWordList";
 import { useRouterQuery } from "./useRouterQuery";
-import { WordListType } from "../../components/pages/list/contexts/contextWordList";
+import { WordListType } from "../../interfaces/interfaceWordList";
 import { useRouter } from "next/router";
 import produce from "immer";
 import { TypeListStatus } from "../../interfaces/interfaceWordList";

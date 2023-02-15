@@ -4,7 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"start": "node build/src/server.js",
 		"dev": "SET NODE_ENV=development && tsnd --respawn --transpile-only src/server.ts",
+		"build": "tsc",
 		"test": "vitest"
 	},
 	"keywords": [],

@@ -11,7 +11,7 @@ describe("Find word", () => {
 			["word", "word"],
 		];
 
-		const hasWord = findWord(words, "target");
+		const hasWord = findWord(words, "TARGET");
 		expect(hasWord).toBe(true);
 	});
 

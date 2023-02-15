@@ -24,7 +24,7 @@ export const StyledWordList = styled.div`
 		.term,
 		.definition {
 			width: 50%;
-			background-color: #202020;
+			background-color: #20202090;
 			border-radius: 2px;
 			padding: 0.5rem;
 			text-overflow: ellipsis;

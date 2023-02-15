@@ -15,7 +15,7 @@ export const AddWords = () => {
 		const hasWord = findWord(words, values.term);
 		if (hasWord) return sendError("term", "Esta palavra já foi adicionada");
 
-		await addWords([values.term, values.definition]);
+		await addWords([values.term.trim(), values.definition.trim()]);
 
 		setValues({ term: "", definition: "" });
 

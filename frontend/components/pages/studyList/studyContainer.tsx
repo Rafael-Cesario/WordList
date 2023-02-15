@@ -32,26 +32,22 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 		setAnswerState(isAnswerRight);
 	};
 
-	const nextQuestion = () => {
+	const nextQuestion = (makeRight?: boolean) => {
 		if (!answerState) return;
 
 		const answer = document.querySelector("#answer") as HTMLTitleElement;
 		answer.classList.toggle("hide");
 
-		console.log({ answer: answer.textContent, value });
 		const isAnswerRight = answer.textContent === value ? "right" : "wrong";
 		answer.classList.toggle(isAnswerRight);
-		setAnswerState(isAnswerRight);
 
-		if (answerState === "right") {
+		if (answerState === "right" || makeRight) {
 			const newWords = produce(studyWords, draft => {
 				draft.splice(wordIndex, 1);
 			});
 
 			if (!newWords.length) return setHaveListEnd(true);
-
-			if (wordIndex === 10 || wordIndex === newWords.length - 1 || newWords.length === 1) setWordIndex(0);
-			else setWordIndex(wordIndex + 1);
+			if (newWords.length - 1 > wordIndex) setWordIndex(0);
 
 			setValue("");
 			setStudyWords(newWords);
@@ -80,7 +76,7 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 
 				<div className='buttons'>
 					{answerState === "wrong" && (
-						<button type='button' onClick={() => setAnswerState("right")}>
+						<button type='button' onClick={() => nextQuestion(true)}>
 							Marcar como correta
 						</button>
 					)}
