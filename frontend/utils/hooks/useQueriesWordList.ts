@@ -5,6 +5,7 @@ import { QueriesTypeWordList } from "../../services/queries/types/queriesTypeWor
 
 export const useQueriesWordListSWR = () => {
 	const queriesTypeWordList = new QueriesTypeWordList();
+	// todo > get listname and owner from local storage
 	const getWordLists = { listName: "list01", owner: "rafael@hotmail.com" };
 
 	const fetcher = (query: RequestDocument) => request("http://localhost:4000", query, { getWordLists });

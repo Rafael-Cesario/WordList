@@ -1,12 +1,16 @@
-import { useContext, useState } from "react";
-import { ContextWords } from "../../../contexts/contextWords";
+import { useState } from "react";
+import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
 import { Options } from "./options";
 import { StyledWordsContainer } from "./styles/styledWordsContainer";
 
 export const WordsContainer = () => {
+	const { words, error, isLoading } = useQueriesWordsSWR();
 	const [options, setOptions] = useState({ show: false, index: 0 });
 	const [values, setValues] = useState({ term: "", definition: "" });
-	const { words } = useContext(ContextWords);
+
+	if (isLoading) return <Paragraph text='Carregando suas palavras' />;
+	if (error) return <Paragraph text='Um erro ocorreu, tente recarregar a página' />;
+	if (!words?.length) return <Paragraph text='Suas palavras aparecerão aqui' />;
 
 	const showOptions = (input: HTMLInputElement, value: string, index: number) => {
 		input.value = value;
@@ -21,13 +25,6 @@ export const WordsContainer = () => {
 			setOptions({ show: false, index });
 		}, 100);
 	};
-
-	if (!words?.length)
-		return (
-			<StyledWordsContainer>
-				<p>Suas palavras aparecerão aqui</p>
-			</StyledWordsContainer>
-		);
 
 	return (
 		<StyledWordsContainer className='words'>
@@ -56,6 +53,14 @@ export const WordsContainer = () => {
 					</div>
 				);
 			})}
+		</StyledWordsContainer>
+	);
+};
+
+const Paragraph = ({ text }: { text: string }) => {
+	return (
+		<StyledWordsContainer>
+			<p>{text}</p>
 		</StyledWordsContainer>
 	);
 };

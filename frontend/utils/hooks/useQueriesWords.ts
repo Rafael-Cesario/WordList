@@ -1,9 +1,13 @@
+import useSWR from "swr";
 import produce from "immer";
+import { request } from "graphql-request";
+import { RequestDocument } from "graphql-request/dist/types";
 import { useEffect, useState } from "react";
 import { TypeListStatus } from "../../interfaces/interfaceWordList";
-import { IRemoveWords } from "../../interfaces/interfaceWords";
+import { IGetWords, IRemoveWords } from "../../interfaces/interfaceWords";
 import { getCookies } from "../../services/cookies";
 import { QueriesWords } from "../../services/queries/queriesWords";
+import { QueriesTypeWords } from "../../services/queries/types/queriesTypeWords";
 import { useRouterQuery } from "./useRouterQuery";
 
 export const useQueriesWords = () => {
@@ -75,4 +79,20 @@ export const useQueriesWords = () => {
 	}, [listName]);
 
 	return { words, addWords, removeWords, renameWords };
+};
+
+export const useQueriesWordsSWR = () => {
+	const queriesTypeWords = new QueriesTypeWords();
+	const words: IGetWords = { listIndex: "0", listName: "list01", owner: "rafael@hotmail.com", status: "next" };
+
+	const fetcher = (query: RequestDocument) => request("http://localhost:4000", query, { words });
+
+	const { data, error, isLoading, mutate } = useSWR(queriesTypeWords.GET_WORDS, fetcher);
+
+	return {
+		words: data?.getWords.words as string[][],
+		error,
+		isLoading,
+		mutate,
+	};
 };
