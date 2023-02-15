@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { IStorage } from "../../../interfaces/storage";
 import { getCookies } from "../../../services/cookies";
 import { queriesList } from "../../../services/queries/queriesList";
 import { StyledDeleteList } from "./styles/styledDeleteList";
@@ -17,7 +18,12 @@ export const DeleteList = ({ props }: DeleteListProps) => {
 	const router = useRouter();
 
 	const deleteList = async () => {
-		const owner = await getCookies("user");
+		const storage = localStorage.getItem("wordList");
+		if (!storage) throw new Error("delete List");
+
+		const data = JSON.parse(storage) as IStorage;
+		const owner = data.owner;
+
 		await queriesList.deleteList({ owner, listName });
 		router.push("/main");
 	};
