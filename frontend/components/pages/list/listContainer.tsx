@@ -1,11 +1,14 @@
 import { WordListContainer } from "./wordListContainer";
 import { StyledListContainer as StyledListContainer } from "./styles/styledListContainer";
-import { useContext } from "react";
-import { ContextWordList } from "../../../contexts/contextWordList";
+import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
 
 export const ListContainer = () => {
-	const { wordList } = useContext(ContextWordList);
-	const { next, current, done } = wordList;
+	const { data: wordLists, error, isLoading } = useQueriesWordListSWR();
+
+	if (isLoading) return <p>Loading...</p>;
+	if (error) return <p>Um erro ocorreu</p>;
+
+	const { next, current, done } = wordLists;
 
 	return (
 		<StyledListContainer>

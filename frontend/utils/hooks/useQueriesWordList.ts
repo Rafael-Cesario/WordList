@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import produce from "immer";
+import useSWR from "swr";
+import { request } from "graphql-request";
+import { useState } from "react";
 import { getCookies } from "../../services/cookies";
 import { QueriesWordList } from "../../services/queries/queriesWordList";
 import { useRouterQuery } from "./useRouterQuery";
 import { WordListType } from "../../interfaces/interfaceWordList";
 import { useRouter } from "next/router";
-import produce from "immer";
 import { TypeListStatus } from "../../interfaces/interfaceWordList";
+import { RequestDocument } from "graphql-request/dist/types";
+import { QueriesTypeWordList } from "../../services/queries/types/queriesTypeWordList";
 
 const status: { [key: string]: TypeListStatus } = {
 	next: "current",
@@ -24,14 +28,6 @@ export const useQueriesWordList = () => {
 		current: [],
 		done: [],
 	});
-
-	const getWordList = async () => {
-		if (!listName) return;
-		const owner = await getCookies("user");
-		const response = await queriesWordList.getWordLists({ listName, owner });
-		const { next, current, done } = response.wordLists;
-		setWordList({ next, current, done });
-	};
 
 	const deleteWordList = async () => {
 		const owner = await getCookies("user");
@@ -72,9 +68,21 @@ export const useQueriesWordList = () => {
 		router.push(newRoute);
 	};
 
-	useEffect(() => {
-		getWordList();
-	}, [listName]);
-
 	return { wordList, setWordList, deleteWordList, changeWordListStatus };
+};
+
+export const useQueriesWordListSWR = () => {
+	const queriesTypeWordList = new QueriesTypeWordList();
+	const getWordLists = { listName: "list01", owner: "rafael@hotmail.com" };
+
+	const fetcher = (query: RequestDocument) => request("http://localhost:4000", query, { getWordLists });
+
+	const { data, error, isLoading, mutate } = useSWR(queriesTypeWordList.GET_WORDlISTS, fetcher);
+
+	return {
+		data: data?.getWordLists?.wordLists,
+		error,
+		isLoading,
+		mutate,
+	};
 };

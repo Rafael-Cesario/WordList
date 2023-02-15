@@ -1,26 +1,21 @@
-import produce from "immer";
-import { useContext } from "react";
 import { getCookies } from "../../../services/cookies";
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
-import { ContextWordList } from "../../../contexts/contextWordList";
+import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
 
 export const CreateWordList = () => {
-	const { wordList, setWordList } = useContext(ContextWordList);
+	const { mutate } = useQueriesWordListSWR();
+
+	// todo > getListname from localStorage
 	const { listName } = useRouterQuery("");
-	const queriesWordList = new QueriesWordList();
 
 	const createWordList = async () => {
-		const newState = produce(wordList, draft => {
-			draft.next.push([]);
-		});
-
-		setWordList(newState);
-
-		const owner = await getCookies("user");
-
 		// todo > handler error case
+		// todo > get owner from localStorage
+		const queriesWordList = new QueriesWordList();
+		const owner = await getCookies("user");
 		await queriesWordList.createWordList({ listName, owner });
+		mutate();
 	};
 
 	return <button onClick={() => createWordList()}>Criar Lista</button>;
