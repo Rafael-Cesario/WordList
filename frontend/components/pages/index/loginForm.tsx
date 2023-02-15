@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { setCookies } from "../../../services/cookies";
 import { queriesUser } from "../../../services/queries/queriesUser";
 import { saveCookies } from "../../../utils/saveCookies";
 import { validations } from "../../../utils/validations";
@@ -37,9 +38,11 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 			return;
 		}
 
-		const user = email;
+		const owner = email;
 		const token = response.token;
-		saveCookies({ token, user });
+
+		setCookies("token", token);
+		localStorage.setItem("wordList", JSON.stringify({ owner }));
 
 		setValues({});
 		router.push("/main");
