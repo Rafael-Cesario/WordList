@@ -1,5 +1,4 @@
 import { describe, test, expect, beforeAll, afterAll, afterEach, vi } from "vitest";
-import { ContextWordList } from "../../../../contexts/contextWordList";
 import { WordListType } from "../../../../interfaces/interfaceWordList";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { server } from "../../../../services/__tests__/__mocks__/server";

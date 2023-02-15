@@ -1,7 +1,7 @@
-import { getCookies } from "../../../services/cookies";
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
+import { IStorage } from "../../../interfaces/storage";
 
 export const CreateWordList = () => {
 	const { mutate } = useQueriesWordListSWR();
@@ -11,9 +11,13 @@ export const CreateWordList = () => {
 
 	const createWordList = async () => {
 		// todo > handler error case
-		// todo > get owner from localStorage
 		const queriesWordList = new QueriesWordList();
-		const owner = await getCookies("user");
+
+		const storage = localStorage.getItem("wordList");
+		if (!storage) throw new Error("Error");
+
+		const data = JSON.parse(storage) as IStorage;
+		const owner = data.owner;
 		await queriesWordList.createWordList({ listName, owner });
 		mutate();
 	};
