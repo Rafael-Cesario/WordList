@@ -7,10 +7,9 @@ import { IStorage } from "../../interfaces/storage";
 import { IGetWordLists } from "../../interfaces/interfaceWordList";
 
 export const useQueriesWordListSWR = () => {
-	const [{ listName, owner }, setStorage] = useState<IStorage>({ listName: "", owner: "" });
+	const [{ listName, owner }, setStorage] = useState<IStorage>({ listName: "", owner: "", listIndex: "", listStatus: "next" });
 	const queriesTypeWordList = new QueriesTypeWordList();
 
-	// todo > get listname and owner from local storage
 	const getWordLists = { listName, owner };
 
 	const fetcher = ([query, getWordLists]: [RequestDocument, IGetWordLists]) => request("http://localhost:4000", query, { getWordLists });

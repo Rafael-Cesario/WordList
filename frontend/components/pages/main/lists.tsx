@@ -10,6 +10,7 @@ export const Lists = () => {
 	// todo > error and is loading
 	if (isLoading) return <p>Carregando...</p>;
 	if (error) return <p>Erro</p>;
+	if (!lists.length) return <p>Você ainda não tem nenhuma lista</p>;
 
 	const goToList = (listName: string) => {
 		const storage = localStorage.getItem("wordList");

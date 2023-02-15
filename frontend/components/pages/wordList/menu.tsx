@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { TypeListStatus } from "../../../interfaces/interfaceWordList";
-import { getCookies } from "../../../services/cookies";
+import { IStorage } from "../../../interfaces/storage";
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
 import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
 import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
@@ -11,7 +11,7 @@ export const Menu = () => {
 	const router = useRouter();
 	const queriesWordList = new QueriesWordList();
 	const { words } = useQueriesWordsSWR();
-	const { listName, listIndex, listStatus, link } = useRouterQuery("");
+	const { link } = useRouterQuery("");
 	const { data: wordLists } = useQueriesWordListSWR();
 
 	// todo > answer with
@@ -20,16 +20,14 @@ export const Menu = () => {
 	const studyList = async () => {
 		// todo > notification
 		if (!words.length) return console.log("Add words first to study this list");
-
-		const owner = await getCookies("user");
-		const params = { listName, listStatus, listIndex, owner };
-		const data = JSON.stringify(params);
-		localStorage.setItem("listData", data);
 		router.push(`/${link}/studyList`);
 	};
 
 	const deleteWordList = async () => {
-		const owner = await getCookies("user");
+		const storage = localStorage.getItem("wordList");
+		if (!storage) throw new Error("");
+
+		const { owner, listIndex, listName, listStatus } = JSON.parse(storage) as IStorage;
 
 		await queriesWordList.deleteWordList({
 			listName,
@@ -49,10 +47,16 @@ export const Menu = () => {
 			done: "next",
 		};
 
-		const owner = await getCookies("user");
+		const storage = localStorage.getItem("wordList");
+		if (!storage) throw new Error("");
+
+		const { owner, listIndex, listName, listStatus } = JSON.parse(storage) as IStorage;
+
 		const wordListIndex = Number(listIndex);
 		const wordListStatusNew = status[listStatus];
 		const wordListStatusOld = listStatus as TypeListStatus;
+
+		localStorage.setItem("wordList", JSON.stringify({ owner, listIndex, listName, listStatus: wordListStatusNew }));
 
 		await queriesWordList.changeWordListStatus({
 			listName,

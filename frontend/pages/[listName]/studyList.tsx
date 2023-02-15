@@ -14,7 +14,7 @@ const StudyList = () => {
 	const [haveListEnd, setHaveListEnd] = useState(false);
 	const { words, isLoading } = useQueriesWordsSWR();
 
-	if (isLoading) return <p>Carregando</p>;
+	if ((isLoading || !words)) return <p>Carregando</p>;
 
 	return (
 		<StyledStudyList>

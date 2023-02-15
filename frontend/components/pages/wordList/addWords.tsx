@@ -5,7 +5,7 @@ import { sendError } from "./utils/sendError";
 import { findWord } from "./utils/findWord";
 import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
 import { QueriesWords } from "../../../services/queries/queriesWords";
-import { TypeListStatus } from "../../../interfaces/interfaceWordList";
+import { IStorage } from "../../../interfaces/storage";
 
 export const AddWords = () => {
 	const [values, setValues] = useState<{ [key: string]: string }>({ term: "", definition: "" });
@@ -17,14 +17,12 @@ export const AddWords = () => {
 		const hasWord = findWord(words, values.term);
 		if (hasWord) return sendError("term", "Esta palavra já foi adicionada");
 
-		// todo > get params from local Storage
-		const owner = "rafael@hotmail.com";
-		const status: TypeListStatus = "next";
-		const listName = "list01";
-		const listIndex = "0";
+		const storage = localStorage.getItem("wordList");
+		if (!storage) throw new Error("Storage");
 
+		const { owner, listIndex, listName, listStatus } = JSON.parse(storage) as IStorage;
 		const { term, definition } = values;
-		const variableWords = { listName, owner, definition, term, listIndex, status };
+		const variableWords = { listName, owner, definition, term, listIndex, status: listStatus };
 
 		// todo > handle if error
 		const queriesWords = new QueriesWords();
