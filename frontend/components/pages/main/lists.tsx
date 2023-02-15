@@ -1,16 +1,14 @@
 import { useRouter } from "next/router";
+import { useLists } from "../../../utils/hooks/useLists";
 import { StyledLists } from "./styles/styledLists";
 
-interface ListsProps {
-	props: {
-		lists: string[];
-	};
-}
-
-export const Lists = ({ props }: ListsProps) => {
-	const { lists } = props;
+export const Lists = () => {
 	const router = useRouter();
+	const { lists, isLoading, error } = useLists();
 
+	// todo > error and is loading
+	if (isLoading) return <p>Carregando...</p>;
+	if (error) return <p>Erro</p>;
 
 	return (
 		<StyledLists>

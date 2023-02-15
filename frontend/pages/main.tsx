@@ -1,14 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Head from "next/head";
 import Link from "next/link";
 import { Lists } from "../components/pages/main/lists";
 import { NewList } from "../components/pages/main/newList";
 import { Perfil } from "../components/pages/main/perfil";
 import { StyledMain } from "../styles/styledMain";
-import { useLists } from "../utils/hooks/useLists";
 
 const Main = () => {
-	const [lists, setLists] = useLists([]);
-
 	return (
 		<>
 			<Head>
@@ -17,7 +15,7 @@ const Main = () => {
 
 			<StyledMain>
 				<header className='menus'>
-					<NewList props={{ lists, setLists }} />
+					<NewList />
 
 					<div className='buttons'>
 						<Perfil />
@@ -28,7 +26,7 @@ const Main = () => {
 				</header>
 
 				<main>
-					<Lists props={{ lists }} />
+					<Lists />
 				</main>
 			</StyledMain>
 		</>

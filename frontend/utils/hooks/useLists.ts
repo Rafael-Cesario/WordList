@@ -1,22 +1,28 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import useSWR from "swr";
 import { useEffect, useState } from "react";
-import { getCookies } from "../../services/cookies";
-import { queriesList } from "../../services/queries/queriesList";
+import { RequestDocument } from "graphql-request/dist/types";
+import { request } from "graphql-request";
+import { IStorage } from "../../interfaces/storage";
+import { GET_LISTS } from "../../services/queries/types/queriesTypesList";
 
-type Lists = string[];
-type SetLists = (lists: Lists) => void;
-
-export const useLists = (initialState: string[]) => {
-	const [lists, setLists] = useState<string[]>(initialState);
-
-	const getLists = async () => {
-		const owner = await getCookies("user");
-		const getLists = await queriesList.getLists(owner);
-		setLists(getLists.lists);
-	};
+export const useLists = () => {
+	const [owner, setOwner] = useState("");
+	const fetcher = ([query, owner]: [RequestDocument, string]) => request("http://localhost:4000", query, { owner });
+	const { data, error, isLoading, mutate } = useSWR([GET_LISTS, owner], fetcher);
 
 	useEffect(() => {
-		getLists();
+		const storage = localStorage.getItem("wordList");
+		if (!storage) return console.log("Error lists");
+
+		const data = JSON.parse(storage) as IStorage;
+		setOwner(data.owner);
 	}, []);
 
-	return [lists, setLists] as [Lists, SetLists];
+	return {
+		lists: data?.getLists.lists as string[],
+		error,
+		isLoading,
+		mutate,
+	};
 };

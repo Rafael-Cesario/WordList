@@ -1,34 +1,28 @@
 import { FormEvent, useState } from "react";
 import { TextInput } from "../../inputs/inputs";
 import { StyledNewList } from "./styles/styledNewList";
-import produce from "immer";
-import { getCookies } from "../../../services/cookies";
 import { queriesList } from "../../../services/queries/queriesList";
+import { IStorage } from "../../../interfaces/storage";
+import { useLists } from "../../../utils/hooks/useLists";
 
-interface NewListProps {
-	props: {
-		lists: string[];
-		setLists: (lists: string[]) => void;
-	};
-}
-
-export const NewList = ({ props }: NewListProps) => {
-	const { lists, setLists } = props;
+export const NewList = () => {
+	const { mutate } = useLists();
 	const [showNewList, setShowNewList] = useState(false);
 	const [values, setValues] = useState<{ [key: string]: string }>({});
 
 	const createNewList = async (e: FormEvent) => {
 		e.preventDefault();
 
-		const owner = await getCookies("user");
+		const storage = localStorage.getItem("wordList");
+
+		// todo > notification
+		if (!storage) return console.log("Error, create new list");
+
+		const data = JSON.parse(storage) as IStorage;
+		const owner = data.owner;
 		const listName = values.name;
 		await queriesList.createList({ owner, listName });
-
-		setLists(
-			produce(lists, draft => {
-				draft.push(values.name);
-			})
-		);
+		mutate();
 
 		setValues({});
 	};
