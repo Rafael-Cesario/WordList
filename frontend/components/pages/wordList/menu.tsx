@@ -1,17 +1,16 @@
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { ContextWords } from "../../../contexts/contextWords";
 import { TypeListStatus } from "../../../interfaces/interfaceWordList";
 import { getCookies } from "../../../services/cookies";
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
 import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
+import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { StyledMenu } from "./styles/styledMenu";
 
 export const Menu = () => {
 	const router = useRouter();
 	const queriesWordList = new QueriesWordList();
-	const { words } = useContext(ContextWords);
+	const { words } = useQueriesWordsSWR();
 	const { listName, listIndex, listStatus, link } = useRouterQuery("");
 	const { data: wordLists } = useQueriesWordListSWR();
 
