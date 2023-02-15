@@ -42,6 +42,7 @@ export const Menu = () => {
 		router.push(`/${listName}`);
 	};
 
+	// todo > save new Status in the localStorage
 	const changeWordListStatus = async () => {
 		const status: { [key: string]: TypeListStatus } = {
 			next: "current",

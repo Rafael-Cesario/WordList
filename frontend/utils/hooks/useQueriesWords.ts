@@ -26,23 +26,6 @@ export const useQueriesWords = () => {
 		setWords(getWords.words);
 	};
 
-	const addWords = async (inputWords: [string, string]) => {
-		const status = listStatus as TypeListStatus;
-		const [term, definition] = inputWords;
-		const owner = await getCookies("user");
-
-		const variableWords = { listName, owner, definition, term, listIndex, status };
-
-		// todo > handle if error
-		await queriesWords.addWords({ words: variableWords });
-
-		const newWords = produce(words, draft => {
-			draft.push(inputWords);
-		});
-
-		setWords(newWords);
-	};
-
 	const removeWords = async (index: string) => {
 		const status = listStatus as TypeListStatus;
 		const owner = await getCookies("user");
@@ -78,7 +61,7 @@ export const useQueriesWords = () => {
 		getWords();
 	}, [listName]);
 
-	return { words, addWords, removeWords, renameWords };
+	return { words, removeWords, renameWords };
 };
 
 export const useQueriesWordsSWR = () => {
