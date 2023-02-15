@@ -1,21 +1,22 @@
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { ContextWordList } from "../../../contexts/contextWordList";
 import { ContextWords } from "../../../contexts/contextWords";
 import { TypeListStatus } from "../../../interfaces/interfaceWordList";
 import { getCookies } from "../../../services/cookies";
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
+import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { StyledMenu } from "./styles/styledMenu";
 
 export const Menu = () => {
-	const { changeWordListStatus } = useContext(ContextWordList);
+	const router = useRouter();
+	const queriesWordList = new QueriesWordList();
 	const { words } = useContext(ContextWords);
 	const { listName, listIndex, listStatus, link } = useRouterQuery("");
-	const router = useRouter();
+	const { data: wordLists } = useQueriesWordListSWR();
 
 	// todo > answer with
-	const answerWith = "Definição";
+	// const answerWith = "Definição";
 
 	const studyList = async () => {
 		// todo > notification
@@ -29,7 +30,6 @@ export const Menu = () => {
 	};
 
 	const deleteWordList = async () => {
-		const queriesWordList = new QueriesWordList();
 		const owner = await getCookies("user");
 
 		await queriesWordList.deleteWordList({
@@ -42,12 +42,39 @@ export const Menu = () => {
 		router.push(`/${listName}`);
 	};
 
+	const changeWordListStatus = async () => {
+		const status: { [key: string]: TypeListStatus } = {
+			next: "current",
+			current: "done",
+			done: "next",
+		};
+
+		const owner = await getCookies("user");
+		const wordListIndex = Number(listIndex);
+		const wordListStatusNew = status[listStatus];
+		const wordListStatusOld = listStatus as TypeListStatus;
+
+		await queriesWordList.changeWordListStatus({
+			listName,
+			owner,
+			wordListIndex,
+			wordListStatusOld,
+			wordListStatusNew,
+		});
+
+		const newIndex = wordLists[wordListStatusNew].length;
+		const newRoute = `/${link}/${wordListStatusNew}-${newIndex}`;
+		router.push(newRoute);
+	};
+
 	return (
 		<StyledMenu>
 			<button onClick={() => studyList()}>Estudar lista</button>
-			<button>Responder com: {answerWith}</button>
-			<button onClick={() => changeWordListStatus()}>Mudar tempo de estudo</button>
+			<button onClick={() => changeWordListStatus()}>Mudar o status da lista</button>
 			<button onClick={() => deleteWordList()}>Excluir lista</button>
+
+			{/* todo */}
+			{/* <button>Responder com: {answerWith}</button> */}
 		</StyledMenu>
 	);
 };
