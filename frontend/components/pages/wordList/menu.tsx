@@ -2,12 +2,14 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { ContextWordList } from "../../../contexts/contextWordList";
 import { ContextWords } from "../../../contexts/contextWords";
+import { TypeListStatus } from "../../../interfaces/interfaceWordList";
 import { getCookies } from "../../../services/cookies";
+import { QueriesWordList } from "../../../services/queries/queriesWordList";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { StyledMenu } from "./styles/styledMenu";
 
 export const Menu = () => {
-	const { deleteWordList, changeWordListStatus } = useContext(ContextWordList);
+	const { changeWordListStatus } = useContext(ContextWordList);
 	const { words } = useContext(ContextWords);
 	const { listName, listIndex, listStatus, link } = useRouterQuery("");
 	const router = useRouter();
@@ -24,6 +26,20 @@ export const Menu = () => {
 		const data = JSON.stringify(params);
 		localStorage.setItem("listData", data);
 		router.push(`/${link}/studyList`);
+	};
+
+	const deleteWordList = async () => {
+		const queriesWordList = new QueriesWordList();
+		const owner = await getCookies("user");
+
+		await queriesWordList.deleteWordList({
+			listName,
+			owner,
+			wordListIndex: Number(listIndex),
+			wordListStatus: listStatus as TypeListStatus,
+		});
+
+		router.push(`/${listName}`);
 	};
 
 	return (

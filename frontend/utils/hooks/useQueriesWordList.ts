@@ -29,19 +29,6 @@ export const useQueriesWordList = () => {
 		done: [],
 	});
 
-	const deleteWordList = async () => {
-		const owner = await getCookies("user");
-
-		await queriesWordList.deleteWordList({
-			listName,
-			owner,
-			wordListIndex: Number(listIndex),
-			wordListStatus: listStatus as TypeListStatus,
-		});
-
-		router.push(`/${listName}`);
-	};
-
 	const changeWordListStatus = async () => {
 		const owner = await getCookies("user");
 		const wordListIndex = Number(listIndex);
@@ -68,7 +55,7 @@ export const useQueriesWordList = () => {
 		router.push(newRoute);
 	};
 
-	return { wordList, setWordList, deleteWordList, changeWordListStatus };
+	return { wordList, setWordList, changeWordListStatus };
 };
 
 export const useQueriesWordListSWR = () => {
