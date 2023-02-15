@@ -1,13 +1,15 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { TextInput } from "../../inputs/inputs";
-import { ContextWords } from "../../../contexts/contextWords";
 import { StyledAddWords } from "./styles/styledAddWords";
 import { sendError } from "./utils/sendError";
 import { findWord } from "./utils/findWord";
+import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
+import { QueriesWords } from "../../../services/queries/queriesWords";
+import { TypeListStatus } from "../../../interfaces/interfaceWordList";
 
 export const AddWords = () => {
 	const [values, setValues] = useState<{ [key: string]: string }>({ term: "", definition: "" });
-	const { words, addWords } = useContext(ContextWords);
+	const { words, mutate } = useQueriesWordsSWR();
 
 	const addNewWord = async (e: FormEvent) => {
 		e.preventDefault();
@@ -15,7 +17,19 @@ export const AddWords = () => {
 		const hasWord = findWord(words, values.term);
 		if (hasWord) return sendError("term", "Esta palavra já foi adicionada");
 
-		await addWords([values.term.trim(), values.definition.trim()]);
+		// todo > get params from local Storage
+		const owner = "rafael@hotmail.com";
+		const status: TypeListStatus = "next";
+		const listName = "list01";
+		const listIndex = "0";
+
+		const { term, definition } = values;
+		const variableWords = { listName, owner, definition, term, listIndex, status };
+
+		// todo > handle if error
+		const queriesWords = new QueriesWords();
+		await queriesWords.addWords({ words: variableWords });
+		mutate();
 
 		setValues({ term: "", definition: "" });
 
