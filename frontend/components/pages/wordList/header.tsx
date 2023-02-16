@@ -1,15 +1,15 @@
 import Link from "next/link";
+import { convertListName } from "../../../utils/convertListName";
 import { useLocalData } from "../../../utils/hooks/useLocalData";
 import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
-import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { StyledHeader } from "./styles/styledHeader";
 
 export const Header = () => {
-	const { link } = useRouterQuery();
 	const { words } = useQueriesWordsSWR();
 
 	const { storage } = useLocalData();
 	const { listName, listStatus } = storage;
+	const link = convertListName(listName);
 
 	const status: { [key: string]: string } = {
 		next: "Próximas",
@@ -19,7 +19,7 @@ export const Header = () => {
 
 	return (
 		<StyledHeader>
-			<Link className='link' href={`/${link}`}>
+			<Link className='link' href={`${link}`}>
 				Voltar
 			</Link>
 			<h1 className='title'>{listName}</h1>

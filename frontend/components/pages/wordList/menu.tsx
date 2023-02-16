@@ -1,23 +1,23 @@
 import { useRouter } from "next/router";
 import { TypeListStatus } from "../../../interfaces/interfaceWordList";
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
+import { convertListName } from "../../../utils/convertListName";
 import { useLocalData } from "../../../utils/hooks/useLocalData";
 import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
 import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
-import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { StyledMenu } from "./styles/styledMenu";
 
 export const Menu = () => {
 	const router = useRouter();
 	const queriesWordList = new QueriesWordList();
 
-	const { link } = useRouterQuery();
-
 	const { words } = useQueriesWordsSWR();
 	const { data: wordLists, mutate } = useQueriesWordListSWR();
 
 	const { storage } = useLocalData();
 	const { owner, listIndex, listName, listStatus } = storage;
+
+	const link = convertListName(listName);
 
 	const studyList = async () => {
 		// todo > notification

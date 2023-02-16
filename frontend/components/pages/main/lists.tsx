@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { convertListName } from "../../../utils/convertListName";
 import { useLists } from "../../../utils/hooks/useLists";
 import { useLocalData } from "../../../utils/hooks/useLocalData";
 import { StyledLists } from "./styles/styledLists";
@@ -8,16 +9,15 @@ export const Lists = () => {
 	const { lists, isLoading, error } = useLists();
 	const { storage } = useLocalData();
 
-	// todo > error and is loading
 	if (isLoading) return <p>Carregando...</p>;
 	if (error) return <p>Erro</p>;
 	if (!lists.length) return <p>Você ainda não tem nenhuma lista</p>;
 
 	const goToList = (listName: string) => {
 		const newData = { ...storage, listName };
-		localStorage.setItem("wordList", JSON.stringify(newData));
+		const link = convertListName(listName);
 
-		const link = "/" + listName.replace(/-/g, "_").replace(/ /g, "-");
+		localStorage.setItem("wordList", JSON.stringify(newData));
 		router.push(link);
 	};
 

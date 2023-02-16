@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
+import { convertListName } from "../../../utils/convertListName";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 import { StyledEmptyWordList } from "./styles/styledEmptyWordList";
 
 interface PropsEmptyWordList {
@@ -11,10 +12,20 @@ interface PropsEmptyWordList {
 
 export const EmptyWordList = ({ props: { index, status } }: PropsEmptyWordList) => {
 	const router = useRouter();
-	const { link } = useRouterQuery();
+	const { storage } = useLocalData();
+
+	const goToWordList = (listStatus: string, listIndex: string) => {
+		const newStorage = JSON.stringify({ ...storage, listStatus, listIndex });
+		localStorage.setItem("wordList", newStorage);
+
+		const linkListName = convertListName(storage.listName);
+
+		const url = `${linkListName}/wordList`;
+		router.push(url);
+	};
 
 	return (
-		<StyledEmptyWordList className='list' onClick={() => router.push(`/${link}/${status}-${index}`)}>
+		<StyledEmptyWordList className='list' onClick={() => goToWordList(status, String(index))}>
 			<p>Lista vazia</p>
 		</StyledEmptyWordList>
 	);

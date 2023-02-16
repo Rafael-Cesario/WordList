@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
+import { convertListName } from "../../../utils/convertListName";
 import { useLocalData } from "../../../utils/hooks/useLocalData";
-import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { EmptyWordList } from "./emptyWordList";
 import { StyledWordList } from "./styles/styledWordList";
 
@@ -14,15 +14,17 @@ interface PropsWordList {
 
 export const WordList = ({ props: { index, list, status } }: PropsWordList) => {
 	const router = useRouter();
-	const { link } = useRouterQuery();
 	const { storage } = useLocalData();
 
 	if (!list.length) return <EmptyWordList props={{ index, status }} />;
 
 	const goToWordList = (listStatus: string, listIndex: string) => {
-		localStorage.setItem("wordList", JSON.stringify({ ...storage, listStatus, listIndex }));
+		const newStorage = JSON.stringify({ ...storage, listStatus, listIndex });
+		localStorage.setItem("wordList", newStorage);
 
-		const url = `/${link}/${listStatus}-${listIndex}`;
+		const linkListName = convertListName(storage.listName);
+
+		const url = `${linkListName}/wordList`;
 		router.push(url);
 	};
 
