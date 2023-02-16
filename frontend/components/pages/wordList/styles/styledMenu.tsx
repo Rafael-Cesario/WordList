@@ -21,4 +21,8 @@ export const StyledMenu = styled.div`
 			transform: scale(1.05);
 		}
 	}
+
+	.delete {
+		background-color: #900020;
+	}
 `;

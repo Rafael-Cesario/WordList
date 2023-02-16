@@ -5,6 +5,7 @@ import { convertListName } from "../../../utils/convertListName";
 import { useLocalData } from "../../../utils/hooks/useLocalData";
 import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
 import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
+import { DeleteWordList } from "./deleteWordList";
 import { StyledMenu } from "./styles/styledMenu";
 
 export const Menu = () => {
@@ -12,7 +13,7 @@ export const Menu = () => {
 	const queriesWordList = new QueriesWordList();
 
 	const { words } = useQueriesWordsSWR();
-	const { data: wordLists, mutate } = useQueriesWordListSWR();
+	const { data: wordLists } = useQueriesWordListSWR();
 
 	const { storage } = useLocalData();
 	const { owner, listIndex, listName, listStatus } = storage;
@@ -23,19 +24,6 @@ export const Menu = () => {
 		// todo > notification
 		if (!words.length) return console.log("Add words first to study this list");
 		router.push(`/${link}/studyList`);
-	};
-
-	// todo > create a component with this function
-	const deleteWordList = async () => {
-		await queriesWordList.deleteWordList({
-			listName,
-			owner,
-			wordListIndex: Number(listIndex),
-			wordListStatus: listStatus as TypeListStatus,
-		});
-
-		mutate();
-		router.push(`/${listName}`);
 	};
 
 	const changeWordListStatus = async () => {
@@ -69,7 +57,7 @@ export const Menu = () => {
 		<StyledMenu>
 			<button onClick={() => studyList()}>Estudar lista</button>
 			<button onClick={() => changeWordListStatus()}>Mudar o status da lista</button>
-			<button onClick={() => deleteWordList()}>Excluir lista</button>
+			<DeleteWordList />
 
 			{/* todo */}
 			{/* <button>Responder com: {answerWith}</button> */}
