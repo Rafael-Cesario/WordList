@@ -12,7 +12,7 @@ interface ConfigsProps {
 }
 
 export const Configs = ({ props }: ConfigsProps) => {
-	const { setShowConfigs, listName } = props;
+	const { setShowConfigs } = props;
 	const [values, setValues] = useState<{ [key: string]: string }>({});
 
 	return (
@@ -32,7 +32,7 @@ export const Configs = ({ props }: ConfigsProps) => {
 			/>
 
 			<div className='options'>
-				<SaveConfigs props={{ values, listName, setShowConfigs }} />
+				<SaveConfigs props={{ values, setShowConfigs }} />
 				<DeleteList />
 			</div>
 		</StyledConfigs>
