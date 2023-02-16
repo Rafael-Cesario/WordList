@@ -11,7 +11,7 @@ interface PropsEmptyWordList {
 
 export const EmptyWordList = ({ props: { index, status } }: PropsEmptyWordList) => {
 	const router = useRouter();
-	const { link } = useRouterQuery("");
+	const { link } = useRouterQuery();
 
 	return (
 		<StyledEmptyWordList className='list' onClick={() => router.push(`/${link}/${status}-${index}`)}>

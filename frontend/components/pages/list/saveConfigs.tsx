@@ -1,26 +1,22 @@
 import { useRouter } from "next/router";
 import { ChangesInput } from "../../../interfaces/interfaceList";
 import { queriesList } from "../../../services/queries/queriesList";
-import { IStorage } from "../../../interfaces/storage";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 
 interface SaveConfigsProps {
 	props: {
 		values: { [key: string]: string };
-		listName: string;
 		setShowConfigs: (show: boolean) => void;
 	};
 }
 
-export const SaveConfigs = ({ props }: SaveConfigsProps) => {
+export const SaveConfigs = ({ props: { values, setShowConfigs } }: SaveConfigsProps) => {
 	const router = useRouter();
-	const { values, listName, setShowConfigs } = props;
+	const { storage } = useLocalData();
+	const { listName, owner } = storage;
 
 	const changeListName = async () => {
-		const storage = localStorage.getItem("wordList");
-		if (!storage) throw new Error("delete List");
-
-		const data = JSON.parse(storage) as IStorage;
-		const owner = data.owner;
+		// todo > create a util function
 		const newURL = "/" + values.listName.replace(/-/g, "_").replace(/ /g, "-");
 
 		const changes: ChangesInput = {
@@ -30,10 +26,11 @@ export const SaveConfigs = ({ props }: SaveConfigsProps) => {
 		};
 
 		await queriesList.changeListName(changes);
-		localStorage.setItem("wordList", JSON.stringify({ ...data, listName: values.listName }));
+
+		const newStorage = JSON.stringify({ ...storage, listName: values.listName });
+		localStorage.setItem("wordList", newStorage);
 
 		setShowConfigs(false);
-
 		router.push(newURL);
 	};
 

@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { Configs } from "./configs";
 import { CreateWordList } from "./createWordList";
 import { StyledHeader } from "./styles/styledHeader";
 import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 
 export const Header = () => {
-	// todo > getListName from local Storage
-	const { listName } = useRouterQuery("Carregando...");
+	const { storage } = useLocalData();
+	const { listName } = storage;
 
 	const [showConfigs, setShowConfigs] = useState(false);
 	const [totalWords, setTotalWords] = useState(0);

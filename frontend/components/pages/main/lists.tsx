@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
-import { IStorage } from "../../../interfaces/storage";
 import { useLists } from "../../../utils/hooks/useLists";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 import { StyledLists } from "./styles/styledLists";
 
 export const Lists = () => {
 	const router = useRouter();
 	const { lists, isLoading, error } = useLists();
+	const { storage } = useLocalData();
 
 	// todo > error and is loading
 	if (isLoading) return <p>Carregando...</p>;
@@ -13,11 +14,7 @@ export const Lists = () => {
 	if (!lists.length) return <p>Você ainda não tem nenhuma lista</p>;
 
 	const goToList = (listName: string) => {
-		const storage = localStorage.getItem("wordList");
-		if (!storage) return console.log("Error");
-
-		const data = JSON.parse(storage) as IStorage;
-		const newData = { ...data, listName };
+		const newData = { ...storage, listName };
 		localStorage.setItem("wordList", JSON.stringify(newData));
 
 		const link = "/" + listName.replace(/-/g, "_").replace(/ /g, "-");

@@ -1,24 +1,19 @@
 import { QueriesWordList } from "../../../services/queries/queriesWordList";
-import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
-import { IStorage } from "../../../interfaces/storage";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 
 export const CreateWordList = () => {
 	const { mutate } = useQueriesWordListSWR();
 
-	// todo > getListname from localStorage
-	const { listName } = useRouterQuery("");
+	const { storage } = useLocalData();
+	const { listName, owner } = storage;
 
 	const createWordList = async () => {
-		// todo > handler error case
 		const queriesWordList = new QueriesWordList();
 
-		const storage = localStorage.getItem("wordList");
-		if (!storage) throw new Error("Error");
-
-		const data = JSON.parse(storage) as IStorage;
-		const owner = data.owner;
+		// todo > handle Error case
 		await queriesWordList.createWordList({ listName, owner });
+
 		mutate();
 	};
 

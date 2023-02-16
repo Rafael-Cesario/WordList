@@ -33,7 +33,7 @@ export const Configs = ({ props }: ConfigsProps) => {
 
 			<div className='options'>
 				<SaveConfigs props={{ values, listName, setShowConfigs }} />
-				<DeleteList props={{ listName }} />
+				<DeleteList />
 			</div>
 		</StyledConfigs>
 	);

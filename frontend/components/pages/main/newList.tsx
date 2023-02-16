@@ -2,25 +2,21 @@ import { FormEvent, useState } from "react";
 import { TextInput } from "../../inputs/inputs";
 import { StyledNewList } from "./styles/styledNewList";
 import { queriesList } from "../../../services/queries/queriesList";
-import { IStorage } from "../../../interfaces/storage";
 import { useLists } from "../../../utils/hooks/useLists";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 
 export const NewList = () => {
 	const { mutate } = useLists();
 	const [showNewList, setShowNewList] = useState(false);
 	const [values, setValues] = useState<{ [key: string]: string }>({});
+	const { storage } = useLocalData();
 
 	const createNewList = async (e: FormEvent) => {
 		e.preventDefault();
 
-		const storage = localStorage.getItem("wordList");
-
-		// todo > notification
-		if (!storage) return console.log("Error, create new list");
-
-		const data = JSON.parse(storage) as IStorage;
-		const owner = data.owner;
+		const owner = storage.owner;
 		const listName = values.name;
+
 		await queriesList.createList({ owner, listName });
 		mutate();
 

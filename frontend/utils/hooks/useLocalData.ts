@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
+import { IStorage } from "../../interfaces/storage";
 
 export const useLocalData = () => {
-	const [{ listName, listIndex, listStatus, owner }, setData] = useState({ listIndex: "0", listName: "", listStatus: "next", owner: "" });
-
-	const getDataFromLocalStorage = () => {
-		const storage = localStorage.getItem("wordList");
-
-		// todo > send a message to user telling him that his data cannot be recovered and send him back to the previous page.
-		if (!storage) return console.log("Error");
-
-		const data = JSON.parse(storage);
-		setData(data);
-	};
+	const [storage, setStorage] = useState<IStorage>({
+		listIndex: "",
+		listName: "",
+		listStatus: "next",
+		owner: "",
+	});
 
 	useEffect(() => {
-		getDataFromLocalStorage();
+		const storage = localStorage.getItem("wordList");
+		if (!storage) return;
+
+		const data = JSON.parse(storage) as IStorage;
+		setStorage({ ...data });
 	}, []);
 
-	return { listName, listIndex, listStatus, owner };
+	return { storage };
 };

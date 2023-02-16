@@ -1,5 +1,5 @@
-import { TypeListStatus } from "../../../interfaces/interfaceWordList";
 import { QueriesWords } from "../../../services/queries/queriesWords";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
 import { StyledOptions } from "./styles/styledOptions";
 
@@ -14,21 +14,36 @@ export const Options = ({ props: { index, values } }: OptionsProps) => {
 	const queriesWords = new QueriesWords();
 	const { words, mutate } = useQueriesWordsSWR();
 
-	// todo > get from LocalStorage
-	const listIndex = "0";
-	const listName = "list01";
-	const owner = "rafael@hotmail.com";
-	const status: TypeListStatus = "next";
-	const wordIndex = String(index);
+	const { storage } = useLocalData();
+	const { listIndex, listName, listStatus, owner } = storage;
 
 	const removeWords = async () => {
-		await queriesWords.removeWords({ words: { listIndex, listName, owner, status, wordIndex } });
+		await queriesWords.removeWords({
+			words: {
+				listIndex,
+				listName,
+				owner,
+				status: listStatus,
+				wordIndex: String(index),
+			},
+		});
+
 		mutate();
 	};
 
 	const renameWords = async () => {
-		const newWords = [values.term || words[Number(wordIndex)][0], values.definition || words[Number(wordIndex)][1]];
-		await queriesWords.renameWords({ words: { listIndex, listName, listStatus: status, newWords, owner, wordIndex } });
+		const newWords = [values.term || words[index][0], values.definition || words[index][1]];
+		await queriesWords.renameWords({
+			words: {
+				listIndex,
+				listName,
+				listStatus,
+				newWords,
+				owner,
+				wordIndex: String(index),
+			},
+		});
+
 		mutate();
 	};
 

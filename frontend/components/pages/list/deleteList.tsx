@@ -1,29 +1,24 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { IStorage } from "../../../interfaces/storage";
 import { queriesList } from "../../../services/queries/queriesList";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
+import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
 import { StyledDeleteList } from "./styles/styledDeleteList";
 
-interface DeleteListProps {
-	props: {
-		listName: string;
-	};
-}
-
-export const DeleteList = ({ props }: DeleteListProps) => {
-	const { listName } = props;
-	const [showConfirmButton, setShowConfirmButton] = useState(false);
-
+export const DeleteList = () => {
 	const router = useRouter();
 
+	const [showConfirmButton, setShowConfirmButton] = useState(false);
+
+	const { storage } = useLocalData();
+	const { owner, listName } = storage;
+
+	const { mutate } = useQueriesWordListSWR();
+
 	const deleteList = async () => {
-		const storage = localStorage.getItem("wordList");
-		if (!storage) throw new Error("delete List");
-
-		const data = JSON.parse(storage) as IStorage;
-		const owner = data.owner;
-
+		// todo > handle if error
 		await queriesList.deleteList({ owner, listName });
+		mutate();
 		router.push("/main");
 	};
 

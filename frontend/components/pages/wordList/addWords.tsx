@@ -5,11 +5,14 @@ import { sendError } from "./utils/sendError";
 import { findWord } from "./utils/findWord";
 import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
 import { QueriesWords } from "../../../services/queries/queriesWords";
-import { IStorage } from "../../../interfaces/storage";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 
 export const AddWords = () => {
 	const [values, setValues] = useState<{ [key: string]: string }>({ term: "", definition: "" });
 	const { words, mutate } = useQueriesWordsSWR();
+
+	const { storage } = useLocalData();
+	const { listIndex, listName, listStatus, owner } = storage;
 
 	const addNewWord = async (e: FormEvent) => {
 		e.preventDefault();
@@ -17,10 +20,6 @@ export const AddWords = () => {
 		const hasWord = findWord(words, values.term);
 		if (hasWord) return sendError("term", "Esta palavra já foi adicionada");
 
-		const storage = localStorage.getItem("wordList");
-		if (!storage) throw new Error("Storage");
-
-		const { owner, listIndex, listName, listStatus } = JSON.parse(storage) as IStorage;
 		const { term, definition } = values;
 		const variableWords = { listName, owner, definition, term, listIndex, status: listStatus };
 

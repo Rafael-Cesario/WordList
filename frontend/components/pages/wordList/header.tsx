@@ -1,11 +1,15 @@
 import Link from "next/link";
+import { useLocalData } from "../../../utils/hooks/useLocalData";
 import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
 import { useRouterQuery } from "../../../utils/hooks/useRouterQuery";
 import { StyledHeader } from "./styles/styledHeader";
 
 export const Header = () => {
-	const { link, listName, listStatus } = useRouterQuery("Carregando...");
+	const { link } = useRouterQuery();
 	const { words } = useQueriesWordsSWR();
+
+	const { storage } = useLocalData();
+	const { listName, listStatus } = storage;
 
 	const status: { [key: string]: string } = {
 		next: "Próximas",
