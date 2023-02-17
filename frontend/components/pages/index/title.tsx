@@ -15,7 +15,7 @@ export const Title = ({ props }: TitleProps) => {
 		<StyledTitle>
 			<h1>{title}</h1>
 
-			<button className='close' onClick={() => changeFormState(formName)}>
+			<button role={"close-form"} className='close' onClick={() => changeFormState(formName)}>
 				x
 			</button>
 		</StyledTitle>

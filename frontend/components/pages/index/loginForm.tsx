@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { setCookies } from "../../../services/cookies";
 import { queriesUser } from "../../../services/queries/queriesUser";
-import { saveCookies } from "../../../utils/saveCookies";
 import { validations } from "../../../utils/validations";
 import { verifyErrors } from "../../../utils/verifyErrors";
 import { PasswordInput, TextInput } from "../../inputs/inputs";

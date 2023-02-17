@@ -38,8 +38,8 @@ const Home = () => {
 				<p className='para'>Um site para memorizar palavras</p>
 
 				<div className='menu'>
-					<button onClick={() => changeFormState("login")}>Login</button>
-					<button onClick={() => changeFormState("create")}>Criar Conta</button>
+					<button className="menu-login" onClick={() => changeFormState("login")}>Login</button>
+					<button className="menu-create-account" onClick={() => changeFormState("create")}>Criar Conta</button>
 				</div>
 
 				{showForm === "login" && <LoginForm props={{ changeFormState }} />}

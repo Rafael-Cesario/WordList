@@ -64,7 +64,7 @@ export const PasswordInput = ({ props }: InputsProps) => {
 				id={name}
 				required
 			/>
-			<button className='icon' onClick={() => setShowPassword(!showPassword)}>
+			<button role={"show-password"} className='icon' onClick={() => setShowPassword(!showPassword)}>
 				{showPassword && <Image src='/icons/eyeOpen.png' width={20} height={20} alt='icon png' />}
 				{showPassword || <Image src='/icons/eyeClose.png' width={20} height={20} alt='icon png' />}
 			</button>
