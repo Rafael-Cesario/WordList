@@ -16,7 +16,8 @@
 		"indent": ["warn", "tab"],
 		"quotes": ["warn", "double"],
 		"semi": ["warn", "always"],
-		"react/prop-types": "off"
+		"react/prop-types": "off",
+		"no-empty-function": "warn"
 	},
 
 	"globals": { "React": true }

@@ -11,8 +11,8 @@ const Home = () => {
 	const router = useRouter();
 
 	const changeFormState = (formName: string) => {
-		if (showForm === formName) return setShowForm("");
-		setShowForm(formName);
+		const formState = showForm === formName ? "" : formName;
+		setShowForm(formState);
 	};
 
 	const userAuthentication = async () => {
@@ -38,8 +38,12 @@ const Home = () => {
 				<p className='para'>Um site para memorizar palavras</p>
 
 				<div className='menu'>
-					<button className="menu-login" onClick={() => changeFormState("login")}>Login</button>
-					<button className="menu-create-account" onClick={() => changeFormState("create")}>Criar Conta</button>
+					<button role={"open-login"} className='menu-login' onClick={() => changeFormState("login")}>
+						Login
+					</button>
+					<button role={"open-create-account"} className='menu-create-account' onClick={() => changeFormState("create")}>
+						Criar Conta
+					</button>
 				</div>
 
 				{showForm === "login" && <LoginForm props={{ changeFormState }} />}
