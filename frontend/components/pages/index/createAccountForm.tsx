@@ -47,7 +47,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 
 	return (
 		<StyledForm>
-			<Title props={{title:"Criar conta", changeFormState, formName: "create" }} />
+			<Title props={{ title: "Criar conta", changeFormState, formName: "create" }} />
 
 			<div className='inputs'>
 				<TextInput props={{ name: "email", content: "Email", values, setValues }} />

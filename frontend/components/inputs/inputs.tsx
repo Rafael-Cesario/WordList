@@ -29,10 +29,18 @@ export const TextInput = ({ props }: InputsProps) => {
 
 	return (
 		<StyledInput className={name} role={name}>
-			<label htmlFor={name} data-name={content}>
+			<label htmlFor={name} data-name={content} role={`label-${name}`}>
 				{content}
 			</label>
-			<input onChange={e => changeValue(e.target)} type='text' value={values[name] || ""} placeholder={content} id={name} required />
+			<input
+				role={`input-${name}`}
+				onChange={e => changeValue(e.target)}
+				type='text'
+				value={values[name] || ""}
+				placeholder={content}
+				id={name}
+				required
+			/>
 		</StyledInput>
 	);
 };

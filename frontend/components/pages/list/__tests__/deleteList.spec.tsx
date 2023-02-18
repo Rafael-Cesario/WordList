@@ -7,10 +7,8 @@ vi.mock("next/router", () => require("next-router-mock"));
 vi.mock("next/dist/client/router", () => require("next-router-mock"));
 
 describe("Delete List Component", () => {
-	const listName = "Test";
-
 	test("Show confirm button", () => {
-		render(<DeleteList props={{ listName }} />);
+		render(<DeleteList />);
 
 		const button = screen.getByRole("button", { name: "Deletar lista" });
 		fireEvent.click(button);
