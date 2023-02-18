@@ -3,7 +3,7 @@ import { LoginInterface, UserInterface } from "../../interfaces/interfaceUser";
 import { client } from "../client";
 import { CREATE_USER, LOGIN } from "./types/queriesTypesUser";
 
-class QueriesUser {
+export class QueriesUser {
 	async createUser(user: UserInterface) {
 		try {
 			const response = await client.mutate({ mutation: CREATE_USER, variables: { user } });

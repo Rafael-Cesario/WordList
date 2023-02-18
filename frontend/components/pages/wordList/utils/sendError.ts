@@ -1,5 +1,5 @@
-export const sendError = (inputName: string, errorMessage: string) => {
-	const div = document.querySelector("." + inputName) as HTMLDivElement;
+export const sendError = (divClass: string, errorMessage: string) => {
+	const div = document.querySelector("." + divClass) as HTMLDivElement;
 	const label = div.childNodes[0] as HTMLLabelElement;
 	const labelText = label.textContent;
 

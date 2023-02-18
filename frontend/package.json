@@ -8,6 +8,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"test": "vitest",
+		"vitest": "vitest --reporter verbose",
 		"cypress": "npx cypress open"
 	},
 	"dependencies": {

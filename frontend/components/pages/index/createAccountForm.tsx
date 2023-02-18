@@ -4,6 +4,7 @@ import { sendNotification } from "../../../utils/sendNotification";
 import { validations } from "../../../utils/validations";
 import { verifyErrors } from "../../../utils/verifyErrors";
 import { PasswordInput, TextInput } from "../../inputs/inputs";
+import { sendError } from "../wordList/utils/sendError";
 import { StyledForm } from "./styles/styledForm";
 import { Title } from "./title";
 
@@ -39,7 +40,8 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 		if (hasErrors) return;
 
 		const user = { email, name, password };
-		await queriesUser.createUser(user);
+		const { error } = await queriesUser.createUser(user);
+		if (error) return sendError("email", "Este email já esta sendo usado");
 
 		setValues({});
 		sendNotification(setShowNotification);
