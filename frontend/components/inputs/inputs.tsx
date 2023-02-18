@@ -70,6 +70,7 @@ export const PasswordInput = ({ props }: InputsProps) => {
 				value={values[name] || ""}
 				placeholder={content}
 				id={name}
+				role={`input-${name}`}
 				required
 			/>
 			<button role={"show-password"} className='icon' onClick={() => setShowPassword(!showPassword)}>

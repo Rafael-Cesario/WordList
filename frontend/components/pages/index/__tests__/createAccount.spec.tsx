@@ -25,7 +25,15 @@ describe("Create account form", () => {
 		expect(screen.getByRole("label-email").textContent).toBe("Email");
 	});
 
-	it.todo("show and hide password");
+	it("show and hide password", () => {
+		const input = screen.getByRole("input-password") as HTMLInputElement;
+		expect(input.type).toBe("password");
+		act(() => fireEvent.click(screen.getAllByRole("show-password")[0]));
+		expect(input.type).toBe("text");
+		act(() => fireEvent.click(screen.getAllByRole("show-password")[0]));
+		expect(input.type).toBe("password");
+	});
+
 	it.todo("can't create a user with the same email");
 	it.todo("password need to have a capital letter a number and ten digits");
 	it.todo("inputs values are reset after submit");
