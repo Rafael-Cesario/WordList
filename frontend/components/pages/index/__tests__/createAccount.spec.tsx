@@ -14,8 +14,8 @@ describe("Create account form", () => {
 
 	beforeEach(() => {
 		cleanup();
-		render(<CreateAccountForm props={{ changeFormState }} />);
 		vi.clearAllMocks();
+		render(<CreateAccountForm props={{ changeFormState }} />);
 	});
 
 	it("Close the form", () => {
@@ -41,7 +41,7 @@ describe("Create account form", () => {
 		expect(input.type).toBe("password");
 	});
 
-	it("can't create a user with the same email", async () => {
+	it("Handle backend errors, 'email already in use' ", async () => {
 		vi.mocked(queriesUser).createUser.mockReturnValueOnce({ error: "email already in use" } as unknown as Promise<unknown>);
 
 		await userEvent.type(screen.getByRole("input-email"), "user@email.com");
@@ -56,7 +56,45 @@ describe("Create account form", () => {
 		expect(await screen.findByRole("label-email")).toHaveTextContent("Este email já esta sendo usado");
 	});
 
-	it.todo("password need to have a capital letter a number and ten digits");
+	it("verify if the password is strong", async () => {
+		await userEvent.type(screen.getByRole("input-password"), "123");
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+			expect(screen.getByRole("label-password")).toHaveTextContent("Ao menos uma letra maiuscula deve existir");
+		});
+
+		await userEvent.clear(screen.getByRole("input-password"));
+		await userEvent.type(screen.getByRole("input-password"), "R123");
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+			expect(screen.getByRole("label-password")).toHaveTextContent("Ao menos uma letra minuscula deve existir");
+		});
+
+		await userEvent.clear(screen.getByRole("input-password"));
+		await userEvent.type(screen.getByRole("input-password"), "Ra");
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+			expect(screen.getByRole("label-password")).toHaveTextContent("Sua senha deve conter ao menos um numero");
+		});
+
+		await userEvent.clear(screen.getByRole("input-password"));
+		await userEvent.type(screen.getByRole("input-password"), "Ra123");
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+			expect(screen.getByRole("label-password")).toHaveTextContent("Sua senha deve conter ao menos 10 letras");
+		});
+	});
+
+	it("Verify if password and confirm password are equal", async () => {
+		await userEvent.type(screen.getByRole("input-password"), "one");
+		await userEvent.type(screen.getByRole("input-confirmPassword"), "two");
+
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+			expect(screen.getByRole("label-confirmPassword")).toHaveTextContent("Suas senhas devem ser iguais");
+		});
+	});
+
 	it.todo("inputs values are reset after submit");
 	it.todo("show a notification");
 	it.todo("Create a new user");

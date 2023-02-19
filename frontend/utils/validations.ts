@@ -16,6 +16,7 @@ class Validations {
 		if (!password) return "password: Este campo não pode ficar vazio";
 		if (!password.match(/[A-Z]/)) return "password: Ao menos uma letra maiuscula deve existir";
 		if (!password.match(/[a-z]/)) return "password: Ao menos uma letra minuscula deve existir";
+		if (!password.match(/[0-9]/)) return "password: Sua senha deve conter ao menos um numero";
 		if (password.length < 10) return "password: Sua senha deve conter ao menos 10 letras";
 	}
 

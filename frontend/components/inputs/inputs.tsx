@@ -61,7 +61,7 @@ export const PasswordInput = ({ props }: InputsProps) => {
 
 	return (
 		<StyledInput role={name}>
-			<label htmlFor={name} data-name={content}>
+			<label htmlFor={name} data-name={content} role={`label-${name}`}>
 				{content}
 			</label>
 			<input
