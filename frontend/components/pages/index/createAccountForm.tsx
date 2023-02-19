@@ -40,8 +40,8 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 		if (hasErrors) return;
 
 		const user = { email, name, password };
-		const { error } = await queriesUser.createUser(user);
-		if (error) return sendError("email", "Este email já esta sendo usado");
+		const response = await queriesUser.createUser(user);
+		if (response.error) return sendError("email", "Este email já esta sendo usado");
 
 		setValues({});
 		sendNotification(setShowNotification);

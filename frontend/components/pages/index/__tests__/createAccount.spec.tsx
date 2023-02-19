@@ -6,7 +6,13 @@ import { CreateAccountForm } from "../createAccountForm";
 import { queriesUser } from "../../../../services/queries/queriesUser";
 
 vi.mock("../../../../services/queries/queriesUser", () => {
-	return { queriesUser: { createUser: vi.fn() } };
+	return {
+		queriesUser: {
+			createUser() {
+				return { message: "ok" };
+			},
+		},
+	};
 });
 
 describe("Create account form", () => {
@@ -95,7 +101,22 @@ describe("Create account form", () => {
 		});
 	});
 
-	it.todo("inputs values are reset after submit");
+	it.only("inputs values are reset after submit", async () => {
+		await userEvent.type(screen.getByRole("input-email"), "user@email.com");
+		await userEvent.type(screen.getByRole("input-name"), "user");
+		await userEvent.type(screen.getByRole("input-password"), "Password123");
+		await userEvent.type(screen.getByRole("input-confirmPassword"), "Password123");
+
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+		});
+
+		expect(await screen.findByRole("input-email")).toHaveValue("");
+		expect(await screen.findByRole("input-name")).toHaveValue("");
+		expect(await screen.findByRole("input-password")).toHaveValue("");
+		expect(await screen.findByRole("input-confirmPassword")).toHaveValue("");
+	});
+
 	it.todo("show a notification");
 	it.todo("Create a new user");
 });
