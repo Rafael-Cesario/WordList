@@ -6,13 +6,7 @@ import { CreateAccountForm } from "../createAccountForm";
 import { queriesUser } from "../../../../services/queries/queriesUser";
 
 vi.mock("../../../../services/queries/queriesUser", () => {
-	return {
-		queriesUser: {
-			createUser() {
-				return { message: "ok" };
-			},
-		},
-	};
+	return { queriesUser: { createUser: vi.fn() } };
 });
 
 describe("Create account form", () => {
@@ -25,25 +19,35 @@ describe("Create account form", () => {
 	});
 
 	it("Close the form", () => {
-		act(() => fireEvent.click(screen.getByRole("close-form")));
+		act(() => {
+			fireEvent.click(screen.getByRole("close-form"));
+		});
 		expect(changeFormState).toHaveBeenCalledWith("create");
 	});
 
 	it("show and remove error", async () => {
-		act(() => fireEvent.click(screen.getByRole("button", { name: "Criar Conta" })));
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+		});
 		expect(screen.getByRole("label-email").textContent).toBe("Este campo não pode ficar vazio");
 
 		await userEvent.type(screen.getByRole("input-email"), "user@email.com");
-		act(() => fireEvent.click(screen.getByRole("button", { name: "Criar Conta" })));
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+		});
 		expect(screen.getByRole("label-email").textContent).toBe("Email");
 	});
 
 	it("show and hide password", () => {
 		const input = screen.getByRole("input-password") as HTMLInputElement;
 		expect(input.type).toBe("password");
-		act(() => fireEvent.click(screen.getAllByRole("show-password")[0]));
+		act(() => {
+			fireEvent.click(screen.getAllByRole("show-password")[0]);
+		});
 		expect(input.type).toBe("text");
-		act(() => fireEvent.click(screen.getAllByRole("show-password")[0]));
+		act(() => {
+			fireEvent.click(screen.getAllByRole("show-password")[0]);
+		});
 		expect(input.type).toBe("password");
 	});
 
@@ -101,7 +105,9 @@ describe("Create account form", () => {
 		});
 	});
 
-	it.only("inputs values are reset after submit", async () => {
+	it("inputs values are reset after submit", async () => {
+		vi.mocked(queriesUser).createUser.mockReturnValueOnce({ message: "ok" } as unknown as Promise<unknown>);
+
 		await userEvent.type(screen.getByRole("input-email"), "user@email.com");
 		await userEvent.type(screen.getByRole("input-name"), "user");
 		await userEvent.type(screen.getByRole("input-password"), "Password123");
@@ -117,6 +123,35 @@ describe("Create account form", () => {
 		expect(await screen.findByRole("input-confirmPassword")).toHaveValue("");
 	});
 
-	it.todo("show a notification");
-	it.todo("Create a new user");
+	it("show a notification after creating a user", async () => {
+		vi.mocked(queriesUser).createUser.mockReturnValueOnce({ message: "ok" } as unknown as Promise<unknown>);
+
+		await userEvent.type(screen.getByRole("input-email"), "user@email.com");
+		await userEvent.type(screen.getByRole("input-name"), "user");
+		await userEvent.type(screen.getByRole("input-password"), "Password123");
+		await userEvent.type(screen.getByRole("input-confirmPassword"), "Password123");
+
+		act(() => {
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+		});
+
+		expect(await screen.findByRole("message")).toBeInTheDocument();
+		expect(await screen.findByRole("message")).toHaveTextContent("Uma nova conta foi criada");
+	});
+
+	it("Create a new user", async () => {
+		vi.mocked(queriesUser).createUser.mockReturnValueOnce({ message: "ok" } as unknown as Promise<unknown>);
+		const { email, name, password } = { email: "user@email.com", name: "user", password: "Password123" };
+
+		await act(async () => {
+			await userEvent.type(screen.getByRole("input-email"), email);
+			await userEvent.type(screen.getByRole("input-name"), name);
+			await userEvent.type(screen.getByRole("input-password"), password);
+			await userEvent.type(screen.getByRole("input-confirmPassword"), password);
+
+			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
+		});
+
+		expect(queriesUser.createUser).toHaveBeenCalledWith({ email, name, password });
+	});
 });
