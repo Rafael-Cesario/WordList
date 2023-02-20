@@ -56,7 +56,7 @@ export const LoginForm = ({ props }: LoginFormProps) => {
 				<PasswordInput props={{ name: "password", content: "Senha", values, setValues }} />
 			</div>
 
-			<button onClick={() => submit()} className='confirm'>
+			<button role={"login-btn"} onClick={() => submit()} className='confirm'>
 				Login
 			</button>
 		</StyledForm>
