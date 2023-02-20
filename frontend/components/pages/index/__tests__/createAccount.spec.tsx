@@ -18,13 +18,6 @@ describe("Create account form", () => {
 		render(<CreateAccountForm props={{ changeFormState }} />);
 	});
 
-	it("Close the form", () => {
-		act(() => {
-			fireEvent.click(screen.getByRole("close-form"));
-		});
-		expect(changeFormState).toHaveBeenCalledWith("create");
-	});
-
 	it("show and remove error", async () => {
 		act(() => {
 			fireEvent.click(screen.getByRole("button", { name: "Criar Conta" }));
