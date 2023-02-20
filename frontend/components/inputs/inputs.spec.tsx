@@ -1,32 +1,18 @@
-import { describe, test, expect } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, vi } from "vitest";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 
 import { TextInput } from "./inputs";
 
 describe("Inputs component", () => {
-	const content = "Test";
-	const name = "test-input";
-	let values: { [key: string]: string } = {};
+	it("set new values on change", () => {
+		const newValue = "newValue";
+		const name = "test";
 
-	const setValues = (newValues: { [key: string]: string }) => {
-		values = newValues;
-	};
+		const setValues = vi.fn();
+		render(<TextInput props={{ content: "Testing", name, setValues, values: {} }} />);
 
-	test("Text input set new values onChange", () => {
-		render(
-			<TextInput
-				props={{
-					content,
-					name,
-					values,
-					setValues,
-				}}
-			/>
-		);
+		act(() => fireEvent.change(screen.getByRole("input-test"), { target: { value: newValue } }));
 
-		const input = screen.getByPlaceholderText("Test") as HTMLInputElement;
-
-		fireEvent.change(input, { target: { value: "test value" } });
-		expect(values["test-input"]).toBe("test value");
+		expect(setValues).toHaveBeenCalledWith({ [name]: newValue });
 	});
 });
