@@ -42,7 +42,7 @@ export const NewList = () => {
 						}}
 					/>
 
-					<button title={"Create new list"}>Criar nova lista</button>
+					<button role={"create-new-list"}>Criar nova lista</button>
 				</form>
 			)}
 		</StyledNewList>
