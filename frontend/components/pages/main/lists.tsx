@@ -25,7 +25,7 @@ export const Lists = () => {
 		<StyledLists>
 			{lists.map(listName => {
 				return (
-					<button onClick={() => goToList(listName)} key={listName} title={"List"}>
+					<button onClick={() => goToList(listName)} key={listName} role={"list"}>
 						{listName}
 					</button>
 				);
