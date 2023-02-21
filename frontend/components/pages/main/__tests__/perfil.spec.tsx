@@ -1,15 +1,11 @@
-import "@testing-library/jest-dom";
-import { describe, test, expect, vi } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 import { Perfil } from "../perfil";
 
-vi.mock("next/router", () => require("next-router-mock"));
-vi.mock("next/dist/client/router", () => require("next-router-mock"));
-
-describe("Perfil component", () => {
-	test("Show button to logout", () => {
+describe("Perfil", () => {
+	it("open and close perfil menu", async () => {
 		render(<Perfil />);
-		fireEvent.click(screen.getByRole("button", { name: "Perfil" }));
-		expect(screen.getByRole("button", { name: "Sair" })).toBeInTheDocument();
+		act(() => fireEvent.click(screen.getByRole("btn-open-perfil")));
+		expect(await screen.findByRole("perfil-buttons")).not.toBeInTheDocument();
 	});
 });

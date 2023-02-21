@@ -14,10 +14,12 @@ export const Perfil = () => {
 
 	return (
 		<StyledPerfil>
-			<button onClick={() => setShowPerfil(!showPerfil)}>Perfil</button>
+			<button role={"btn-open-perfil"} onClick={() => setShowPerfil(!showPerfil)}>
+				Perfil
+			</button>
 
 			{showPerfil && (
-				<div className='perfil-buttons'>
+				<div role={"perfil-buttons"} className='perfil-buttons'>
 					<button onClick={() => logout()}>Sair</button>
 				</div>
 			)}

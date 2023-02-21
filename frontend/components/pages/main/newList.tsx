@@ -25,13 +25,13 @@ export const NewList = () => {
 
 	return (
 		<StyledNewList>
-			<button title={"Button new list"} onClick={() => setShowNewList(!showNewList)}>
+			<button role={"btn-new-list"} onClick={() => setShowNewList(!showNewList)}>
 				Nova lista
 			</button>
 
 			{showNewList && (
 				<form onSubmit={e => createNewList(e)}>
-					<h1 title={"New list"}>Nova Lista</h1>
+					<h1 role={"new-list-title"}>Nova Lista</h1>
 
 					<TextInput
 						props={{
