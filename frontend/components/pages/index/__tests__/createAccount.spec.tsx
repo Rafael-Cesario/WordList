@@ -147,4 +147,9 @@ describe("Create account form", () => {
 
 		expect(queriesUser.createUser).toHaveBeenCalledWith({ email, name, password });
 	});
+
+	it("focus on the email input when open", () => {
+		const input = screen.getByRole("input-email") as HTMLInputElement;
+		expect(input === document.activeElement).toBe(true);
+	});
 });

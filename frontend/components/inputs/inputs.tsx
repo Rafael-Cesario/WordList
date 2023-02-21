@@ -40,6 +40,7 @@ export const TextInput = ({ props }: InputsProps) => {
 				placeholder={content}
 				id={name}
 				required
+				autoFocus={name === "email" ? true : false}
 			/>
 		</StyledInput>
 	);

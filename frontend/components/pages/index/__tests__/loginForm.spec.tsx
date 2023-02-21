@@ -10,6 +10,7 @@ vi.mock("next/router", () => ({
 	useRouter() {
 		return {
 			query: { listName: "list00" },
+			push: vi.fn(),
 		};
 	},
 }));
@@ -75,5 +76,10 @@ describe("Login form", () => {
 		});
 
 		expect(setItem).toHaveBeenCalledWith(storageName, storageValue);
+	});
+
+	it("focus on the email input when open", () => {
+		const input = screen.getByRole("input-email") as HTMLInputElement;
+		expect(input === document.activeElement).toBe(true);
 	});
 });
