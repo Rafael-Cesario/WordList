@@ -1,7 +1,7 @@
 import { describe, expect, vi } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 
-import { TextInput } from "./inputs";
+import { PasswordInput, TextInput } from "./inputs";
 
 describe("Inputs component", () => {
 	it("set new values on change", () => {
@@ -14,5 +14,19 @@ describe("Inputs component", () => {
 		act(() => fireEvent.change(screen.getByRole("input-test"), { target: { value: newValue } }));
 
 		expect(setValues).toHaveBeenCalledWith({ [name]: newValue });
+	});
+
+	it("show the password", () => {
+		const setValues = vi.fn();
+		render(<PasswordInput props={{ content: "Testing", name: "test", setValues, values: {} }} />);
+
+		const input = screen.getByRole("input-test") as HTMLInputElement;
+		expect(input.type).toBe("password");
+
+		act(() => fireEvent.click(screen.getByRole("show-password")));
+		expect(input.type).toBe("text");
+
+		act(() => fireEvent.click(screen.getByRole("show-password")));
+		expect(input.type).toBe("password");
 	});
 });
