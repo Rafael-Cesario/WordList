@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { Lists } from "../lists";
@@ -22,7 +23,21 @@ describe("Lists", () => {
 		expect(lists.length).toBe(2);
 	});
 
-	it.todo("loading lists");
-	it.todo("error loading lists");
-	it.todo("user has no lists");
+	it("loading lists", () => {
+		vi.mocked(useLists).mockReturnValue({ error: false, isLoading: true, lists: [], mutate: vi.fn() });
+		render(<Lists />);
+		expect(screen.getByRole("loading")).toBeInTheDocument();
+	});
+
+	it("error loading lists", () => {
+		vi.mocked(useLists).mockReturnValue({ error: true, isLoading: false, lists: [], mutate: vi.fn() });
+		render(<Lists />);
+		expect(screen.getByRole("error")).toBeInTheDocument();
+	});
+
+	it("empty lists", () => {
+		vi.mocked(useLists).mockReturnValue({ error: false, isLoading: false, lists: [], mutate: vi.fn() });
+		render(<Lists />);
+		expect(screen.getByRole("empty")).toBeInTheDocument();
+	});
 });
