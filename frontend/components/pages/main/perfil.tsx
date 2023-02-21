@@ -20,7 +20,9 @@ export const Perfil = () => {
 
 			{showPerfil && (
 				<div role={"perfil-buttons"} className='perfil-buttons'>
-					<button onClick={() => logout()}>Sair</button>
+					<button role={"logout-btn"} onClick={() => logout()}>
+						Sair
+					</button>
 				</div>
 			)}
 		</StyledPerfil>
