@@ -39,7 +39,7 @@ export const TextInput = ({ props }: InputsProps) => {
 				value={values[name] || ""}
 				placeholder={content}
 				id={name}
-				required
+				// required
 				autoFocus={name === "email" ? true : false}
 			/>
 		</StyledInput>

@@ -4,6 +4,7 @@ import { StyledNewList } from "./styles/styledNewList";
 import { queriesList } from "../../../services/queries/queriesList";
 import { useLists } from "../../../utils/hooks/useLists";
 import { useLocalData } from "../../../utils/hooks/useLocalData";
+import { sendError } from "../wordList/utils/sendError";
 
 export const NewList = () => {
 	const { mutate } = useLists();
@@ -16,6 +17,8 @@ export const NewList = () => {
 
 		const owner = storage.owner;
 		const listName = values.name;
+
+		if (!listName) return sendError("name", "Escolha um nome para sua lista");
 
 		await queriesList.createList({ owner, listName });
 		mutate();

@@ -29,4 +29,8 @@ export const StyledNewList = styled.div`
 			height: 2rem;
 		}
 	}
+
+	.error {
+		color: crimson;
+	}
 `;

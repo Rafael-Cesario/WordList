@@ -53,4 +53,13 @@ describe("New list", () => {
 			});
 		});
 	});
+
+	it("send error if listName is empty", async () => {
+		vi.useFakeTimers();
+		fireEvent.click(screen.getByRole("btn-new-list"));
+		fireEvent.click(screen.getByRole("create-new-list"));
+		expect(screen.getByRole("label-name")).toHaveTextContent("Escolha um nome para sua lista");
+		vi.runAllTimers();
+		expect(screen.getByRole("label-name")).toHaveTextContent("Nome");
+	});
 });
