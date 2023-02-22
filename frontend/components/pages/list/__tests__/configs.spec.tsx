@@ -17,6 +17,6 @@ describe("Configs", () => {
 
 	it("close configs", () => {
 		fireEvent.click(screen.getByRole("close-configs"));
-		expect(setShowConfigs).toHaveBeenCalledWith(true);
+		expect(setShowConfigs).toHaveBeenCalledWith(false);
 	});
 });
