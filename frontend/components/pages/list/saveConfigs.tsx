@@ -34,5 +34,9 @@ export const SaveConfigs = ({ props: { values, setShowConfigs } }: SaveConfigsPr
 		router.push(newURL);
 	};
 
-	return <button onClick={() => changeListName()}>Salvar configs</button>;
+	return (
+		<button role='save-configs' onClick={() => changeListName()}>
+			Salvar configs
+		</button>
+	);
 };
