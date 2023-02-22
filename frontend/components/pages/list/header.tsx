@@ -40,7 +40,7 @@ export const Header = () => {
 
 			<div className='title'>
 				<h1 role={"listName"}>{listName}</h1>
-				<span role={"wordsCount"}>{totalWords} palavras</span>
+				<span role={"words-count"}>{totalWords} palavras</span>
 			</div>
 
 			<div className='menus'>
