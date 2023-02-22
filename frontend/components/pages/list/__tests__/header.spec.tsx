@@ -3,33 +3,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Header } from "../header";
 
-vi.mock("../../../../utils/hooks/useLocalData", () => ({
-	useLocalData() {
-		return {
-			storage: {
-				listIndex: "0",
-				listName: "List01",
-				listStatus: "next",
-				owner: "user",
-			},
-		};
-	},
-}));
-
-vi.mock("../../../../utils/hooks/useQueriesWordList", () => ({
-	useQueriesWordListSWR() {
-		return {
-			data: {
-				next: [[[]], [[]]],
-				current: [],
-				done: [[[], [], []]],
-			},
-			error: false,
-			isLoading: false,
-			mutate: vi.fn(),
-		};
-	},
-}));
+vi.mock("../../../../utils/hooks/useLocalData");
+vi.mock("../../../../utils/hooks/useQueriesWordList");
 
 describe("Header", () => {
 	beforeEach(() => {

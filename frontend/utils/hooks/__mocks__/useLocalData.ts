@@ -1,3 +1,8 @@
 export const useLocalData = () => ({
-	storage: { listName: "list01", owner: "user" },
+	storage: {
+		listIndex: "0",
+		listName: "List01",
+		listStatus: "next",
+		owner: "user",
+	},
 });
