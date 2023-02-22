@@ -39,7 +39,7 @@ export const Header = () => {
 			<Link href={"/main"}> Voltar </Link>
 
 			<div className='title'>
-				<h1>{listName}</h1>
+				<h1 role={"listName"}>{listName}</h1>
 				<span role={"wordsCount"}>{totalWords} palavras</span>
 			</div>
 
