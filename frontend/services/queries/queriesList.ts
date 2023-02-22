@@ -39,24 +39,6 @@ class QueriesList {
 			return { error: error.message };
 		}
 	}
-
-	async createWordList(wordList: WordListInput) {
-		try {
-			const response = await client.mutate({ mutation: CREATE_WORD_LIST, variables: { wordList } });
-			return response.data.createWordList;
-		} catch (error: any) {
-			return { error: error.message };
-		}
-	}
-
-	async getWordLists(getWordLists: GetWordListsInput) {
-		try {
-			const response = await client.query({ query: GET_WORD_LISTS, variables: { getWordLists } });
-			return response.data.getWordLists;
-		} catch (error: any) {
-			return { error: error.message };
-		}
-	}
 }
 
 export const queriesList = new QueriesList();
