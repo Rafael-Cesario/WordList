@@ -17,5 +17,9 @@ export const CreateWordList = () => {
 		mutate();
 	};
 
-	return <button onClick={() => createWordList()}>Criar Lista</button>;
+	return (
+		<button role='create-new-wordList' onClick={() => createWordList()}>
+			Criar Lista
+		</button>
+	);
 };
