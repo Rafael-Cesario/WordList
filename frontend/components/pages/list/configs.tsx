@@ -7,7 +7,6 @@ import { DeleteList } from "./deleteList";
 interface ConfigsProps {
 	props: {
 		setShowConfigs: (showConfigs: boolean) => void;
-		listName: string;
 	};
 }
 
@@ -17,8 +16,8 @@ export const Configs = ({ props }: ConfigsProps) => {
 
 	return (
 		<StyledConfigs>
-			<h1>Configs</h1>
-			<button className='close' onClick={() => setShowConfigs(false)}>
+			<h1 role='configs-title'>Configs</h1>
+			<button role='close-configs' className='close' onClick={() => setShowConfigs(false)}>
 				x
 			</button>
 

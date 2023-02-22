@@ -1,10 +1,16 @@
 import "@testing-library/jest-dom";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Header } from "../header";
 
 vi.mock("../../../../utils/hooks/useLocalData");
 vi.mock("../../../../utils/hooks/useQueriesWordList");
+
+vi.mock("next/router", () => ({
+	useRouter: () => ({
+		query: { listName: "list01" },
+	}),
+}));
 
 describe("Header", () => {
 	beforeEach(() => {
@@ -17,5 +23,10 @@ describe("Header", () => {
 
 	it("show how many words user has", () => {
 		expect(screen.getByRole("words-count")).toHaveTextContent("5 palavras");
+	});
+
+	it("open and close configs", () => {
+		fireEvent.click(screen.getByRole("open-configs"));
+		expect(screen.getByRole("configs-title")).toBeInTheDocument();
 	});
 });

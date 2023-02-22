@@ -45,10 +45,12 @@ export const Header = () => {
 
 			<div className='menus'>
 				<CreateWordList />
-				<button onClick={() => setShowConfigs(!showConfigs)}>Configs</button>
+				<button role='open-configs' onClick={() => setShowConfigs(!showConfigs)}>
+					Configs
+				</button>
 			</div>
 
-			{showConfigs && <Configs props={{ setShowConfigs, listName }} />}
+			{showConfigs && <Configs props={{ setShowConfigs }} />}
 		</StyledHeader>
 	);
 };
