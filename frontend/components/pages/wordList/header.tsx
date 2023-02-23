@@ -22,7 +22,9 @@ export const Header = () => {
 			<Link className='link' href={`${link}`}>
 				Voltar
 			</Link>
-			<h1 className='title'>{listName}</h1>
+			<h1 role={"title"} className='title'>
+				{listName}
+			</h1>
 
 			<div className='info'>
 				<p>Palavras na lista: {words?.length}</p>
