@@ -41,7 +41,9 @@ export const AddWords = () => {
 			<form onSubmit={e => addNewWord(e)}>
 				<TextInput props={{ content: "Termo", name: "term", values, setValues }} />
 				<TextInput props={{ content: "Definição", name: "definition", values, setValues }} />
-				<button className='btn-add-words'>Adicionar</button>
+				<button role={"btn-add-words"} className='btn-add-words'>
+					Adicionar
+				</button>
 			</form>
 		</StyledAddWords>
 	);
