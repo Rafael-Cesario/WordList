@@ -56,7 +56,9 @@ export const Menu = () => {
 	return (
 		<StyledMenu>
 			<button onClick={() => studyList()}>Estudar lista</button>
-			<button onClick={() => changeWordListStatus()}>Mudar o status da lista</button>
+			<button role={"change-list-status"} onClick={() => changeWordListStatus()}>
+				Mudar o status da lista
+			</button>
 			<DeleteWordList />
 
 			{/* todo */}
