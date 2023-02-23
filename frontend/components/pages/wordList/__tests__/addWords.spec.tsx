@@ -1,7 +1,8 @@
+import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 import { it, describe, vi, beforeEach } from "vitest";
 import { AddWords } from "../addWords";
-import userEvent from "@testing-library/user-event";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { QueriesWords } from "../../../../services/queries/queriesWords";
 
 vi.mock("../../../../utils/hooks/useQueriesWords");
@@ -28,5 +29,14 @@ describe("Add words", () => {
 
 		const isElementOnFocus = document.activeElement === screen.getByRole("input-term");
 		expect(isElementOnFocus).toBe(true);
+	});
+
+	it("check for repeated words", async () => {
+		await userEvent.type(screen.getByRole("input-term"), "WORD");
+		await userEvent.type(screen.getByRole("input-definition"), "word02");
+
+		fireEvent.click(screen.getByRole("btn-add-words"));
+
+		expect(screen.getByRole("label-term")).toHaveTextContent("Esta palavra já foi adicionada");
 	});
 });
