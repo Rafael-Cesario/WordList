@@ -17,6 +17,26 @@ describe("WordList", () => {
 		expect(screen.getByRole("empty-list")).toBeInTheDocument();
 	});
 
+	it("show words", () => {
+		const list = [
+			["word01", "word02"],
+			["word01", "word02"],
+		];
+
+		render(
+			<WordList
+				props={{
+					index: 0,
+					status: "next",
+					list,
+				}}
+			/>
+		);
+
+		const wordList = screen.getByRole("wordList") as HTMLDivElement;
+		expect(wordList.childNodes.length).toBe(2);
+	});
+
 	it("set a new item on localStorage when user go to a list", () => {
 		const setItem = vi.spyOn(Storage.prototype, "setItem");
 		render(<WordList props={{ index: 0, list: [[]], status: "next" }} />);
