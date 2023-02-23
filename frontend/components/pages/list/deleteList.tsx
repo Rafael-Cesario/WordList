@@ -24,13 +24,17 @@ export const DeleteList = () => {
 
 	return (
 		<StyledDeleteList>
-			<button onClick={() => setShowConfirmButton(!showConfirmButton)}>Deletar lista</button>
+			<button role='delete-list' onClick={() => setShowConfirmButton(!showConfirmButton)}>
+				Deletar lista
+			</button>
 
 			{showConfirmButton && (
 				<div className='confirm'>
 					<h1>Deletar lista {listName} ?</h1>
 					<div className='choices'>
-						<button onClick={() => deleteList()}>Sim</button>
+						<button role='confirm-delete-list' onClick={() => deleteList()}>
+							Sim
+						</button>
 						<button onClick={() => setShowConfirmButton(false)}>Não</button>
 					</div>
 				</div>
