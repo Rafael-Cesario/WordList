@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { TypeListStatus } from "../../../interfaces/interfaceWordList";
@@ -33,10 +34,12 @@ export const DeleteWordList = () => {
 	}, [confirm]);
 
 	return confirm ? (
-		<button className='delete' onClick={() => deleteWordList()} onBlur={() => setConfirm(false)}>
+		<button role={"delete-btn-confirm"} className='delete' onClick={() => deleteWordList()} onBlur={() => setConfirm(false)}>
 			Clique novamente para excluir, clique em outra area da tela para cancelar
 		</button>
 	) : (
-		confirm || <button onClick={() => setConfirm(true)}>Excluir Lista</button>
+		<button role={"delete-btn"} onClick={() => setConfirm(true)}>
+			Excluir Lista
+		</button>
 	);
 };
