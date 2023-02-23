@@ -29,7 +29,7 @@ export const WordList = ({ props: { index, list, status } }: PropsWordList) => {
 	};
 
 	return (
-		<StyledWordList className='list' key={status + index} onClick={() => goToWordList(status, String(index))}>
+		<StyledWordList role={"wordList"} className='list' key={status + index} onClick={() => goToWordList(status, String(index))}>
 			{list.map(([term, definition], index) => {
 				return (
 					<div key={index} className='words'>

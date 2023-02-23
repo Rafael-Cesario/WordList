@@ -26,7 +26,7 @@ export const EmptyWordList = ({ props: { index, status } }: PropsEmptyWordList) 
 
 	return (
 		<StyledEmptyWordList className='list' onClick={() => goToWordList(status, String(index))}>
-			<p>Lista vazia</p>
+			<p role={"empty-list"}>Lista vazia</p>
 		</StyledEmptyWordList>
 	);
 };
