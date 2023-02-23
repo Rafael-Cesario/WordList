@@ -1,14 +1,21 @@
 import "@testing-library/jest-dom";
 import { Header } from "../header";
-import { describe, vi } from "vitest";
+import { beforeEach, describe, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 vi.mock("../../../../utils/hooks/useLocalData");
 vi.mock("../../../../utils/hooks/useQueriesWords");
 
 describe("Header", () => {
-	it("show list name in the header", () => {
+	beforeEach(() => {
 		render(<Header />);
+	});
+
+	it("show list name in the header", () => {
 		expect(screen.getByRole("title")).toHaveTextContent("List01");
+	});
+
+	it("show how many words user has", () => {
+		expect(screen.getByRole("user-words")).toHaveTextContent(/4/);
 	});
 });
