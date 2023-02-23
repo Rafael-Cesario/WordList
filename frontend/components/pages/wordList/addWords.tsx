@@ -17,6 +17,9 @@ export const AddWords = () => {
 	const addNewWord = async (e: FormEvent) => {
 		e.preventDefault();
 
+		if (!values.term) return sendError("term", "Este campo não pode ficar vazio");
+		if (!values.definition) return sendError("definition", "Este campo não pode ficar vazio");
+
 		const hasWord = findWord(words, values.term);
 		if (hasWord) return sendError("term", "Esta palavra já foi adicionada");
 
