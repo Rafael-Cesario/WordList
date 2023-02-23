@@ -28,7 +28,7 @@ export const Header = () => {
 
 			<div className='info'>
 				<p role={"user-words"}>Palavras na lista: {words?.length}</p>
-				<p>Estudar lista: {status[listStatus]}</p>
+				<p role={"list-status"}>Estudar lista: {status[listStatus]}</p>
 			</div>
 		</StyledHeader>
 	);

@@ -18,4 +18,8 @@ describe("Header", () => {
 	it("show how many words user has", () => {
 		expect(screen.getByRole("user-words")).toHaveTextContent(/4/);
 	});
+
+	it("show the list status", () => {
+		expect(screen.getByRole("list-status")).toHaveTextContent(/Próximas/);
+	});
 });
