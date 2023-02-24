@@ -12,7 +12,7 @@ export const EndList = ({ props: { words } }: PropsEndList) => {
 
 	return (
 		<StyledEndList>
-			<h1>Fim</h1>
+			<h1 role='end-list'>Fim</h1>
 			<button onClick={() => router.reload()}>Estudar lista novamente</button>
 
 			<div className='words'>
