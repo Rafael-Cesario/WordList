@@ -16,7 +16,7 @@ describe("Create wordList", () => {
 		fireEvent.click(screen.getByRole("create-new-wordList"));
 		const queriesWordList = new QueriesWordList();
 		expect(queriesWordList.createWordList).toHaveBeenCalledWith({
-			listName: "list01",
+			listName: "List01",
 			owner: "user",
 		});
 	});

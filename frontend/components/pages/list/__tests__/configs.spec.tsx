@@ -8,6 +8,9 @@ vi.mock("next/router", () => ({
 	}),
 }));
 
+vi.mock("../../../../utils/hooks/useLocalData");
+vi.mock("../../../../utils/hooks/useQueriesWordList");
+
 describe("Configs", () => {
 	const setShowConfigs = vi.fn();
 

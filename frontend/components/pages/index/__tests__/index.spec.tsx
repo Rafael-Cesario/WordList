@@ -9,6 +9,10 @@ vi.mock("next/router", () => ({
 	},
 }));
 
+vi.mock("../../../../services/cookies", () => ({
+	getCookies: () => false,
+}));
+
 describe("Index Page", () => {
 	beforeEach(() => {
 		cleanup();
