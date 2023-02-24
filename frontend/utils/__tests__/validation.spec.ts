@@ -34,7 +34,10 @@ describe("Validation", () => {
 		const lowercaseLetter = validations.password("PASSWORD");
 		expect(lowercaseLetter).toBe("password: Ao menos uma letra minuscula deve existir");
 
-		const shortPassword = validations.password("Password");
+		const atLeastOneNumber = validations.password("Password");
+		expect(atLeastOneNumber).toBe("password: Sua senha deve conter ao menos um numero");
+
+		const shortPassword = validations.password("Pass123");
 		expect(shortPassword).toBe("password: Sua senha deve conter ao menos 10 letras");
 	});
 
