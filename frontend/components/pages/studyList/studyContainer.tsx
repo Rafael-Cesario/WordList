@@ -26,7 +26,6 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 		const answer = document.querySelector("#answer") as HTMLTitleElement;
 		answer.classList.toggle("hide");
 
-		console.log({ answer: answer.textContent, value });
 		const isAnswerRight = answer.textContent === value ? "right" : "wrong";
 		answer.classList.toggle(isAnswerRight);
 		setAnswerState(isAnswerRight);
@@ -65,27 +64,33 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 	return (
 		<StyledStudyContainer>
 			<div className='question'>
-				<h1>{studyWords[wordIndex][0]}</h1>
-				<h1 id='answer' className='hide'>
+				<h1 role='question'>{studyWords[wordIndex][0]}</h1>
+				<h1 role='answer' id='answer' className='hide'>
 					{studyWords[wordIndex][1]}
 				</h1>
 			</div>
 
 			<form onSubmit={e => showAnswer(e)}>
-				<input value={value} onChange={e => setValue(e.target.value)} className='answer' type='text' placeholder='Resposta' />
+				<input
+					role={"input-answer"}
+					value={value}
+					onChange={e => setValue(e.target.value)}
+					className='answer'
+					type='text'
+					placeholder='Resposta'
+				/>
 
 				<div className='buttons'>
+					<button role={"confirm"}>Confirmar</button>
 					{answerState === "wrong" && (
-						<button type='button' onClick={() => nextQuestion(true)}>
+						<button role={"force-right"} type='button' onClick={() => nextQuestion(true)}>
 							Marcar como correta
 						</button>
 					)}
-					<button>Confirmar</button>
-					<button type='button'>Não sei</button>
 				</div>
 			</form>
 
-			<h2 className='words-left'>
+			<h2 className='words-left' role={"words-left"}>
 				{studyWords.length} {studyWords.length > 1 ? "palavras" : "palavra"} para o fim da lista
 			</h2>
 		</StyledStudyContainer>
