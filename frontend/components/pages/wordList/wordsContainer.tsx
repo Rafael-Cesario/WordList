@@ -41,6 +41,7 @@ export const WordsContainer = () => {
 							onChange={e => setValues({ ...values, term: e.target.value })}
 							onFocus={e => showOptions(e.target, term, index)}
 							onBlur={() => hideOptions(index)}
+							role={`input-${term}`}
 						/>
 
 						<input

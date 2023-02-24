@@ -1,5 +1,5 @@
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import { afterEach, beforeEach, describe, vi } from "vitest";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { afterEach, describe, vi } from "vitest";
 import { useQueriesWordsSWR } from "../../../../utils/hooks/useQueriesWords";
 import { WordsContainer } from "../wordsContainer";
 
@@ -66,5 +66,26 @@ describe("Words container", () => {
 
 		render(<WordsContainer />);
 		expect(screen.getByRole("para").textContent).toBe("Suas palavras aparecerão aqui");
+	});
+
+	it("show options", async () => {
+		vi.mocked(useQueriesWordsSWR).mockReturnValue({
+			words: [
+				["word", "word"],
+				["word01", "word01"],
+			],
+			isLoading: false,
+			error: false,
+			mutate: vi.fn(),
+		});
+
+		render(<WordsContainer />);
+
+		fireEvent.focus(screen.getByRole("input-word"));
+
+		await waitFor(async () => {
+			const options = await screen.findAllByRole("options");
+			expect(options.length).toBe(1);
+		});
 	});
 });

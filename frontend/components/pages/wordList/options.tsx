@@ -48,7 +48,7 @@ export const Options = ({ props: { index, values } }: OptionsProps) => {
 	};
 
 	return (
-		<StyledOptions>
+		<StyledOptions role={"options"}>
 			<button onClick={() => renameWords()}>Salvar</button>
 			<button onClick={() => removeWords()}>Excluir</button>
 		</StyledOptions>
