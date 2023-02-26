@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import { QueriesWordList } from "../../../../services/queries/queriesWordList";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, vi } from "vitest";

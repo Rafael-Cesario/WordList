@@ -1,4 +1,3 @@
-import "@testing-library/jest-dom";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { TypeListStatus } from "../../../interfaces/interfaceWordList";

@@ -6,8 +6,8 @@ export default defineConfig({
 
 	test: {
 		reporters: "verbose",
-		watch: false,
 		environment: "jsdom",
+		watch: false,
 		globals: true,
 		css: false,
 	},
