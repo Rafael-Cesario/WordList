@@ -8,6 +8,8 @@ export const StyledNewList = styled.div`
 		padding: 1rem;
 		margin: 1rem 0;
 		z-index: 2;
+		width: 70vw;
+		max-width: 500px;
 
 		display: flex;
 		flex-direction: column;
@@ -19,7 +21,17 @@ export const StyledNewList = styled.div`
 		}
 
 		.name {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 			margin: 2rem 0;
+			width: 100%;
+
+			@media (max-width: 600px) {
+				input {
+					width: 80%;
+				}
+			}
 		}
 
 		button {

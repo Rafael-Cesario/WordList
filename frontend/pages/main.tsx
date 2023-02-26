@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Lists } from "../components/pages/main/lists";
 import { NewList } from "../components/pages/main/newList";
 import { Perfil } from "../components/pages/main/perfil";
-import { StyledMain } from "../styles/styledMain";
+import { StyledMain } from "../components/pages/main/styles/styledMain";
 
 const Main = () => {
 	return (

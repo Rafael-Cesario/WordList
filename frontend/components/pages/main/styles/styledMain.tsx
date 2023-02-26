@@ -10,6 +10,11 @@ export const StyledMain = styled.div`
 		.buttons {
 			display: flex;
 			flex-wrap: wrap;
+
+			@media (max-width: 600px) {
+				flex-direction: column;
+				align-items: end;
+			}
 		}
 
 		button,
