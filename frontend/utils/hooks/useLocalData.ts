@@ -17,5 +17,5 @@ export const useLocalData = () => {
 		setStorage({ ...data });
 	}, []);
 
-	return { storage };
+	return { storage, setStorage };
 };

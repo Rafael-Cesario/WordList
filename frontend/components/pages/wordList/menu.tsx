@@ -13,9 +13,9 @@ export const Menu = () => {
 	const queriesWordList = new QueriesWordList();
 
 	const { words } = useQueriesWordsSWR();
-	const { data: wordLists } = useQueriesWordListSWR();
+	const { mutate } = useQueriesWordListSWR();
 
-	const { storage } = useLocalData();
+	const { storage, setStorage } = useLocalData();
 	const { owner, listIndex, listName, listStatus } = storage;
 
 	const link = convertListName(listName);
@@ -37,8 +37,9 @@ export const Menu = () => {
 		const wordListStatusNew = status[listStatus];
 		const wordListStatusOld = listStatus as TypeListStatus;
 
-		const newStorage = JSON.stringify({ owner, listIndex, listName, listStatus: wordListStatusNew });
-		localStorage.setItem("wordList", newStorage);
+		const newStorage = { owner, listIndex, listName, listStatus: wordListStatusNew };
+		localStorage.setItem("wordList", JSON.stringify(newStorage));
+		setStorage(newStorage);
 
 		await queriesWordList.changeWordListStatus({
 			listName,
@@ -48,9 +49,9 @@ export const Menu = () => {
 			wordListStatusNew,
 		});
 
-		const newIndex = wordLists[wordListStatusNew].length;
-		const newRoute = `/${link}/${wordListStatusNew}-${newIndex}`;
-		router.push(newRoute);
+		mutate();
+
+		router.reload();
 	};
 
 	return (

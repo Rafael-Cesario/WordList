@@ -10,6 +10,12 @@ vi.mock("../../../../utils/hooks/useLocalData");
 
 vi.mock("next/router", () => ({
 	useRouter: () => ({
+		reload: vi.fn(),
+	}),
+}));
+
+vi.mock("next/router", () => ({
+	useRouter: () => ({
 		query: { listName: "list01" },
 		push: vi.fn(),
 	}),

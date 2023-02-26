@@ -8,8 +8,7 @@ export const Header = () => {
 	const { words } = useQueriesWordsSWR();
 
 	const { storage } = useLocalData();
-	const { listName, listStatus } = storage;
-	const link = convertListName(listName);
+	const link = convertListName(storage.listName);
 
 	const status: { [key: string]: string } = {
 		next: "Próximas",
@@ -23,12 +22,12 @@ export const Header = () => {
 				Voltar
 			</Link>
 			<h1 role={"title"} className='title'>
-				{listName}
+				{storage.listName}
 			</h1>
 
 			<div className='info'>
 				<p role={"user-words"}>Palavras na lista: {words?.length}</p>
-				<p role={"list-status"}>Estudar lista: {status[listStatus]}</p>
+				<p role={"list-status"}>Estudar lista: {status[storage.listStatus]}</p>
 			</div>
 		</StyledHeader>
 	);

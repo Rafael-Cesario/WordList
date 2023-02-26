@@ -5,13 +5,12 @@ import { StyledWordsContainer } from "./styles/styledWordsContainer";
 
 export const WordsContainer = () => {
 	const { words, error, isLoading } = useQueriesWordsSWR();
+	const [options, setOptions] = useState({ show: false, index: 0 });
+	const [values, setValues] = useState({ term: "", definition: "" });
 
 	if (isLoading) return <Paragraph text='Carregando suas palavras' />;
 	if (error) return <Paragraph text='Um erro ocorreu, tente recarregar a página' />;
 	if (!words?.length) return <Paragraph text='Suas palavras aparecerão aqui' />;
-
-	const [options, setOptions] = useState({ show: false, index: 0 });
-	const [values, setValues] = useState({ term: "", definition: "" });
 
 	const showOptions = (input: HTMLInputElement, value: string, index: number) => {
 		input.value = value;
