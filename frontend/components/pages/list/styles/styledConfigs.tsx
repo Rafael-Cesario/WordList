@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 export const StyledConfigs = styled.div`
+	width: 50vw;
+	height: 50vh;
 	position: absolute;
-	padding: 1rem;
-	border-radius: 2px;
 	top: 50%;
 	left: 50%;
-	z-index: 1;
 	transform: translate(-50%, -50%);
+	z-index: 1;
+
+	padding: 5rem;
+	border-radius: 2px;
 	background-color: #151515;
 	box-shadow: 5px 5px 5px #10101020;
 
@@ -17,10 +20,13 @@ export const StyledConfigs = styled.div`
 
 	h1 {
 		font-size: 1.1rem;
+		margin-bottom: 2rem;
 	}
 
 	.close,
 	.options button {
+		height: auto;
+
 		:hover {
 			color: #00aaff;
 		}
@@ -28,8 +34,9 @@ export const StyledConfigs = styled.div`
 
 	.close {
 		position: absolute;
+		padding: 2rem 2rem;
 		right: 0;
-		padding: 0 2rem;
+		top: 0;
 	}
 
 	.options {
@@ -37,5 +44,23 @@ export const StyledConfigs = styled.div`
 		flex-wrap: wrap;
 		justify-content: space-between;
 		width: 80%;
+		max-width: 20rem;
+		margin-top: 2rem;
+	}
+
+	@media (max-width: 450px) {
+		.options {
+			flex-direction: column;
+
+			button {
+				margin: 1rem 0;
+			}
+		}
+
+		.listName {
+			input {
+				width: 50vw;
+			}
+		}
 	}
 `;

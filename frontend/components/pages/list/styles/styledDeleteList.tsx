@@ -7,12 +7,10 @@ export const StyledDeleteList = styled.div`
 
 	.confirm {
 		position: absolute;
-		background-color: #aa0020;
-		font-weight: bold;
-		border-radius: 2px;
-		padding: 1rem;
-		margin-top: 3rem;
-		width: 50%;
+		background-color: #bd3737;
+		border-radius: 0.2rem;
+		box-shadow: 2px 2px 2px #00000020;
+		padding: 2rem;
 
 		h1 {
 			text-align: center;
