@@ -14,6 +14,11 @@ export const StyledEmptyWordList = styled.div`
 	overflow: hidden;
 	cursor: pointer;
 
+	@media (max-width: 1000px) {
+		width: 10rem;
+		height: 15rem;
+	}
+
 	p {
 		background-color: #202020;
 		padding: 0.5rem 1rem;

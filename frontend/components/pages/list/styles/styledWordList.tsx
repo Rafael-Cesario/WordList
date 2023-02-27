@@ -13,6 +13,11 @@ export const StyledWordList = styled.div`
 	overflow: hidden;
 	cursor: pointer;
 
+	@media (max-width: 1000px) {
+		width: 10rem;
+		height: 15rem;
+	}
+
 	:hover {
 		transform: scale(1.05);
 	}

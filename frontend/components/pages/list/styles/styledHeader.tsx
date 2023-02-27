@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const StyledHeader = styled.div`
 	margin: 2rem;
 	display: grid;
-	align-items: start;
 	grid-template-columns: repeat(3, 1fr);
 
-	@media (max-width: 600px) {
+	@media (max-width: 800px) {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
