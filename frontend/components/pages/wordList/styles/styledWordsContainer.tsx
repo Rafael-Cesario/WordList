@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledWordsContainer = styled.div`
 	background-color: #151515;

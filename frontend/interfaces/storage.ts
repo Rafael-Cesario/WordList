@@ -1,4 +1,4 @@
-import { TypeListStatus } from "./interfaceWordList";
+import { TypeListStatus } from './interfaceWordList';
 
 export interface IStorage {
 	owner: string;

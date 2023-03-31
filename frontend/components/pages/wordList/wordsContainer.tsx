@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
-import { Options } from "./options";
-import { StyledWordsContainer } from "./styles/styledWordsContainer";
+import { useState } from 'react';
+import { useQueriesWordsSWR } from '../../../utils/hooks/useQueriesWords';
+import { Options } from './options';
+import { StyledWordsContainer } from './styles/styledWordsContainer';
 
 export const WordsContainer = () => {
 	const { words, error, isLoading } = useQueriesWordsSWR();
 	const [options, setOptions] = useState({ show: false, index: 0 });
-	const [values, setValues] = useState({ term: "", definition: "" });
+	const [values, setValues] = useState({ term: '', definition: '' });
 
 	if (isLoading) return <Paragraph text='Carregando suas palavras' />;
 	if (error) return <Paragraph text='Um erro ocorreu, tente recarregar a página' />;
@@ -27,7 +27,7 @@ export const WordsContainer = () => {
 	};
 
 	return (
-		<StyledWordsContainer role={"words-container"} className='words'>
+		<StyledWordsContainer role={'words-container'} className='words'>
 			{words.map(([term, definition], index) => {
 				return (
 					<div key={`${term}-${index}`} className='word'>
@@ -61,7 +61,7 @@ export const WordsContainer = () => {
 const Paragraph = ({ text }: { text: string }) => {
 	return (
 		<StyledWordsContainer>
-			<p role={"para"}>{text}</p>
+			<p role={'para'}>{text}</p>
 		</StyledWordsContainer>
 	);
 };

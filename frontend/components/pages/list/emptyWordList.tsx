@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import { convertListName } from "../../../utils/convertListName";
-import { useLocalData } from "../../../utils/hooks/useLocalData";
-import { StyledEmptyWordList } from "./styles/styledEmptyWordList";
+import { useRouter } from 'next/router';
+import { convertListName } from '../../../utils/convertListName';
+import { useLocalData } from '../../../utils/hooks/useLocalData';
+import { StyledEmptyWordList } from './styles/styledEmptyWordList';
 
 interface PropsEmptyWordList {
 	props: {
@@ -16,7 +16,7 @@ export const EmptyWordList = ({ props: { index, status } }: PropsEmptyWordList) 
 
 	const goToWordList = (listStatus: string, listIndex: string) => {
 		const newStorage = JSON.stringify({ ...storage, listStatus, listIndex });
-		localStorage.setItem("wordList", newStorage);
+		localStorage.setItem('wordList', newStorage);
 
 		const linkListName = convertListName(storage.listName);
 
@@ -26,7 +26,7 @@ export const EmptyWordList = ({ props: { index, status } }: PropsEmptyWordList) 
 
 	return (
 		<StyledEmptyWordList className='list' onClick={() => goToWordList(status, String(index))}>
-			<p role={"empty-list"}>Lista vazia</p>
+			<p role={'empty-list'}>Lista vazia</p>
 		</StyledEmptyWordList>
 	);
 };

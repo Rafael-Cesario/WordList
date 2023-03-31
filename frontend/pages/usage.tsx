@@ -1,5 +1,5 @@
-import Head from "next/head";
-import Link from "next/link";
+import Head from 'next/head';
+import Link from 'next/link';
 
 const Usage = () => {
 	return (
@@ -10,7 +10,7 @@ const Usage = () => {
 
 			<h1>Dicas de uso</h1>
 			<p>...</p>
-			<Link href={"/main"}>Voltar</Link>
+			<Link href={'/main'}>Voltar</Link>
 		</div>
 	);
 };

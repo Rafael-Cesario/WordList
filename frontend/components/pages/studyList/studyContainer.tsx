@@ -1,6 +1,6 @@
-import produce from "immer";
-import { FormEvent, useEffect, useState } from "react";
-import { StyledStudyContainer } from "./styles/styledStudyContainer";
+import produce from 'immer';
+import { FormEvent, useEffect, useState } from 'react';
+import { StyledStudyContainer } from './styles/styledStudyContainer';
 
 interface PropsStudyContaienr {
 	props: {
@@ -12,8 +12,8 @@ interface PropsStudyContaienr {
 export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyContaienr) => {
 	const [studyWords, setStudyWords] = useState(words);
 	const [wordIndex, setWordIndex] = useState(0);
-	const [value, setValue] = useState("");
-	const [answerState, setAnswerState] = useState("");
+	const [value, setValue] = useState('');
+	const [answerState, setAnswerState] = useState('');
 
 	useEffect(() => {
 		setStudyWords(words);
@@ -23,10 +23,10 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 		e.preventDefault();
 		if (answerState) return nextQuestion();
 
-		const answer = document.querySelector("#answer") as HTMLTitleElement;
-		answer.classList.toggle("hide");
+		const answer = document.querySelector('#answer') as HTMLTitleElement;
+		answer.classList.toggle('hide');
 
-		const isAnswerRight = answer.textContent === value ? "right" : "wrong";
+		const isAnswerRight = answer.textContent === value ? 'right' : 'wrong';
 		answer.classList.toggle(isAnswerRight);
 		setAnswerState(isAnswerRight);
 	};
@@ -34,13 +34,13 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 	const nextQuestion = (makeRight?: boolean) => {
 		if (!answerState) return;
 
-		const answer = document.querySelector("#answer") as HTMLTitleElement;
-		answer.classList.toggle("hide");
+		const answer = document.querySelector('#answer') as HTMLTitleElement;
+		answer.classList.toggle('hide');
 
-		const isAnswerRight = answer.textContent === value ? "right" : "wrong";
+		const isAnswerRight = answer.textContent === value ? 'right' : 'wrong';
 		answer.classList.toggle(isAnswerRight);
 
-		if (answerState === "right" || makeRight) {
+		if (answerState === 'right' || makeRight) {
 			const newWords = produce(studyWords, draft => {
 				draft.splice(wordIndex, 1);
 			});
@@ -48,17 +48,17 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 			if (!newWords.length) return setHaveListEnd(true);
 			if (newWords.length - 1 > wordIndex) setWordIndex(0);
 
-			setValue("");
+			setValue('');
 			setStudyWords(newWords);
-			setAnswerState("");
+			setAnswerState('');
 			return;
 		}
 
 		if (wordIndex === 10 || wordIndex === studyWords.length - 1 || studyWords.length === 1) setWordIndex(0);
 		else setWordIndex(wordIndex + 1);
 
-		setAnswerState("");
-		setValue("");
+		setAnswerState('');
+		setValue('');
 	};
 
 	return (
@@ -72,7 +72,7 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 
 			<form onSubmit={e => showAnswer(e)}>
 				<input
-					role={"input-answer"}
+					role={'input-answer'}
 					value={value}
 					onChange={e => setValue(e.target.value)}
 					className='answer'
@@ -81,17 +81,17 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 				/>
 
 				<div className='buttons'>
-					<button role={"confirm"}>Confirmar</button>
-					{answerState === "wrong" && (
-						<button role={"force-right"} type='button' onClick={() => nextQuestion(true)}>
+					<button role={'confirm'}>Confirmar</button>
+					{answerState === 'wrong' && (
+						<button role={'force-right'} type='button' onClick={() => nextQuestion(true)}>
 							Marcar como correta
 						</button>
 					)}
 				</div>
 			</form>
 
-			<h2 className='words-left' role={"words-left"}>
-				{studyWords.length} {studyWords.length > 1 ? "palavras" : "palavra"} para o fim da lista
+			<h2 className='words-left' role={'words-left'}>
+				{studyWords.length} {studyWords.length > 1 ? 'palavras' : 'palavra'} para o fim da lista
 			</h2>
 		</StyledStudyContainer>
 	);

@@ -1,4 +1,4 @@
-import { StyledWordListContainer } from "./styles/styledWordListContainer";
+import { StyledWordListContainer } from './styles/styledWordListContainer';
 
 interface PropsEmptyList {
 	props: {

@@ -1,4 +1,4 @@
-export type TypeListStatus = "next" | "current" | "done";
+export type TypeListStatus = 'next' | 'current' | 'done';
 
 export interface IGetWordLists {
 	owner: string;
@@ -13,16 +13,16 @@ export interface ICreateWordList {
 export interface IDeleteWordList {
 	owner: string;
 	listName: string;
-	wordListStatus: "next" | "current" | "done";
-	wordListIndex: number;
+	wordListStatus: 'next' | 'current' | 'done';
+	wordListIndex: string;
 }
 
 export interface IChangeWordListStatus {
 	owner: string;
 	listName: string;
-	wordListIndex: number;
-	wordListStatusOld: "next" | "current" | "done";
-	wordListStatusNew: "next" | "current" | "done";
+	wordListIndex: string;
+	wordListStatusOld: 'next' | 'current' | 'done';
+	wordListStatusNew: 'next' | 'current' | 'done';
 }
 
 export type WordListType = {

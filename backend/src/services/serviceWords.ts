@@ -9,7 +9,7 @@ export class WordsService {
 		const list = await this.wordListRepository.getList({ listName, owner });
 		if (!list) throw new GraphQLError('List not found');
 
-		list.wordLists[status][listIndex].push([term, definition]);
+		list.wordLists[status][Number(listIndex)].push([term, definition]);
 		await this.wordListRepository.saveList({ owner, listName, list });
 
 		return { message: 'New word added' };
@@ -19,7 +19,7 @@ export class WordsService {
 		const list = await this.wordListRepository.getList({ listName, owner });
 		if (!list) throw new GraphQLError('List not found');
 
-		const words = list.wordLists[status][listIndex];
+		const words = list.wordLists[status][Number(listIndex)];
 
 		return { words };
 	}
@@ -28,7 +28,7 @@ export class WordsService {
 		const list = await this.wordListRepository.getList({ listName, owner });
 		if (!list) throw new GraphQLError('List not found');
 
-		list.wordLists[listStatus][listIndex][wordIndex] = newWords;
+		list.wordLists[listStatus][Number(listIndex)][Number(wordIndex)] = newWords;
 		await this.wordListRepository.saveList({ owner, listName, list });
 
 		return { message: 'Words updated' };
@@ -38,7 +38,7 @@ export class WordsService {
 		const list = await this.wordListRepository.getList({ listName, owner });
 		if (!list) throw new GraphQLError('List not found');
 
-		list.wordLists[status][listIndex].splice(wordIndex, 1);
+		list.wordLists[status][Number(listIndex)].splice(Number(wordIndex), 1);
 		await this.wordListRepository.saveList({ owner, listName, list });
 
 		return { message: 'Term and definition removed' };

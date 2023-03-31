@@ -1,12 +1,12 @@
-import cookie from "cookie";
-import { NextApiRequest, NextApiResponse } from "next";
+import cookie from 'cookie';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const cookies = (req: NextApiRequest, res: NextApiResponse) => {
 	const method = req.method;
 
-	method === "GET" && getCookie(req, res);
-	method === "POST" && setCookie(req, res);
-	method === "DELETE" && deleteCookie(req, res);
+	method === 'GET' && getCookie(req, res);
+	method === 'POST' && setCookie(req, res);
+	method === 'DELETE' && deleteCookie(req, res);
 };
 
 const getCookie = (req: NextApiRequest, res: NextApiResponse) => {
@@ -17,31 +17,31 @@ const getCookie = (req: NextApiRequest, res: NextApiResponse) => {
 
 const setCookie = (req: NextApiRequest, res: NextApiResponse) => {
 	res.setHeader(
-		"Set-Cookie",
+		'Set-Cookie',
 		cookie.serialize(req.body.name, req.body.value, {
 			httpOnly: true,
-			secure: process.env.NODE_ENV !== "development",
+			secure: process.env.NODE_ENV !== 'development',
 			maxAge: 60 * 60 * 24 * 7, // 1 week
-			sameSite: "strict",
-			path: "/",
+			sameSite: 'strict',
+			path: '/',
 		})
 	);
 
-	res.status(200).json({ message: "Cookie set" });
+	res.status(200).json({ message: 'Cookie set' });
 };
 
 const deleteCookie = (req: NextApiRequest, res: NextApiResponse) => {
 	res.setHeader(
-		"Set-Cookie",
-		cookie.serialize(req.query.name as string, "", {
+		'Set-Cookie',
+		cookie.serialize(req.query.name as string, '', {
 			httpOnly: true,
-			secure: process.env.NODE_ENV !== "development",
+			secure: process.env.NODE_ENV !== 'development',
 			maxAge: 1, // 1 second
-			sameSite: "strict",
-			path: "/",
+			sameSite: 'strict',
+			path: '/',
 		})
 	);
-	res.status(200).json({ message: "Cookie deleted" });
+	res.status(200).json({ message: 'Cookie deleted' });
 };
 
 export default cookies;

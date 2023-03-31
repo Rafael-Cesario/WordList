@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { queriesUser } from "../../../services/queries/queriesUser";
-import { sendNotification } from "../../../utils/sendNotification";
-import { validations } from "../../../utils/validations";
-import { verifyErrors } from "../../../utils/verifyErrors";
-import { PasswordInput, TextInput } from "../../inputs/inputs";
-import { sendError } from "../wordList/utils/sendError";
-import { StyledForm } from "./styles/styledForm";
-import { Title } from "./title";
+import { useState } from 'react';
+import { queriesUser } from '../../../services/queries/queriesUser';
+import { sendNotification } from '../../../utils/sendNotification';
+import { validations } from '../../../utils/validations';
+import { verifyErrors } from '../../../utils/verifyErrors';
+import { PasswordInput, TextInput } from '../../inputs/inputs';
+import { sendError } from '../wordList/utils/sendError';
+import { StyledForm } from './styles/styledForm';
+import { Title } from './title';
 
 interface CreateAccountProps {
 	props: {
@@ -41,7 +41,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 
 		const user = { email, name, password };
 		const response = await queriesUser.createUser(user);
-		if (response.error) return sendError("email", "Este email já esta sendo usado");
+		if (response.error) return sendError('email', 'Este email já esta sendo usado');
 
 		setValues({});
 		sendNotification(setShowNotification);
@@ -49,13 +49,13 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 
 	return (
 		<StyledForm>
-			<Title props={{ title: "Criar conta", changeFormState, formName: "create" }} />
+			<Title props={{ title: 'Criar conta', changeFormState, formName: 'create' }} />
 
 			<div className='inputs'>
-				<TextInput props={{ name: "email", content: "Email", values, setValues }} />
-				<TextInput props={{ name: "name", content: "Nome", values, setValues }} />
-				<PasswordInput props={{ name: "password", content: "Senha", values, setValues }} />
-				<PasswordInput props={{ name: "confirmPassword", content: "Confirme sua senha", values, setValues }} />
+				<TextInput props={{ name: 'email', content: 'Email', values, setValues }} />
+				<TextInput props={{ name: 'name', content: 'Nome', values, setValues }} />
+				<PasswordInput props={{ name: 'password', content: 'Senha', values, setValues }} />
+				<PasswordInput props={{ name: 'confirmPassword', content: 'Confirme sua senha', values, setValues }} />
 			</div>
 
 			<button onClick={() => submit()} className='confirm'>
@@ -63,7 +63,7 @@ export const CreateAccountForm = ({ props }: CreateAccountProps) => {
 			</button>
 
 			{showNotification && (
-				<h1 className='notification' role={"message"}>
+				<h1 className='notification' role={'message'}>
 					Uma nova conta foi criada
 				</h1>
 			)}

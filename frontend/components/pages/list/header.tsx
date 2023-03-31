@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Configs } from "./configs";
-import { CreateWordList } from "./createWordList";
-import { StyledHeader } from "./styles/styledHeader";
-import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
-import { useLocalData } from "../../../utils/hooks/useLocalData";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Configs } from './configs';
+import { CreateWordList } from './createWordList';
+import { StyledHeader } from './styles/styledHeader';
+import { useQueriesWordListSWR } from '../../../utils/hooks/useQueriesWordList';
+import { useLocalData } from '../../../utils/hooks/useLocalData';
 
 export const Header = () => {
 	const { storage } = useLocalData();
@@ -18,7 +18,7 @@ export const Header = () => {
 	const getTotalWords = () => {
 		if (!wordLists) return;
 
-		const keys = Object.keys(wordLists) as ("next" | "current" | "done")[];
+		const keys = Object.keys(wordLists) as ('next' | 'current' | 'done')[];
 		let count = 0;
 
 		keys.forEach(key => {
@@ -36,11 +36,11 @@ export const Header = () => {
 
 	return (
 		<StyledHeader>
-			<Link href={"/main"}> Voltar </Link>
+			<Link href={'/main'}> Voltar </Link>
 
 			<div className='title'>
-				<h1 role={"listName"}>{listName}</h1>
-				<span role={"words-count"}>{totalWords} palavras</span>
+				<h1 role={'listName'}>{listName}</h1>
+				<span role={'words-count'}>{totalWords} palavras</span>
 			</div>
 
 			<div className='menus'>

@@ -1,6 +1,6 @@
-import { PageHead } from "../components/head/head";
-import Link from "next/link";
-import { StyledAbout } from "../styles/styledAbout";
+import { PageHead } from '../components/head/head';
+import Link from 'next/link';
+import { StyledAbout } from '../styles/styledAbout';
 
 const Usage = () => {
 	return (
@@ -10,7 +10,7 @@ const Usage = () => {
 			<StyledAbout>
 				<header>
 					<h1>WordList</h1>
-					<Link href={"/main"}>Voltar</Link>
+					<Link href={'/main'}>Voltar</Link>
 				</header>
 
 				<main>
@@ -26,7 +26,7 @@ const Usage = () => {
 						qualquer outra categoria que você gostaria de criar.
 					</p>
 					<span>Boas vindas ao WordList</span>
-					<Link href={"http://github.com/rafael-cesario/wordlist"} target='_blank'>
+					<Link href={'http://github.com/rafael-cesario/wordlist'} target='_blank'>
 						Visite a página no Github
 					</Link>
 				</main>

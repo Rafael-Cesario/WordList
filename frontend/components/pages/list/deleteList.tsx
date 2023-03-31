@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { queriesList } from "../../../services/queries/queriesList";
-import { useLocalData } from "../../../utils/hooks/useLocalData";
-import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
-import { StyledDeleteList } from "./styles/styledDeleteList";
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { queriesList } from '../../../services/queries/queriesList';
+import { useLocalData } from '../../../utils/hooks/useLocalData';
+import { useQueriesWordListSWR } from '../../../utils/hooks/useQueriesWordList';
+import { StyledDeleteList } from './styles/styledDeleteList';
 
 export const DeleteList = () => {
 	const router = useRouter();
@@ -19,7 +19,7 @@ export const DeleteList = () => {
 		// todo > handle if error
 		await queriesList.deleteList({ owner, listName });
 		mutate();
-		router.push("/main");
+		router.push('/main');
 	};
 
 	return (

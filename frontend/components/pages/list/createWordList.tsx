@@ -1,6 +1,6 @@
-import { QueriesWordList } from "../../../services/queries/queriesWordList";
-import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
-import { useLocalData } from "../../../utils/hooks/useLocalData";
+import { QueriesWordList } from '../../../services/queries/queriesWordList';
+import { useQueriesWordListSWR } from '../../../utils/hooks/useQueriesWordList';
+import { useLocalData } from '../../../utils/hooks/useLocalData';
 
 export const CreateWordList = () => {
 	const { mutate } = useQueriesWordListSWR();

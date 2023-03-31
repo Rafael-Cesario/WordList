@@ -1,7 +1,7 @@
-import produce from "immer";
-import Image from "next/image";
-import { useState } from "react";
-import { StyledInput } from "./styledInput";
+import produce from 'immer';
+import Image from 'next/image';
+import { useState } from 'react';
+import { StyledInput } from './styledInput';
 
 type Values = { [key: string]: string };
 
@@ -36,11 +36,11 @@ export const TextInput = ({ props }: InputsProps) => {
 				role={`input-${name}`}
 				onChange={e => changeValue(e.target)}
 				type='text'
-				value={values[name] || ""}
+				value={values[name] || ''}
 				placeholder={content}
 				id={name}
 				// required
-				autoFocus={name === "email" ? true : false}
+				autoFocus={name === 'email' ? true : false}
 			/>
 		</StyledInput>
 	);
@@ -67,14 +67,14 @@ export const PasswordInput = ({ props }: InputsProps) => {
 			</label>
 			<input
 				onChange={e => changeValue(e.target)}
-				type={showPassword ? "text" : "password"}
-				value={values[name] || ""}
+				type={showPassword ? 'text' : 'password'}
+				value={values[name] || ''}
 				placeholder={content}
 				id={name}
 				role={`input-${name}`}
 				required
 			/>
-			<button role={"show-password"} className='icon' onClick={() => setShowPassword(!showPassword)}>
+			<button role={'show-password'} className='icon' onClick={() => setShowPassword(!showPassword)}>
 				{showPassword && <Image src='/icons/eyeOpen.png' width={20} height={20} alt='icon png' />}
 				{showPassword || <Image src='/icons/eyeClose.png' width={20} height={20} alt='icon png' />}
 			</button>

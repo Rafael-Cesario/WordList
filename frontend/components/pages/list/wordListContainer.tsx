@@ -1,6 +1,6 @@
-import { Emptylist } from "./emptyList";
-import { StyledWordListContainer } from "./styles/styledWordListContainer";
-import { WordList } from "./wordList";
+import { Emptylist } from './emptyList';
+import { StyledWordListContainer } from './styles/styledWordListContainer';
+import { WordList } from './wordList';
 
 interface ListContainerProps {
 	props: {

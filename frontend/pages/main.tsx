@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import Head from "next/head";
-import Link from "next/link";
-import { Lists } from "../components/pages/main/lists";
-import { NewList } from "../components/pages/main/newList";
-import { Perfil } from "../components/pages/main/perfil";
-import { StyledMain } from "../components/pages/main/styles/styledMain";
+import Head from 'next/head';
+import Link from 'next/link';
+import { Lists } from '../components/pages/main/lists';
+import { NewList } from '../components/pages/main/newList';
+import { Perfil } from '../components/pages/main/perfil';
+import { StyledMain } from '../components/pages/main/styles/styledMain';
 
 const Main = () => {
 	return (
@@ -20,8 +20,8 @@ const Main = () => {
 					<div className='buttons'>
 						<Perfil />
 
-						<Link href={"/about"}>Sobre</Link>
-						<Link href={"/usage"}>Dicas de uso</Link>
+						<Link href={'/about'}>Sobre</Link>
+						<Link href={'/usage'}>Dicas de uso</Link>
 					</div>
 				</header>
 

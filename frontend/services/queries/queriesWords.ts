@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { IAddWords, IGetWords, IRemoveWords, IRenameWords } from "../../interfaces/interfaceWords";
-import { client } from "../client";
-import { QueriesTypeWords } from "./types/queriesTypeWords";
+import { IAddWords, IGetWords, IRemoveWords, IRenameWords } from '../../interfaces/interfaceWords';
+import { client } from '../client';
+import { QueriesTypeWords } from './types/queriesTypeWords';
 
 const queriesTypeWords = new QueriesTypeWords();
 

@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import { StyledEndList } from "./styles/styledEndList";
+import { useRouter } from 'next/router';
+import { StyledEndList } from './styles/styledEndList';
 
 interface PropsEndList {
 	props: {

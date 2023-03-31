@@ -1,11 +1,11 @@
-import { PageHead } from "../../components/head/head";
-import { Header } from "../../components/pages/list/header";
-import { ListContainer } from "../../components/pages/list/listContainer";
+import { PageHead } from '../../components/head/head';
+import { Header } from '../../components/pages/list/header';
+import { ListContainer } from '../../components/pages/list/listContainer';
 
 const ListPage = () => {
 	return (
 		<>
-			<PageHead title={"WordList"} />
+			<PageHead title={'WordList'} />
 			<Header />
 			<ListContainer />
 		</>

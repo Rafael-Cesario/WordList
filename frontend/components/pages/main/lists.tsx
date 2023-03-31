@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
-import { convertListName } from "../../../utils/convertListName";
-import { useLists } from "../../../utils/hooks/useLists";
-import { useLocalData } from "../../../utils/hooks/useLocalData";
-import { StyledLists } from "./styles/styledLists";
+import { useRouter } from 'next/router';
+import { convertListName } from '../../../utils/convertListName';
+import { useLists } from '../../../utils/hooks/useLists';
+import { useLocalData } from '../../../utils/hooks/useLocalData';
+import { StyledLists } from './styles/styledLists';
 
 export const Lists = () => {
 	const router = useRouter();
@@ -17,7 +17,7 @@ export const Lists = () => {
 		const newData = { ...storage, listName };
 		const link = convertListName(listName);
 
-		localStorage.setItem("wordList", JSON.stringify(newData));
+		localStorage.setItem('wordList', JSON.stringify(newData));
 		router.push(link);
 	};
 
@@ -25,7 +25,7 @@ export const Lists = () => {
 		<StyledLists>
 			{lists.map(listName => {
 				return (
-					<button onClick={() => goToList(listName)} key={listName} role={"list"}>
+					<button onClick={() => goToList(listName)} key={listName} role={'list'}>
 						{listName}
 					</button>
 				);

@@ -1,65 +1,65 @@
-import "@testing-library/jest-dom";
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { NewList } from "../newList";
-import { queriesList } from "../../../../services/queries/queriesList";
-import userEvent from "@testing-library/user-event";
+import '@testing-library/jest-dom';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { NewList } from '../newList';
+import { queriesList } from '../../../../services/queries/queriesList';
+import userEvent from '@testing-library/user-event';
 
-vi.mock("../../../../services/queries/queriesList", () => ({
+vi.mock('../../../../services/queries/queriesList', () => ({
 	queriesList: { createList: vi.fn() },
 }));
 
-vi.mock("../../../../utils/hooks/useLocalData", () => ({
+vi.mock('../../../../utils/hooks/useLocalData', () => ({
 	useLocalData() {
 		return {
 			storage: {
-				owner: "user",
+				owner: 'user',
 			},
 		};
 	},
 }));
 
-vi.mock("../../../../utils/hooks/useLists", () => ({
+vi.mock('../../../../utils/hooks/useLists', () => ({
 	useLists: () => {
 		return { mutate: vi.fn() };
 	},
 }));
 
-describe("New list", () => {
+describe('New list', () => {
 	beforeEach(() => {
 		cleanup();
 		render(<NewList />);
 	});
 
-	it("open and close new list form", async () => {
-		act(() => fireEvent.click(screen.getByRole("btn-new-list")));
-		expect(await screen.findByRole("new-list-title")).toBeInTheDocument();
-		act(() => fireEvent.click(screen.getByRole("btn-new-list")));
-		expect(screen.queryByRole("new-list-title")).not.toBeInTheDocument();
+	it('open and close new list form', async () => {
+		act(() => fireEvent.click(screen.getByRole('btn-new-list')));
+		expect(await screen.findByRole('new-list-title')).toBeInTheDocument();
+		act(() => fireEvent.click(screen.getByRole('btn-new-list')));
+		expect(screen.queryByRole('new-list-title')).not.toBeInTheDocument();
 	});
 
-	it("create a new list", async () => {
-		const listName = "my new list";
+	it('create a new list', async () => {
+		const listName = 'my new list';
 
-		act(() => fireEvent.click(screen.getByRole("btn-new-list")));
-		await userEvent.type(screen.getByRole("input-name"), listName);
-		act(() => fireEvent.click(screen.getByRole("create-new-list")));
+		act(() => fireEvent.click(screen.getByRole('btn-new-list')));
+		await userEvent.type(screen.getByRole('input-name'), listName);
+		act(() => fireEvent.click(screen.getByRole('create-new-list')));
 
 		await waitFor(() => {
-			expect(screen.getByRole("input-name")).toHaveValue("");
+			expect(screen.getByRole('input-name')).toHaveValue('');
 			expect(vi.mocked(queriesList).createList).toHaveBeenCalledWith({
 				listName,
-				owner: "user",
+				owner: 'user',
 			});
 		});
 	});
 
-	it("send error if listName is empty", async () => {
+	it('send error if listName is empty', async () => {
 		vi.useFakeTimers();
-		fireEvent.click(screen.getByRole("btn-new-list"));
-		fireEvent.click(screen.getByRole("create-new-list"));
-		expect(screen.getByRole("label-name")).toHaveTextContent("Escolha um nome para sua lista");
+		fireEvent.click(screen.getByRole('btn-new-list'));
+		fireEvent.click(screen.getByRole('create-new-list'));
+		expect(screen.getByRole('label-name')).toHaveTextContent('Escolha um nome para sua lista');
 		vi.runAllTimers();
-		expect(screen.getByRole("label-name")).toHaveTextContent("Nome");
+		expect(screen.getByRole('label-name')).toHaveTextContent('Nome');
 	});
 });

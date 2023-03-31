@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import { ChangesInput } from "../../../interfaces/interfaceList";
-import { queriesList } from "../../../services/queries/queriesList";
-import { useLocalData } from "../../../utils/hooks/useLocalData";
+import { useRouter } from 'next/router';
+import { ChangesInput } from '../../../interfaces/interfaceList';
+import { queriesList } from '../../../services/queries/queriesList';
+import { useLocalData } from '../../../utils/hooks/useLocalData';
 
 interface SaveConfigsProps {
 	props: {
@@ -17,7 +17,7 @@ export const SaveConfigs = ({ props: { values, setShowConfigs } }: SaveConfigsPr
 
 	const changeListName = async () => {
 		// todo > create a util function
-		const newURL = "/" + values.listName.replace(/-/g, "_").replace(/ /g, "-");
+		const newURL = '/' + values.listName.replace(/-/g, '_').replace(/ /g, '-');
 
 		const changes: ChangesInput = {
 			owner,
@@ -28,7 +28,7 @@ export const SaveConfigs = ({ props: { values, setShowConfigs } }: SaveConfigsPr
 		await queriesList.changeListName(changes);
 
 		const newStorage = JSON.stringify({ ...storage, listName: values.listName });
-		localStorage.setItem("wordList", newStorage);
+		localStorage.setItem('wordList', newStorage);
 
 		setShowConfigs(false);
 		router.push(newURL);

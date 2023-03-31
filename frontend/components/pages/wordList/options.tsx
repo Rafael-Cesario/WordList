@@ -1,7 +1,7 @@
-import { QueriesWords } from "../../../services/queries/queriesWords";
-import { useLocalData } from "../../../utils/hooks/useLocalData";
-import { useQueriesWordsSWR } from "../../../utils/hooks/useQueriesWords";
-import { StyledOptions } from "./styles/styledOptions";
+import { QueriesWords } from '../../../services/queries/queriesWords';
+import { useLocalData } from '../../../utils/hooks/useLocalData';
+import { useQueriesWordsSWR } from '../../../utils/hooks/useQueriesWords';
+import { StyledOptions } from './styles/styledOptions';
 
 interface OptionsProps {
 	props: {
@@ -48,7 +48,7 @@ export const Options = ({ props: { index, values } }: OptionsProps) => {
 	};
 
 	return (
-		<StyledOptions role={"options"}>
+		<StyledOptions role={'options'}>
 			<button onClick={() => renameWords()}>Salvar</button>
 			<button onClick={() => removeWords()}>Excluir</button>
 		</StyledOptions>

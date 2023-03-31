@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IChangeWordListStatus, ICreateWordList, IDeleteWordList, IGetWordLists } from "../../interfaces/interfaceWordList";
-import { client } from "../client";
-import { QueriesTypeWordList } from "./types/queriesTypeWordList";
+import { IChangeWordListStatus, ICreateWordList, IDeleteWordList, IGetWordLists } from '../../interfaces/interfaceWordList';
+import { client } from '../client';
+import { QueriesTypeWordList } from './types/queriesTypeWordList';
 
 const queriesTypeWordList = new QueriesTypeWordList();
 

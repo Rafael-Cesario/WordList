@@ -1,6 +1,6 @@
-import { WordListContainer } from "./wordListContainer";
-import { StyledListContainer as StyledListContainer } from "./styles/styledListContainer";
-import { useQueriesWordListSWR } from "../../../utils/hooks/useQueriesWordList";
+import { WordListContainer } from './wordListContainer';
+import { StyledListContainer as StyledListContainer } from './styles/styledListContainer';
+import { useQueriesWordListSWR } from '../../../utils/hooks/useQueriesWordList';
 
 export const ListContainer = () => {
 	const { data: wordLists, error, isLoading } = useQueriesWordListSWR();
@@ -13,9 +13,9 @@ export const ListContainer = () => {
 	return (
 		<StyledListContainer>
 			<div className='wordLists'>
-				<WordListContainer props={{ status: ["Próximas", "next"], lists: next }} />
-				<WordListContainer props={{ status: ["Estudando", "current"], lists: current }} />
-				<WordListContainer props={{ status: ["Finalizadas", "done"], lists: done }} />
+				<WordListContainer props={{ status: ['Próximas', 'next'], lists: next }} />
+				<WordListContainer props={{ status: ['Estudando', 'current'], lists: current }} />
+				<WordListContainer props={{ status: ['Finalizadas', 'done'], lists: done }} />
 			</div>
 		</StyledListContainer>
 	);

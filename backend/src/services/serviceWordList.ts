@@ -37,7 +37,7 @@ export class ServiceWordList {
 		if (!getList) throw new GraphQLError('List not found');
 
 		const wordLists = getList.wordLists[wordListStatus];
-		wordLists.splice(wordListIndex, 1);
+		wordLists.splice(Number(wordListIndex), 1);
 
 		await this.listRepository.updateOne(getList, { wordLists: getList.wordLists });
 		return { message: 'WordList deleted' };
@@ -50,7 +50,7 @@ export class ServiceWordList {
 		if (!getList) throw new GraphQLError('List not found');
 
 		const wordList = getList.wordLists[wordListStatusOld];
-		const words = wordList.splice(wordListIndex, 1);
+		const words = wordList.splice(Number(wordListIndex), 1);
 		getList.wordLists[wordListStatusNew].push(...words);
 
 		await this.listRepository.updateOne(getList, { wordLists: getList.wordLists });
