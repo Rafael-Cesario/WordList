@@ -28,13 +28,13 @@ export const typeDefsWordList = `#graphql
 		owner: String!
 		listName: String!
 		wordListStatus: String!
-		wordListIndex: Int!
+		wordListIndex: String!
 	}
 
 	input IChangeWordListStatus {
 		owner: String!
 		listName: String!
-		wordListIndex: Int!
+		wordListIndex: String!
 		wordListStatusOld: String! 
 		wordListStatusNew: String! 
 	}
