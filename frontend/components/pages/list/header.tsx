@@ -7,8 +7,7 @@ import { useQueriesWordListSWR } from '../../../utils/hooks/useQueriesWordList';
 import { useLocalData } from '../../../utils/hooks/useLocalData';
 
 export const Header = () => {
-	const { storage } = useLocalData();
-	const { listName } = storage;
+	const { storage, setStorage } = useLocalData();
 
 	const [showConfigs, setShowConfigs] = useState(false);
 	const [totalWords, setTotalWords] = useState(0);
@@ -21,7 +20,7 @@ export const Header = () => {
 		const keys = Object.keys(wordLists) as ('next' | 'current' | 'done')[];
 		let count = 0;
 
-		keys.forEach(key => {
+		keys.forEach((key) => {
 			wordLists[key].forEach((list: string[]) => {
 				count += list.length;
 			});
@@ -38,19 +37,19 @@ export const Header = () => {
 		<StyledHeader>
 			<Link href={'/main'}> Voltar </Link>
 
-			<div className='title'>
-				<h1 role={'listName'}>{listName}</h1>
+			<div className="title">
+				<h1 role={'listName'}>{storage.listName}</h1>
 				<span role={'words-count'}>{totalWords} palavras</span>
 			</div>
 
-			<div className='menus'>
+			<div className="menus">
 				<CreateWordList />
-				<button role='open-configs' onClick={() => setShowConfigs(!showConfigs)}>
+				<button role="open-configs" onClick={() => setShowConfigs(!showConfigs)}>
 					Configs
 				</button>
 			</div>
 
-			{showConfigs && <Configs props={{ setShowConfigs }} />}
+			{showConfigs && <Configs props={{ setShowConfigs, storage, setStorage }} />}
 		</StyledHeader>
 	);
 };
