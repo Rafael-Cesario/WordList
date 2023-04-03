@@ -39,6 +39,7 @@ export const StyledHeader = styled.div`
 
 		h1 {
 			font-size: 1.1rem;
+			text-transform: capitalize;
 		}
 
 		span {
