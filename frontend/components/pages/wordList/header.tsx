@@ -18,14 +18,14 @@ export const Header = () => {
 
 	return (
 		<StyledHeader>
-			<Link className='link' href={`${link}`}>
+			<Link className="link" href={`/${link}`}>
 				Voltar
 			</Link>
-			<h1 role={'title'} className='title'>
+			<h1 role={'title'} className="title">
 				{storage.listName}
 			</h1>
 
-			<div className='info'>
+			<div className="info">
 				<p role={'user-words'}>Palavras na lista: {words?.length}</p>
 				<p role={'list-status'}>Estudar lista: {status[storage.listStatus]}</p>
 			</div>

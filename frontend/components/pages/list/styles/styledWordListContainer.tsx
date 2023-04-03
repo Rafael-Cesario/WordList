@@ -7,6 +7,7 @@ export const StyledWordListContainer = styled.div`
 	background-color: #151515;
 	margin: 5rem 2rem;
 	padding: 2rem;
+	width: 80vw;
 
 	h1 {
 		font-size: 1.2rem;

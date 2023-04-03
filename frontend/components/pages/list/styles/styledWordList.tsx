@@ -6,9 +6,9 @@ export const StyledWordList = styled.div`
 	margin: 1rem;
 	background-color: #005090;
 	width: 15rem;
-	height: 21rem;
+	height: 20rem;
 	border-radius: 2px;
-	padding: 1rem;
+	padding: 0.5rem;
 	transition: 0.3s;
 	overflow: hidden;
 	cursor: pointer;
@@ -23,12 +23,13 @@ export const StyledWordList = styled.div`
 	}
 
 	.words {
-		display: flex;
-		margin: 0.5rem 0;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		column-gap: 0.5rem;
 
 		.term,
 		.definition {
-			width: 50%;
+			margin: 0.2rem 0;
 			background-color: #20202090;
 			border-radius: 2px;
 			padding: 0.5rem;
@@ -36,10 +37,7 @@ export const StyledWordList = styled.div`
 			overflow: hidden;
 			white-space: nowrap;
 			text-transform: capitalize;
-		}
-
-		.term {
-			margin-right: 1rem;
+			font-size: 0.8rem;
 		}
 	}
 `;

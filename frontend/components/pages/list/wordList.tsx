@@ -24,7 +24,7 @@ export const WordList = ({ props: { index, list, status } }: PropsWordList) => {
 
 		const linkListName = convertListName(storage.listName);
 
-		const url = `${linkListName}/wordList`;
+		const url = `/${linkListName}/wordList`;
 		router.push(url);
 	};
 
