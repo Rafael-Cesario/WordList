@@ -19,6 +19,11 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 		setStudyWords(words);
 	}, [words]);
 
+	const checkAnswer = (userAnswer: string, answer: string) => {
+		if (userAnswer.trim().toLowerCase() === answer.trim().toLowerCase()) return 'right';
+		return 'wrong';
+	};
+
 	const showAnswer = (e: FormEvent) => {
 		e.preventDefault();
 		if (answerState) return nextQuestion();
@@ -26,7 +31,7 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 		const answer = document.querySelector('#answer') as HTMLTitleElement;
 		answer.classList.toggle('hide');
 
-		const isAnswerRight = answer.textContent === value ? 'right' : 'wrong';
+		const isAnswerRight = checkAnswer(value, answer.textContent as string);
 		answer.classList.toggle(isAnswerRight);
 		setAnswerState(isAnswerRight);
 	};
@@ -37,11 +42,11 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 		const answer = document.querySelector('#answer') as HTMLTitleElement;
 		answer.classList.toggle('hide');
 
-		const isAnswerRight = answer.textContent === value ? 'right' : 'wrong';
+		const isAnswerRight = checkAnswer(value, answer.textContent as string);
 		answer.classList.toggle(isAnswerRight);
 
 		if (answerState === 'right' || makeRight) {
-			const newWords = produce(studyWords, draft => {
+			const newWords = produce(studyWords, (draft) => {
 				draft.splice(wordIndex, 1);
 			});
 
@@ -63,34 +68,27 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 
 	return (
 		<StyledStudyContainer>
-			<div className='question'>
-				<h1 role='question'>{studyWords[wordIndex][0]}</h1>
-				<h1 role='answer' id='answer' className='hide'>
+			<div className="question">
+				<h1 role="question">{studyWords[wordIndex][0]}</h1>
+				<h1 role="answer" id="answer" className="hide">
 					{studyWords[wordIndex][1]}
 				</h1>
 			</div>
 
-			<form onSubmit={e => showAnswer(e)}>
-				<input
-					role={'input-answer'}
-					value={value}
-					onChange={e => setValue(e.target.value)}
-					className='answer'
-					type='text'
-					placeholder='Resposta'
-				/>
+			<form onSubmit={(e) => showAnswer(e)}>
+				<input role={'input-answer'} value={value} onChange={(e) => setValue(e.target.value)} className="answer" type="text" placeholder="Resposta" />
 
-				<div className='buttons'>
+				<div className="buttons">
 					<button role={'confirm'}>Confirmar</button>
 					{answerState === 'wrong' && (
-						<button role={'force-right'} type='button' onClick={() => nextQuestion(true)}>
+						<button role={'force-right'} type="button" onClick={() => nextQuestion(true)}>
 							Marcar como correta
 						</button>
 					)}
 				</div>
 			</form>
 
-			<h2 className='words-left' role={'words-left'}>
+			<h2 className="words-left" role={'words-left'}>
 				{studyWords.length} {studyWords.length > 1 ? 'palavras' : 'palavra'} para o fim da lista
 			</h2>
 		</StyledStudyContainer>
