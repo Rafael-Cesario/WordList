@@ -18,7 +18,7 @@ export const WordListContainer = ({ props: { status, lists } }: ListContainerPro
 		<StyledWordListContainer>
 			<h1>{statusBR}</h1>
 
-			<div className='lists'>
+			<div className="lists">
 				{lists.map((list, index) => (
 					<WordList key={`${list[0]}-${index}`} props={{ index, list, status: statusEN }} />
 				))}

@@ -29,12 +29,12 @@ export const WordList = ({ props: { index, list, status } }: PropsWordList) => {
 	};
 
 	return (
-		<StyledWordList role={'wordList'} className='list' key={status + index} onClick={() => goToWordList(status, String(index))}>
+		<StyledWordList role={'wordList'} className="list" key={status + index} onClick={() => goToWordList(status, String(index))}>
 			{list.map(([term, definition], index) => {
 				return (
-					<div key={index} className='words'>
-						<p className='term'>{term}</p>
-						<p className='definition'>{definition}</p>
+					<div key={index} className="words">
+						<p className="term">{term}</p>
+						<p className="definition">{definition}</p>
 					</div>
 				);
 			})}

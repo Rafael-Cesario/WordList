@@ -50,8 +50,12 @@ export const StudyContainer = ({ props: { setHaveListEnd, words } }: PropsStudyC
 				draft.splice(wordIndex, 1);
 			});
 
-			if (!newWords.length) return setHaveListEnd(true);
-			if (newWords.length - 1 > wordIndex) setWordIndex(0);
+			const hasWords = newWords.length;
+			if (!hasWords) return setHaveListEnd(true);
+
+			const studyListSize = newWords.length - 1;
+			const maxRange = studyListSize < wordIndex;
+			if (maxRange) setWordIndex(0);
 
 			setValue('');
 			setStudyWords(newWords);

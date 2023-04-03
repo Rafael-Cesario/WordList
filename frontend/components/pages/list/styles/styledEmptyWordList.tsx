@@ -7,9 +7,9 @@ export const StyledEmptyWordList = styled.div`
 	margin: 1rem;
 	background-color: #005090;
 	width: 15rem;
-	height: 21rem;
+	height: 20rem;
 	border-radius: 2px;
-	padding: 1rem;
+	padding: 0.5rem;
 	transition: 0.3s;
 	overflow: hidden;
 	cursor: pointer;
