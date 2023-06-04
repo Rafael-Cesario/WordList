@@ -7,7 +7,7 @@
 	"author": "Rafael",
 	"license": "MIT",
 	"scripts": {
-		"dev": "tsx src/app.ts"
+		"dev": "tsx watch src/app.ts"
 	},
 	"devDependencies": {
 		"@types/node": "^20.2.5",
@@ -17,6 +17,7 @@
 	"dependencies": {
 		"@apollo/server": "^4.7.1",
 		"@graphql-tools/schema": "^10.0.0",
-		"graphql": "^16.6.0"
+		"graphql": "^16.6.0",
+		"graphql-tag": "^2.12.6"
 	}
 }

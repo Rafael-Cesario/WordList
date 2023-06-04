@@ -1,4 +1,6 @@
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import { typeUser } from "./typedefs/user";
+import { resolverUser } from "./resolvers/user";
 
 const typeDefs = `#graphql
   type Query {
@@ -13,6 +15,6 @@ const resolvers = {
 };
 
 export const schema = makeExecutableSchema({
-	typeDefs: [typeDefs],
-	resolvers: [resolvers],
+	typeDefs: [typeDefs, typeUser],
+	resolvers: [resolvers, resolverUser],
 });
