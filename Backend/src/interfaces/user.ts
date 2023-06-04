@@ -1,3 +1,8 @@
+export interface IUser {
+	email: string;
+	password: string;
+}
+
 export interface ICreateUser {
 	createUser: {
 		email: string;
@@ -7,4 +12,8 @@ export interface ICreateUser {
 
 export interface RCreateUser {
 	message: string;
+}
+
+export interface IOneUser {
+	email: string;
 }
