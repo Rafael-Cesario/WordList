@@ -6,13 +6,17 @@
 	"keywords": [],
 	"author": "Rafael",
 	"license": "MIT",
+
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "tsx src/app.ts"
 	},
+
 	"devDependencies": {
 		"@types/node": "^20.2.5",
+		"tsx": "^3.12.7",
 		"typescript": "^5.1.3"
 	},
+
 	"dependencies": {
 		"@apollo/server": "^4.7.1",
 		"graphql": "^16.6.0"
