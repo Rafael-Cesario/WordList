@@ -7,7 +7,7 @@
 	"author": "Rafael",
 	"license": "MIT",
 	"scripts": {
-		"dev": "tsx watch src/app.ts"
+		"dev": "set NODE_ENV=development&& tsx watch src/app.ts"
 	},
 	"devDependencies": {
 		"@types/node": "^20.2.5",
@@ -17,7 +17,10 @@
 	"dependencies": {
 		"@apollo/server": "^4.7.1",
 		"@graphql-tools/schema": "^10.0.0",
+		"@typegoose/typegoose": "^11.2.0",
+		"dotenv": "^16.1.4",
 		"graphql": "^16.6.0",
-		"graphql-tag": "^2.12.6"
+		"graphql-tag": "^2.12.6",
+		"mongoose": "^7.2.2"
 	}
 }

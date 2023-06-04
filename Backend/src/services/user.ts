@@ -1,4 +1,4 @@
-import { ICreateUser, RCreateUser } from "../schemas/interfaces/user";
+import { ICreateUser, RCreateUser } from "../interfaces/user";
 
 export class ServiceUser {
 	createUser(createUser: ICreateUser): RCreateUser {
