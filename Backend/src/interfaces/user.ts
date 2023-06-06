@@ -14,6 +14,11 @@ export interface RCreateUser {
 	message: string;
 }
 
-export interface IOneUser {
+export interface IFindOneUser {
 	email: string;
+}
+
+export interface RFindOneUser {
+	user?: IUser;
+	message?: string;
 }

@@ -6,6 +6,11 @@ export const typeUser = gql`
 		password: String!
 	}
 
+	type RFindOneUser {
+		user: TUser
+		message: String
+	}
+
 	type RCreateUser {
 		message: String!
 	}
@@ -16,7 +21,7 @@ export const typeUser = gql`
 	}
 
 	type Query {
-		findOneUser(email: String): TUser
+		findOneUser(email: String): RFindOneUser!
 	}
 
 	type Mutation {

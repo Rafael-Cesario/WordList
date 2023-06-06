@@ -1,13 +1,15 @@
-import { ICreateUser, IOneUser, IUser, RCreateUser } from "../interfaces/user";
+import { GraphQLError } from "graphql";
+import { ICreateUser, IFindOneUser, RCreateUser, RFindOneUser } from "../interfaces/user";
+import { UserModel } from "../models/user";
 
 export class ServiceUser {
-	findOneUser({ email }: IOneUser): IUser {
-		console.log({ email });
+	async findOneUser({ email }: IFindOneUser): Promise<RFindOneUser> {
+		if (!email) throw new GraphQLError("Email was not provided");
 
-		return {
-			email: "",
-			password: "",
-		};
+		const user = await UserModel.findOne({ email });
+		if (!user) return { message: "User not found" };
+
+		return { user: { email: user.email, password: "" } };
 	}
 
 	createUser(createUser: ICreateUser): RCreateUser {
