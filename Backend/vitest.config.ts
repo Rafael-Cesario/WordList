@@ -7,6 +7,6 @@ export default defineConfig({
 		watch: false,
 		globals: true,
 		singleThread: true,
-		silent: true,
+		// silent: true,
 	},
 });

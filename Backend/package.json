@@ -7,7 +7,8 @@
 	"author": "Rafael",
 	"license": "MIT",
 	"scripts": {
-		"dev": "set NODE_ENV=development&& tsx watch src/app.ts"
+		"dev": "set NODE_ENV=development&& tsx watch src/app.ts",
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.0",
@@ -26,6 +27,7 @@
 		"graphql": "^16.6.0",
 		"graphql-tag": "^2.12.6",
 		"mongoose": "^7.2.2",
-		"nodemailer": "^6.9.3"
+		"nodemailer": "^6.9.3",
+		"supertest-graphql": "^1.1.4"
 	}
 }

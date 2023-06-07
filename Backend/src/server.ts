@@ -13,4 +13,6 @@ export const startServer = async (port = 4000) => {
 	});
 
 	console.log(`🚀 \x1b[32mServer ready at: ${url}\x1b[0m`);
+
+	return url;
 };
