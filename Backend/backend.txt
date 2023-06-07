@@ -1,9 +1,12 @@
------- User -------
+============== User ======================
 
 - Create Account
-    - send a link to user's email to verify his account.
+    - Validate the input data.
+    - Verify if email already exist.
+    - Hash the user password.
 
-- Login
-    - User can't login if email is not verified.
-
-- Password recovery
+x Login
+    x Validate input data.
+    x Search for a user.
+    x Compare passwords.
+    x Generate a token.
