@@ -1,8 +1,10 @@
 import { GraphQLError } from "graphql";
 import { ICreateUser, IFindOneUser, RCreateUser, RFindOneUser } from "../interfaces/user";
 import { UserModel } from "../models/user";
+import { checkData } from "../utils/checkData";
 
 export class ServiceUser {
+	// todo > Tests
 	async findOneUser({ email }: IFindOneUser): Promise<RFindOneUser> {
 		if (!email) throw new GraphQLError("Email was not provided");
 
@@ -12,9 +14,18 @@ export class ServiceUser {
 		return { user: { email: user.email, password: "" } };
 	}
 
-	createUser(createUser: ICreateUser): RCreateUser {
-		console.log({ createUser });
+	// todo > Tests
+	async createUser({ createUser }: ICreateUser): Promise<RCreateUser> {
+		const { email, password } = createUser;
 
-		return { message: "Hello" };
+		const emptyValues = checkData(createUser);
+		if (emptyValues) throw new GraphQLError(emptyValues);
+
+		const emailAlreadyExist = await UserModel.findOne({ email });
+		if (emailAlreadyExist) throw new GraphQLError("This email is already in use.");
+
+		await UserModel.create({ email, password });
+
+		return { message: `New user created with success.` };
 	}
 }

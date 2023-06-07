@@ -1,5 +1,9 @@
 ------ User -------
 
 - Create Account
+    - send a link to user's email to verify his account.
+
 - Login
+    - User can't login if email is not verified.
+
 - Password recovery

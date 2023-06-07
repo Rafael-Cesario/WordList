@@ -1,5 +1,9 @@
-import { prop, getModelForClass } from "@typegoose/typegoose";
+import { prop, getModelForClass, pre } from "@typegoose/typegoose";
+import { encryptPassword } from "../utils/crypt";
 
+@pre<UserClass>("save", function () {
+	this.password = encryptPassword(this.password);
+})
 class UserClass {
 	@prop({ type: String, required: true, lowercase: true })
 	public email!: string;
