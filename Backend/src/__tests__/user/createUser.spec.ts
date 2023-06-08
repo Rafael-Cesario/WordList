@@ -1,16 +1,11 @@
 import mongoose from "mongoose";
-import request from "supertest-graphql";
 import { startDatabase } from "../../database";
 import { startServer } from "../../server";
-import gql from "graphql-tag";
+import { UserQueries } from "../../utils/queries/user";
+import { UserModel } from "../../models/user";
 
-const CREATE_USER = gql`
-	mutation CreateUser($createUser: ICreateUser) {
-		createUser(createUser: $createUser) {
-			message
-		}
-	}
-`;
+const userQueries = new UserQueries();
+const defaultUser = { email: "user@test.com", password: "123123" };
 
 describe("Create a new user", () => {
 	let url: string;
@@ -20,16 +15,29 @@ describe("Create a new user", () => {
 		url = await startServer(0);
 	});
 
+	beforeEach(async () => {
+		await UserModel.deleteMany({});
+	});
+
 	afterAll(async () => {
-		// mongoose.connection.dropDatabase();
-		mongoose.connection.close();
+		await mongoose.connection.dropDatabase();
+		await mongoose.connection.close();
 	});
 
 	it("Throws a error, empty variables", async () => {
-		const { data, errors } = await request(url)
-			.mutate(CREATE_USER)
-			.variables({ createUser: { email: "", password: "" } });
+		const { error } = await userQueries.createUser(url, { createUser: { email: "", password: "" } });
+		expect(error).toBe("email was not provided, password was not provided");
+	});
 
-		console.log({ data, errors });
+	it("Can't create a user with the same email", async () => {
+		await userQueries.createUser(url, { createUser: defaultUser });
+		const { error } = await userQueries.createUser(url, { createUser: defaultUser });
+
+		expect(error).toBe("This email is already in use.");
+	});
+
+	it("Create a new user", async () => {
+		const { data } = await userQueries.createUser(url, { createUser: defaultUser });
+		expect(data).toEqual({ message: "New user created with success." });
 	});
 });

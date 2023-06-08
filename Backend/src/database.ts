@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 let url = process.env.DATABASE || "mongodb://127.0.0.1:27017/WordList:";
 const environment = process.env.NODE_ENV;
 
-if (environment === "development") url += "-development";
+if (environment !== "") url += `-${environment}`;
 
 export const startDatabase = async () => {
 	mongoose.set("strictQuery", false);
