@@ -29,3 +29,8 @@ export interface ILogin {
 		password: string;
 	};
 }
+
+export interface RLogin {
+	token: string;
+	message: string;
+}
