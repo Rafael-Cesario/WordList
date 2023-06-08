@@ -1,4 +1,3 @@
-// todo > Tests
 export const checkData = (data: object) => {
 	const entries = Object.entries(data);
 	const errors: string[] = [];
