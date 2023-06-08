@@ -3,9 +3,9 @@ import { startDatabase } from "../../database";
 import { startServer } from "../../server";
 import { UserQueries } from "../../utils/queries/user";
 import { UserModel } from "../../models/user";
+import { defaultUser } from "../../utils/placeHolders";
 
 const userQueries = new UserQueries();
-const defaultUser = { email: "user@test.com", password: "123123" };
 
 describe("Create a new user", () => {
 	let url: string;

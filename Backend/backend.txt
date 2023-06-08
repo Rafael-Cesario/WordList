@@ -1,12 +1,16 @@
 ============== User ======================
 
+- Find One user
+    - Return a message or the user.
+
 - Create Account
     - Validate the input data.
     - Verify if email already exist.
     - Hash the user password.
+    - Create a new user.
 
 x Login
     x Validate input data.
     x Search for a user.
     x Compare passwords.
-    x Generate a token.
+    x Generate and return a token.

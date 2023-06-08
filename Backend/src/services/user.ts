@@ -4,7 +4,6 @@ import { UserModel } from "../models/user";
 import { checkData } from "../utils/checkData";
 
 export class ServiceUser {
-	// todo > Tests
 	async findOneUser({ email }: IFindOneUser): Promise<RFindOneUser> {
 		if (!email) throw new GraphQLError("Email was not provided");
 
@@ -14,7 +13,6 @@ export class ServiceUser {
 		return { user: { email: user.email, password: "" } };
 	}
 
-	// todo > Tests
 	async createUser({ createUser }: ICreateUser): Promise<RCreateUser> {
 		const { email, password } = createUser;
 
