@@ -22,3 +22,10 @@ export interface RFindOneUser {
 	user?: IUser;
 	message?: string;
 }
+
+export interface ILogin {
+	login: {
+		email: string;
+		password: string;
+	};
+}

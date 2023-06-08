@@ -15,7 +15,17 @@ export const typeUser = gql`
 		message: String!
 	}
 
+	type RLogin {
+		message: String!
+		token: String!
+	}
+
 	input ICreateUser {
+		email: String!
+		password: String!
+	}
+
+	input ILogin {
 		email: String!
 		password: String!
 	}
@@ -26,5 +36,6 @@ export const typeUser = gql`
 
 	type Mutation {
 		createUser(createUser: ICreateUser): RCreateUser!
+		login(login: ILogin): RLogin!
 	}
 `;

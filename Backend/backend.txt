@@ -10,7 +10,6 @@
     - Create a new user.
 
 x Login
-    x Validate input data.
     x Search for a user.
     x Compare passwords.
     x Generate and return a token.
