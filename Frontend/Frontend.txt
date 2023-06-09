@@ -1,0 +1,5 @@
+- With private routes
+> Authentication page
+    x Login
+    x CreateAccount
+x Index page

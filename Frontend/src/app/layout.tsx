@@ -1,3 +1,5 @@
+import StyledComponentsRegistry from "@/lib/registry";
+
 export const metadata = {
 	title: "WordList",
 	description: "A website to learn a new language.",
@@ -6,7 +8,9 @@ export const metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html lang="pt-br">
-			<body>{children}</body>
+			<body>
+				<StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+			</body>
 		</html>
 	);
 };
