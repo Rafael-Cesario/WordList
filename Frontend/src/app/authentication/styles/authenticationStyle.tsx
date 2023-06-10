@@ -9,13 +9,14 @@ export const StyledAuthentication = styled.div`
 	min-height: 100vh;
 
 	.wordList {
-		padding: 2rem;
+		padding: 2rem 4rem;
 		background-color: ${theme.primary};
 		display: flex;
 		justify-content: center;
-		align-items: center;
 
 		.title {
+			margin-top: 10rem;
+			height: fit-content;
 			background-color: ${theme.background};
 			padding: 5px 50px;
 			border-radius: 2px;

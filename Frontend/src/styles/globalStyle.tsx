@@ -1,5 +1,6 @@
 "use client";
 import { createGlobalStyle } from "styled-components";
+import { theme } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -10,14 +11,28 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background-color: #202020;
+        background-color: ${theme.background};
         color: #eee;
     }
 
+    
     button, input {
         border: none;
         outline: none;
-        background-color: #252525;
+        background-color: ${theme.container};
         color: #ddd;
+        border-radius: 2px;
+    }
+
+    button {
+        cursor: pointer;
+        background-color: ${theme.primary};
+        color: #ddd;
+        padding: 10px 20px;
+        transition: 0.2s;
+
+        &:active {
+            transform: scale(0.95);
+        }
     }
 `;
