@@ -12,10 +12,13 @@ export const StyledAuthentication = styled.div`
 		padding: 2rem 4rem;
 		background-color: ${theme.primary};
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
+		align-items: center;
 
 		.title {
-			margin-top: 10rem;
+			margin-top: -21rem;
+			margin-bottom: 2rem;
 			height: fit-content;
 			background-color: ${theme.background};
 			padding: 5px 50px;

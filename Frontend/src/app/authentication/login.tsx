@@ -1,6 +1,13 @@
+import { SetStateAction } from "react";
 import { StyledLogin } from "./styles/loginStyle";
 
-export const Login = () => {
+interface ILogin {
+	props: {
+		setFormName: React.Dispatch<SetStateAction<"login" | "create">>;
+	};
+}
+
+export const Login = ({ props: { setFormName } }: ILogin) => {
 	return (
 		<StyledLogin>
 			<h1 className="title">Login</h1>
@@ -11,7 +18,9 @@ export const Login = () => {
 				<button className="login-button">Entrar</button>
 			</div>
 
-			<button className="change-form">Não tem uma conta? Clique aqui para criar.</button>
+			<button className="change-form" onClick={() => setFormName("create")}>
+				Não tem uma conta? Clique aqui para criar.
+			</button>
 		</StyledLogin>
 	);
 };
