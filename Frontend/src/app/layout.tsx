@@ -1,4 +1,5 @@
 import StyledComponentsRegistry from "@/lib/registry";
+import { GlobalStyle } from "@/styles/globalStyle";
 
 export const metadata = {
 	title: "WordList",
@@ -9,7 +10,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html lang="pt-br">
 			<body>
-				<StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+				<StyledComponentsRegistry>
+					<GlobalStyle />
+					{children}
+				</StyledComponentsRegistry>
 			</body>
 		</html>
 	);
