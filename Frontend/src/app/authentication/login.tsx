@@ -12,11 +12,11 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 		<StyledLogin>
 			<h1 className="title">Login</h1>
 
-			<div className="fields">
+			<form className="fields">
 				<input type="text" placeholder="Email" />
-				<input type="text" placeholder="Senha" />
-				<button className="login-button">Entrar</button>
-			</div>
+				<input type="password" placeholder="Senha" />
+				<button className="submit">Entrar</button>
+			</form>
 
 			<button className="change-form" onClick={() => setFormName("create")}>
 				Não tem uma conta? Clique aqui para criar.

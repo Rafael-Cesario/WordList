@@ -27,7 +27,7 @@ export const StyledLogin = styled.div`
 			margin-bottom: 2rem;
 		}
 
-		.login-button {
+		.submit {
 			background-color: ${theme.primary};
 
 			&:hover {

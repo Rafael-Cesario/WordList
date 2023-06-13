@@ -10,6 +10,7 @@ const Authentication = () => {
 
 	return (
 		<StyledAuthentication>
+			{/* Todo > form component */}
 			{formName === "login" && <Login props={{ setFormName }} />}
 			{formName === "create" && <CreateAccount props={{ setFormName }} />}
 
