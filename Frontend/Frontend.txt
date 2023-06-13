@@ -1,5 +1,8 @@
-- With private routes
-> Authentication page
-    x Login
+===== Authentication page ==================
+    - With private routes
     x CreateAccount
-x Index page
+    x Login
+
+
+===== Home ======================
+    x Home page

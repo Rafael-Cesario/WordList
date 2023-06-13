@@ -44,4 +44,21 @@ export const StyledForms = styled.div`
 			opacity: 1;
 		}
 	}
+
+	.password-input {
+		display: flex;
+		justify-content: space-between;
+		background-color: ${theme.container};
+		margin-bottom: 2rem;
+
+		input {
+			width: 100%;
+			margin: 0;
+		}
+
+		.input-icon {
+			padding: 8.5px;
+			cursor: pointer;
+		}
+	}
 `;

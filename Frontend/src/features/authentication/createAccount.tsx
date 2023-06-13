@@ -1,5 +1,6 @@
 import { SetStateAction } from "react";
 import { StyledForms } from "./styles/formsStyle";
+import { Password } from "./password";
 
 interface ILogin {
 	props: {
@@ -14,8 +15,8 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 
 			<form className="fields">
 				<input type="text" placeholder="Email" />
-				<input type="password" placeholder="Senha" />
-				<input type="password" placeholder="Confirme sua senha" />
+				<Password placeholder="Senha" />
+				<Password placeholder="Confirme sua senha" />
 				<button className="submit">Criar Conta</button>
 			</form>
 
