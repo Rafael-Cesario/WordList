@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import { StyledLogin } from "./styles/loginStyle";
+import { StyledForms } from "./styles/formsStyle";
 
 interface ILogin {
 	props: {
@@ -9,7 +9,7 @@ interface ILogin {
 
 export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 	return (
-		<StyledLogin>
+		<StyledForms>
 			<h1 className="title">Criar Conta</h1>
 
 			<form className="fields">
@@ -22,6 +22,6 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 			<button className="change-form" onClick={() => setFormName("login")}>
 				Voltar para tela de login
 			</button>
-		</StyledLogin>
+		</StyledForms>
 	);
 };
