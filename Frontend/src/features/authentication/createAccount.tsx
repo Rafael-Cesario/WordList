@@ -2,6 +2,7 @@ import { produce } from "immer";
 import { FormEvent, SetStateAction, useState } from "react";
 import { StyledForms } from "./styles/formsStyle";
 import { Password } from "./password";
+import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
 
 interface ILogin {
 	props: {
@@ -26,6 +27,11 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 
 	const submitForm = (e: FormEvent) => {
 		e.preventDefault();
+
+		const emptyValues = checkForEmptyValues(values);
+		const hasEmptyValues = Object.keys(emptyValues).length;
+		if (hasEmptyValues) sendError(emptyValues);
+
 		console.log({ values });
 	};
 
