@@ -80,7 +80,13 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 
 			<form className="fields" onSubmit={(e) => submitForm(e)}>
 				<label className="label-error">{errors.email}</label>
-				<input type="text" className={errors.email ? "error" : ""} placeholder={"Email"} onChange={(e) => changeValue(e.target.value, "email")} />
+				<input
+					autoFocus={true}
+					type="text"
+					className={errors.email ? "error" : ""}
+					placeholder={"Email"}
+					onChange={(e) => changeValue(e.target.value, "email")}
+				/>
 				<Password errors={errors} placeholder={"Senha"} changeValue={changeValue} fieldName="password" />
 				<Password errors={errors} placeholder={"Confirme sua senha"} changeValue={changeValue} fieldName="confirmPassword" />
 				<button className="submit">Criar Conta</button>

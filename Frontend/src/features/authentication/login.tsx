@@ -13,7 +13,7 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 			<h1 className="title">Login</h1>
 
 			<form className="fields">
-				<input type="text" placeholder="Email" />
+				<input autoFocus={true} type="text" placeholder="Email" />
 				<input type="password" placeholder="Senha" />
 				<button className="submit">Entrar</button>
 			</form>
