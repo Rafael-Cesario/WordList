@@ -28,9 +28,9 @@ const defaultFormValues = {
 export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 	const [values, setValues] = useState<Fields>(defaultFormValues);
 	const [errors, setErrors] = useState<Fields>(defaultFormValues);
-	const { notificationValues, setNotificationValues } = useContext(NotificationContext);
 
 	const { requestCreateUser } = useQueriesUser();
+	const { setNotificationValues } = useContext(NotificationContext);
 
 	const changeValue = (newValue: string, field: keyof typeof values) => {
 		const newState = produce(values, (draft) => {
@@ -42,6 +42,7 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 
 	const validateFields = () => {
 		const validations = new Validations();
+
 		const emptyValues = checkForEmptyValues(values);
 		const hasEmptyValues = Object.keys(emptyValues).length;
 		if (hasEmptyValues) return setErrors({ ...defaultFormValues, ...emptyValues });
@@ -55,7 +56,6 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 		if (values.password !== values.confirmPassword) return setErrors({ ...defaultFormValues, confirmPassword: "Suas senhas devem ser iguais" });
 
 		setErrors(defaultFormValues);
-
 		return true;
 	};
 
@@ -66,8 +66,10 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 		if (!isFieldsValid) return;
 
 		const newUser = { email: values.email, password: values.password };
-		await requestCreateUser({ createUser: newUser });
+		const { error } = await requestCreateUser({ createUser: newUser });
+		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Erro", type: "error" });
 
+		setFormName("login");
 		setValues(defaultFormValues);
 		setNotificationValues({ type: "success", title: "Novo usuário criado", message: "Boas vindas, você já pode fazer login", isOpen: true });
 	};
