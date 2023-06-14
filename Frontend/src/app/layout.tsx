@@ -1,4 +1,4 @@
-import StyledComponentsRegistry from "@/lib/registry";
+import { AllProviders } from "@/components/providers";
 import { GlobalStyle } from "@/styles/globalStyle";
 import { Roboto_Slab } from "next/font/google";
 
@@ -16,10 +16,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html lang="pt-br" className={robotoSlab.className}>
 			<body>
-				<StyledComponentsRegistry>
+				<AllProviders>
 					<GlobalStyle />
 					{children}
-				</StyledComponentsRegistry>
+				</AllProviders>
 			</body>
 		</html>
 	);

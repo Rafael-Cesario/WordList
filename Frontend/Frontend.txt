@@ -1,6 +1,19 @@
+===== Configs =============
+
+    - StyledComponents
+    - Apollo Provider
+    x Redux 
+
 ===== Authentication page ==================
-    - With private routes
-    x CreateAccount
+    - Verify if user is looged, if not send to authentication page using High Order Components.
+    
+    > CreateAccount
+        - show and hide password
+        - Show input errors on a label
+        - validate fields
+        > graphql mutation create account
+        x save token and user email on cookies
+
     x Login
 
 
