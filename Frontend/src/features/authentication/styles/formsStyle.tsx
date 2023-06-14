@@ -61,4 +61,13 @@ export const StyledForms = styled.div`
 			cursor: pointer;
 		}
 	}
+
+	.error {
+		border: 2px solid crimson;
+
+		::placeholder,
+		&::placeholder {
+			color: crimson;
+		}
+	}
 `;

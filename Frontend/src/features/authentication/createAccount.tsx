@@ -10,12 +10,21 @@ interface ILogin {
 	};
 }
 
+export interface Fields {
+	email: string;
+	password: string;
+	confirmPassword: string;
+}
+
+const defaultFormValues = {
+	email: "",
+	password: "",
+	confirmPassword: "",
+};
+
 export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
-	const [values, setValues] = useState({
-		email: "",
-		password: "",
-		confirmPassword: "",
-	});
+	const [values, setValues] = useState<Fields>(defaultFormValues);
+	const [errors, setErrors] = useState<Fields>(defaultFormValues);
 
 	const changeValue = (newValue: string, field: keyof typeof values) => {
 		const newState = produce(values, (draft) => {
@@ -30,9 +39,9 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 
 		const emptyValues = checkForEmptyValues(values);
 		const hasEmptyValues = Object.keys(emptyValues).length;
-		if (hasEmptyValues) sendError(emptyValues);
+		if (hasEmptyValues) return setErrors({ ...defaultFormValues, ...emptyValues });
 
-		console.log({ values });
+		setErrors(defaultFormValues);
 	};
 
 	return (
@@ -40,9 +49,15 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 			<h1 className="title">Criar Conta</h1>
 
 			<form className="fields" onSubmit={(e) => submitForm(e)}>
-				<input type="text" placeholder="Email" onChange={(e) => changeValue(e.target.value, "email")} />
-				<Password placeholder="Senha" changeValue={changeValue} fieldName="password" />
-				<Password placeholder="Confirme sua senha" changeValue={changeValue} fieldName="confirmPassword" />
+				<input
+					type="text"
+					className={errors.email ? "error" : ""}
+					placeholder={errors.email || "Email"}
+					onChange={(e) => changeValue(e.target.value, "email")}
+				/>
+
+				<Password errors={errors} placeholder={"Senha"} changeValue={changeValue} fieldName="password" />
+				<Password errors={errors} placeholder={"Confirme sua senha"} changeValue={changeValue} fieldName="confirmPassword" />
 				<button className="submit">Criar Conta</button>
 			</form>
 
