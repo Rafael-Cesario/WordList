@@ -22,7 +22,7 @@ export class ServiceUser {
 		if (emptyValues) throw new GraphQLError(emptyValues);
 
 		const emailAlreadyExist = await UserModel.findOne({ email });
-		if (emailAlreadyExist) throw new GraphQLError("This email is already in use.");
+		if (emailAlreadyExist) throw new GraphQLError("duplicated: This email is already in use.");
 
 		await UserModel.create({ email, password });
 
