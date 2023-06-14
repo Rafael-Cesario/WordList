@@ -1,6 +1,7 @@
 import { AllProviders } from "@/components/providers";
 import { GlobalStyle } from "@/styles/globalStyle";
 import { Roboto_Slab } from "next/font/google";
+import { Notification } from "@/components/notification";
 
 export const metadata = {
 	title: "WordList",
@@ -18,6 +19,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 			<body>
 				<AllProviders>
 					<GlobalStyle />
+					<Notification />
 					{children}
 				</AllProviders>
 			</body>
