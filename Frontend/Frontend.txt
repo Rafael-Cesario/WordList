@@ -11,7 +11,7 @@
         - show and hide password
         - Show input errors on a label
         - validate fields
-        > graphql mutation create account
+        > Hook with user queries
         x save token and user email on cookies
 
     x Login

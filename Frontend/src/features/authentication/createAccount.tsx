@@ -4,6 +4,7 @@ import { StyledForms } from "./styles/formsStyle";
 import { Password } from "./password";
 import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
 import { Validations } from "@/utils/validationsClass";
+import { useQueriesUser } from "./hooks/useQueriesUser";
 
 interface ILogin {
 	props: {
@@ -26,6 +27,8 @@ const defaultFormValues = {
 export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 	const [values, setValues] = useState<Fields>(defaultFormValues);
 	const [errors, setErrors] = useState<Fields>(defaultFormValues);
+
+	const { requestCreateUser } = useQueriesUser();
 
 	const changeValue = (newValue: string, field: keyof typeof values) => {
 		const newState = produce(values, (draft) => {
@@ -54,13 +57,14 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 		return true;
 	};
 
-	const submitForm = (e: FormEvent) => {
+	const submitForm = async (e: FormEvent) => {
 		e.preventDefault();
 
-		const hasError = validateFields();
-		if (hasError) return;
+		const isFieldsValid = validateFields();
+		if (!isFieldsValid) return;
 
-		// todo > create account
+		const newUser = { email: values.email, password: values.password };
+		await requestCreateUser({ createUser: newUser });
 	};
 
 	return (
