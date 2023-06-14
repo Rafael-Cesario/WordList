@@ -1,15 +1,16 @@
 import { styled } from "styled-components";
 import { theme } from "./theme";
 
-export const StyledNotification = styled.div`
+export const StyledNotification = styled.div<{ type: "success" | "error" }>`
 	position: absolute;
 	background-color: ${theme.container};
 	margin: 1rem;
-	padding: 1rem 6rem 1rem 2rem;
+	padding: 1rem 4rem 1rem 2rem;
 	border-radius: 2px;
-	box-shadow: 10px 10px 2px #11111115;
+	box-shadow: 10px 10px 2px #11111110;
 	right: 0;
 	top: 0;
+	max-width: 300px;
 
 	.close {
 		position: absolute;
@@ -28,7 +29,7 @@ export const StyledNotification = styled.div`
 		font-size: 1.1rem;
 		margin-bottom: 0px;
 		font-weight: normal;
-		color: ${theme.success};
+		color: ${({ type }) => (type === "success" ? theme.success : theme.error)};
 	}
 
 	.description {

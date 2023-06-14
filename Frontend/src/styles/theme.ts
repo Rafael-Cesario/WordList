@@ -3,4 +3,5 @@ export const theme = {
 	background: "#151515",
 	container: "#202020",
 	success: "#18c061",
+	error: "crimson",
 };

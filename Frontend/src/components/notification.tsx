@@ -10,12 +10,12 @@ export const Notification = () => {
 	if (!notificationValues.isOpen) return <></>;
 
 	return (
-		<StyledNotification>
+		<StyledNotification type={notificationValues.type}>
 			<button onClick={() => setNotificationValues({ ...notificationValues, isOpen: false })} className="close">
 				x
 			</button>
-			<h1 className="title">Novo usuário criado</h1>
-			<p className="description">Boas vindas, você já pode fazer login.</p>
+			<h1 className="title">{notificationValues.title}</h1>
+			<p className="description">{notificationValues.message}</p>
 		</StyledNotification>
 	);
 };
