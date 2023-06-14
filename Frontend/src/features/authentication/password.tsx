@@ -14,11 +14,8 @@ export const Password = ({ placeholder, changeValue, fieldName, errors }: Passwo
 
 	return (
 		<div className={`password-input ${errors[fieldName] ? "error" : ""}`}>
-			<input
-				type={isPasswordHide ? "password" : "text"}
-				placeholder={errors[fieldName] || placeholder}
-				onChange={(e) => changeValue(e.target.value, fieldName)}
-			/>
+			<label className="label-error">{errors[fieldName]}</label>
+			<input type={isPasswordHide ? "password" : "text"} placeholder={placeholder} onChange={(e) => changeValue(e.target.value, fieldName)} />
 			<Image
 				onClick={() => setIsPasswordHide(!isPasswordHide)}
 				className="input-icon"

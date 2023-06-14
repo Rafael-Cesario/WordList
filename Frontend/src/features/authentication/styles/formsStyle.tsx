@@ -64,10 +64,12 @@ export const StyledForms = styled.div`
 
 	.error {
 		border: 2px solid crimson;
+	}
 
-		::placeholder,
-		&::placeholder {
-			color: crimson;
-		}
+	.label-error {
+		position: absolute;
+		font-size: 0.8rem;
+		transform: translateY(-20px);
+		color: #db123a;
 	}
 `;
