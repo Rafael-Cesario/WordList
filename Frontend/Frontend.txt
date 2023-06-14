@@ -1,13 +1,3 @@
-===== Configs =============
-
-    - StyledComponents
-    - Apollo Provider
-    x Redux 
-
-
-
-
-
 ===== Globals ===========
 
     - Notification component and Context
@@ -20,13 +10,22 @@
 
     - Verify if user is looged, if not send to authentication page using High Order Components.
     
-    > CreateAccount
+    - CreateAccount
         - show and hide password
         - Show input errors on a label
         - validate fields
         - Hook with user queries
+        - mutation create user
+        - catch errors
+        - send user to login page
 
     x Login
+        x verify empty fields
+        x send notification with errors
+        x mutation login
+        x catch errors
+        x store the token and email on cookies.
+        x send user to home page
 
 
 
