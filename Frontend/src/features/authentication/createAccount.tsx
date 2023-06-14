@@ -3,6 +3,7 @@ import { FormEvent, SetStateAction, useState } from "react";
 import { StyledForms } from "./styles/formsStyle";
 import { Password } from "./password";
 import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
+import { Validations } from "@/utils/validationsClass";
 
 interface ILogin {
 	props: {
@@ -34,37 +35,30 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 		setValues(newState);
 	};
 
-	const validatePassword = (password: string) => {
-		if (password.length < 10) return { password: "Sua senha precisa ter ao menos 10 caracteres" };
-		if (!password.match(/[A-Z]/)) return { password: "Sua senha precisa ter ao menos 1 letra maiúscula" };
-		if (!password.match(/[a-z]/)) return { password: "Sua senha precisa ter ao menos 1 letra minúscula" };
-		if (!password.match(/[0-9]/)) return { password: "Sua senha precisa ter ao menos 1 número" };
-	};
-
-	const validateEmail = (email: string) => {
-		if (!email.match(/@/)) return { email: "Seu email não parece valido" };
-
-		const [user, domain] = email.split("@");
-		if (!user) return { email: "Seu email não parece valido" };
-		if (!domain) return { email: "Seu email não parece valido" };
-	};
-
-	const submitForm = (e: FormEvent) => {
-		e.preventDefault();
-
+	const validateFields = () => {
+		const validations = new Validations();
 		const emptyValues = checkForEmptyValues(values);
 		const hasEmptyValues = Object.keys(emptyValues).length;
 		if (hasEmptyValues) return setErrors({ ...defaultFormValues, ...emptyValues });
 
-		const emailIsNotValid = validateEmail(values.email);
+		const emailIsNotValid = validations.email(values.email);
 		if (emailIsNotValid) return setErrors({ ...defaultFormValues, ...emailIsNotValid });
 
-		const passwordIsNotValid = validatePassword(values.password);
+		const passwordIsNotValid = validations.password(values.password);
 		if (passwordIsNotValid) return setErrors({ ...defaultFormValues, ...passwordIsNotValid });
 
 		if (values.password !== values.confirmPassword) return setErrors({ ...defaultFormValues, confirmPassword: "Suas senhas devem ser iguais" });
 
 		setErrors(defaultFormValues);
+
+		return true;
+	};
+
+	const submitForm = (e: FormEvent) => {
+		e.preventDefault();
+
+		const hasError = validateFields();
+		if (hasError) return;
 
 		// todo > create account
 	};
