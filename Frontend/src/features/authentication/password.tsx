@@ -13,7 +13,7 @@ export const Password = ({ placeholder, changeValue, fieldName, errors }: Passwo
 	const [isPasswordHide, setIsPasswordHide] = useState(true);
 
 	return (
-		<div className={`password-input ${errors[fieldName] ? "error" : ""}`}>
+		<div key={fieldName} className={`password-input ${errors[fieldName] ? "error" : ""}`}>
 			<label className="label-error">{errors[fieldName]}</label>
 			<input type={isPasswordHide ? "password" : "text"} placeholder={placeholder} onChange={(e) => changeValue(e.target.value, fieldName)} />
 			<Image

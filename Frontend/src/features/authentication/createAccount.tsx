@@ -1,10 +1,11 @@
 import { produce } from "immer";
-import { FormEvent, SetStateAction, useState } from "react";
+import { FormEvent, SetStateAction, useContext, useState } from "react";
 import { StyledForms } from "./styles/formsStyle";
 import { Password } from "./password";
 import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
 import { Validations } from "@/utils/validationsClass";
 import { useQueriesUser } from "./hooks/useQueriesUser";
+import { NotificationContext } from "@/context/notification";
 
 interface ILogin {
 	props: {
@@ -27,6 +28,7 @@ const defaultFormValues = {
 export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 	const [values, setValues] = useState<Fields>(defaultFormValues);
 	const [errors, setErrors] = useState<Fields>(defaultFormValues);
+	const { notificationValues, setNotificationValues } = useContext(NotificationContext);
 
 	const { requestCreateUser } = useQueriesUser();
 
@@ -65,6 +67,9 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 
 		const newUser = { email: values.email, password: values.password };
 		await requestCreateUser({ createUser: newUser });
+
+		setValues(defaultFormValues);
+		setNotificationValues({ type: "success", title: "Novo usuário criado", message: "Boas vindas, você já pode fazer login", isOpen: true });
 	};
 
 	return (

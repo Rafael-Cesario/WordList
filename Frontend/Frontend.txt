@@ -4,7 +4,20 @@
     - Apollo Provider
     x Redux 
 
+
+
+
+
+===== Globals ===========
+
+    - Notification component and Context
+
+
+
+
+
 ===== Authentication page ==================
+
     - Verify if user is looged, if not send to authentication page using High Order Components.
     
     > CreateAccount
@@ -12,9 +25,11 @@
         - Show input errors on a label
         - validate fields
         - Hook with user queries
-        - Notification component
 
     x Login
+
+
+
 
 
 ===== Home ======================
