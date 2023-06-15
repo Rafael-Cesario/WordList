@@ -3,10 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { CreateAccount } from "../createAccount";
 import { AllProviders } from "@/components/providers";
+import { Notification } from "@/components/notification";
 
 const renderComponent = () => {
 	render(
 		<AllProviders>
+			<Notification />
 			<CreateAccount props={{ setFormName: vi.fn() }} />
 		</AllProviders>
 	);
@@ -31,5 +33,14 @@ describe("Create account component", () => {
 		await user.click(screen.getByRole("submit"));
 
 		expect(screen.getByRole("password-label")).toHaveTextContent("Sua senha precisa ter ao menos 10 caracteres");
+	});
+
+	it("Catch the response error and show in the notification", async () => {
+		renderComponent();
+		await user.type(screen.getByRole("input-email"), "valid@domain.com");
+		await user.type(screen.getAllByRole("password")[0], "Password123");
+		await user.type(screen.getAllByRole("password")[1], "Password123");
+		await user.click(screen.getByRole("submit"));
+		expect(screen.getByRole("notification")).toBeInTheDocument();
 	});
 });
