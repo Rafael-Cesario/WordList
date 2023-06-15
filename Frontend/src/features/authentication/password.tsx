@@ -15,7 +15,12 @@ export const Password = ({ placeholder, changeValue, fieldName, errors }: Passwo
 	return (
 		<div key={fieldName} className={`password-input ${errors[fieldName as keyof typeof errors] ? "error" : ""}`}>
 			<label className="label-error">{errors[fieldName as keyof typeof errors]}</label>
-			<input type={isPasswordHide ? "password" : "text"} placeholder={placeholder} onChange={(e) => changeValue(e.target.value, fieldName)} />
+			<input
+				role="password"
+				type={isPasswordHide ? "password" : "text"}
+				placeholder={placeholder}
+				onChange={(e) => changeValue(e.target.value, fieldName)}
+			/>
 			<Image
 				onClick={() => setIsPasswordHide(!isPasswordHide)}
 				className="input-icon"
@@ -23,6 +28,7 @@ export const Password = ({ placeholder, changeValue, fieldName, errors }: Passwo
 				alt="eye closed"
 				width={16}
 				height={16}
+				role="eye-icon"
 			/>
 		</div>
 	);
