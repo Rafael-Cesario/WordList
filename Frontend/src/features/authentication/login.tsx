@@ -6,6 +6,8 @@ import { Fields } from "./createAccount";
 import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
 import { useQueriesUser } from "./hooks/useQueriesUser";
 import { NotificationContext } from "@/context/notification";
+import { createCookie } from "@/services/cookies";
+import { useRouter } from "next/navigation";
 
 interface ILogin {
 	props: {
@@ -21,6 +23,7 @@ const defaultValues = {
 export const Login = ({ props: { setFormName } }: ILogin) => {
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
+	const router = useRouter();
 
 	const { requestLogin } = useQueriesUser();
 	const { setNotificationValues } = useContext(NotificationContext);
@@ -42,6 +45,13 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 
 		const { token, error } = await requestLogin({ login: values });
 		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Ops, Erro", type: "error" });
+
+		const userCookie = { email: values.email, token };
+		const expires = new Date();
+		expires.setDate(expires.getDate() + 7);
+		createCookie("user", userCookie, expires);
+
+		router.push("/");
 	};
 
 	return (
