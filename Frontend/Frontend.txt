@@ -21,7 +21,7 @@
 
     x Login
         - verify empty fields
-        x mutation login
+        - mutation login
         x catch errors
         x send notification with errors
         x store the token and email on cookies.

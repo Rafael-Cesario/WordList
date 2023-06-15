@@ -3,6 +3,7 @@ export interface IErrorsCode {
 
 	user: {
 		duplicated: string;
+		"Invalid credentials": string;
 	};
 }
 
@@ -11,5 +12,6 @@ export const errorsCode: IErrorsCode = {
 
 	user: {
 		duplicated: "Desculpe, este email não esta disponível ou já foi registrado.",
+		"Invalid credentials": "Parece que seu email ou sua senha não estão certos.",
 	},
 };

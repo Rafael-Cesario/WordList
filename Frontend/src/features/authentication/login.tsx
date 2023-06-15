@@ -1,9 +1,11 @@
-import { FormEvent, SetStateAction, useState } from "react";
+import { FormEvent, SetStateAction, useContext, useState } from "react";
 import { StyledForms } from "./styles/formsStyle";
 import { Password } from "./password";
 import { produce } from "immer";
 import { Fields } from "./createAccount";
 import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
+import { useQueriesUser } from "./hooks/useQueriesUser";
+import { NotificationContext } from "@/context/notification";
 
 interface ILogin {
 	props: {
@@ -20,6 +22,9 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
 
+	const { requestLogin } = useQueriesUser();
+	const { setNotificationValues } = useContext(NotificationContext);
+
 	const changeValue = (newValue: string, fieldName: keyof Fields) => {
 		const newState = produce(values, (draft) => {
 			draft[fieldName as keyof typeof draft] = newValue;
@@ -28,12 +33,15 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 		setValues(newState);
 	};
 
-	const submitForm = (e: FormEvent) => {
+	const submitForm = async (e: FormEvent) => {
 		e.preventDefault();
 
 		const emptyValues = checkForEmptyValues(values);
 		const hasEmptyValues = Object.keys(emptyValues).length;
 		if (hasEmptyValues) return setErrors({ ...defaultValues, ...emptyValues });
+
+		const { token, error } = await requestLogin({ login: values });
+		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Ops, Erro", type: "error" });
 	};
 
 	return (

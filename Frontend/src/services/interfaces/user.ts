@@ -31,6 +31,8 @@ export interface ILogin {
 }
 
 export interface RLogin {
-	token: string;
-	message: string;
+	login: {
+		token: string;
+		message: string;
+	};
 }
