@@ -1,6 +1,4 @@
-import { Fields } from "@/features/authentication/createAccount";
-
-export const checkForEmptyValues = (values: Fields) => {
+export const checkForEmptyValues = (values: object) => {
 	const emptyValues: { [key: string]: string } = {};
 	const entries = Object.entries(values);
 

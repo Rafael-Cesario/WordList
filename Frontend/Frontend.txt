@@ -20,10 +20,10 @@
         - send user to login page
 
     x Login
-        x verify empty fields
-        x send notification with errors
+        - verify empty fields
         x mutation login
         x catch errors
+        x send notification with errors
         x store the token and email on cookies.
         x send user to home page
 

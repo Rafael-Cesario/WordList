@@ -4,17 +4,17 @@ import { Fields } from "./createAccount";
 
 interface PasswordProps {
 	placeholder: string;
-	changeValue: (value: string, fieldName: "password" | "confirmPassword") => void;
+	changeValue: (value: string, fieldName: keyof Fields) => void;
 	fieldName: "password" | "confirmPassword";
-	errors: Fields;
+	errors: object;
 }
 
 export const Password = ({ placeholder, changeValue, fieldName, errors }: PasswordProps) => {
 	const [isPasswordHide, setIsPasswordHide] = useState(true);
 
 	return (
-		<div key={fieldName} className={`password-input ${errors[fieldName] ? "error" : ""}`}>
-			<label className="label-error">{errors[fieldName]}</label>
+		<div key={fieldName} className={`password-input ${errors[fieldName as keyof typeof errors] ? "error" : ""}`}>
+			<label className="label-error">{errors[fieldName as keyof typeof errors]}</label>
 			<input type={isPasswordHide ? "password" : "text"} placeholder={placeholder} onChange={(e) => changeValue(e.target.value, fieldName)} />
 			<Image
 				onClick={() => setIsPasswordHide(!isPasswordHide)}
