@@ -12,12 +12,12 @@
     
     - CreateAccount
         - show and hide password
-        > Show input errors on a label
+        - Show input errors on a label
         - validate fields
-        x Hook with user queries
-        x mutation create user
-        x catch errors
-        x send user to login page
+        - Hook with user queries
+        - mutation create user
+        - catch errors
+        - send user to login page
 
     - Login
         - verify empty fields

@@ -59,8 +59,11 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 			<h1 className="title">Login</h1>
 
 			<form onSubmit={(e) => submitForm(e)} className="fields">
-				<label className="label-error">{errors.email}</label>
+				<label role="email-label" className="label-error">
+					{errors.email}
+				</label>
 				<input
+					role="email-input"
 					className={errors.email ? "error" : ""}
 					onChange={(e) => changeValue(e.target.value, "email")}
 					autoFocus={true}
@@ -68,7 +71,9 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 					placeholder="Email"
 				/>
 				<Password changeValue={changeValue} errors={errors} fieldName="password" placeholder="Senha" />
-				<button className="submit">Entrar</button>
+				<button role="submit" className="submit">
+					Entrar
+				</button>
 			</form>
 
 			<button className="change-form" onClick={() => setFormName("create")}>
