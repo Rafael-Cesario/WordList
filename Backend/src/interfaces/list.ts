@@ -1,3 +1,5 @@
+import mongoose, { ObjectId } from "mongoose";
+
 export interface List {
 	userID: string;
 	ID: string;
@@ -14,7 +16,13 @@ export interface RReadLists {
 
 export interface ICreateList {
 	createList: {
-		userID: string;
+		userID: ObjectId;
 		name: string;
+	};
+}
+
+export interface RCreateList {
+	createList: {
+		message: string;
 	};
 }

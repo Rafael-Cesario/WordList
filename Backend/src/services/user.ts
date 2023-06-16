@@ -12,7 +12,7 @@ export class ServiceUser {
 		const user = await UserModel.findOne({ email });
 		if (!user) return { message: "User not found" };
 
-		return { user: { email: user.email, password: "" } };
+		return { user: { email: user.email, password: "", ID: user._id } };
 	}
 
 	async createUser({ createUser }: ICreateUser): Promise<RCreateUser> {

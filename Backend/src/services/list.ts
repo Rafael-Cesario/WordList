@@ -22,7 +22,7 @@ export class ServiceList {
 		const emptyValues = checkData(createList);
 		if (emptyValues) throw new GraphQLError(emptyValues);
 
-		const user = await UserModel.findOne({ _id: new mongoose.Types.ObjectId(userID) });
+		const user = await UserModel.findOne({ _id: userID });
 		if (!user) throw new GraphQLError("User not found");
 
 		const list = await ListModel.findOne({ name });

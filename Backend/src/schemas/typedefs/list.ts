@@ -21,6 +21,6 @@ export const typeList = gql`
 	}
 
 	type Mutation {
-		createList(createList: ICreateList): RCreateList!
+		createList(createList: ICreateList!): RCreateList!
 	}
 `;

@@ -2,6 +2,7 @@ import { gql } from "graphql-tag";
 
 export const typeUser = gql`
 	type TUser {
+		ID: String!
 		email: String!
 		password: String!
 	}
