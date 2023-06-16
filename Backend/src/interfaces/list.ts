@@ -11,3 +11,10 @@ export interface IReadLists {
 export interface RReadLists {
 	readLists: List[];
 }
+
+export interface ICreateList {
+	createList: {
+		userID: string;
+		name: string;
+	};
+}

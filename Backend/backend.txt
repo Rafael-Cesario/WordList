@@ -18,7 +18,12 @@
 ===== Lists =====
 
 - read lists
+    - if there is no list, check if the user exist.
+
 - create lists
+    - Can't create lists for an user that don't exist.
+    - Can't create lists with same name.
+    
 - rename lists
 - delete lists
 

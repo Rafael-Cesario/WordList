@@ -7,7 +7,20 @@ export const typeList = gql`
 		name: String!
 	}
 
+	type RCreateList {
+		message: String!
+	}
+
+	input ICreateList {
+		userID: String!
+		name: String!
+	}
+
 	type Query {
 		readLists(userID: String!): [list]!
+	}
+
+	type Mutation {
+		createList(createList: ICreateList): RCreateList!
 	}
 `;

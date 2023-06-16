@@ -17,11 +17,18 @@ export class ServiceList {
 	}
 
 	async createList({ createList }: ICreateList) {
+		const { name, userID } = createList;
+
 		const emptyValues = checkData(createList);
 		if (emptyValues) throw new GraphQLError(emptyValues);
 
-		const { name, userID } = createList;
-
 		const user = await UserModel.findOne({ _id: new mongoose.Types.ObjectId(userID) });
+		if (!user) throw new GraphQLError("User not found");
+
+		const list = await ListModel.findOne({ name });
+		if (list) throw new GraphQLError("Duplicated: A list with the same name already exist");
+
+		await ListModel.create({ name, userID });
+		return { message: "A new list was created" };
 	}
 }
