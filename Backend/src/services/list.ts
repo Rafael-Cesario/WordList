@@ -8,7 +8,7 @@ import { UserModel } from "../models/user";
 export class ServiceList {
 	async readLists({ userID }: IReadLists) {
 		const lists = await ListModel.find({ userID: new mongoose.Types.ObjectId(userID) });
-		if (lists) return lists;
+		if (lists.length) return lists;
 
 		const user = await UserModel.findOne({ _id: new mongoose.Types.ObjectId(userID) });
 		if (!user) throw new GraphQLError("User not found");
