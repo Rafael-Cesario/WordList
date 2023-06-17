@@ -9,7 +9,6 @@ export const metadata = {
 };
 
 const robotoSlab = Roboto_Slab({
-	display: "swap",
 	subsets: ["latin"],
 });
 

@@ -1,7 +1,12 @@
 import { withPrivateRoute } from "@/components/withPrivateRoute";
+import { Header } from "@/features/home/header";
 
 const Home = () => {
-	return <h1>WordList</h1>;
+	return (
+		<>
+			<Header />
+		</>
+	);
 };
 
 export default withPrivateRoute(Home);
