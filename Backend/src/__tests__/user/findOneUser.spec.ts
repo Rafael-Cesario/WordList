@@ -32,6 +32,8 @@ describe("Find one user", () => {
 	it("Returns the user with an empty password", async () => {
 		await userQueries.createUser(url, { createUser: defaultUser });
 		const { data } = await userQueries.findOneUser(url, { email: defaultUser.email });
-		expect(data).toEqual({ message: null, user: { email: "user@test.com", password: "" } });
+		expect(data?.user).toHaveProperty("email", defaultUser.email);
+		expect(data?.user).toHaveProperty("password", "");
+		expect(data?.user).toHaveProperty("ID");
 	});
 });

@@ -33,7 +33,7 @@ describe("Create a new user", () => {
 		await userQueries.createUser(url, { createUser: defaultUser });
 		const { error } = await userQueries.createUser(url, { createUser: defaultUser });
 
-		expect(error).toBe("This email is already in use.");
+		expect(error).toMatch("duplicated:");
 	});
 
 	it("Create a new user", async () => {
