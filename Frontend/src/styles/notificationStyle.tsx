@@ -11,6 +11,7 @@ export const StyledNotification = styled.div<{ type: "success" | "error" }>`
 	right: 0;
 	top: 0;
 	max-width: 300px;
+	z-index: 1;
 
 	.close {
 		position: absolute;

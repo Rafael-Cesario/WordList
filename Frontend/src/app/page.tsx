@@ -1,4 +1,3 @@
-import { withPrivateRoute } from "@/components/withPrivateRoute";
 import { Header } from "@/features/home/header";
 
 const Home = () => {
@@ -9,4 +8,4 @@ const Home = () => {
 	);
 };
 
-export default withPrivateRoute(Home);
+export default Home;

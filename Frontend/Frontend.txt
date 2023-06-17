@@ -8,7 +8,7 @@
 
 ===== Authentication page ==================
 
-    - Verify if user is looged, if not send to authentication page using High Order Components.
+    - Verify if user is looged, if not send to authentication page with parallel routes.
     
     - CreateAccount
         - show and hide password
@@ -32,4 +32,6 @@
 
 
 ===== Home ======================
-    x Home page
+    x Header
+        - create list
+

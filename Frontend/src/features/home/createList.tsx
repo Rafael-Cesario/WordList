@@ -5,6 +5,11 @@ import { StyledCreateList } from "./styles/createListStyle";
 
 export const CreateList = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [listName, setListName] = useState("");
+
+	const createList = () => {
+		console.log({ listName });
+	};
 
 	return (
 		<>
@@ -12,8 +17,10 @@ export const CreateList = () => {
 
 			{isOpen && (
 				<StyledCreateList>
-					<input className="name" type="text" placeholder="Nome" />
-					<button className="create">Criar</button>
+					<input className="name" type="text" placeholder="Nome" onChange={(e) => setListName(e.target.value)} />
+					<button onClick={() => createList()} className="create">
+						Criar
+					</button>
 				</StyledCreateList>
 			)}
 		</>

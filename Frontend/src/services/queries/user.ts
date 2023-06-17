@@ -25,6 +25,7 @@ export class QueriesUser {
 		mutation Login($login: ILogin) {
 			login(login: $login) {
 				token
+				ID
 				message
 			}
 		}
