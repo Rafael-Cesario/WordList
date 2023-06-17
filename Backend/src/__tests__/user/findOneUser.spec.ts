@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { startDatabase } from "../../database";
 import { startServer } from "../../server";
-import { UserQueries } from "../../utils/queries/user";
+import { UserQueries } from "../__utils__/queries/user";
 import { defaultUser } from "../../utils/placeHolders";
 
 const userQueries = new UserQueries();

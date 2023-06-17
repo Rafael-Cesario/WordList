@@ -1,18 +1,10 @@
 import mongoose, { ObjectId } from "mongoose";
 import { startDatabase } from "../../database";
 import { startServer } from "../../server";
-import { ListQueries } from "../../utils/queries/list";
-import { UserQueries } from "../../utils/queries/user";
+import { ListQueries } from "../__utils__/queries/list";
 import { IUser } from "../../interfaces/user";
 import { ListModel } from "../../models/list";
-
-const createUser = async (url: string) => {
-	const userQueries = new UserQueries();
-	const email = "user@test.com";
-	await userQueries.createUser(url, { createUser: { email, password: "Password123" } });
-	const { data } = await userQueries.findOneUser(url, { email });
-	return data?.user;
-};
+import { createUser } from "../__utils__/createUser";
 
 describe("Create list", () => {
 	const listQueries = new ListQueries();

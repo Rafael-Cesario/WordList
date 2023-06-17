@@ -8,5 +8,6 @@ export default defineConfig({
 		globals: true,
 		singleThread: true,
 		// silent: true,
+		exclude: ["**/node_modules/**", "**/__utils__/**"],
 	},
 });

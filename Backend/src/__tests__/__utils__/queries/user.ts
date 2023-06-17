@@ -1,6 +1,6 @@
 import request from "supertest-graphql";
 import gql from "graphql-tag";
-import { ICreateUser, IFindOneUser, ILogin, RCreateUser, RFindOneUser, RLogin } from "../../interfaces/user";
+import { ICreateUser, IFindOneUser, ILogin, RCreateUser, RFindOneUser, RLogin } from "../../../interfaces/user";
 
 export class UserQueries {
 	private FIND_ONE_USER = gql`

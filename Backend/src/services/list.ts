@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { ICreateList, IReadLists } from "../interfaces/list";
 import { ListModel } from "../models/list";
 import { checkData } from "../utils/checkData";
@@ -7,10 +6,10 @@ import { UserModel } from "../models/user";
 
 export class ServiceList {
 	async readLists({ userID }: IReadLists) {
-		const lists = await ListModel.find({ userID: new mongoose.Types.ObjectId(userID) });
+		const lists = await ListModel.find({ userID });
 		if (lists.length) return lists;
 
-		const user = await UserModel.findOne({ _id: new mongoose.Types.ObjectId(userID) });
+		const user = await UserModel.findOne({ _id: userID });
 		if (!user) throw new GraphQLError("User not found");
 
 		return [];

@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 export const typeList = gql`
 	type list {
 		userID: String!
-		ID: String!
+		_id: String!
 		name: String!
 	}
 
