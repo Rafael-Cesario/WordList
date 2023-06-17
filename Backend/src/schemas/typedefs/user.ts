@@ -19,6 +19,7 @@ export const typeUser = gql`
 	type RLogin {
 		message: String!
 		token: String!
+		ID: String!
 	}
 
 	input ICreateUser {

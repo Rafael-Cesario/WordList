@@ -29,6 +29,7 @@ export class UserQueries {
 			login(login: $login) {
 				token
 				message
+				ID
 			}
 		}
 	`;

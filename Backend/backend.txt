@@ -10,7 +10,7 @@
     - Search for a user.
     - Compare passwords.
     - Generate a token.
-    - Return: token, userID, email.
+    - Return: token, userID.
     
     
     

@@ -32,8 +32,9 @@ describe("Login", () => {
 		expect(response.error).toBe("Invalid credentials");
 	});
 
-	it("Returns a token", async () => {
+	it("Returns a token, and the user's ID", async () => {
 		const { data } = await userQueries.login(url, { login: defaultUser });
 		expect(data).toHaveProperty("token");
+		expect(data).toHaveProperty("ID");
 	});
 });

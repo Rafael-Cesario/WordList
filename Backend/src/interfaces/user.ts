@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 
 export interface IUser {
 	ID: mongoose.Types.ObjectId;
@@ -35,5 +35,6 @@ export interface ILogin {
 
 export interface RLogin {
 	token: string;
+	ID: ObjectId;
 	message: string;
 }
