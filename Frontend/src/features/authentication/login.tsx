@@ -43,15 +43,17 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 		const hasEmptyValues = Object.keys(emptyValues).length;
 		if (hasEmptyValues) return setErrors({ ...defaultValues, ...emptyValues });
 
-		const { token, error } = await requestLogin({ login: values });
+		const { user, error } = await requestLogin({ login: values });
 		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Ops, Erro", type: "error" });
 
-		const userCookie = { email: values.email, token };
+		const userCookie = { email: values.email, ...user };
 		const expires = new Date();
-		expires.setDate(expires.getDate() + 7);
-		createCookie("user", userCookie, expires);
 
+		expires.setDate(expires.getDate() + 7);
+
+		createCookie("user", userCookie, expires);
 		router.push("/");
+		setNotificationValues({ isOpen: true, message: "Login efetuado com sucesso, boas vindas.", title: "Login efetuado", type: "success" });
 	};
 
 	return (

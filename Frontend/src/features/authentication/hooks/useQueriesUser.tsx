@@ -22,7 +22,7 @@ export const useQueriesUser = () => {
 	const requestLogin = async (login: ILogin) => {
 		try {
 			const { data } = await mutationLogin({ variables: login });
-			return { token: data?.login.token };
+			return { user: { token: data?.login.token, ID: data?.login.ID } };
 		} catch (e: any) {
 			return { error: catchError(e.message, "user") };
 		}

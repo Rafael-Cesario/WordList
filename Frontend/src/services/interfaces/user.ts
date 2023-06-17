@@ -1,3 +1,5 @@
+import { ObjectId } from "mongoose";
+
 export interface IUser {
 	email: string;
 	password: string;
@@ -33,6 +35,7 @@ export interface ILogin {
 export interface RLogin {
 	login: {
 		token: string;
+		ID: ObjectId;
 		message: string;
 	};
 }
