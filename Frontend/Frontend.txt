@@ -1,5 +1,7 @@
 ===== Globals ===========
 
+    - Verify if user is looged, if not send to authentication page with parallel routes.
+    x Route handlers to set and get cookies.
     - Notification component and Context
 
 
@@ -8,7 +10,6 @@
 
 ===== Authentication page ==================
 
-    - Verify if user is looged, if not send to authentication page with parallel routes.
     
     - CreateAccount
         - show and hide password

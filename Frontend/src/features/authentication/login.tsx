@@ -4,10 +4,11 @@ import { Password } from "./password";
 import { produce } from "immer";
 import { Fields } from "./createAccount";
 import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
-import { useQueriesUser } from "./hooks/useQueriesUser";
+import { useQueriesUser } from "../../hooks/useQueriesUser";
 import { NotificationContext } from "@/context/notification";
 import { createCookie } from "@/services/cookies";
 import { useRouter } from "next/navigation";
+import { UserCookies } from "@/services/interfaces/cookies";
 
 interface ILogin {
 	props: {
@@ -46,7 +47,7 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 		const { user, error } = await requestLogin({ login: values });
 		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Ops, Erro", type: "error" });
 
-		const userCookie = { email: values.email, ...user };
+		const userCookie = { email: values.email, ...user } as UserCookies;
 		const expires = new Date();
 
 		expires.setDate(expires.getDate() + 7);

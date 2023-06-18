@@ -1,4 +1,7 @@
+"use server";
+
 import { cookies } from "next/headers";
+import { UserCookies } from "./interfaces/cookies";
 
 export const getUser = () => {
 	const cookieStore = cookies();
@@ -11,5 +14,6 @@ export const getUser = () => {
 	// const token: string = values.token;
 	// todo > verify if token is valid
 
-	return values;
+	return values as UserCookies;
 };
+

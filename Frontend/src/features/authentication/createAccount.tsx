@@ -4,7 +4,7 @@ import { StyledForms } from "./styles/formsStyle";
 import { Password } from "./password";
 import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
 import { Validations } from "@/utils/validationsClass";
-import { useQueriesUser } from "./hooks/useQueriesUser";
+import { useQueriesUser } from "../../hooks/useQueriesUser";
 import { NotificationContext } from "@/context/notification";
 
 interface ILogin {
