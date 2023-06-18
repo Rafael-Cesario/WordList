@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyledCreateList } from "./styles/createListStyle";
+import { NotificationContext } from "@/context/notification";
 
 export const CreateList = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [listName, setListName] = useState("");
+	const { setNotificationValues } = useContext(NotificationContext);
 
 	const createList = () => {
-		console.log({ listName });
+		if (!listName) return setNotificationValues({ isOpen: true, message: "Digite um nome para sua lista", title: "Lista sem nome", type: "error" });
 	};
 
 	return (
