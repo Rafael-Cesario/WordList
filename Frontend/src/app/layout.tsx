@@ -2,7 +2,7 @@ import { AllProviders } from "@/components/providers";
 import { GlobalStyle } from "@/styles/globalStyle";
 import { Roboto_Slab } from "next/font/google";
 import { Notification } from "@/components/notification";
-import { getUser } from "@/services/getUser";
+import { authenticationUser } from "@/services/authentication";
 
 export const metadata = {
 	title: "WordList",
@@ -14,7 +14,7 @@ const robotoSlab = Roboto_Slab({
 });
 
 const RootLayout = ({ children, authentication }: { children: React.ReactNode; authentication: React.ReactNode }) => {
-	const user = getUser();
+	const isLoggedIn = authenticationUser();
 
 	return (
 		<html lang="pt-br" className={robotoSlab.className}>
@@ -22,7 +22,7 @@ const RootLayout = ({ children, authentication }: { children: React.ReactNode; a
 				<AllProviders>
 					<GlobalStyle />
 					<Notification />
-					{user ? children : authentication}
+					{isLoggedIn ? children : authentication}
 				</AllProviders>
 			</body>
 		</html>
