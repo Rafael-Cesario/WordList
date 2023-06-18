@@ -1,14 +1,20 @@
-"use server";
+import { SetCookies, UserCookies } from "./interfaces/cookies";
 
-import { cookies } from "next/headers";
+export class Cookies {
+	async get(key: string) {
+		const response = await fetch(`/api/cookies/${key}`);
+		const data = (await response.json()) as { name: string; value: string };
+		const cookies = JSON.parse(data.value) as UserCookies;
+		return cookies;
+	}
 
-export const createCookie = (name: string, data: object, expires: Date) => {
-	const value = JSON.stringify(data);
+	async set(key: string, cookies: SetCookies) {
+		const response = await fetch(`/api/cookies/${key}`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(cookies),
+		});
 
-	cookies().set({
-		name,
-		value,
-		expires,
-		httpOnly: true,
-	});
-};
+		return response;
+	}
+}

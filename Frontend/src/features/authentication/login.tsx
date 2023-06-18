@@ -6,9 +6,9 @@ import { Fields } from "./createAccount";
 import { checkForEmptyValues } from "@/utils/checkForEmptyValues";
 import { useQueriesUser } from "../../hooks/useQueriesUser";
 import { NotificationContext } from "@/context/notification";
-import { createCookie } from "@/services/cookies";
 import { useRouter } from "next/navigation";
 import { UserCookies } from "@/services/interfaces/cookies";
+import { Cookies } from "@/services/cookies";
 
 interface ILogin {
 	props: {
@@ -47,13 +47,16 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 		const { user, error } = await requestLogin({ login: values });
 		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Ops, Erro", type: "error" });
 
+		const cookies = new Cookies();
 		const userCookie = { email: values.email, ...user } as UserCookies;
-		const expires = new Date();
 
-		expires.setDate(expires.getDate() + 7);
+		await cookies.set("user", {
+			key: "user",
+			value: JSON.stringify(userCookie),
+			maxAge: 60 * 60 * 24 * 7, // 7 days
+		});
 
-		createCookie("user", userCookie, expires);
-		router.push("/");
+		router.refresh();
 		setNotificationValues({ isOpen: true, message: "Login efetuado com sucesso, boas vindas.", title: "Login efetuado", type: "success" });
 	};
 

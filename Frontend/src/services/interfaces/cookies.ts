@@ -5,3 +5,9 @@ export interface UserCookies {
 	ID: ObjectId;
 	token: string;
 }
+
+export interface SetCookies {
+	key: string;
+	value: string;
+	maxAge: number;
+}
