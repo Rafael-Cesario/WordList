@@ -33,7 +33,16 @@
 
 
 ===== Home ======================
+    
     x Header
-        - create list
+        - create list 
+            - Tests
+        x Perfil
+    
+    x Main
+        - Read lists
+        x List component
+        x Loading lists skeleton
         
+
 

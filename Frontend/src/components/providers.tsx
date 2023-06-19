@@ -7,10 +7,10 @@ import { NotificationProvider } from "@/context/notification";
 
 export const AllProviders = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<StyledComponentsRegistry>
-			<ApolloProvider client={client}>
+		<ApolloProvider client={client}>
+			<StyledComponentsRegistry>
 				<NotificationProvider>{children}</NotificationProvider>
-			</ApolloProvider>
-		</StyledComponentsRegistry>
+			</StyledComponentsRegistry>
+		</ApolloProvider>
 	);
 };

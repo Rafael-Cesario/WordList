@@ -1,5 +1,3 @@
-"use client";
-
 import { StyledAuthentication } from "../../features/authentication/styles/authenticationStyle";
 import { AuthenticationForms } from "./authenticationForms";
 

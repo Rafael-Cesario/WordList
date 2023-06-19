@@ -1,4 +1,6 @@
-import { ICreateList } from "@/services/interfaces/list";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { client } from "@/services/client";
+import { ICreateList, IReadLists, RReadLists } from "@/services/interfaces/list";
 import { QueriesList } from "@/services/queries/list";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
@@ -19,5 +21,16 @@ export const useQueriesList = () => {
 		return { message, error };
 	};
 
-	return { requestCreateList };
+	const requestReadLists = async (readLists: IReadLists) => {
+		try {
+			const { data } = await client.query<RReadLists>({ query: queriesList.READ_LISTS, variables: readLists });
+			const lists = data.readLists;
+			return { lists };
+		} catch (e: any) {
+			console.log(`Read Lists: ${e.message}`);
+			return { error: "Um erro ocorreu tentando carregar suas listas, por favor recarregue a página." };
+		}
+	};
+
+	return { requestCreateList, requestReadLists };
 };

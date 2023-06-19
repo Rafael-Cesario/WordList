@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 "use client";
-
 import { createContext, useState } from "react";
 
 interface INotification {
