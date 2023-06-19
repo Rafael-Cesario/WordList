@@ -5,6 +5,7 @@ import { Cookies } from "@/services/cookies";
 import { useContext, useEffect, useState } from "react";
 import { NotificationContext } from "@/context/notification";
 import { List } from "@/services/interfaces/list";
+import { Loading } from "./loading";
 
 export const ListContainer = () => {
 	const [{ lists, loading }, setLists] = useState<{ loading: boolean; lists: List[] }>({ loading: true, lists: [] });
@@ -27,7 +28,7 @@ export const ListContainer = () => {
 
 	return (
 		<StyledListContainer>
-			{loading && "Loading component"}
+			{loading && <Loading />}
 			{loading || lists.map((list) => <div key={String(list._id)}>{list.name}</div>)}
 		</StyledListContainer>
 	);
