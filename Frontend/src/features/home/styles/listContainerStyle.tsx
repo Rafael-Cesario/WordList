@@ -3,6 +3,13 @@ import { styled } from "styled-components";
 
 export const StyledListContainer = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
-	margin: 5rem 2rem;
+	margin: 10rem 2rem;
+
+	.lists {
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 1000px;
+	}
 `;

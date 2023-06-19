@@ -4,11 +4,12 @@ import { StyledListContainer } from "./styles/listContainerStyle";
 import { Cookies } from "@/services/cookies";
 import { useContext, useEffect, useState } from "react";
 import { NotificationContext } from "@/context/notification";
-import { List } from "@/services/interfaces/list";
+import { IList } from "@/services/interfaces/list";
 import { Loading } from "./loading";
+import { List } from "./list";
 
 export const ListContainer = () => {
-	const [{ lists, loading }, setLists] = useState<{ loading: boolean; lists: List[] }>({ loading: true, lists: [] });
+	const [{ lists, loading }, setLists] = useState<{ loading: boolean; lists: IList[] }>({ loading: true, lists: [] });
 	const { requestReadLists } = useQueriesList();
 	const { setNotificationValues } = useContext(NotificationContext);
 
@@ -29,7 +30,7 @@ export const ListContainer = () => {
 	return (
 		<StyledListContainer>
 			{loading && <Loading />}
-			{loading || lists.map((list) => <div key={String(list._id)}>{list.name}</div>)}
+			<div className="lists">{loading || lists.map((list) => <List key={String(list._id)} props={{ list }} />)}</div>
 		</StyledListContainer>
 	);
 };

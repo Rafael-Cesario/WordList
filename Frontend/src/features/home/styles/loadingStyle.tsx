@@ -2,17 +2,17 @@ import { styled } from "styled-components";
 
 export const StyledLoading = styled.div`
 	display: flex;
+	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
 	max-width: 1000px;
-	margin: 5rem 0;
 
-	div {
-		margin: 1rem;
+	.loading {
 		width: 300px;
 		height: 80px;
 		background-color: white;
-		opacity: 10%;
 		border-radius: 2px;
+		margin: 1rem;
+		opacity: 10%;
 	}
 `;
