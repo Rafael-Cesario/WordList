@@ -13,7 +13,7 @@ export const StyledCreateList = styled.div`
 	margin: 3rem 0;
 	border-radius: 2px;
 	background-color: ${theme.container};
-	border: 4px solid #11111120;
+	border-top: 1rem solid ${theme.primary};
 	box-shadow: 0 10px 4px #11111110;
 
 	display: flex;

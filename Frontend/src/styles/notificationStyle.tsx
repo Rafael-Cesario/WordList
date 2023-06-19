@@ -8,7 +8,7 @@ export const StyledNotification = styled.div<{ type: "success" | "error" }>`
 	padding: 1rem 4rem 1rem 2rem;
 	border-radius: 2px;
 	box-shadow: 10px 10px 2px #11111110;
-	right: 0;
+	left: 0;
 	top: 0;
 	max-width: 300px;
 	z-index: 1;

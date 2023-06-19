@@ -35,4 +35,9 @@ export const GlobalStyle = createGlobalStyle`
             transform: scale(0.95);
         }
     }
+
+    .title {
+        font-size: 1.5rem;
+		font-weight: bold;
+    }
 `;

@@ -5,6 +5,10 @@ export interface IErrorsCode {
 		duplicated: string;
 		"Invalid credentials": string;
 	};
+
+	list: {
+		duplicated: string;
+	};
 }
 
 export const errorsCode: IErrorsCode = {
@@ -13,5 +17,9 @@ export const errorsCode: IErrorsCode = {
 	user: {
 		duplicated: "Desculpe, este email não esta disponível ou já foi registrado.",
 		"Invalid credentials": "Parece que seu email ou sua senha não estão certos.",
+	},
+
+	list: {
+		duplicated: "Uma lista com o mesmo nome já existe.",
 	},
 };

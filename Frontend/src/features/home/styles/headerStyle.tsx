@@ -7,10 +7,6 @@ export const StyledHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
 
-	.title {
-		font-weight: bold;
-	}
-
 	.menu {
 		position: relative;
 
