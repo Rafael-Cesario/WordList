@@ -3,7 +3,7 @@ import { theme } from "@/styles/theme";
 import { styled } from "styled-components";
 
 export const StyledList = styled.div`
-	width: 250px;
+	width: 300px;
 	height: 80px;
 	margin: 1rem;
 	border-radius: 2px;

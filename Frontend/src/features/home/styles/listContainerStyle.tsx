@@ -4,12 +4,13 @@ import { styled } from "styled-components";
 export const StyledListContainer = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
 	margin: 10rem 2rem;
+	justify-content: center;
 
 	.lists {
-		display: flex;
-		flex-wrap: wrap;
-		max-width: 1000px;
+		width: 80%;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		justify-items: center;
 	}
 `;

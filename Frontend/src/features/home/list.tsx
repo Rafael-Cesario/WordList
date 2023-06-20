@@ -4,10 +4,12 @@ import { useState } from "react";
 
 export const List = ({ props: { list } }: { props: { list: IList } }) => {
 	const [showMenu, setShowMenu] = useState(false);
+	const [editable, setEditable] = useState(false);
 
 	return (
 		<StyledList onClick={() => setShowMenu(!showMenu)}>
 			{list.name}
+			<input type="text" placeholder="Nome" />
 
 			{showMenu && (
 				<div className="menu">
