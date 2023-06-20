@@ -3,8 +3,6 @@ import { theme } from "@/styles/theme";
 import { styled } from "styled-components";
 
 export const StyledList = styled.div`
-	width: 300px;
-	height: 80px;
 	margin: 1rem;
 	border-radius: 2px;
 	border-left: 10px solid ${theme.primary};
@@ -12,7 +10,6 @@ export const StyledList = styled.div`
 	box-shadow: 0 10px 2px #11111150;
 	display: flex;
 	align-items: center;
-	padding-left: 2rem;
 	text-transform: capitalize;
 	cursor: pointer;
 	transition: 0.3s;
@@ -21,6 +18,19 @@ export const StyledList = styled.div`
 
 	&:hover {
 		transform: scale(1.05);
+	}
+
+	.listName,
+	.editable {
+		width: 300px;
+		padding: 1.5rem 1rem;
+		font-weight: bold;
+		font-size: 1rem;
+	}
+
+	.editable {
+		color: #666;
+		font-size: 1.1rem;
 	}
 
 	.menu {
