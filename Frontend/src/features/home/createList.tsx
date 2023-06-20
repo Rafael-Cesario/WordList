@@ -43,7 +43,14 @@ export const CreateList = () => {
 
 			{isOpen && (
 				<StyledCreateList>
-					<input className="name" type="text" placeholder="Nome" onChange={(e) => setListName(e.target.value)} />
+					<input
+						onKeyUp={(e) => e.key === "Enter" && createList()}
+						autoFocus={true}
+						className="name"
+						type="text"
+						placeholder="Nome"
+						onChange={(e) => setListName(e.target.value)}
+					/>
 					<button onClick={() => createList()} className="create">
 						Criar
 					</button>

@@ -40,7 +40,7 @@
         - create list
             - Update global state
             x Update cache
-            x Input autoFocus
+            - Input autoFocus
             x Tests
 
         x Perfil
