@@ -18,13 +18,21 @@ export const CreateList = () => {
 		const cookies = new Cookies();
 		const userCookies = await cookies.get("user");
 
-		const createList = { name: listName, userID: userCookies.ID };
-		const { message, error } = await requestCreateList({ createList });
+		const createList = { name: listName, userID: String(userCookies.ID) };
+		const { list, error } = await requestCreateList({ createList });
 		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Erro ao criar lista", type: "error" });
+
+		console.log({ list });
 
 		setListName("");
 		setIsOpen(false);
-		setNotificationValues({ isOpen: true, message, title: "Nova Lista", type: "success" });
+
+		setNotificationValues({
+			isOpen: true,
+			message: "Sua nova lista deve estar aparecendo no final de suas listas",
+			title: "Nova Lista",
+			type: "success",
+		});
 	};
 
 	return (

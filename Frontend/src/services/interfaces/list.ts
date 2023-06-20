@@ -1,4 +1,3 @@
-
 export interface IList {
 	userID: string;
 	_id: string;
@@ -22,6 +21,6 @@ export interface ICreateList {
 
 export interface RCreateList {
 	createList: {
-		message: string;
+		list: IList;
 	};
 }

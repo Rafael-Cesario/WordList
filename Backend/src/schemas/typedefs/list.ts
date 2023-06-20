@@ -8,7 +8,7 @@ export const typeList = gql`
 	}
 
 	type RCreateList {
-		message: String!
+		list: list!
 	}
 
 	input ICreateList {

@@ -23,6 +23,6 @@ export interface ICreateList {
 
 export interface RCreateList {
 	createList: {
-		message: string;
+		list: List;
 	};
 }

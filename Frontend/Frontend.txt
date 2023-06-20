@@ -4,6 +4,7 @@
     - Route handlers to set and get cookies.
     - Notification component and Context
     - Redux Store
+    - List slice
 
 
 
@@ -37,6 +38,7 @@
     
     x Header
         - create list
+            x Update global state
             x Update cache
             x Input autoFocus
             x Tests
@@ -48,7 +50,8 @@
             
     
     > Main
-        - Read lists
+        - Load lists
+        x Read lists global State
         - List component
         - Loading lists skeleton
         x Rename the list

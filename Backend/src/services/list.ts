@@ -27,7 +27,7 @@ export class ServiceList {
 		const list = await ListModel.findOne({ name });
 		if (list) throw new GraphQLError("Duplicated: A list with the same name already exist");
 
-		await ListModel.create({ name, userID });
-		return { message: "A new list was created" };
+		const newList = await ListModel.create({ name, userID });
+		return { list: { _id: newList._id, userID, name } };
 	}
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from "@/services/client";
-import { ICreateList, IReadLists, RReadLists } from "@/services/interfaces/list";
+import { ICreateList, IReadLists, RCreateList, RReadLists } from "@/services/interfaces/list";
 import { QueriesList } from "@/services/queries/list";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
@@ -8,19 +8,21 @@ import { useMutation } from "@apollo/client";
 export const useQueriesList = () => {
 	const queriesList = new QueriesList();
 
-	const [mutationCreateList] = useMutation(queriesList.CREATE_LIST);
+	const [mutationCreateList] = useMutation<RCreateList>(queriesList.CREATE_LIST);
 
 	const requestCreateList = async (createList: ICreateList) => {
-		const message = "Uma nova lista foi criada";
+		let list: object = {};
 		let error = "";
 
 		try {
-			await mutationCreateList({ variables: createList });
+			const { data } = await mutationCreateList({ variables: createList });
+			if (!data) throw new Error("Data is undefined");
+			list = data.createList.list;
 		} catch (e: any) {
 			error = catchError(e.message, "list");
 		}
 
-		return { message, error };
+		return { list, error };
 	};
 
 	const requestReadLists = async (readLists: IReadLists) => {

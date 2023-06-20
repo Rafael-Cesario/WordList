@@ -4,7 +4,11 @@ export class QueriesList {
 	CREATE_LIST = gql`
 		mutation CreateList($createList: ICreateList!) {
 			createList(createList: $createList) {
-				message
+				list {
+					_id
+					userID
+					name
+				}
 			}
 		}
 	`;
