@@ -1,16 +1,18 @@
 "use client";
-
 import { useContext, useState } from "react";
 import { StyledCreateList } from "./styles/createListStyle";
 import { NotificationContext } from "@/context/notification";
 import { Cookies } from "@/services/cookies";
 import { useQueriesList } from "@/hooks/useQueriesList";
+import { useDispatch } from "react-redux";
+import { listSlice } from "./context/listSlice";
 
 export const CreateList = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [listName, setListName] = useState("");
 	const { setNotificationValues } = useContext(NotificationContext);
 	const { requestCreateList } = useQueriesList();
+	const dispatch = useDispatch();
 
 	const createList = async () => {
 		if (!listName) return setNotificationValues({ isOpen: true, message: "Digite um nome para sua lista", title: "Lista sem nome", type: "error" });
@@ -22,7 +24,7 @@ export const CreateList = () => {
 		const { list, error } = await requestCreateList({ createList });
 		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Erro ao criar lista", type: "error" });
 
-		console.log({ list });
+		dispatch(listSlice.actions.createList({ list }));
 
 		setListName("");
 		setIsOpen(false);

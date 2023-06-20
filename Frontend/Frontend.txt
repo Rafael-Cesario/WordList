@@ -38,7 +38,7 @@
     
     x Header
         - create list
-            x Update global state
+            - Update global state
             x Update cache
             x Input autoFocus
             x Tests
@@ -51,7 +51,7 @@
     
     > Main
         - Load lists
-        x Read lists global State
+        - Read lists global State
         - List component
         - Loading lists skeleton
         x Rename the list

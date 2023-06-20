@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from "@/services/client";
-import { ICreateList, IReadLists, RCreateList, RReadLists } from "@/services/interfaces/list";
+import { ICreateList, IList, IReadLists, RCreateList, RReadLists } from "@/services/interfaces/list";
 import { QueriesList } from "@/services/queries/list";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
@@ -11,7 +11,7 @@ export const useQueriesList = () => {
 	const [mutationCreateList] = useMutation<RCreateList>(queriesList.CREATE_LIST);
 
 	const requestCreateList = async (createList: ICreateList) => {
-		let list: object = {};
+		let list: IList = { userID: "", _id: "", name: "" };
 		let error = "";
 
 		try {

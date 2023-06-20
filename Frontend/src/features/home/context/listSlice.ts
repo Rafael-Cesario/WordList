@@ -19,5 +19,3 @@ export const listSlice = createSlice({
 		},
 	},
 });
-
-export const { createList, loadLists } = listSlice.actions;
