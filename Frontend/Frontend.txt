@@ -3,6 +3,7 @@
     - Verify if user is looged, if not send to authentication page with parallel routes.
     - Route handlers to set and get cookies.
     - Notification component and Context
+    - Redux Store
 
 
 

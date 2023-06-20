@@ -1,13 +1,12 @@
-import { ObjectId } from "mongoose";
 
 export interface IList {
 	userID: string;
-	_id: ObjectId;
+	_id: string;
 	name: string;
 }
 
 export interface IReadLists {
-	userID: ObjectId;
+	userID: string;
 }
 
 export interface RReadLists {
@@ -16,7 +15,7 @@ export interface RReadLists {
 
 export interface ICreateList {
 	createList: {
-		userID: ObjectId;
+		userID: string;
 		name: string;
 	};
 }
