@@ -14,9 +14,11 @@ export const useQueriesList = () => {
 		const message = "Uma nova lista foi criada";
 		let error = "";
 
-		await mutationCreateList({ variables: createList }).catch((e) => {
+		try {
+			await mutationCreateList({ variables: createList });
+		} catch (e: any) {
 			error = catchError(e.message, "list");
-		});
+		}
 
 		return { message, error };
 	};

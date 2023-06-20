@@ -35,14 +35,40 @@
 ===== Home ======================
     
     x Header
-        - create list 
-            - Tests
+        - create list
+            x Update cache
+            x Input autoFocus
+            x Tests
+
         x Perfil
+            - Design the layout
+            - Logout
+            - change how many words per wordList.
+            
     
-    x Main
+    > Main
         - Read lists
-        x List component
-        x Loading lists skeleton
+        - List component
+        - Loading lists skeleton
+        x Rename the list
+        x Delete the list    
+        x Tests
+       
+
+
+===== List =====
+
+    x Add new words
+    x Add a group of words
+    x Separete words by group with x words per group
+    
+    
         
-
-
+        
+        
+        
+        
+        
+        
+        
+        
