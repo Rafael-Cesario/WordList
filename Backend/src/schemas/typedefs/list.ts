@@ -7,13 +7,23 @@ export const typeList = gql`
 		name: String!
 	}
 
+	input ICreateList {
+		userID: String!
+		name: String!
+	}
+
 	type RCreateList {
 		list: list!
 	}
 
-	input ICreateList {
+	input IRenameList {
 		userID: String!
-		name: String!
+		ID: String!
+		newName: String!
+	}
+
+	type RRenameList {
+		list: list!
 	}
 
 	type Query {
@@ -22,5 +32,6 @@ export const typeList = gql`
 
 	type Mutation {
 		createList(createList: ICreateList!): RCreateList!
+		renameList(renameList: IRenameList!): RRenameList!
 	}
 `;

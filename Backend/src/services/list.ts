@@ -1,4 +1,4 @@
-import { ICreateList, IReadLists } from "../interfaces/list";
+import { ICreateList, IReadLists, IRenameList } from "../interfaces/list";
 import { ListModel } from "../models/list";
 import { checkData } from "../utils/checkData";
 import { GraphQLError } from "graphql";
@@ -29,5 +29,19 @@ export class ServiceList {
 
 		const newList = await ListModel.create({ name, userID });
 		return { list: { _id: newList._id, userID, name } };
+	}
+
+	async renameList({ renameList }: IRenameList) {
+		const emptyValues = checkData(renameList);
+		if (emptyValues) throw new GraphQLError(emptyValues);
+
+		const { ID, userID, newName } = renameList;
+		const alreadyHasList = await ListModel.findOne({ userID: userID, name: newName });
+		if (alreadyHasList) throw new GraphQLError("duplicated: A list with the same name already exist");
+
+		const list = await ListModel.findOneAndUpdate({ _id: ID, userID }, { name: newName }, { new: true });
+		if (!list) throw new GraphQLError("notFound: List not found");
+
+		return { list };
 	}
 }

@@ -17,16 +17,20 @@
     
 ===== Lists =====
 
-- read lists
+- Read lists
     - if there is no list, check if the user exist.
 
-- create lists
+- Create lists
     - Can't create lists for an user that don't exist.
     - Can't create lists with same name.
-    x Return the new list.
+    - Return the new list.
     
-- rename lists
-- delete lists
+- Rename lists
+    - Can't rename if a list with the same name already exist.
+    - Return the new list.
+    x Tests
+
+- Delete lists
 
 
 
