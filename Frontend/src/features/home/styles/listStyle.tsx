@@ -16,6 +16,7 @@ export const StyledList = styled.div`
 	cursor: pointer;
 	transition: 0.3s;
 	position: relative;
+	user-select: none;
 
 	&:hover {
 		transform: scale(1.05);
@@ -26,6 +27,7 @@ export const StyledList = styled.div`
 		top: -2.5rem;
 		right: -5px;
 		display: flex;
+		animation: show 0.2s ease-out;
 
 		.option {
 			margin: 5px;
@@ -33,7 +35,6 @@ export const StyledList = styled.div`
 			padding: 5px 20px;
 			font-weight: bold;
 
-			
 			&:nth-child(3) {
 				background-color: ${theme.error};
 			}
@@ -41,6 +42,17 @@ export const StyledList = styled.div`
 			&:hover {
 				background-color: ${theme.container};
 			}
+		}
+	}
+
+	@keyframes show {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+
+		to {
+			opacity: 1;
 		}
 	}
 `;
