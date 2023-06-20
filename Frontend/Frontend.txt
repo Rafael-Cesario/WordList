@@ -55,7 +55,7 @@
         - List component.  
         - Loading lists skeleton
         - list onClick show menu with options. 
-        x Rename the list
+        > Rename the list
         x Delete the list    
         x Tests
        

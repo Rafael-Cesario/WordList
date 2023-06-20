@@ -51,6 +51,7 @@ export const CreateList = () => {
 						placeholder="Nome"
 						onChange={(e) => setListName(e.target.value)}
 					/>
+
 					<button onClick={() => createList()} className="create">
 						Criar
 					</button>
