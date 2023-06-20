@@ -15,8 +15,32 @@ export const StyledList = styled.div`
 	text-transform: capitalize;
 	cursor: pointer;
 	transition: 0.3s;
+	position: relative;
 
 	&:hover {
 		transform: scale(1.05);
+	}
+
+	.menu {
+		position: absolute;
+		top: -2.5rem;
+		right: -5px;
+		display: flex;
+
+		.option {
+			margin: 5px;
+			background-color: ${theme.primary};
+			padding: 5px 20px;
+			font-weight: bold;
+
+			
+			&:nth-child(3) {
+				background-color: ${theme.error};
+			}
+
+			&:hover {
+				background-color: ${theme.container};
+			}
+		}
 	}
 `;

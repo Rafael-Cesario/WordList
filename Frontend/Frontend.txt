@@ -38,22 +38,23 @@
     
     x Header
         - create list
-            - Update global state
-            x Update cache
+            - Update global state. 
             - Input autoFocus
+            x Update cache
             x Tests
 
         x Perfil
-            - Design the layout
-            - Logout
-            - change how many words per wordList.
+            x Design the layout
+            x Logout
+            x change how many words per wordList.
             
     
     > Main
         - Load lists
         - Read lists global State
-        - List component
+        - List component.  
         - Loading lists skeleton
+        - list onClick show menu with options. 
         x Rename the list
         x Delete the list    
         x Tests
