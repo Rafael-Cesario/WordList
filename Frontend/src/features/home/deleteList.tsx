@@ -3,6 +3,8 @@ import { useQueriesList } from "@/hooks/useQueriesList";
 import { Cookies } from "@/services/cookies";
 import { IList } from "@/services/interfaces/list";
 import { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
+import { listSlice } from "./context/listSlice";
 
 interface DeleteListProps {
 	props: {
@@ -16,9 +18,10 @@ export const DeleteList = ({ props: { list, setConfirmDelete } }: DeleteListProp
 
 	const { requestDeleteList } = useQueriesList();
 	const { setNotificationValues } = useContext(NotificationContext);
+	const dispatch = useDispatch();
 
 	const deleteList = async () => {
-		const isSameName = list.name === listName.trim().toLowerCase();
+		const isSameName = list.name.toLowerCase() === listName.trim().toLowerCase();
 		if (!isSameName)
 			return setNotificationValues({
 				isOpen: true,
@@ -33,7 +36,9 @@ export const DeleteList = ({ props: { list, setConfirmDelete } }: DeleteListProp
 		const { message, error } = await requestDeleteList({ deleteList: { ID: list._id, userID: String(userCookies.ID) } });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Error ao deletar lista", message: error });
 
-		setNotificationValues({ isOpen: true, type: "success", title: "Lista deletada", message });
+		dispatch(listSlice.actions.deleteList({ ID: list._id }));
+
+		setNotificationValues({ isOpen: true, type: "success", title: "Lista deletada", message: `${message}: ${list.name}` });
 		setConfirmDelete(false);
 	};
 

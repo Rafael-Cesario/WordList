@@ -61,7 +61,7 @@ export const useQueriesList = () => {
 	};
 
 	const requestDeleteList = async (deleteList: IDeleteList) => {
-		const message = "Sua lista foi deletada com sucesso.";
+		const message = "Sua lista foi deletada com sucesso";
 		let error = "";
 
 		try {

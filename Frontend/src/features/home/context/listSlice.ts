@@ -22,5 +22,10 @@ export const listSlice = createSlice({
 			const listIndex = state.lists.findIndex((list) => list._id === action.payload.ID);
 			state.lists[listIndex].name = action.payload.newName;
 		},
+
+		deleteList: (state, action: { payload: { ID: string } }) => {
+			const listIndex = state.lists.findIndex((list) => list._id === action.payload.ID);
+			state.lists.splice(listIndex, 1);
+		},
 	},
 });

@@ -9,7 +9,6 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [editable, setEditable] = useState(false);
 	const [listName, setListName] = useState(list.name);
-
 	const [confirmDelete, setConfirmDelete] = useState(false);
 
 	return (
