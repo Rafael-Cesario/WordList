@@ -38,3 +38,16 @@ export interface RRenameList {
 		list: IList;
 	};
 }
+
+export interface IDeleteList {
+	deleteList: {
+		ID: string;
+		userID: string;
+	};
+}
+
+export interface RDeleteList {
+	deleteList: {
+		message: string;
+	};
+}

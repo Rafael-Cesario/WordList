@@ -1,6 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from "@/services/client";
-import { ICreateList, IList, IReadLists, IRenameList, RCreateList, RReadLists, RRenameList } from "@/services/interfaces/list";
+import {
+	ICreateList,
+	IDeleteList,
+	IList,
+	IReadLists,
+	IRenameList,
+	RCreateList,
+	RDeleteList,
+	RReadLists,
+	RRenameList,
+} from "@/services/interfaces/list";
 import { QueriesList } from "@/services/queries/list";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
@@ -10,6 +20,7 @@ export const useQueriesList = () => {
 
 	const [mutationCreateList] = useMutation<RCreateList>(queriesList.CREATE_LIST);
 	const [mutationRenameList] = useMutation<RRenameList>(queriesList.RENAME_LIST);
+	const [mutationDeleteList] = useMutation<RDeleteList>(queriesList.DELETE_LIST);
 
 	const requestCreateList = async (createList: ICreateList) => {
 		let list: IList = { userID: "", _id: "", name: "" };
@@ -49,5 +60,18 @@ export const useQueriesList = () => {
 		return { message, error };
 	};
 
-	return { requestCreateList, requestReadLists, requestRenameList };
+	const requestDeleteList = async (deleteList: IDeleteList) => {
+		const message = "Sua lista foi deletada com sucesso.";
+		let error = "";
+
+		try {
+			await mutationDeleteList({ variables: deleteList });
+		} catch (e: any) {
+			error = catchError(e.message, "list");
+		}
+
+		return { message, error };
+	};
+
+	return { requestCreateList, requestReadLists, requestRenameList, requestDeleteList };
 };

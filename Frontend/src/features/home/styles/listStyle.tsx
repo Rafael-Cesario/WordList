@@ -130,6 +130,7 @@ export const StyledList = styled.div`
 			label {
 				display: block;
 				margin: 2rem 1rem 5px 0rem;
+				user-select: text;
 			}
 
 			input {

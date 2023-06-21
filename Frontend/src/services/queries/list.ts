@@ -34,4 +34,12 @@ export class QueriesList {
 			}
 		}
 	`;
+
+	DELETE_LIST = gql`
+		mutation DeleteList($deleteList: IDeleteList!) {
+			deleteList(deleteList: $deleteList) {
+				message
+			}
+		}
+	`;
 }
