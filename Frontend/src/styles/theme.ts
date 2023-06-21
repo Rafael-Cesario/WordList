@@ -1,7 +1,7 @@
 export const theme = {
 	primary: "#19446e",
-	background: "#151515",
-	container: "#202020",
+	background: "#101010",
+	container: "#151515",
 	success: "#18c061",
-	error: "crimson",
+	error: "#bb3434",
 };
