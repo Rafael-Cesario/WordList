@@ -17,5 +17,10 @@ export const listSlice = createSlice({
 		loadLists: (state, action: { payload: { lists: IList[] } }) => {
 			state.lists = action.payload.lists;
 		},
+
+		renameList: (state, action: { payload: { ID: string; newName: string } }) => {
+			const listIndex = state.lists.findIndex((list) => list._id === action.payload.ID);
+			state.lists[listIndex].name = action.payload.newName;
+		},
 	},
 });

@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import { useQueriesList } from "@/hooks/useQueriesList";
 import { Cookies } from "@/services/cookies";
 import { NotificationContext } from "@/context/notification";
+import { useDispatch } from "react-redux";
+import { listSlice } from "./context/listSlice";
 
 export const List = ({ props: { list } }: { props: { list: IList } }) => {
 	const [showMenu, setShowMenu] = useState(false);
@@ -12,6 +14,7 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 
 	const { setNotificationValues } = useContext(NotificationContext);
 	const { requestRenameList } = useQueriesList();
+	const dispatch = useDispatch();
 
 	const renameList = async () => {
 		setEditable(false);
@@ -25,6 +28,7 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 		const { message, error } = await requestRenameList({ renameList: { ID: list._id, userID: String(userCookies.ID), newName: listName } });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao tentar renomear lista", message: error });
 
+		dispatch(listSlice.actions.renameList({ ID: list._id, newName: listName }));
 		setNotificationValues({ isOpen: true, type: "success", title: "Lista renomeada", message });
 	};
 
