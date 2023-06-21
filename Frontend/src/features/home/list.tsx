@@ -2,6 +2,7 @@ import { IList } from "@/services/interfaces/list";
 import { StyledList } from "./styles/listStyle";
 import { useState } from "react";
 import { RenameList } from "./renameList";
+import { ListName } from "./listName";
 
 export const List = ({ props: { list } }: { props: { list: IList } }) => {
 	const [showMenu, setShowMenu] = useState(false);
@@ -10,15 +11,7 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 
 	return (
 		<StyledList>
-			{editable || (
-				<p className="listName" onClick={() => setShowMenu(!showMenu)}>
-					{list.name}
-				</p>
-			)}
-
-			{editable && (
-				<input autoFocus={true} className="editable" type="text" placeholder="Nome" value={listName} onChange={(e) => setListName(e.target.value)} />
-			)}
+			<ListName props={{ editable, showMenu, setShowMenu, list, listName, setListName }} />
 
 			{showMenu && (
 				<div className="menu">
