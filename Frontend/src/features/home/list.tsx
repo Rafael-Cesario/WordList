@@ -1,19 +1,31 @@
 import { IList } from "@/services/interfaces/list";
 import { StyledList } from "./styles/listStyle";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useQueriesList } from "@/hooks/useQueriesList";
+import { Cookies } from "@/services/cookies";
+import { NotificationContext } from "@/context/notification";
 
 export const List = ({ props: { list } }: { props: { list: IList } }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [editable, setEditable] = useState(false);
 	const [listName, setListName] = useState(list.name);
 
-	const renameList = () => {
-		console.log({ listName });
+	const { setNotificationValues } = useContext(NotificationContext);
+	const { requestRenameList } = useQueriesList();
 
+	const renameList = async () => {
 		setEditable(false);
 		setShowMenu(false);
 
 		if (listName === list.name) return;
+
+		const cookies = new Cookies();
+		const userCookies = await cookies.get("user");
+
+		const { message, error } = await requestRenameList({ renameList: { ID: list._id, userID: String(userCookies.ID), newName: listName } });
+		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao tentar renomear lista", message: error });
+
+		setNotificationValues({ isOpen: true, type: "success", title: "Lista renomeada", message });
 	};
 
 	return (

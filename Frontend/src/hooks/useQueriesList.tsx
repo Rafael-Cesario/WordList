@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from "@/services/client";
-import { ICreateList, IList, IReadLists, RCreateList, RReadLists } from "@/services/interfaces/list";
+import { ICreateList, IList, IReadLists, IRenameList, RCreateList, RReadLists, RRenameList } from "@/services/interfaces/list";
 import { QueriesList } from "@/services/queries/list";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
@@ -9,6 +9,7 @@ export const useQueriesList = () => {
 	const queriesList = new QueriesList();
 
 	const [mutationCreateList] = useMutation<RCreateList>(queriesList.CREATE_LIST);
+	const [mutationRenameList] = useMutation<RRenameList>(queriesList.RENAME_LIST);
 
 	const requestCreateList = async (createList: ICreateList) => {
 		let list: IList = { userID: "", _id: "", name: "" };
@@ -31,10 +32,22 @@ export const useQueriesList = () => {
 			const lists = data.readLists;
 			return { lists };
 		} catch (e: any) {
-			console.log(`Read Lists: ${e.message}`);
 			return { error: "Um erro ocorreu tentando carregar suas listas, por favor recarregue a página." };
 		}
 	};
 
-	return { requestCreateList, requestReadLists };
+	const requestRenameList = async (renameList: IRenameList) => {
+		const message = "Sua lista foi renomeada";
+		let error = "";
+
+		try {
+			await mutationRenameList({ variables: renameList });
+		} catch (e: any) {
+			error = catchError(e.message, "list");
+		}
+
+		return { message, error };
+	};
+
+	return { requestCreateList, requestReadLists, requestRenameList };
 };

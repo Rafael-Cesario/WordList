@@ -22,4 +22,16 @@ export class QueriesList {
 			}
 		}
 	`;
+
+	RENAME_LIST = gql`
+		mutation RenameList($renameList: IRenameList!) {
+			renameList(renameList: $renameList) {
+				list {
+					_id
+					userID
+					name
+				}
+			}
+		}
+	`;
 }

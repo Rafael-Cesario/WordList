@@ -11,7 +11,7 @@ export const StyledNotification = styled.div<{ type: "success" | "error" }>`
 	box-shadow: 10px 10px 2px #11111110;
 	left: 0;
 	top: 0;
-	max-width: 300px;
+	width: 300px;
 	z-index: 1;
 
 	.close {

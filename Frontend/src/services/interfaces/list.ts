@@ -24,3 +24,17 @@ export interface RCreateList {
 		list: IList;
 	};
 }
+
+export interface IRenameList {
+	renameList: {
+		userID: string;
+		ID: string;
+		newName: string;
+	};
+}
+
+export interface RRenameList {
+	renameList: {
+		list: IList;
+	};
+}
