@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { IList } from "@/services/interfaces/list";
 import { StyledList } from "./styles/listStyle";
 import { useState } from "react";
@@ -17,8 +18,12 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 
 			{showMenu && (
 				<div className="menu">
-					<button className="option">Entrar</button>
+					<Link href={`${list.name.replaceAll(" ", "-")}-${list._id}`} className="option">
+						Entrar
+					</Link>
+
 					<RenameList props={{ editable, setEditable, list, listName, setShowMenu }} />
+
 					<button className="option" onClick={() => setConfirmDelete(true)}>
 						Deletar
 					</button>

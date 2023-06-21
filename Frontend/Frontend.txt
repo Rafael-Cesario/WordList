@@ -40,7 +40,6 @@
         - create list
             - Update global state. 
             - Input autoFocus
-            x Update cache
             x Tests
 
         x Perfil
@@ -56,15 +55,16 @@
         - Loading lists skeleton
         - list onClick show menu with options. 
         - Rename the list
-        > Delete the list
-            > Show a container with a message about deleting the list
-            x Ask the user to type the name of the list as confirmation 
+        - Delete the list
+            - Show a container with a message about deleting the list
+            - Ask the user to type the name of the list as confirmation 
         x Tests
        
 
 
 ===== List =====
 
+    x Header
     x Add new words
     x Add a group of words
     x Separete words per quantity 

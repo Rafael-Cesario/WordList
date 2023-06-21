@@ -35,10 +35,13 @@ export const StyledList = styled.div`
 		animation: show 0.2s ease-out;
 
 		.option {
+			text-decoration: none;
+			color: white;
 			margin: 5px;
 			background-color: ${theme.primary};
 			padding: 5px 20px;
 			font-weight: bold;
+			font-size: 0.8rem;
 
 			&:nth-child(3) {
 				background-color: ${theme.error};
