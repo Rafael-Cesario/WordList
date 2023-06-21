@@ -1,4 +1,4 @@
-import { ICreateList, IReadLists, IRenameList } from "../interfaces/list";
+import { ICreateList, IDeleteList, IReadLists, IRenameList } from "../interfaces/list";
 import { ListModel } from "../models/list";
 import { checkData } from "../utils/checkData";
 import { GraphQLError } from "graphql";
@@ -43,5 +43,17 @@ export class ServiceList {
 		if (!list) throw new GraphQLError("notFound: List not found");
 
 		return { list };
+	}
+
+	async deleteList({ deleteList }: IDeleteList) {
+		const emptyValues = checkData(deleteList);
+		if (emptyValues) throw new GraphQLError(emptyValues);
+
+		const { ID, userID } = deleteList;
+
+		const list = await ListModel.findOneAndDelete({ _id: ID, userID });
+		if (!list) throw new GraphQLError("notFound: List not found");
+
+		return { message: "Deleted" };
 	}
 }

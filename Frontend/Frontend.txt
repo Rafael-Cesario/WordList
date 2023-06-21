@@ -56,7 +56,9 @@
         - Loading lists skeleton
         - list onClick show menu with options. 
         - Rename the list
-        > Delete the list    
+        > Delete the list
+            > Show a container with a message about deleting the list
+            x Ask the user to type the name of the list as confirmation 
         x Tests
        
 
@@ -65,7 +67,7 @@
 
     x Add new words
     x Add a group of words
-    x Separete words by group with x words per group
+    x Separete words per quantity 
     
     
         

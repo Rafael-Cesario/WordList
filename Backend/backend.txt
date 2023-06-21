@@ -31,6 +31,8 @@
     x Tests
 
 - Delete lists
+    x Delete all the words that belongs to that list
+    x Tests
 
 
 

@@ -26,6 +26,15 @@ export const typeList = gql`
 		list: list!
 	}
 
+	input IDeleteList {
+		userID: String!
+		ID: String!
+	}
+
+	type RDeleteList {
+		message: String!
+	}
+
 	type Query {
 		readLists(userID: String!): [list]!
 	}
@@ -33,5 +42,6 @@ export const typeList = gql`
 	type Mutation {
 		createList(createList: ICreateList!): RCreateList!
 		renameList(renameList: IRenameList!): RRenameList!
+		deleteList(deleteList: IDeleteList!): RDeleteList!
 	}
 `;

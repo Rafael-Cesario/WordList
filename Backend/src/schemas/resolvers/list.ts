@@ -1,4 +1,4 @@
-import { ICreateList, IReadLists, IRenameList } from "../../interfaces/list";
+import { ICreateList, IDeleteList, IReadLists, IRenameList } from "../../interfaces/list";
 import { ServiceList } from "../../services/list";
 
 const serviceList = new ServiceList();
@@ -11,5 +11,6 @@ export const resolverList = {
 	Mutation: {
 		createList: (parent: never, data: ICreateList) => serviceList.createList(data),
 		renameList: (parent: never, data: IRenameList) => serviceList.renameList(data),
+		deleteList: (parent:never, data: IDeleteList) => serviceList.deleteList(data),
 	},
 };

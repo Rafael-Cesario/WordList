@@ -40,3 +40,16 @@ export interface RRenameList {
 		list: List;
 	};
 }
+
+export interface IDeleteList {
+	deleteList: {
+		userID: string;
+		ID: string;
+	};
+}
+
+export interface RDeleteList {
+	deleteList: {
+		message: string;
+	}
+}
