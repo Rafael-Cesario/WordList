@@ -1,36 +1,12 @@
 import { IList } from "@/services/interfaces/list";
 import { StyledList } from "./styles/listStyle";
-import { useContext, useState } from "react";
-import { useQueriesList } from "@/hooks/useQueriesList";
-import { Cookies } from "@/services/cookies";
-import { NotificationContext } from "@/context/notification";
-import { useDispatch } from "react-redux";
-import { listSlice } from "./context/listSlice";
+import { useState } from "react";
+import { RenameList } from "./renameList";
 
 export const List = ({ props: { list } }: { props: { list: IList } }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [editable, setEditable] = useState(false);
 	const [listName, setListName] = useState(list.name);
-
-	const { setNotificationValues } = useContext(NotificationContext);
-	const { requestRenameList } = useQueriesList();
-	const dispatch = useDispatch();
-
-	const renameList = async () => {
-		setEditable(false);
-		setShowMenu(false);
-
-		if (listName === list.name) return;
-
-		const cookies = new Cookies();
-		const userCookies = await cookies.get("user");
-
-		const { message, error } = await requestRenameList({ renameList: { ID: list._id, userID: String(userCookies.ID), newName: listName } });
-		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao tentar renomear lista", message: error });
-
-		dispatch(listSlice.actions.renameList({ ID: list._id, newName: listName }));
-		setNotificationValues({ isOpen: true, type: "success", title: "Lista renomeada", message });
-	};
 
 	return (
 		<StyledList>
@@ -47,19 +23,7 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 			{showMenu && (
 				<div className="menu">
 					<button className="option">Entrar</button>
-
-					{editable || (
-						<button className="option" onClick={() => setEditable(true)}>
-							Renomear
-						</button>
-					)}
-
-					{editable && (
-						<button className="option" onClick={() => renameList()}>
-							Salvar
-						</button>
-					)}
-
+					<RenameList props={{ editable, setEditable, list, listName, setShowMenu }} />
 					<button className="option">Deletar</button>
 				</div>
 			)}
