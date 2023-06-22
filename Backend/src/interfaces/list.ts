@@ -1,9 +1,11 @@
 import { ObjectId } from "mongoose";
+import { Word } from "./word";
 
 export interface List {
 	userID: string;
 	_id: ObjectId;
 	name: string;
+	words: Word[];
 }
 
 export interface IReadLists {
@@ -16,7 +18,7 @@ export interface RReadLists {
 
 export interface ICreateList {
 	createList: {
-		userID: ObjectId;
+		userID: string;
 		name: string;
 	};
 }
@@ -51,5 +53,5 @@ export interface IDeleteList {
 export interface RDeleteList {
 	deleteList: {
 		message: string;
-	}
+	};
 }

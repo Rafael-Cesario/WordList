@@ -6,7 +6,11 @@ export class ListQueries {
 	private CREATE_LIST = gql`
 		mutation CreateList($createList: ICreateList!) {
 			createList(createList: $createList) {
-				message
+				list {
+					_id
+					name
+					userID
+				}
 			}
 		}
 	`;
@@ -23,12 +27,11 @@ export class ListQueries {
 
 	async createList(url: string, { createList }: ICreateList) {
 		const { data, errors } = await request<RCreateList>(url).mutate(this.CREATE_LIST).variables({ createList });
-		return { data: data?.createList.message, error: errors?.[0].message };
+		return { data: data?.createList.list, error: errors?.[0].message };
 	}
 
 	async readLists(url: string, { userID }: IReadLists) {
 		const { data, errors } = await request<RReadLists>(url).query(this.READ_LISTS).variables({ userID });
 		return { data: data?.readLists, error: errors?.[0].message };
 	}
-
 }

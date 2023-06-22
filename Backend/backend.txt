@@ -45,4 +45,4 @@
     - learned and correctTimes must be false and zero.
     - terms should be unique.
     - Returns the number of words added.
-    x Tests
+    - Tests

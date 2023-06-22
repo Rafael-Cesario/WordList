@@ -11,7 +11,7 @@ export class ServiceWord {
 		if (!list) throw new GraphQLError("notFound: List not found");
 
 		words.forEach((word) => {
-			if (!word.term) throw new GraphQLError("emtpyWord: Term can't be emtpy");
+			if (!word.term) throw new GraphQLError("emtpyWord: Term can't be empty");
 			if (!word.definitions) throw new GraphQLError("emtpyWord: Definitions can't be empty");
 			if (word.learned) word.learned = false;
 			if (word.correctTimes > 0) word.correctTimes = 0;
