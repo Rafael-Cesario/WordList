@@ -5,6 +5,7 @@ export const typeList = gql`
 		userID: String!
 		_id: String!
 		name: String!
+		words: [word]!
 	}
 
 	input ICreateList {
