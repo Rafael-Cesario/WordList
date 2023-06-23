@@ -1,11 +1,11 @@
 import { ObjectId } from "mongoose";
-import { Word } from "./word";
+import { IWord } from "./word";
 
 export interface List {
 	userID: string;
 	_id: ObjectId;
 	name: string;
-	words: Word[];
+	words: IWord[];
 }
 
 export interface IReadLists {

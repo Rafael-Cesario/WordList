@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IAddWords, IRemoveWord } from "../interfaces/word";
+import { IAddWords, IRemoveWord, IUpdateWords } from "../interfaces/word";
 import { ListModel } from "../models/list";
 import { GraphQLError } from "graphql";
 
@@ -39,5 +39,18 @@ export class ServiceWord {
 
 		await list.save();
 		return { message: `success: Word "${removedWord.term}" was removed.` };
+	}
+
+	async updateWords({ updateWords }: IUpdateWords) {
+		const { listID, firstWordIndex, updatedWords } = updateWords;
+
+		const list = await ListModel.findOne({ _id: new mongoose.Types.ObjectId(listID) });
+		if (!list) throw new GraphQLError("notFound: List not found");
+		if (firstWordIndex > list.words.length - 1) throw new GraphQLError("notFound: Word index is out of bound.");
+
+		list.words.splice(firstWordIndex, updatedWords.length, ...updatedWords);
+		await list.save();
+
+		return { message: `success: ${updatedWords.length} updated words.` };
 	}
 }

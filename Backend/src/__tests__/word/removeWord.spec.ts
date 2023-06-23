@@ -7,7 +7,7 @@ import { IUser } from "../../interfaces/user";
 import { List } from "../../interfaces/list";
 import { WordQueries } from "../__utils__/queries/word";
 import { ListModel } from "../../models/list";
-import { Word } from "../../interfaces/word";
+import { IWord } from "../../interfaces/word";
 
 describe("Remove word", () => {
 	const listQueries = new ListQueries();
@@ -56,7 +56,7 @@ describe("Remove word", () => {
 		const currentList = await ListModel.findOne({ _id: list._id });
 		const wordIndex = 1;
 
-		const newWords: Word[] = [
+		const newWords: IWord[] = [
 			{ ...defaultWord, term: "01" },
 			{ ...defaultWord, term: "02" },
 			{ ...defaultWord, term: "03" },

@@ -33,8 +33,19 @@ export const typeWord = gql`
 		message: String!
 	}
 
+	input IUpdateWords {
+		listID: String!
+		firstWordIndex: Int!
+		updatedWords: [IWord!]!
+	}
+
+	type RUpdateWords {
+		message: String!
+	}
+
 	type Mutation {
 		addWords(addWords: IAddWords!): RAddWords!
 		removeWord(removeWord: IRemoveWord!): RRemoveWord!
+		updateWords(updateWords: IUpdateWords!): RUpdateWords!
 	}
 `;

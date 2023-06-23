@@ -1,4 +1,4 @@
-export interface Word {
+export interface IWord {
 	term: string;
 	definitions: string;
 	learned: boolean;
@@ -8,7 +8,7 @@ export interface Word {
 export interface IAddWords {
 	addWords: {
 		listID: string;
-		words: Word[];
+		words: IWord[];
 	};
 }
 
@@ -28,5 +28,13 @@ export interface IRemoveWord {
 export interface RRemoveWord {
 	removeWord: {
 		message: string;
+	};
+}
+
+export interface IUpdateWords {
+	updateWords: {
+		listID: string;
+		firstWordIndex: number;
+		updatedWords: IWord[];
 	};
 }

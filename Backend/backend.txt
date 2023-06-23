@@ -45,3 +45,9 @@
     
 - Remove word
     - Frontend will send the index where the word is.
+    - Tests
+
+- Update Word
+    - Frontend will send the index of the firstWord that was updated and all the updated words.
+    - Replace the current values with the new ones.
+    - Tests
