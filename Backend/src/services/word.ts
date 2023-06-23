@@ -31,12 +31,13 @@ export class ServiceWord {
 	async removeWord({ removeWord }: IRemoveWord) {
 		const { listID, wordIndex } = removeWord;
 
-		const list = await ListModel.findOne({ _id: listID });
+		const list = await ListModel.findOne({ _id: new mongoose.Types.ObjectId(listID) });
 		if (!list) throw new GraphQLError("notFound: List not found");
 
 		const [removedWord] = list.words.splice(wordIndex, 1);
-		await list.save();
+		if (!removedWord) throw new GraphQLError("notFound: Word not found");
 
+		await list.save();
 		return { message: `success: Word "${removedWord.term}" was removed.` };
 	}
 }
