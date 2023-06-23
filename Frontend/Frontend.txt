@@ -1,81 +1,74 @@
 ===== Globals ===========
 
-    - Verify if user is looged, if not send to authentication page with parallel routes.
-    - Route handlers to set and get cookies.
-    - Notification component and Context
-    - Redux Store
-    - List slice
-
-
-
+- Verify if user is looged, if not send to authentication page with parallel routes.
+- Route handlers to set and get cookies.
+- Notification component and Context
+- Redux Store
+- List slice
 
 
 ===== Authentication page ==================
 
-    
-    - CreateAccount
-        - show and hide password
-        - Show input errors on a label
-        - validate fields
-        - Hook with user queries
-        - mutation create user
-        - catch errors
-        - send user to login page
 
-    - Login
-        - verify empty fields
-        - mutation login
-        - catch errors
-        - send notification with errors
-        - store the token and email on cookies.
-        - send user to home page
+- CreateAccount
+    - show and hide password
+    - Show input errors on a label
+    - validate fields
+    - Hook with user queries
+    - mutation create user
+    - catch errors
+    - send user to login page
+    x Tests
 
-
-
+- Login
+    - verify empty fields
+    - mutation login
+    - catch errors
+    - send notification with errors
+    - store the token and email on cookies.
+    - send user to home page
+    x Tests
 
 
 ===== Home ======================
-    
-    x Header
-        - create list
-            - Update global state. 
-            - Input autoFocus
-            x Tests
 
-        x Perfil
-            x Design the layout
-            x Logout
-            x change how many words per wordList.
-            
-    
-    > Main
-        - Load lists
-        - Read lists global State
-        - List component.  
-        - Loading lists skeleton
-        - list onClick show menu with options. 
-        - Rename the list
-        - Delete the list
-            - Show a container with a message about deleting the list
-            - Ask the user to type the name of the list as confirmation 
+x Header
+    - create list
+        - Update global state. 
+        - Input autoFocus
         x Tests
-       
 
+    x Perfil
+        x Logout
+        
+
+> Main
+    - Load lists
+    - Read lists global State
+    - List component.  
+    - Loading lists skeleton
+    - list onClick show menu with options. 
+    - Rename the list
+    - Delete the list
+        - Show a container with a message about deleting the list
+        - Ask the user to type the name of the list as confirmation 
+    x Tests
+    
 
 ===== List =====
 
-    x Header
-    x Add new words
-    x Add a group of words
-    x Separete words per quantity 
+x Header
+x Add new words
+x Add a group of words
+x Separete words per quantity 
+
+
     
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    
+    
+    
+    
+    
+    
+    

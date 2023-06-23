@@ -24,7 +24,17 @@ export const typeWord = gql`
 		message: String!
 	}
 
+	input IRemoveWord {
+		listID: String!
+		wordIndex: Int!
+	}
+
+	type RRemoveWord {
+		message: String!
+	}
+
 	type Mutation {
 		addWords(addWords: IAddWords!): RAddWords!
+		removeWord(removeWord: IRemoveWord!): RRemoveWord!
 	}
 `;

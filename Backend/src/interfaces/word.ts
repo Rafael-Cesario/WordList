@@ -1,6 +1,6 @@
 export interface Word {
 	term: string;
-	definitions: string
+	definitions: string;
 	learned: boolean;
 	correctTimes: number;
 }
@@ -14,6 +14,19 @@ export interface IAddWords {
 
 export interface RAddWords {
 	addWords: {
+		message: string;
+	};
+}
+
+export interface IRemoveWord {
+	removeWord: {
+		listID: string;
+		wordIndex: number;
+	};
+}
+
+export interface RRemoveWord {
+	removeWord: {
 		message: string;
 	};
 }

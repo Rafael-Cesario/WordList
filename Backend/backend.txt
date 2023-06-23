@@ -11,9 +11,7 @@
     - Compare passwords.
     - Generate a token.
     - Return: token, userID.
-    
-    
-    
+
     
 ===== Lists =====
 
@@ -35,8 +33,6 @@
     x Tests
 
 
-
-
 ===== Words =====
 
 - Add words
@@ -46,3 +42,6 @@
     - terms should be unique.
     - Returns the number of words added.
     - Tests
+    
+- Remove word
+    - Frontend will send the index where the word is.

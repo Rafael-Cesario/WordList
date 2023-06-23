@@ -1,0 +1,59 @@
+WordList is a website to learn a language by adding words and using flash cards to review then.
+
+
+===== Features =====
+
+- User
+    - Create account.
+    - Login.
+    - Authentication.
+    - Token and backend cookies that expires after one week.
+
+- List
+    - Create List
+    - Rename List
+    - Delete List
+    - Show all the words inside of lists.
+    - show the total of words.
+    
+- Words
+    - Add one or many words at same time.
+    - rename words
+    - remove words
+    - Can be marked as learned if answered right x times.
+    - user can reset all the words or just one word.
+    - Term will be one word.
+    - User can't add a duplicated term.
+    - Definitions will be one or more words in a unique string separated by comma.
+
+- WordList
+    - WordList will be a list of words separated by x words per list.
+    - Review wordList
+    - user can restart the flash cards.
+    
+- Configs
+    - Words per wordList.
+    - How many times should be answered right until a word be marked as learned.
+    - Reset all the learned words.
+    - show the total of words, the total of words learned and the total not learned yet.
+    
+       
+===== Interfaces =====
+
+- User
+    ID: string;
+    email: string;
+    password: string;
+    
+- List
+    userID: string;
+    ID: string;
+    name: string;
+    words: Word[];
+    
+- Word
+    term: string;
+    definitions: string;
+    correctTimes: string;
+    learned: string;
+    
