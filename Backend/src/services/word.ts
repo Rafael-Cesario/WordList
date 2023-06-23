@@ -44,6 +44,8 @@ export class ServiceWord {
 	async updateWords({ updateWords }: IUpdateWords) {
 		const { listID, firstWordIndex, updatedWords } = updateWords;
 
+		if (!updatedWords.length) throw new GraphQLError("emptyValues: There is no words to update.");
+
 		const list = await ListModel.findOne({ _id: new mongoose.Types.ObjectId(listID) });
 		if (!list) throw new GraphQLError("notFound: List not found");
 		if (firstWordIndex > list.words.length - 1) throw new GraphQLError("notFound: Word index is out of bound.");
@@ -51,6 +53,6 @@ export class ServiceWord {
 		list.words.splice(firstWordIndex, updatedWords.length, ...updatedWords);
 		await list.save();
 
-		return { message: `success: ${updatedWords.length} updated words.` };
+		return { message: `success: ${updatedWords.length} updated ${updatedWords.length === 1 ? "word" : "words"}.` };
 	}
 }

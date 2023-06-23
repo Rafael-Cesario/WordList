@@ -38,3 +38,7 @@ export interface IUpdateWords {
 		updatedWords: IWord[];
 	};
 }
+
+export interface RUpdateWords {
+	updateWords: { message: string };
+}
