@@ -22,14 +22,32 @@ export const useQueriesList = () => {
 	const [mutationRenameList] = useMutation<RRenameList>(queriesList.RENAME_LIST);
 	const [mutationDeleteList] = useMutation<RDeleteList>(queriesList.DELETE_LIST);
 
-	const requestCreateList = async (createList: ICreateList) => {
+	const readListCache = (userID: string) => {
+		const cacheList = client.readQuery<RReadLists, IReadLists>({
+			query: queriesList.READ_LISTS,
+			variables: { userID },
+		});
+
+		return cacheList || { readLists: [] };
+	};
+
+	const requestCreateList = async ({ createList }: ICreateList) => {
 		let list: IList = { userID: "", _id: "", name: "" };
 		let error = "";
 
 		try {
-			const { data } = await mutationCreateList({ variables: createList });
+			const { data } = await mutationCreateList({ variables: { createList } });
 			if (!data) throw new Error("Data is undefined");
 			list = data.createList.list;
+
+			const cacheList = readListCache(createList.userID);
+			cacheList.readLists.push(list);
+
+			client.writeQuery<RReadLists, IReadLists>({
+				query: queriesList.READ_LISTS,
+				variables: { userID: createList.userID },
+				data: cacheList,
+			});
 		} catch (e: any) {
 			error = catchError(e.message, "list");
 		}
