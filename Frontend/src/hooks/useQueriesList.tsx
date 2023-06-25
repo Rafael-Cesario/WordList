@@ -70,12 +70,16 @@ export const useQueriesList = () => {
 		return { message, error };
 	};
 
-	const requestDeleteList = async (deleteList: IDeleteList) => {
+	const requestDeleteList = async ({ deleteList }: IDeleteList) => {
 		const message = "Sua lista foi deletada com sucesso";
 		let error = "";
 
 		try {
-			await mutationDeleteList({ variables: deleteList });
+			await mutationDeleteList({ variables: { deleteList } });
+			const cache = cacheList.read(deleteList.userID);
+			const listIndex = cache.readLists.findIndex((list) => list._id === deleteList.ID);
+			cache.readLists.splice(listIndex, 1);
+			cacheList.update(deleteList.userID, cache);
 		} catch (e: any) {
 			error = catchError(e.message, "list");
 		}
