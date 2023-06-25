@@ -7,8 +7,6 @@ export const StyledHeader = styled.div`
 	justify-content: space-between;
 
 	.menu {
-		position: relative;
-
 		button {
 			font-size: 0.9rem;
 			font-weight: bold;

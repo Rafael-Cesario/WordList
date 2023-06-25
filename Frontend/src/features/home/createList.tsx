@@ -41,7 +41,7 @@ export const CreateList = () => {
 		<>
 			<button onClick={() => setIsOpen(!isOpen)}>Criar nova Lista</button>
 
-			{isOpen && (
+			{/* {isOpen && (
 				<StyledCreateList>
 					<input
 						onKeyUp={(e) => e.key === "Enter" && createList()}
@@ -55,6 +55,17 @@ export const CreateList = () => {
 					<button onClick={() => createList()} className="create">
 						Criar
 					</button>
+				</StyledCreateList>
+			)} */}
+
+			{isOpen && (
+				<StyledCreateList>
+					<div className="container">
+						<button className="close">x</button>
+						<h1 className="title">Criar nova lista</h1>
+						<input type="text" className="list-name" placeholder="Nome" />
+						<button className="create-button">Criar</button>
+					</div>
 				</StyledCreateList>
 			)}
 		</>

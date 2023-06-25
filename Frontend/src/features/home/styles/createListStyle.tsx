@@ -5,44 +5,54 @@ import { styled } from "styled-components";
 export const StyledCreateList = styled.div`
 	position: absolute;
 	top: 0;
-	right: 0;
-
+	left: 0;
 	width: 100%;
-	padding: 2rem 4rem;
-	margin: 3rem 0;
-	border-radius: 2px;
-	background-color: ${theme.container};
-	border-top: 1rem solid ${theme.primary};
-	box-shadow: 0 10px 4px #11111110;
+	height: 100%;
+	background-color: #11111150;
+	backdrop-filter: blur(2px);
 
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	transform: translateY(-10%);
 
-	animation: show 0.3s;
+	.container {
+		background-color: ${theme.container};
+		padding: 4rem;
+		position: relative;
 
-	@keyframes show {
-		from {
-			transform: translateY(-1rem);
-			opacity: 0;
+		.close {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+
+			&:hover {
+				background-color: ${theme.error};
+			}
 		}
-		to {
-			opacity: 1;
+
+		.title {
+			text-align: center;
+			font-size: 1.1rem;
+			margin-bottom: 2rem;
 		}
-	}
 
-	.name {
-		margin-bottom: 2rem;
-		background-color: ${theme.background};
-		padding: 5px 10px;
-	}
+		.list-name {
+			display: block;
+			margin-bottom: 2rem;
+			background-color: ${theme.background};
+			padding: 1rem 2rem;
+			min-width: 200px;
+			max-width: 1000px;
+			width: 40vw;
+		}
 
-	.create {
-		background-color: #ddd;
-		color: #111;
+		.create-button {
+			width: 100%;
 
-		&:hover {
-			background-color: #111;
-			color: #ddd;
+			&:hover {
+				background-color: ${theme.background};
+			}
 		}
 	}
 `;
