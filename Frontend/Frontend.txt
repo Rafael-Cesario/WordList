@@ -34,8 +34,10 @@
 
 x Header
     - create list
+        - Can't create list without a name.
+        - Can't create duplicated list.
         - Update global state. 
-        - Input autoFocus
+        - Update apollo cache.
         x Tests
 
     x Perfil
