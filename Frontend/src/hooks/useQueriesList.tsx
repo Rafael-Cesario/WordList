@@ -53,12 +53,16 @@ export const useQueriesList = () => {
 		}
 	};
 
-	const requestRenameList = async (renameList: IRenameList) => {
+	const requestRenameList = async ({ renameList }: IRenameList) => {
 		const message = "Sua lista foi renomeada";
 		let error = "";
 
 		try {
-			await mutationRenameList({ variables: renameList });
+			await mutationRenameList({ variables: { renameList } });
+			const cache = cacheList.read(renameList.userID);
+			const listIndex = cache.readLists.findIndex((list) => list._id === renameList.ID);
+			cache.readLists[listIndex].name = renameList.newName;
+			cacheList.update(renameList.userID, cache);
 		} catch (e: any) {
 			error = catchError(e.message, "list");
 		}
