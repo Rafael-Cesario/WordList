@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CacheList } from "@/services/cache/cacheList";
 import { client } from "@/services/client";
 import {
 	ICreateList,
@@ -17,19 +18,11 @@ import { useMutation } from "@apollo/client";
 
 export const useQueriesList = () => {
 	const queriesList = new QueriesList();
+	const cacheList = new CacheList();
 
 	const [mutationCreateList] = useMutation<RCreateList>(queriesList.CREATE_LIST);
 	const [mutationRenameList] = useMutation<RRenameList>(queriesList.RENAME_LIST);
 	const [mutationDeleteList] = useMutation<RDeleteList>(queriesList.DELETE_LIST);
-
-	const readListCache = (userID: string) => {
-		const cacheList = client.readQuery<RReadLists, IReadLists>({
-			query: queriesList.READ_LISTS,
-			variables: { userID },
-		});
-
-		return cacheList || { readLists: [] };
-	};
 
 	const requestCreateList = async ({ createList }: ICreateList) => {
 		let list: IList = { userID: "", _id: "", name: "" };
@@ -40,14 +33,9 @@ export const useQueriesList = () => {
 			if (!data) throw new Error("Data is undefined");
 			list = data.createList.list;
 
-			const cacheList = readListCache(createList.userID);
-			cacheList.readLists.push(list);
-
-			client.writeQuery<RReadLists, IReadLists>({
-				query: queriesList.READ_LISTS,
-				variables: { userID: createList.userID },
-				data: cacheList,
-			});
+			const cache = cacheList.read(createList.userID);
+			cache.readLists.push(list);
+			cacheList.update(createList.userID, cache);
 		} catch (e: any) {
 			error = catchError(e.message, "list");
 		}
