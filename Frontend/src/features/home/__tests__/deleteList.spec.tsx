@@ -7,7 +7,7 @@ describe("Delete list", () => {
 	const mockedQueriesList = QueriesList as { useQueriesList: object };
 	const user = userEvent.setup();
 
-	mockedQueriesList.useQueriesList = () => ({
+	const defaultMocks = {
 		requestReadLists: () => ({
 			lists: [
 				{ _id: "123", userID: "123", name: "List01" },
@@ -16,7 +16,9 @@ describe("Delete list", () => {
 		}),
 
 		requestDeleteList: () => ({ error: "Hello, i'm a error" }),
-	});
+	};
+
+	mockedQueriesList.useQueriesList = () => ({ ...defaultMocks });
 
 	const openDeleteListMenu = async () => {
 		await user.click(screen.getByText(/list02/i));
@@ -40,6 +42,24 @@ describe("Delete list", () => {
 		await user.type(screen.getByRole("submit-input"), "list02");
 		await user.click(screen.getByRole("submit"));
 		expect(screen.getByRole("notification").getAttribute("type")).toBe("error");
+	});
+
+	it("Remove a list from the page after delete it", async () => {
+		mockedQueriesList.useQueriesList = () => ({
+			...defaultMocks,
+			requestDeleteList: () => ({
+				message: "Sucess",
+			}),
+		});
+
+		await renderHomePage();
+		expect(screen.getByRole("list-container").children).toHaveLength(2);
+
+		await openDeleteListMenu();
+		await user.type(screen.getByRole("submit-input"), "list02");
+		await user.click(screen.getByRole("submit"));
+		expect(screen.getByRole("notification").getAttribute("type")).toBe("success");
+		expect(screen.getByRole("list-container").children).toHaveLength(1);
 	});
 });
 
