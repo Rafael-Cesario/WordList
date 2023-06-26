@@ -7,7 +7,7 @@ import * as QueriesList from "@/hooks/useQueriesList";
 const mockQueriesList = QueriesList as { useQueriesList: object };
 
 vi.mock("@/hooks/useQueriesList", () => ({
-	useQueriesList: null,
+	useQueriesList: vi.fn(),
 }));
 
 vi.mock("@/services/cookies", () => {

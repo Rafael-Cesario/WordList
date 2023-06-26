@@ -60,9 +60,15 @@ export const DeleteList = ({ props: { list, setConfirmDelete } }: DeleteListProp
 					{'"'}
 				</label>
 
-				<input id="submit-delete" type="text" placeholder="Digite o nome da lista para confirmar" onChange={(e) => setListName(e.target.value)} />
+				<input
+					role="submit-input"
+					id="submit-delete"
+					type="text"
+					placeholder="Digite o nome da lista para confirmar"
+					onChange={(e) => setListName(e.target.value)}
+				/>
 
-				<button onClick={() => deleteList()} className="submit">
+				<button role="submit" onClick={() => deleteList()} className="submit">
 					Deletar lista
 				</button>
 			</div>

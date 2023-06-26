@@ -24,7 +24,7 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 
 					<RenameList props={{ editable, setEditable, list, listName, setShowMenu }} />
 
-					<button className="option" onClick={() => setConfirmDelete(true)}>
+					<button role="show-delete-list" className="option" onClick={() => setConfirmDelete(true)}>
 						Deletar
 					</button>
 				</div>
