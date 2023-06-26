@@ -2,21 +2,10 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
 import { renderHomePage } from "./__utils__/renderHomePage";
-
 import * as QueriesList from "@/hooks/useQueriesList";
-const mockQueriesList = QueriesList as { useQueriesList: object };
-
-vi.mock("@/hooks/useQueriesList", () => ({
-	useQueriesList: vi.fn(),
-}));
-
-vi.mock("@/services/cookies", () => {
-	const Cookies = vi.fn();
-	Cookies.prototype.get = () => ({ ID: "123" });
-	return { Cookies };
-});
 
 describe("Create list", () => {
+	const mockQueriesList = QueriesList as { useQueriesList: object };
 	const user = userEvent.setup();
 
 	test("Create a new list show on the page", async () => {
@@ -63,4 +52,14 @@ describe("Create list", () => {
 		const notification = screen.getByRole("notification");
 		expect(notification.getAttribute("type")).toBe("error");
 	});
+});
+
+vi.mock("@/hooks/useQueriesList", () => ({
+	useQueriesList: vi.fn(),
+}));
+
+vi.mock("@/services/cookies", () => {
+	const Cookies = vi.fn();
+	Cookies.prototype.get = () => ({ ID: "123" });
+	return { Cookies };
 });

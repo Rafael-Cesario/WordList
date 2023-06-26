@@ -45,12 +45,7 @@ describe("Delete list", () => {
 	});
 
 	it("Remove a list from the page after delete it", async () => {
-		mockedQueriesList.useQueriesList = () => ({
-			...defaultMocks,
-			requestDeleteList: () => ({
-				message: "Sucess",
-			}),
-		});
+		mockedQueriesList.useQueriesList = () => ({ ...defaultMocks, requestDeleteList: () => ({ message: "Sucess" }) });
 
 		await renderHomePage();
 		expect(screen.getByRole("list-container").children).toHaveLength(2);

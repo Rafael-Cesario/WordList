@@ -44,7 +44,6 @@
     - catch errors.
     - Update and read from global state.
     - loading skeleton.
-    x tests.
 
 - Rename List
     - Mutation.
@@ -60,7 +59,7 @@
     - update cache.
     - show a container with a message about deleting the list.
     - ask the user to type the name of the list as a confirmation.
-    x Tests
+    - Tests
 
 x Logout
     x Delete cookies
