@@ -1,9 +1,7 @@
 import "@testing-library/jest-dom";
-import Home from "@/app/page";
 import userEvent from "@testing-library/user-event";
-import { AllProviders } from "@/components/providers";
-import { render, screen, waitFor } from "@testing-library/react";
-import { Notification } from "@/components/notification";
+import { screen } from "@testing-library/react";
+import { renderHomePage } from "./__utils__/renderHomePage";
 
 import * as QueriesList from "@/hooks/useQueriesList";
 const mockQueriesList = QueriesList as { useQueriesList: object };
@@ -18,17 +16,6 @@ vi.mock("@/services/cookies", () => {
 	return { Cookies };
 });
 
-const renderComponent = async () => {
-	await waitFor(() =>
-		render(
-			<AllProviders>
-				<Notification />
-				<Home />
-			</AllProviders>
-		)
-	);
-};
-
 describe("Create list", () => {
 	const user = userEvent.setup();
 
@@ -40,7 +27,7 @@ describe("Create list", () => {
 			requestCreateList: () => ({ list: { name: listName } }),
 		});
 
-		await renderComponent();
+		await renderHomePage();
 		await user.click(screen.getByRole("show-create-input"));
 		await user.type(screen.getByRole("list-name"), listName);
 		await user.click(screen.getByRole("create-list"));
@@ -55,7 +42,7 @@ describe("Create list", () => {
 	});
 
 	test("Can't create a list without a name", async () => {
-		await renderComponent();
+		await renderHomePage();
 		await user.click(screen.getByRole("show-create-input"));
 		await user.click(screen.getByRole("create-list"));
 		const notification = screen.getByRole("notification");
@@ -69,7 +56,7 @@ describe("Create list", () => {
 			requestCreateList: () => ({ error: "Hello" }),
 		});
 
-		await renderComponent();
+		await renderHomePage();
 		await user.click(screen.getByRole("show-create-input"));
 		await user.type(screen.getByRole("list-name"), "My new list");
 		await user.click(screen.getByRole("create-list"));

@@ -10,5 +10,6 @@ export default defineConfig({
 		globals: true,
 		watch: false,
 		reporters: "verbose",
+		exclude: ["node_modules", "**/__utils__/**"],
 	},
 });

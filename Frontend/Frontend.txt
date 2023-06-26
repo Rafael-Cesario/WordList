@@ -37,7 +37,7 @@
     - catch errors.
     - update global state.
     - update cache.
-    x tests.
+    - tests.
 
 - Read lists
     - Query
