@@ -49,6 +49,7 @@ export const useQueriesList = () => {
 			const lists = data.readLists;
 			return { lists };
 		} catch (e: any) {
+			console.log(e.message);
 			return { error: "Um erro ocorreu tentando carregar suas listas, por favor recarregue a página." };
 		}
 	};

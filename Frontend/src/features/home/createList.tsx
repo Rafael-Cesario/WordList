@@ -39,7 +39,9 @@ export const CreateList = () => {
 
 	return (
 		<>
-			<button onClick={() => setIsOpen(!isOpen)}>Criar nova Lista</button>
+			<button role="show-create-input" onClick={() => setIsOpen(!isOpen)}>
+				Criar nova Lista
+			</button>
 
 			{isOpen && (
 				<StyledCreateList>
@@ -47,8 +49,11 @@ export const CreateList = () => {
 						<button className="close" onClick={() => setIsOpen(false)}>
 							x
 						</button>
+
 						<h1 className="title">Criar nova lista</h1>
+
 						<input
+							role="list-name"
 							type="text"
 							className="list-name"
 							placeholder="Nome"
@@ -57,7 +62,7 @@ export const CreateList = () => {
 							onChange={(e) => setListName(e.target.value)}
 						/>
 
-						<button onClick={() => createList()} className="create-button">
+						<button role="create-list" onClick={() => createList()} className="create-button">
 							Criar
 						</button>
 					</div>

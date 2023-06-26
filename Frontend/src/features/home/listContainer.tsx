@@ -35,7 +35,10 @@ export const ListContainer = () => {
 	return (
 		<StyledListContainer>
 			{loading && <Loading />}
-			<div className="lists">{loading || lists.map((list) => <List key={String(list._id)} props={{ list }} />)}</div>
+
+			<div role="list-container" className="lists">
+				{loading || lists.map((list) => <List key={String(list._id)} props={{ list }} />)}
+			</div>
 		</StyledListContainer>
 	);
 };

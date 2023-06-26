@@ -32,45 +32,42 @@
 
 ===== Home ======================
 
-x Header
-    - create list
-        - Can't create list without a name.
-        - Can't create duplicated list.
-        - Update global state. 
-        - Update apollo cache.
-        x Tests
+- Create list
+    - Mutation
+    - catch errors.
+    - update global state.
+    - update cache.
+    x tests.
 
-    x Perfil
-        x Logout
-        
+- Read lists
+    - Query
+    - catch errors.
+    - Update and read from global state.
+    - loading skeleton.
+    x tests.
 
-> Main
-    - Load lists
-    - Read lists global State
-    - List component.  
-    - Loading lists skeleton
-    - list onClick show menu with options. 
-    - Rename the list
-    - Delete the list
-        - Show a container with a message about deleting the list
-        - Ask the user to type the name of the list as confirmation 
+- Rename List
+    - Mutation.
+    - catch errors.
+    - update global state.
+    - update cache.
+    x tests.
+
+- Delete List
+    - Mutation.
+    - Catch errors.
+    - Update global state.
+    - update cache.
+    - show a container with a message about deleting the list.
+    - ask the user to type the name of the list as a confirmation.
     x Tests
+
+x Logout
+    x Delete cookies
     
 
 ===== List =====
 
-x Header
 x Add new words
 x Add a group of words
 x Separete words per quantity 
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
