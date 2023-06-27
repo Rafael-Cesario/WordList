@@ -18,7 +18,7 @@
     - mutation create user
     - catch errors
     - send user to login page
-    x Tests
+    - Tests
 
 - Login
     - verify empty fields
@@ -27,7 +27,7 @@
     - send notification with errors
     - store the token and email on cookies.
     - send user to home page
-    x Tests
+    - Tests
 
 
 ===== Home ======================
@@ -44,6 +44,7 @@
     - catch errors.
     - Update and read from global state.
     - loading skeleton.
+    x Tests
 
 - Rename List
     - Mutation.

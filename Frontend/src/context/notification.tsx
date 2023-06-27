@@ -22,7 +22,7 @@ const defaultValues: INotification = {
 	isOpen: false,
 };
 
-const initialValues = {
+const initialValues: IContext = {
 	notificationValues: defaultValues,
 	setNotificationValues: (newState: INotification) => {},
 };
