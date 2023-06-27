@@ -40,13 +40,13 @@ export const RenameList = ({ props: { editable, setEditable, listName, list, set
 	return (
 		<>
 			{editable || (
-				<button className="option" onClick={() => setEditable(true)}>
+				<button role="rename-button" className="option" onClick={() => setEditable(true)}>
 					Renomear
 				</button>
 			)}
 
 			{editable && (
-				<button className="option" onClick={() => renameList()}>
+				<button role="save-button" className="option" onClick={() => renameList()}>
 					Salvar
 				</button>
 			)}

@@ -21,7 +21,15 @@ export const ListName = ({ props: { editable, setShowMenu, showMenu, list, listN
 			)}
 
 			{editable && (
-				<input autoFocus={true} className="editable" type="text" placeholder="Nome" value={listName} onChange={(e) => setListName(e.target.value)} />
+				<input
+					role="input-list-name"
+					autoFocus={true}
+					className="editable"
+					type="text"
+					placeholder="Nome"
+					value={listName}
+					onChange={(e) => setListName(e.target.value)}
+				/>
 			)}
 		</>
 	);

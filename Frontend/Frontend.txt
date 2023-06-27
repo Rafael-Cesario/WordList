@@ -44,14 +44,14 @@
     - catch errors.
     - Update and read from global state.
     - loading skeleton.
-    x Tests
+    - Tests
 
 - Rename List
     - Mutation.
     - catch errors.
     - update global state.
     - update cache.
-    x tests.
+    - tests.
 
 - Delete List
     - Mutation.
