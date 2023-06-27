@@ -71,3 +71,5 @@ x Logout
 x Add new words
 x Add a group of words
 x Separete words per quantity 
+x Show number of words in the list.
+x show name of the list.

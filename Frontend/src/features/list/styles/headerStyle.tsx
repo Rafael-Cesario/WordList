@@ -3,9 +3,10 @@ import { theme } from "@/styles/theme";
 import { styled } from "styled-components";
 
 export const StyledHeader = styled.header`
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	align-items: center;
-	justify-content: space-between;
+	justify-items: center;
 	margin: 2rem;
 
 	.title {
@@ -22,6 +23,7 @@ export const StyledHeader = styled.header`
 	}
 
 	.link {
+		justify-self: start;
 		color: #aaa;
 		text-decoration: none;
 		font-weight: bold;
@@ -34,6 +36,7 @@ export const StyledHeader = styled.header`
 	}
 
 	.add-words-button {
+		justify-self: end;
 		font-weight: bold;
 		padding: 10px 20px;
 

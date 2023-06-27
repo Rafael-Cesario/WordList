@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { StyledHeader } from "./styles/headerStyle";
+import { AddWords } from "./addWords";
 
 export const Header = () => {
 	return (
@@ -13,7 +14,7 @@ export const Header = () => {
 				<p>187 Palavras na lista</p>
 			</div>
 
-			<button className="add-words-button">Adicionar palavras</button>
+			<AddWords />
 		</StyledHeader>
 	);
 };
