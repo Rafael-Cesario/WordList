@@ -3,40 +3,69 @@ import { INotification } from "@/context/notification";
 import { useContext, useState } from "react";
 import { StyledAddWords } from "./styles/addWordsStyle";
 import { NotificationContext } from "@/context/notification";
+import { useQueriesWords } from "@/hooks/useQueriesWords";
+import { StorageKeys } from "@/services/interfaces/storage";
+import { IList } from "@/services/interfaces/list";
 
+const defaultOneWord = { term: "", definitions: "", correctTimes: 0, learned: false };
+
+const notificationError: INotification = {
+	isOpen: true,
+	type: "error",
+	title: "Campos vazios",
+	message: "Parece que você deixou algum campo vazio ao tentar adicionar novas palavras.",
+};
+
+// todo > Tests
 export const AddWords = () => {
 	const [menuAddWords, setMenuAddWords] = useState<"" | "one" | "many">("");
-	const [oneWord, setOneWord] = useState({ term: "", definitions: "" });
+	const [oneWord, setOneWord] = useState(defaultOneWord);
 	const [manyWords, setManyWords] = useState("");
 
 	const { setNotificationValues } = useContext(NotificationContext);
+	const { requestAddWords } = useQueriesWords();
 
 	const generateClass = (name: "one" | "many") => {
 		return menuAddWords === name ? "active" : "";
 	};
 
-	const notificationError: INotification = {
-		isOpen: true,
-		type: "error",
-		title: "Campos vazios",
-		message: "Parece que você deixou algum campo vazio ao tentar adicionar novas palavras.",
-	};
-
 	const getTextareaWords = () => {
-		const words = manyWords
-			.split("\n")
-			.map((word) => word.split(":"))
-			.filter((word) => {
-				const [term, definition] = word;
-				if (term && definition) return [term.trim(), definition.trim()];
-			});
+		const separatedWords = manyWords.split("\n");
 
-		return words;
+		const withoutEmpties = separatedWords.filter((word) => {
+			const [term, definitions] = word.split(":");
+			if (term && definitions) return word;
+		});
+
+		const wordsObject = withoutEmpties.map((word) => {
+			const [term, definitions] = word.split(":");
+			return { term: term.trim(), definitions: definitions.trim(), correctTimes: 0, learned: false };
+		});
+
+		return wordsObject;
 	};
 
-	const submitOneWord = () => {
+	const submitOneWord = async () => {
 		if (menuAddWords === "one" && (!oneWord.term || !oneWord.definitions)) return setNotificationValues(notificationError);
 		if (menuAddWords === "many" && !manyWords) return setNotificationValues(notificationError);
+
+		// todo > list global State
+		const storageKey: StorageKeys = "List";
+		const storage = sessionStorage.getItem(storageKey);
+		if (!storage) return console.log("Storage is empty");
+
+		const listData = JSON.parse(storage) as IList;
+		const words = menuAddWords === "one" ? [oneWord] : [...getTextareaWords()];
+
+		const { message, error } = await requestAddWords({ addWords: { listID: listData._id, words } });
+		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao adicionar palavras", message: error });
+
+		setNotificationValues({ isOpen: true, type: "success", title: "Novas palavras adicionadas", message });
+		setOneWord(defaultOneWord);
+		setManyWords("");
+
+		const textElement = document.querySelector("#many-words") as HTMLTextAreaElement;
+		textElement.value = "";
 	};
 
 	return (
@@ -71,9 +100,11 @@ export const AddWords = () => {
 									type="text"
 									placeholder="Termo"
 									className="term"
+									value={oneWord.term}
 									onChange={(e) => setOneWord({ ...oneWord, term: e.target.value })}
 								/>
 								<input
+									value={oneWord.definitions}
 									onKeyUp={(e) => e.key === "Enter" && submitOneWord()}
 									type="text"
 									placeholder="Definições"
@@ -87,6 +118,7 @@ export const AddWords = () => {
 							<>
 								<p className="info">Siga o template abaixo para adicionar novas palavras.</p>
 								<textarea
+									id={"many-words"}
 									onChange={(e) => setManyWords(e.target.value)}
 									placeholder={`Termo : Definição01, Definição02, Definição03\nOutro termo : Outra definição `}></textarea>
 							</>
