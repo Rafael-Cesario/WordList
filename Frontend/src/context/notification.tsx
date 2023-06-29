@@ -3,7 +3,7 @@
 "use client";
 import { createContext, useState } from "react";
 
-interface INotification {
+export interface INotification {
 	title: string;
 	message: string;
 	type: "success" | "error";

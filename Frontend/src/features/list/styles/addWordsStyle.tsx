@@ -79,6 +79,14 @@ export const StyledAddWords = styled.div`
 			margin: 2rem 0;
 		}
 
+		.info {
+			margin: -1.5rem 0 2rem 0;
+			text-align: center;
+			font-size: 0.8rem;
+			font-weight: 300;
+			opacity: 80%;
+		}
+
 		textarea {
 			resize: none;
 			min-height: 20vh;
