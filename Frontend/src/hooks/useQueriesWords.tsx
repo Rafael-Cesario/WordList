@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from "@/services/client";
-import { IAddWords, IGetWords, RAddWords, RGetWords } from "@/services/interfaces/words";
+import { IAddWords, IGetWords, IWord, RAddWords, RGetWords } from "@/services/interfaces/words";
 import { QueriesWords } from "@/services/queries/words";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
@@ -29,7 +29,7 @@ export const useQueriesWords = () => {
 	};
 
 	const requestGetWords = async (listID: string, userID: string) => {
-		let list: object = {};
+		let list: { listName: string; words: IWord[] } = { listName: "", words: [] };
 		let error = "";
 
 		try {

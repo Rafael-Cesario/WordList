@@ -6,14 +6,20 @@ import { ListCookies } from "@/services/interfaces/cookies";
 import { useContext, useEffect } from "react";
 import { useQueriesWords } from "@/hooks/useQueriesWords";
 import { NotificationContext } from "@/context/notification";
+import { useDispatch, useSelector } from "react-redux";
+import { wordSlice } from "./context/wordSlice";
+import { StoreType } from "@/context/store";
 
 interface Props {
 	listCookies: ListCookies;
 }
 
 export const Header = ({ listCookies }: Props) => {
+	const { listName, words } = useSelector((state: StoreType) => state.words);
+
 	const { requestGetWords } = useQueriesWords();
 	const { setNotificationValues } = useContext(NotificationContext);
+	const dispatch = useDispatch();
 
 	const loadWords = async () => {
 		const { listID, userID } = listCookies;
@@ -26,7 +32,7 @@ export const Header = ({ listCookies }: Props) => {
 				message: "Tente sair e entrar novamente na sua lista.",
 			});
 
-		console.log({ list });
+		dispatch(wordSlice.actions.loadWords({ ...list }));
 	};
 
 	useEffect(() => {
@@ -40,8 +46,8 @@ export const Header = ({ listCookies }: Props) => {
 			</Link>
 
 			<div className="title">
-				<h1>Hello</h1>
-				<p>187 Palavras na lista</p>
+				<h1>{listName}</h1>
+				<p>{words.length} Palavras na lista</p>
 			</div>
 
 			<AddWords />
