@@ -1,12 +1,18 @@
 import { Header } from "@/features/list/header";
+import { CookiesKeys, ListCookies } from "@/services/interfaces/cookies";
+import { cookies } from "next/headers";
 
-const List = ({ params }: { params: { list: string } }) => {
-	const listID = params.list.split("-").pop();
-	console.log({ listID });
+const List = () => {
+	const cookieKey: CookiesKeys = "list";
+	const cookieStore = cookies();
+	const response = cookieStore.get(cookieKey);
+	// todo > link to lists page.
+	if (!response) return;
+	const list = JSON.parse(response.value) as ListCookies;
 
 	return (
 		<>
-			<Header />
+			<Header list={list} />
 		</>
 	);
 };
