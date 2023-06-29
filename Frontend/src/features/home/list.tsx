@@ -5,12 +5,14 @@ import { useState } from "react";
 import { RenameList } from "./renameList";
 import { ListName } from "./listName";
 import { DeleteList } from "./deleteList";
+import { StorageKeys } from "@/services/interfaces/storage";
 
 export const List = ({ props: { list } }: { props: { list: IList } }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [editable, setEditable] = useState(false);
 	const [listName, setListName] = useState(list.name);
 	const [confirmDelete, setConfirmDelete] = useState(false);
+	const storageName: StorageKeys = "List";
 
 	return (
 		<StyledList>
@@ -18,7 +20,10 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 
 			{showMenu && (
 				<div className="menu">
-					<Link href={`${list.name.replaceAll(" ", "-")}-${list._id}`} className="option">
+					<Link
+						onClick={() => sessionStorage.setItem(storageName, JSON.stringify(list))}
+						href={`${list.name.replaceAll(" ", "-")}-${list._id}`}
+						className="option">
 						Entrar
 					</Link>
 
