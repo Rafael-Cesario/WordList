@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IAddWords, RAddWords } from "@/services/interfaces/words";
+import { client } from "@/services/client";
+import { IAddWords, IGetWords, RAddWords, RGetWords } from "@/services/interfaces/words";
 import { QueriesWords } from "@/services/queries/words";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
@@ -27,5 +28,26 @@ export const useQueriesWords = () => {
 		return { message, error };
 	};
 
-	return { requestAddWords };
+	const requestGetWords = async (listID: string, userID: string) => {
+		let list: object = {};
+		let error = "";
+
+		try {
+			const { data } = await client.query<RGetWords, IGetWords>({
+				query: queriesWords.GET_WORDS,
+				variables: { getWords: { listID: listID, userID: userID } },
+			});
+
+			if (!data) throw new Error("Data is undefined");
+
+			list = data?.getWords;
+		} catch (e: any) {
+			console.log({ error: e.message });
+			error = catchError(e.message, "word");
+		}
+
+		return { list, error };
+	};
+
+	return { requestAddWords, requestGetWords };
 };

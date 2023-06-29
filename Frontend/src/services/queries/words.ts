@@ -25,13 +25,16 @@ export class QueriesWords {
 		}
 	`;
 
-	READ_LISTS = gql`
-		query ReadLists($userID: String!) {
-			readLists(userID: $userID) {
-				userID
-				_id
-				name
-				words
+	GET_WORDS = gql`
+		query getWords($getWords: IGetWords!) {
+			getWords(getWords: $getWords) {
+				listName
+				words {
+					term
+					definitions
+					correctTimes
+					learned
+				}
 			}
 		}
 	`;

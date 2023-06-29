@@ -12,7 +12,7 @@ const List = () => {
 
 	return (
 		<>
-			<Header list={list} />
+			<Header listCookies={list} />
 		</>
 	);
 };
