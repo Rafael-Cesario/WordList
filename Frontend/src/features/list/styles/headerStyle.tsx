@@ -20,6 +20,23 @@ export const StyledHeader = styled.header`
 			font-size: 0.9rem;
 			font-weight: 300;
 		}
+
+		.loading {
+			width: 20vw;
+			height: 1rem;
+			border-radius: 2px;
+			background-color: white;
+			opacity: 10%;
+			margin-bottom: 5px;
+			animation: loading 0.2s ease-out;
+
+			@keyframes loading {
+				from {
+					opacity: 0;
+					transform: scale(0.5);
+				}
+			}
+		}
 	}
 
 	.link {

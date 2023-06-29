@@ -3,7 +3,7 @@ import Link from "next/link";
 import { StyledHeader } from "./styles/headerStyle";
 import { AddWords } from "./addWords";
 import { ListCookies } from "@/services/interfaces/cookies";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useQueriesWords } from "@/hooks/useQueriesWords";
 import { NotificationContext } from "@/context/notification";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ interface Props {
 
 export const Header = ({ listCookies }: Props) => {
 	const { listName, words } = useSelector((state: StoreType) => state.words);
+	const [loadingList, setLoadingList] = useState(true);
 
 	const { requestGetWords } = useQueriesWords();
 	const { setNotificationValues } = useContext(NotificationContext);
@@ -24,6 +25,7 @@ export const Header = ({ listCookies }: Props) => {
 	const loadWords = async () => {
 		const { listID, userID } = listCookies;
 		const { list, error } = await requestGetWords(listID, userID);
+
 		if (error)
 			return setNotificationValues({
 				isOpen: true,
@@ -33,6 +35,7 @@ export const Header = ({ listCookies }: Props) => {
 			});
 
 		dispatch(wordSlice.actions.loadWords({ ...list }));
+		setLoadingList(false);
 	};
 
 	useEffect(() => {
@@ -46,8 +49,8 @@ export const Header = ({ listCookies }: Props) => {
 			</Link>
 
 			<div className="title">
-				<h1>{listName}</h1>
-				<p>{words.length} Palavras na lista</p>
+				{loadingList ? <div className="loading" /> : <h1>{listName}</h1>}
+				{loadingList ? <div className="loading" /> : <p>{words.length} {words.length === 1 ? "Palavra" : "Palavras"} na lista</p>}
 			</div>
 
 			<AddWords />
