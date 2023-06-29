@@ -43,6 +43,20 @@ export const typeWord = gql`
 		message: String!
 	}
 
+	input IGetWords {
+		userID: String!
+		listID: String!
+	}
+
+	type RGetWords {
+		listName: String!
+		words: [word]!
+	}
+
+	type Query {
+		getWords(getWords: IGetWords!): RGetWords!
+	}
+
 	type Mutation {
 		addWords(addWords: IAddWords!): RAddWords!
 		removeWord(removeWord: IRemoveWord!): RRemoveWord!

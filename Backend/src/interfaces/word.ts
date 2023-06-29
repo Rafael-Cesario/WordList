@@ -42,3 +42,17 @@ export interface IUpdateWords {
 export interface RUpdateWords {
 	updateWords: { message: string };
 }
+
+export interface IGetWords {
+	getWords: {
+		userID: string;
+		listID: string;
+	};
+}
+
+export interface RGetWords {
+	getWords: {
+		listName: string;
+		words: IWord[];
+	}
+}

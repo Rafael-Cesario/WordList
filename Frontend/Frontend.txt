@@ -68,8 +68,9 @@ x Logout
 
 ===== List =====
 
-x Add new words
-x Add a group of words
-x Separete words per quantity 
-x Show number of words in the list.
+- Add new words.
+- Add a group of words.
+x list global state.
 x show name of the list.
+x Show number of words in the list.
+x Separete words per quantity 

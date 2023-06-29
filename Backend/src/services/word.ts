@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IAddWords, IRemoveWord, IUpdateWords } from "../interfaces/word";
+import { IAddWords, IGetWords, IRemoveWord, IUpdateWords } from "../interfaces/word";
 import { ListModel } from "../models/list";
 import { GraphQLError } from "graphql";
 
@@ -54,5 +54,9 @@ export class ServiceWord {
 		await list.save();
 
 		return { message: `success: ${updatedWords.length} updated ${updatedWords.length === 1 ? "word" : "words"}.` };
+	}
+
+	async getWords({ getWords }: IGetWords) {
+		console.log({ getWords });
 	}
 }

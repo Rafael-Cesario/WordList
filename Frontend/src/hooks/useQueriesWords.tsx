@@ -8,7 +8,6 @@ export const useQueriesWords = () => {
 	const queriesWords = new QueriesWords();
 
 	const [mutationAddWords] = useMutation<RAddWords, IAddWords>(queriesWords.ADD_WORDS);
-
 	const requestAddWords = async (addWords: IAddWords) => {
 		let message = "";
 		let error = "";
