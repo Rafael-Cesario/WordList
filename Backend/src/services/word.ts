@@ -57,6 +57,11 @@ export class ServiceWord {
 	}
 
 	async getWords({ getWords }: IGetWords) {
-		console.log({ getWords });
+		const { listID, userID } = getWords;
+
+		const list = await ListModel.findOne({ _id: listID, userID });
+		if (!list) throw new GraphQLError("notFound: list not found");
+
+		return { listName: list.name, words: list.words };
 	}
 }
