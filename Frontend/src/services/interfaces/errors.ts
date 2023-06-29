@@ -9,6 +9,10 @@ export interface IErrorsCode {
 	list: {
 		duplicated: string;
 	};
+
+	word: {
+		duplicated: string;
+	};
 }
 
 export const errorsCode: IErrorsCode = {
@@ -21,5 +25,10 @@ export const errorsCode: IErrorsCode = {
 
 	list: {
 		duplicated: "Uma lista com o mesmo nome já existe.",
+	},
+
+	word: {
+		duplicated:
+			"O mesmo termo já foi adicionado antes.\nDica: Você pode clicar duas vezes no termo mostrado na notifição e apertar CTRL + F para ativar a busca do navegador.",
 	},
 };
