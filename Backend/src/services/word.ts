@@ -18,14 +18,14 @@ export class ServiceWord {
 
 			list.words.forEach((wordInList) => {
 				const alreadyExist = wordInList.term === word.term;
-				if (alreadyExist) throw new GraphQLError("duplicated: This term already exist");
+				if (alreadyExist) throw new GraphQLError(`duplicated: ${word.term} : already was added`);
 			});
 		});
 
 		list.words.push(...words);
 		await list.save();
 
-		return { message: `New words added: ${words.length} ${words.length === 1 ? "word" : "words"}.` };
+		return { message: `New words added: ${words.length}` };
 	}
 
 	async removeWord({ removeWord }: IRemoveWord) {
