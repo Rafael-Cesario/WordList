@@ -1,4 +1,4 @@
-import { ICreateList, IDeleteList, IReadLists, IRenameList, IUpdateConfigs } from "../interfaces/list";
+import { ICreateList, IDeleteList, IGetOneList, IReadLists, IRenameList, IUpdateConfigs } from "../interfaces/list";
 import { ListModel } from "../models/list";
 import { checkData } from "../utils/checkData";
 import { GraphQLError } from "graphql";
@@ -67,5 +67,9 @@ export class ServiceList {
 		if (!acknowledged) throw new GraphQLError("default: Unexpected error while updating configs");
 
 		return { message: "success: Configs updated" };
+	}
+
+	async getOneList(getOneList: IGetOneList) {
+		console.log({ getOneList });
 	}
 }

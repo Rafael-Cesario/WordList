@@ -6,6 +6,8 @@ export interface List {
 	_id: ObjectId;
 	name: string;
 	words: IWord[];
+	wordsPerWordList: number;
+	timesUntilLearning: number;
 }
 
 export interface IReadLists {
@@ -68,5 +70,16 @@ export interface IUpdateConfigs {
 export interface RUpdateConfigs {
 	updateConfigs: {
 		message: string;
+	};
+}
+
+export interface IGetOneList {
+	userID: string;
+	listID: string;
+}
+
+export interface RGetOneList {
+	getOneList: {
+		list: List;
 	};
 }

@@ -51,6 +51,7 @@ export const typeList = gql`
 
 	type Query {
 		readLists(userID: String!): [list]!
+		getOneList(userID: String!, listID: String!): list!
 	}
 
 	type Mutation {

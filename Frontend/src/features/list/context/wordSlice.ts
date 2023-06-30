@@ -11,6 +11,7 @@ const initialState: WordSlice = {
 	words: [],
 };
 
+// todo > Remove from usage and delete file.
 export const wordSlice = createSlice({
 	name: "words",
 	initialState,
