@@ -35,6 +35,7 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${theme.container};
         color: #ddd;
         border-radius: 2px;
+        box-shadow: 5px 5px 2px #11111120;
     }
 
     button {

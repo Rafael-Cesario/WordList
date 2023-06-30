@@ -9,6 +9,7 @@ import { NotificationContext } from "@/context/notification";
 import { useDispatch, useSelector } from "react-redux";
 import { wordSlice } from "./context/wordSlice";
 import { StoreType } from "@/context/store";
+import { Configs } from "./configs";
 
 interface Props {
 	listCookies: ListCookies;
@@ -59,7 +60,10 @@ export const Header = ({ listCookies }: Props) => {
 				)}
 			</div>
 
-			<AddWords />
+			<div className="menu">
+				<Configs />
+				<AddWords />
+			</div>
 		</StyledHeader>
 	);
 };

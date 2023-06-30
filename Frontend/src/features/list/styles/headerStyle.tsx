@@ -52,8 +52,23 @@ export const StyledHeader = styled.header`
 		}
 	}
 
-	.add-words-button {
+	.menu {
 		justify-self: end;
+	}
+
+	.configs-button {
+		background-color: transparent;
+		color: #999;
+		font-weight: bold;
+		font-size: 0.9rem;
+
+		&:hover {
+			color: #ddd;
+		}
+	}
+
+	.add-words-button {
+		font-size: 0.9rem;
 		font-weight: bold;
 		padding: 10px 20px;
 

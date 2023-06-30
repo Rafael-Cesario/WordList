@@ -3,5 +3,5 @@ export const theme = {
 	background: "#101010",
 	container: "#151515",
 	success: "#18c061",
-	error: "#bb3434",
+	error: "#903030",
 };
