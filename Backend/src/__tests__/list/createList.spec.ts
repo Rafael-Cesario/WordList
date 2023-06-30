@@ -27,25 +27,26 @@ describe("Create list", () => {
 	});
 
 	it("Throws a error for empty values", async () => {
-		const { error } = await listQueries.createList(url, { createList: { name: "", userID: "" as unknown as ObjectId } });
+		const { error } = await listQueries.createList(url, { createList: { name: "", userID: "" } });
 		expect(error).toBe("userID was not provided, name was not provided");
 	});
 
 	it("Throws a error if didn't find the user", async () => {
-		const userID = new mongoose.Types.ObjectId() as unknown as ObjectId;
-		const { error } = await listQueries.createList(url, { createList: { name: "qwe", userID } });
+		const userID = new mongoose.Types.ObjectId();
+		const { error } = await listQueries.createList(url, { createList: { name: "qwe", userID: String(userID) } });
 		expect(error).toBe("User not found");
 	});
 
 	it("Throws a error, duplicated lists", async () => {
-		const variables = { name: "qwe", userID: user.ID as unknown as ObjectId };
+		const variables = { name: "qwe", userID: String(user.ID) };
 		await listQueries.createList(url, { createList: variables });
 		const { error } = await listQueries.createList(url, { createList: variables });
 		expect(error).toMatch("Duplicated");
 	});
 
 	it("Create a new list", async () => {
-		const { data } = await listQueries.createList(url, { createList: { name: "new list", userID: user.ID as unknown as ObjectId } });
-		expect(data).toBe("A new list was created");
+		const { data } = await listQueries.createList(url, { createList: { name: "new list", userID: String(user.ID) } });
+		expect(data?.name).toBe("new list");
+		expect(data?._id).toBeDefined();
 	});
 });

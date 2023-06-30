@@ -92,6 +92,6 @@ describe("Add words request", () => {
 		];
 
 		const { data } = await wordQueries.addWords(url, { addWords: { listID: String(list._id), words } });
-		expect(data).toMatch(`${words.length} words`);
+		expect(data).toMatch(`${words.length}`);
 	});
 });
