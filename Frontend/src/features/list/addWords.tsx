@@ -69,12 +69,18 @@ export const AddWords = () => {
 		setOneWord(defaultOneWord);
 		setManyWords("");
 
+		if (menuAddWords === "one") inputFocus();
 		if (menuAddWords === "many") clearTextarea();
 	};
 
 	const clearTextarea = () => {
 		const textElement = document.querySelector("#many-words") as HTMLTextAreaElement;
 		textElement.value = "";
+	};
+
+	const inputFocus = () => {
+		const inputElement = document.querySelector("#one-word") as HTMLInputElement;
+		inputElement.focus();
 	};
 
 	return (
@@ -104,6 +110,7 @@ export const AddWords = () => {
 						{menuAddWords === "one" && (
 							<>
 								<input
+									id={"one-word"}
 									onKeyUp={(e) => e.key === "Enter" && submitWords()}
 									autoFocus={true}
 									type="text"
