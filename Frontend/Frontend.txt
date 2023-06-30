@@ -63,11 +63,6 @@
     - Tests
 
 x Logout
-    x Delete cookies
-
-x user configs
-    x logout
-    x words per wordlist
 
     
 
@@ -82,3 +77,10 @@ x user configs
 - Show words on the page
 x Show learned words
 x Loading words
+
+> Configs
+    x Words per wordlist.
+    x Times until mark a word as learned.
+    x Reset learned words.
+    x Show the total of words, not learned and learned.
+

@@ -10,14 +10,14 @@ WordList is a website to learn a language by adding words and using flash cards 
     - Token and backend cookies that expires after one week.
 
 - List
-    x Create List
+    - Create List
     - Rename List
     - Delete List
-    x Show all the words inside of lists.
-    x show the total of words.
+    - Show all the words inside of lists.
+    - show the total of words.
     
 - Words
-    x Add one or many words at same time.
+    - Add one or many words at same time.
     x rename words
     x remove words
     x Can be marked as learned if answered right x times.

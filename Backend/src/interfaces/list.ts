@@ -55,3 +55,18 @@ export interface RDeleteList {
 		message: string;
 	};
 }
+
+export interface IUpdateConfigs {
+	updateConfigs: {
+		userID: string;
+		listID: string;
+		wordsPerWordList: number;
+		timesUntilLearning: number;
+	};
+}
+
+export interface RUpdateConfigs {
+	updateConfigs: {
+		message: string;
+	};
+}

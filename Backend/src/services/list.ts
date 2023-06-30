@@ -1,4 +1,4 @@
-import { ICreateList, IDeleteList, IReadLists, IRenameList } from "../interfaces/list";
+import { ICreateList, IDeleteList, IReadLists, IRenameList, IUpdateConfigs } from "../interfaces/list";
 import { ListModel } from "../models/list";
 import { checkData } from "../utils/checkData";
 import { GraphQLError } from "graphql";
@@ -55,5 +55,9 @@ export class ServiceList {
 		if (!list) throw new GraphQLError("notFound: List not found");
 
 		return { message: "Deleted" };
+	}
+
+	async updateConfigs({ updateConfigs }: IUpdateConfigs) {
+		console.log({ updateConfigs });
 	}
 }

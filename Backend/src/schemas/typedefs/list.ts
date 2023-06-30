@@ -6,6 +6,8 @@ export const typeList = gql`
 		_id: String!
 		name: String!
 		words: [word]!
+		wordsPerWordList: Int!
+		timesUntilLearning: Int!
 	}
 
 	input ICreateList {
@@ -36,6 +38,17 @@ export const typeList = gql`
 		message: String!
 	}
 
+	input IUpdateConfigs {
+		userID: String!
+		listID: String!
+		wordsPerWordList: Int!
+		timesUntilLearning: Int!
+	}
+
+	type RUpdateConfigs {
+		message: String!
+	}
+
 	type Query {
 		readLists(userID: String!): [list]!
 	}
@@ -44,5 +57,6 @@ export const typeList = gql`
 		createList(createList: ICreateList!): RCreateList!
 		renameList(renameList: IRenameList!): RRenameList!
 		deleteList(deleteList: IDeleteList!): RDeleteList!
+		updateConfigs(updateConfigs: IUpdateConfigs!): RUpdateConfigs!
 	}
 `;

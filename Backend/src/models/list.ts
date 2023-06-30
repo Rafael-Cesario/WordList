@@ -10,6 +10,12 @@ class ListClass {
 
 	@prop({ type: mongoose.Schema.Types.Array, required: true })
 	public words!: Word[];
+
+	@prop({ type: Number, required: true })
+	public wordsPerWordList!: number;
+
+	@prop({ type: Number, required: true })
+	public timesUntilLearning!: number;
 }
 
 class Word {
