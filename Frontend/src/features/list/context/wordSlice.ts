@@ -20,5 +20,9 @@ export const wordSlice = createSlice({
 			state.words = action.payload.words;
 			state.listName = action.payload.listName;
 		},
+
+		addWords: (state, action: { payload: { words: IWord[] } }) => {
+			state.words.push(...action.payload.words);
+		},
 	},
 });

@@ -2,16 +2,17 @@
 import { useSelector } from "react-redux";
 import { StyledWordsContainer } from "./styles/wordsContainerStyle";
 import { StoreType } from "@/context/store";
+import { IWord } from "@/services/interfaces/words";
 
 export const WordsContainer = () => {
 	const { words } = useSelector((state: StoreType) => state.words);
 
 	// todo > Tests. Move to separeted file.
-	const groupWords = () => {
+	const groupWords = (words: IWord[]) => {
 		const group = [];
 
-		let start = 0;
 		// todo > get words per wordlist from user configs
+		let start = 0;
 		const userWordsPerWordList = 20;
 
 		while (start < words.length) {
@@ -29,7 +30,7 @@ export const WordsContainer = () => {
 			<h1 className="group-title">Estudando</h1>
 
 			<div className="container">
-				{groupWords().map((group) => {
+				{groupWords(words).map((group) => {
 					return (
 						<div key={group[0].term + "group"} className="group">
 							{group.map((word) => {

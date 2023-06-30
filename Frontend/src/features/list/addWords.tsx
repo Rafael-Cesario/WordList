@@ -6,6 +6,8 @@ import { NotificationContext } from "@/context/notification";
 import { useQueriesWords } from "@/hooks/useQueriesWords";
 import { Cookies } from "@/services/cookies";
 import { CookiesKeys, ListCookies } from "@/services/interfaces/cookies";
+import { useDispatch } from "react-redux";
+import { wordSlice } from "./context/wordSlice";
 
 const defaultOneWord = { term: "", definitions: "", correctTimes: 0, learned: false };
 
@@ -24,6 +26,7 @@ export const AddWords = () => {
 
 	const { setNotificationValues } = useContext(NotificationContext);
 	const { requestAddWords } = useQueriesWords();
+	const dispatch = useDispatch();
 
 	const generateClass = (name: "one" | "many") => {
 		return menuAddWords === name ? "active" : "";
@@ -58,13 +61,16 @@ export const AddWords = () => {
 		const { message, error } = await requestAddWords({ addWords: { listID: listCookies.listID, words } });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao adicionar palavras", message: error });
 
-		// todo > update global state
-		// dispatch()
+		dispatch(wordSlice.actions.addWords({ words }));
 
 		setNotificationValues({ isOpen: true, type: "success", title: "Novas palavras adicionadas", message });
 		setOneWord(defaultOneWord);
 		setManyWords("");
 
+		if (menuAddWords === "many") clearTextarea();
+	};
+
+	const clearTextarea = () => {
 		const textElement = document.querySelector("#many-words") as HTMLTextAreaElement;
 		textElement.value = "";
 	};

@@ -18,6 +18,7 @@ export const useQueriesWords = () => {
 			if (!data) throw new Error("Data is undefined");
 			const wordsAmount = data.addWords.message.split(":")[1];
 			message = `${wordsAmount} ${Number(wordsAmount) === 1 ? "palavra foi adicionada" : "palavras foram adicionadas"}.`;
+			// todo > Update cache
 		} catch (e: any) {
 			console.log(e.message);
 			const [code, word] = e.message.split(":");
