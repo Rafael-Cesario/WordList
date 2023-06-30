@@ -45,7 +45,7 @@ export const AddWords = () => {
 		return wordsObject;
 	};
 
-	const submitOneWord = async () => {
+	const submitWords = async () => {
 		if (menuAddWords === "one" && (!oneWord.term || !oneWord.definitions)) return setNotificationValues(notificationError);
 		if (menuAddWords === "many" && !manyWords) return setNotificationValues(notificationError);
 
@@ -57,6 +57,9 @@ export const AddWords = () => {
 
 		const { message, error } = await requestAddWords({ addWords: { listID: listCookies.listID, words } });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao adicionar palavras", message: error });
+
+		// todo > update global state
+		// dispatch()
 
 		setNotificationValues({ isOpen: true, type: "success", title: "Novas palavras adicionadas", message });
 		setOneWord(defaultOneWord);
@@ -93,7 +96,7 @@ export const AddWords = () => {
 						{menuAddWords === "one" && (
 							<>
 								<input
-									onKeyUp={(e) => e.key === "Enter" && submitOneWord()}
+									onKeyUp={(e) => e.key === "Enter" && submitWords()}
 									autoFocus={true}
 									type="text"
 									placeholder="Termo"
@@ -103,7 +106,7 @@ export const AddWords = () => {
 								/>
 								<input
 									value={oneWord.definitions}
-									onKeyUp={(e) => e.key === "Enter" && submitOneWord()}
+									onKeyUp={(e) => e.key === "Enter" && submitWords()}
 									type="text"
 									placeholder="Definições"
 									className="definitions"
@@ -122,7 +125,7 @@ export const AddWords = () => {
 							</>
 						)}
 
-						<button onClick={() => submitOneWord()} className="submit">
+						<button onClick={() => submitWords()} className="submit">
 							Adicionar
 						</button>
 					</div>

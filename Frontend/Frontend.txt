@@ -64,6 +64,11 @@
 
 x Logout
     x Delete cookies
+
+x user configs
+    x logout
+    x words per wordlist
+
     
 
 ===== List =====
@@ -74,4 +79,6 @@ x Logout
 - Add a group of words.
 - show name of the list.
 - Show number of words in the list.
-x Show words on the page
+- Show words on the page
+x Show learned words
+x Loading words
