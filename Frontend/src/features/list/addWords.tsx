@@ -56,13 +56,15 @@ export const AddWords = () => {
 
 		const cookies = new Cookies();
 		const key: CookiesKeys = "list";
-		const listCookies = await cookies.get<ListCookies>(key);
+		const { listID, userID } = await cookies.get<ListCookies>(key);
 
-		const { message, error } = await requestAddWords({ addWords: { listID: listCookies.listID, words } });
+		const getWords = { listID, userID };
+		const addWords = { addWords: { listID, words } };
+
+		const { message, error } = await requestAddWords(addWords, { getWords });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao adicionar palavras", message: error });
 
 		dispatch(wordSlice.actions.addWords({ words }));
-
 		setNotificationValues({ isOpen: true, type: "success", title: "Novas palavras adicionadas", message });
 		setOneWord(defaultOneWord);
 		setManyWords("");

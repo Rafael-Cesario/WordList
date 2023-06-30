@@ -30,7 +30,7 @@ export const StyledWordsContainer = styled.div`
 		background-color: ${theme.primary};
 		margin: 0.5rem;
 		padding: 10px;
-		max-height: 350px;
+		max-height: 354px;
 		overflow: hidden;
 		border-radius: 2px;
 		box-shadow: 10px 10px 5px #11111110;

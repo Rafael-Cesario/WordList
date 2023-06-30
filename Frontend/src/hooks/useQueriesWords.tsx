@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CacheWords } from "@/services/cache/cacheWords";
 import { client } from "@/services/client";
 import { IAddWords, IGetWords, IWord, RAddWords, RGetWords } from "@/services/interfaces/words";
 import { QueriesWords } from "@/services/queries/words";
@@ -7,18 +8,29 @@ import { useMutation } from "@apollo/client";
 
 export const useQueriesWords = () => {
 	const queriesWords = new QueriesWords();
+	const cacheWords = new CacheWords();
+
+	const updateCache = ({ getWords }: IGetWords, words: IWord[]) => {
+		const cache = cacheWords.read({ getWords });
+		const newWords = words;
+		if (!cache) return;
+		cache.getWords.words.push(...newWords);
+		cacheWords.update({ getWords }, cache);
+	};
 
 	const [mutationAddWords] = useMutation<RAddWords, IAddWords>(queriesWords.ADD_WORDS);
-	const requestAddWords = async (addWords: IAddWords) => {
+	const requestAddWords = async ({ addWords }: IAddWords, getWords: IGetWords) => {
 		let message = "";
 		let error = "";
 
 		try {
-			const { data } = await mutationAddWords({ variables: addWords });
+			const { data } = await mutationAddWords({ variables: { addWords } });
 			if (!data) throw new Error("Data is undefined");
+
 			const wordsAmount = data.addWords.message.split(":")[1];
 			message = `${wordsAmount} ${Number(wordsAmount) === 1 ? "palavra foi adicionada" : "palavras foram adicionadas"}.`;
-			// todo > Update cache
+
+			updateCache(getWords, addWords.words);
 		} catch (e: any) {
 			console.log(e.message);
 			const [code, word] = e.message.split(":");
