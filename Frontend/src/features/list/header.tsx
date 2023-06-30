@@ -50,7 +50,13 @@ export const Header = ({ listCookies }: Props) => {
 
 			<div className="title">
 				{loadingList ? <div className="loading" /> : <h1>{listName}</h1>}
-				{loadingList ? <div className="loading" /> : <p>{words.length} {words.length === 1 ? "Palavra" : "Palavras"} na lista</p>}
+				{loadingList ? (
+					<div className="loading" />
+				) : (
+					<p>
+						{words.length} {words.length === 1 ? "Palavra" : "Palavras"} na lista
+					</p>
+				)}
 			</div>
 
 			<AddWords />

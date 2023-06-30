@@ -1,10 +1,10 @@
-import { SetCookies, UserCookies } from "./interfaces/cookies";
+import { SetCookies } from "./interfaces/cookies";
 
 export class Cookies {
-	async get(key: string) {
+	async get<T>(key: string) {
 		const response = await fetch(`/api/cookies/${key}`);
 		const data = (await response.json()) as { name: string; value: string };
-		const cookies = JSON.parse(data.value) as UserCookies;
+		const cookies = JSON.parse(data.value) as T;
 		return cookies;
 	}
 

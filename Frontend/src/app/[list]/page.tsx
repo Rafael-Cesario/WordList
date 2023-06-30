@@ -1,4 +1,5 @@
 import { Header } from "@/features/list/header";
+import { WordsContainer } from "@/features/list/wordsContainer";
 import { CookiesKeys, ListCookies } from "@/services/interfaces/cookies";
 import { cookies } from "next/headers";
 import Link from "next/link";
@@ -13,6 +14,7 @@ const List = () => {
 	return (
 		<>
 			<Header listCookies={list} />
+			<WordsContainer />
 		</>
 	);
 };

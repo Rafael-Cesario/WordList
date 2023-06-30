@@ -4,8 +4,8 @@ import { useContext, useState } from "react";
 import { StyledAddWords } from "./styles/addWordsStyle";
 import { NotificationContext } from "@/context/notification";
 import { useQueriesWords } from "@/hooks/useQueriesWords";
-import { StorageKeys } from "@/services/interfaces/storage";
-import { IList } from "@/services/interfaces/list";
+import { Cookies } from "@/services/cookies";
+import { CookiesKeys, ListCookies } from "@/services/interfaces/cookies";
 
 const defaultOneWord = { term: "", definitions: "", correctTimes: 0, learned: false };
 
@@ -49,15 +49,13 @@ export const AddWords = () => {
 		if (menuAddWords === "one" && (!oneWord.term || !oneWord.definitions)) return setNotificationValues(notificationError);
 		if (menuAddWords === "many" && !manyWords) return setNotificationValues(notificationError);
 
-		// todo > list global State
-		const storageKey: StorageKeys = "List";
-		const storage = sessionStorage.getItem(storageKey);
-		if (!storage) return console.log("Storage is empty");
-
-		const listData = JSON.parse(storage) as IList;
 		const words = menuAddWords === "one" ? [oneWord] : [...getTextareaWords()];
 
-		const { message, error } = await requestAddWords({ addWords: { listID: listData._id, words } });
+		const cookies = new Cookies();
+		const key: CookiesKeys = "list";
+		const listCookies = await cookies.get<ListCookies>(key);
+
+		const { message, error } = await requestAddWords({ addWords: { listID: listCookies.listID, words } });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao adicionar palavras", message: error });
 
 		setNotificationValues({ isOpen: true, type: "success", title: "Novas palavras adicionadas", message });

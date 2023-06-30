@@ -68,9 +68,10 @@ x Logout
 
 ===== List =====
 
+- Load words.
+- Words global State.
 - Add new words.
 - Add a group of words.
-x list global state.
-x show name of the list.
-x Show number of words in the list.
-x Separete words per quantity 
+- show name of the list.
+- Show number of words in the list.
+x Show words on the page
