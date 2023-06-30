@@ -58,6 +58,14 @@ export class ServiceList {
 	}
 
 	async updateConfigs({ updateConfigs }: IUpdateConfigs) {
-		console.log({ updateConfigs });
+		const { listID, userID, timesUntilLearning, wordsPerWordList } = updateConfigs;
+
+		const list = await ListModel.findOne({ _id: listID, userID });
+		if (!list) throw new GraphQLError("notFound: List not found");
+
+		const { acknowledged } = await list.updateOne({ wordsPerWordList, timesUntilLearning });
+		if (!acknowledged) throw new GraphQLError("default: Unexpected error while updating configs");
+
+		return { message: "success: Configs updated" };
 	}
 }
