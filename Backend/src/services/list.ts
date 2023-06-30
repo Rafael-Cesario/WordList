@@ -57,6 +57,7 @@ export class ServiceList {
 		return { message: "Deleted" };
 	}
 
+	// todo > Tests
 	async updateConfigs({ updateConfigs }: IUpdateConfigs) {
 		const { listID, userID, timesUntilLearning, wordsPerWordList } = updateConfigs;
 
@@ -69,7 +70,10 @@ export class ServiceList {
 		return { message: "success: Configs updated" };
 	}
 
-	async getOneList(getOneList: IGetOneList) {
-		console.log({ getOneList });
+	// todo > Tests
+	async getOneList({ listID, userID }: IGetOneList) {
+		const list = await ListModel.findOne({ _id: listID, userID });
+		if (!list) throw new GraphQLError("notFound: List not found");
+		return list;
 	}
 }
