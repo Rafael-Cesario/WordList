@@ -13,6 +13,19 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background-color: ${theme.background};
         color: #eee;
+
+        &::-webkit-scrollbar {
+            background-color: ${theme.background};
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #333;
+            border-radius: 2px;
+        }
+
+        &::-webkit-scrollbar-button {
+            background-color: #222;
+        }
     }
 
     
