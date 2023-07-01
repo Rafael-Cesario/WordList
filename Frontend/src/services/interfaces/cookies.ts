@@ -1,5 +1,6 @@
 import { ObjectId } from "mongoose";
 
+// todo > CookiesKeys should be a object
 export type CookiesKeys = "user" | "list";
 
 export interface UserCookies {
@@ -14,8 +15,9 @@ export interface ListCookies {
 	listName: string;
 }
 
+// todo key should be a keyof typeof CookiesKeys
 export interface SetCookies {
-	key: CookiesKeys;
+	key: string;
 	value: string;
 	maxAge: number;
 }

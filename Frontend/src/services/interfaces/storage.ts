@@ -1,1 +1,5 @@
-export type StorageKeys = "List";
+export const CookiesKeys = {
+	user: "user",
+	list: "list",
+	wordList: "wordList",
+};
