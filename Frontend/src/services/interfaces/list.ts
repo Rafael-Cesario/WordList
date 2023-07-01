@@ -73,3 +73,7 @@ export interface IUpdateConfigs {
 export interface RUpdateConfigs {
 	updateConfigs: { message: string };
 }
+
+export interface WordListData extends ListGlobalState {
+	groupIndex: number;
+}

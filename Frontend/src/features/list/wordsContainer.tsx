@@ -1,10 +1,10 @@
 "use client";
-import { CookiesKeys } from "@/services/interfaces/storage";
+import { StorageKeys } from "@/services/interfaces/storage";
 import { StyledWordsContainer } from "./styles/wordsContainerStyle";
 import { groupWords } from "./utils/groupWords";
 import { useOneList } from "@/hooks/list/useOneList";
 import { useRouter } from "next/navigation";
-import { Cookies } from "@/services/cookies";
+import { WordListData } from "@/services/interfaces/list";
 
 interface Props {
 	list: { listID: string; userID: string };
@@ -22,17 +22,11 @@ export const WordsContainer = ({ list: { listID, userID } }: Props) => {
 		const indexEndOfGroup = indexStartOfGroup + wordsPerWordList;
 		const wordsFromCurrentGroup = words.slice(indexStartOfGroup, indexEndOfGroup);
 
-		const cookies = new Cookies();
-		const wordListData = { ...list, words: wordsFromCurrentGroup, groupIndex };
-
-		cookies.set(CookiesKeys.wordList, {
-			key: CookiesKeys.wordList,
-			maxAge: 60 * 60 * 24 * 7, // 7 Days
-			value: JSON.stringify(wordListData),
-		});
+		const wordListData: WordListData = { ...list, words: wordsFromCurrentGroup, groupIndex };
+		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(wordListData));
 
 		const listNameAsLink = list.name.replaceAll(" ", "-");
-		router.push(`/${listNameAsLink}/WordList`);
+		router.push(`/${listNameAsLink}/wordlist`);
 	};
 
 	return (
