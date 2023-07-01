@@ -7,7 +7,6 @@ import { useQueriesWords } from "@/hooks/useQueriesWords";
 import { Cookies } from "@/services/cookies";
 import { CookiesKeys, ListCookies } from "@/services/interfaces/cookies";
 import { useDispatch } from "react-redux";
-import { wordSlice } from "./context/wordSlice";
 
 const defaultOneWord = { term: "", definitions: "", correctTimes: 0, learned: false };
 
@@ -64,7 +63,8 @@ export const AddWords = () => {
 		const { message, error } = await requestAddWords(addWords, { getWords });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao adicionar palavras", message: error });
 
-		dispatch(wordSlice.actions.addWords({ words }));
+		// todo > update global state
+		// dispatch(wordSlice.actions.addWords({ words }));
 		setNotificationValues({ isOpen: true, type: "success", title: "Novas palavras adicionadas", message });
 		setOneWord(defaultOneWord);
 		setManyWords("");
