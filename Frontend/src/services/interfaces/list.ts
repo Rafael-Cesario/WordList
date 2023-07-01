@@ -31,9 +31,7 @@ export interface ICreateList {
 }
 
 export interface RCreateList {
-	createList: {
-		list: IList;
-	};
+	createList: { list: IList };
 }
 
 export interface IRenameList {
@@ -45,9 +43,7 @@ export interface IRenameList {
 }
 
 export interface RRenameList {
-	renameList: {
-		list: IList;
-	};
+	renameList: { list: IList };
 }
 
 export interface IDeleteList {
@@ -58,11 +54,22 @@ export interface IDeleteList {
 }
 
 export interface RDeleteList {
-	deleteList: {
-		message: string;
-	};
+	deleteList: { message: string };
 }
 
 export interface RGetOneList {
 	getOneList: ListGlobalState;
+}
+
+export interface IUpdateConfigs {
+	updateConfigs: {
+		userID: string;
+		listID: string;
+		wordsPerWordList: number;
+		timesUntilLearning: number;
+	};
+}
+
+export interface RUpdateConfigs {
+	updateConfigs: { message: string };
 }

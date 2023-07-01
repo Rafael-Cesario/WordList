@@ -7,10 +7,12 @@ import {
 	IList,
 	IReadLists,
 	IRenameList,
+	IUpdateConfigs,
 	RCreateList,
 	RDeleteList,
 	RReadLists,
 	RRenameList,
+	RUpdateConfigs,
 } from "@/services/interfaces/list";
 import { QueriesList } from "@/services/queries/list";
 import { catchError } from "@/utils/catchError";
@@ -23,6 +25,7 @@ export const useQueriesList = () => {
 	const [mutationCreateList] = useMutation<RCreateList>(queriesList.CREATE_LIST);
 	const [mutationRenameList] = useMutation<RRenameList>(queriesList.RENAME_LIST);
 	const [mutationDeleteList] = useMutation<RDeleteList>(queriesList.DELETE_LIST);
+	const [mutationUpdateConfigs] = useMutation<RUpdateConfigs, IUpdateConfigs>(queriesList.UPDATE_CONFIGS);
 
 	const requestCreateList = async ({ createList }: ICreateList) => {
 		let list: IList = { userID: "", _id: "", name: "" };
@@ -88,5 +91,15 @@ export const useQueriesList = () => {
 		return { message, error };
 	};
 
-	return { requestCreateList, requestReadLists, requestRenameList, requestDeleteList };
+	const requestUpdateConfigs = async ({ updateConfigs }: IUpdateConfigs) => {
+		try {
+			await mutationUpdateConfigs({ variables: { updateConfigs } });
+			return { data: "Suas configurações foram salvas.", error: null };
+		} catch (e: any) {
+			const error = catchError(e.message, "list");
+			return { data: "", error };
+		}
+	};
+
+	return { requestCreateList, requestReadLists, requestRenameList, requestDeleteList, requestUpdateConfigs };
 };

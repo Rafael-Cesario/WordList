@@ -60,4 +60,12 @@ export class QueriesList {
 			}
 		}
 	`;
+
+	UPDATE_CONFIGS = gql`
+		mutation UpdateConfigs($updateConfigs: IUpdateConfigs!) {
+			updateConfigs(updateConfigs: $updateConfigs) {
+				message
+			}
+		}
+	`;
 }
