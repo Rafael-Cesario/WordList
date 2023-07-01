@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { StyledConfigs } from "./styles/configsStyle";
+import { useSelector } from "react-redux";
+import { StoreType } from "@/context/store";
 
 export const Configs = () => {
 	const [isOpen, setIsOpen] = useState(false);
-
-	// todo > get from list
-	const wordsPerWordList = 20;
-	const timesUntilLearning = 20;
+	const { list } = useSelector((state: StoreType) => state.oneList);
+	const { wordsPerWordList, timesUntilLearning } = list;
 
 	return (
 		<>

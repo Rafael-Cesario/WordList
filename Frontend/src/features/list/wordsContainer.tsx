@@ -10,14 +10,14 @@ interface Props {
 // todo > loading
 export const WordsContainer = ({ list: { listID, userID } }: Props) => {
 	const { list } = useOneList(listID, userID);
-	const { words } = list;
+	const { words, wordsPerWordList } = list;
 
 	return (
 		<StyledWordsContainer>
 			<h1 className="group-title">Estudando</h1>
 
 			<div className="container">
-				{groupWords(words).map((group) => {
+				{groupWords(words, wordsPerWordList).map((group) => {
 					return (
 						<div key={group[0].term + "group"} className="group">
 							{group.map((word) => {
