@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { StyledConfigs } from "./styles/configsStyle";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "@/context/store";
 import { NotificationContext } from "@/context/notification";
 import { useQueriesList } from "@/hooks/useQueriesList";
+import { oneListSlice } from "./context/oneListSlice";
 
 export const Configs = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,7 @@ export const Configs = () => {
 
 	const { setNotificationValues } = useContext(NotificationContext);
 	const { requestUpdateConfigs } = useQueriesList();
+	const dispatch = useDispatch();
 
 	const saveConfigs = async () => {
 		const { wordsPerWordList, timesUntilLearning } = configValues;
@@ -38,9 +40,9 @@ export const Configs = () => {
 			});
 		}
 
-		// todo > update global state
-		setNotificationValues({ isOpen: true, type: "success", title: "Configurações", message: data });
 		setIsOpen(false);
+		dispatch(oneListSlice.actions.updateConfigs({ timesUntilLearning, wordsPerWordList }));
+		setNotificationValues({ isOpen: true, type: "success", title: "Configurações", message: data });
 	};
 
 	return (

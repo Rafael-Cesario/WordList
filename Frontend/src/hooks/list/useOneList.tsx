@@ -21,5 +21,5 @@ export const useOneList = (listID: string, userID: string) => {
 		list && dispatch(onListLoad({ list }));
 	}, [loading]);
 
-	return { list: list || globalState.list, loading };
+	return { list: globalState.list, loading };
 };

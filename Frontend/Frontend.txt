@@ -1,6 +1,0 @@
-> Configs
-    > Words Global State
-    x useGetOneList
-        x Fetch one list.
-        x Update global State.
-        x Send notification on errors

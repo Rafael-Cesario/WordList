@@ -20,6 +20,14 @@ export const oneListSlice = createSlice({
 		onListLoad: (state, action: { payload: { list: ListGlobalState } }) => {
 			state.list = action.payload.list;
 		},
+
+		updateConfigs: (state, action: { payload: { wordsPerWordList: number; timesUntilLearning: number } }) => {
+			state.list = {
+				...state.list,
+				wordsPerWordList: action.payload.wordsPerWordList,
+				timesUntilLearning: action.payload.timesUntilLearning,
+			};
+		},
 	},
 });
 
