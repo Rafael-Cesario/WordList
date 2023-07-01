@@ -1,29 +1,24 @@
-import { IWord } from "@/services/interfaces/words";
+import { ListGlobalState } from "@/services/interfaces/list";
 import { createSlice } from "@reduxjs/toolkit";
 
-interface WordSlice {
-	listName: string;
-	words: IWord[];
-}
-
-const initialState: WordSlice = {
-	listName: "",
+const initialState: ListGlobalState = {
+	_id: "",
+	userID: "",
+	name: "",
+	wordsPerWordList: 20,
+	timesUntilLearning: 20,
 	words: [],
 };
 
-// todo > Remove from usage and delete file.
-export const wordSlice = createSlice({
-	name: "words",
+export const oneListSlice = createSlice({
+	name: "oneList",
 	initialState,
 
 	reducers: {
-		loadWords: (state, action: { payload: { words: IWord[]; listName: string } }) => {
-			state.words = action.payload.words;
-			state.listName = action.payload.listName;
-		},
-
-		addWords: (state, action: { payload: { words: IWord[] } }) => {
-			state.words.push(...action.payload.words);
+		loadLists: (state, action: { payload: { list: ListGlobalState } }) => {
+			state = action.payload.list;
 		},
 	},
 });
+
+export const { loadLists } = oneListSlice.actions;

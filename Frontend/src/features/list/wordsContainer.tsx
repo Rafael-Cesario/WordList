@@ -3,9 +3,20 @@ import { useSelector } from "react-redux";
 import { StyledWordsContainer } from "./styles/wordsContainerStyle";
 import { StoreType } from "@/context/store";
 import { groupWords } from "./utils/groupWords";
+import { useQuery } from "@apollo/client";
+import { QueriesList } from "@/services/queries/list";
 
-export const WordsContainer = () => {
+interface Props {
+	list: { listID: string; userID: string };
+}
+
+export const WordsContainer = ({ list: { listID, userID } }: Props) => {
 	const { words } = useSelector((state: StoreType) => state.words);
+
+	const queriesList = new QueriesList();
+	const variables = { listID, userID };
+	const { data, loading, error } = useQuery(queriesList.GET_ONE_LIST, { variables });
+	console.log({ data, loading, error });
 
 	return (
 		<StyledWordsContainer>

@@ -14,7 +14,7 @@ const List = () => {
 	return (
 		<>
 			<Header listCookies={list} />
-			<WordsContainer />
+			<WordsContainer list={list} />
 		</>
 	);
 };

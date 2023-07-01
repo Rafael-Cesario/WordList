@@ -42,4 +42,22 @@ export class QueriesList {
 			}
 		}
 	`;
+
+	GET_ONE_LIST = gql`
+		query GetOneList($listID: String!, $userID: String!) {
+			getOneList(listID: $listID, userID: $userID) {
+				_id
+				userID
+				name
+				wordsPerWordList
+				timesUntilLearning
+				words {
+					term
+					definitions
+					learned
+					correctTimes
+				}
+			}
+		}
+	`;
 }
