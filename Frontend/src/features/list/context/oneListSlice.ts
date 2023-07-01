@@ -1,4 +1,5 @@
 import { ListGlobalState } from "@/services/interfaces/list";
+import { IWord } from "@/services/interfaces/words";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: { list: ListGlobalState } = {
@@ -27,6 +28,11 @@ export const oneListSlice = createSlice({
 				wordsPerWordList: action.payload.wordsPerWordList,
 				timesUntilLearning: action.payload.timesUntilLearning,
 			};
+		},
+
+		addWord: (state, action: { payload: { newWords: IWord[] } }) => {
+			const newWords = action.payload.newWords;
+			state.list.words.push(...newWords);
 		},
 	},
 });
