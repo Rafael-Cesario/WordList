@@ -5,6 +5,6 @@ import { useSelector } from "react-redux";
 
 export const Navigate = () => {
 	const { wordList } = useSelector((state: StoreType) => state.wordList);
-	const linkFromName = wordList.name.replaceAll(" ", "-");
+	const linkFromName = wordList.name?.replaceAll(" ", "-");
 	return <Link href={linkFromName}>Voltar</Link>;
 };

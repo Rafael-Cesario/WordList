@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { StyledWordsContainer } from "./styles/wordsContianerStyle";
 import { useContext, useEffect, useState } from "react";
 import { NotificationContext } from "@/context/notification";
+import { StorageKeys } from "@/services/interfaces/storage";
+import { WordListData } from "@/services/interfaces/list";
 
 export const WordsContainer = () => {
 	const { wordList } = useSelector((state: StoreType) => state.wordList);
@@ -26,9 +28,8 @@ export const WordsContainer = () => {
 	}, [wordList]);
 
 	const saveWords = () => {
-		console.log({ words });
-
-		// todo > update session storage with the new words
+		const newStorage: WordListData = { ...wordList, words };
+		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(newStorage));
 
 		// todo > mutation to update the words
 
