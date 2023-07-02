@@ -3,7 +3,8 @@ import { styled } from "styled-components";
 
 export const StyledWordList = styled.div`
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 
 	a {
 		margin: 2rem;
