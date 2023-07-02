@@ -46,7 +46,7 @@ describe("Update Words", () => {
 			updateWords: {
 				listID: wrongID,
 				firstWordIndex: 0,
-				updatedWords: [defaultWord],
+				newWords: [defaultWord],
 			},
 		});
 
@@ -58,7 +58,7 @@ describe("Update Words", () => {
 			updateWords: {
 				listID: String(list._id),
 				firstWordIndex: 999,
-				updatedWords: [defaultWord],
+				newWords: [defaultWord],
 			},
 		});
 
@@ -70,7 +70,7 @@ describe("Update Words", () => {
 			updateWords: {
 				listID: String(list._id),
 				firstWordIndex: 0,
-				updatedWords: [],
+				newWords: [],
 			},
 		});
 
@@ -86,7 +86,7 @@ describe("Update Words", () => {
 			updateWords: {
 				listID: String(list._id),
 				firstWordIndex: 0,
-				updatedWords: [
+				newWords: [
 					{
 						term: "new",
 						definitions: "new",

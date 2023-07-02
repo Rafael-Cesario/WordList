@@ -35,7 +35,7 @@ export interface IUpdateWords {
 	updateWords: {
 		listID: string;
 		firstWordIndex: number;
-		updatedWords: IWord[];
+		newWords: IWord[];
 	};
 }
 

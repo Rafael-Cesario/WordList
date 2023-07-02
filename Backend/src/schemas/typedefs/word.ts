@@ -36,7 +36,7 @@ export const typeWord = gql`
 	input IUpdateWords {
 		listID: String!
 		firstWordIndex: Int!
-		updatedWords: [IWord!]!
+		newWords: [IWord!]!
 	}
 
 	type RUpdateWords {

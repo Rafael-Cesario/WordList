@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CacheWords } from "@/services/cache/cacheWords";
 import { client } from "@/services/client";
-import { IAddWords, IGetWords, IWord, RAddWords, RGetWords } from "@/services/interfaces/words";
+import { IAddWords, IGetWords, IUpdateWords, IWord, RAddWords, RGetWords, RUpdateWords } from "@/services/interfaces/words";
 import { QueriesWords } from "@/services/queries/words";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
@@ -62,5 +62,16 @@ export const useQueriesWords = () => {
 		return { list, error };
 	};
 
-	return { requestAddWords, requestGetWords };
+	const [mutationUpdateWords] = useMutation<RUpdateWords, IUpdateWords>(queriesWords.UPDATE_WORDS);
+	const requestUpdateWords = async ({ updateWords }: IUpdateWords) => {
+		try {
+			await mutationUpdateWords({ variables: { updateWords } });
+			return { error: "" };
+		} catch (e: any) {
+			const error = catchError(e.message, "word");
+			return { error };
+		}
+	};
+
+	return { requestAddWords, requestGetWords, requestUpdateWords };
 };

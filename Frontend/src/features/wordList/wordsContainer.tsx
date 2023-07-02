@@ -7,12 +7,15 @@ import { useContext, useEffect, useState } from "react";
 import { NotificationContext } from "@/context/notification";
 import { StorageKeys } from "@/services/interfaces/storage";
 import { WordListData } from "@/services/interfaces/list";
+import { useQueriesWords } from "@/hooks/useQueriesWords";
 
 export const WordsContainer = () => {
 	const { wordList } = useSelector((state: StoreType) => state.wordList);
 	const [words, setWords] = useState(wordList.words);
 	const [haveWordsChanged, setHaveWordsChanged] = useState(false);
+
 	const { setNotificationValues } = useContext(NotificationContext);
+	const { requestUpdateWords } = useQueriesWords();
 
 	const renameWord = (wordIndex: number, key: "term" | "definitions", newValue: string) => {
 		const newState = produce(words, (draft) => {
@@ -27,11 +30,21 @@ export const WordsContainer = () => {
 		setWords(wordList.words);
 	}, [wordList]);
 
-	const saveWords = () => {
+	const saveWords = async () => {
 		const newStorage: WordListData = { ...wordList, words };
 		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(newStorage));
 
-		// todo > mutation to update the words
+		const firstWordIndex = wordList.groupIndex * wordList.wordsPerWordList;
+		const { error } = await requestUpdateWords({ updateWords: { listID: wordList._id, newWords: words, firstWordIndex } });
+
+		if (error) {
+			return setNotificationValues({
+				isOpen: false,
+				type: "error",
+				title: "Ops, um erro ocorreu ao tentar salvar suas palavras",
+				message: error,
+			});
+		}
 
 		setHaveWordsChanged(false);
 		setNotificationValues({ isOpen: true, type: "success", title: "Alterações salvas", message: "Suas palavras foram salvas com sucesso." });
