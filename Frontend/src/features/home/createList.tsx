@@ -6,6 +6,7 @@ import { Cookies } from "@/services/cookies";
 import { useQueriesList } from "@/hooks/useQueriesList";
 import { useDispatch } from "react-redux";
 import { listSlice } from "./context/listSlice";
+import { UserCookies } from "@/services/interfaces/cookies";
 
 export const CreateList = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -18,10 +19,11 @@ export const CreateList = () => {
 		if (!listName) return setNotificationValues({ isOpen: true, message: "Digite um nome para sua lista", title: "Lista sem nome", type: "error" });
 
 		const cookies = new Cookies();
-		const userCookies = await cookies.get("user");
+		const userCookies = await cookies.get<UserCookies>("user");
 
 		const createList = { name: listName, userID: String(userCookies.ID) };
 		const { list, error } = await requestCreateList({ createList });
+
 		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Erro ao criar lista", type: "error" });
 
 		dispatch(listSlice.actions.createList({ list }));

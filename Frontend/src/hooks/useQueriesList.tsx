@@ -17,6 +17,7 @@ import {
 import { QueriesList } from "@/services/queries/list";
 import { catchError } from "@/utils/catchError";
 import { useMutation } from "@apollo/client";
+import { produce } from "immer";
 
 export const useQueriesList = () => {
 	const queriesList = new QueriesList();
@@ -37,7 +38,7 @@ export const useQueriesList = () => {
 			list = data.createList.list;
 
 			const cache = cacheList.read(createList.userID);
-			cache.readLists.push(list);
+			cache.readLists = [...cache.readLists, list];
 			cacheList.update(createList.userID, cache);
 		} catch (e: any) {
 			error = catchError(e.message, "list");
@@ -89,9 +90,10 @@ export const useQueriesList = () => {
 			await mutationDeleteList({ variables: { deleteList } });
 			const cache = cacheList.read(deleteList.userID);
 			const listIndex = cache.readLists.findIndex((list) => list._id === deleteList.ID);
-			cache.readLists.splice(listIndex, 1);
+			cache.readLists = produce(cache.readLists, (draft) => draft.splice(listIndex, 1));
 			cacheList.update(deleteList.userID, cache);
 		} catch (e: any) {
+			console.log(e);
 			error = catchError(e.message, "list");
 		}
 
