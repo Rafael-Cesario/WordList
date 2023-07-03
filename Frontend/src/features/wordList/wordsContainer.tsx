@@ -64,8 +64,7 @@ export const WordsContainer = () => {
 					<div className="group" key={"group" + index}>
 						<input type="text" className="word" value={word.term} onChange={(e) => renameWord(index, "term", e.target.value)} />
 						<input type="text" className="word" value={word.definitions} onChange={(e) => renameWord(index, "definitions", e.target.value)} />
-
-						<RemoveWord />
+						<RemoveWord props={{ words, setWords, index, groupIndex: wordList.groupIndex }} />
 					</div>
 				);
 			})}
