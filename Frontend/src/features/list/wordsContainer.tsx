@@ -22,7 +22,7 @@ export const WordsContainer = ({ list: { listID, userID } }: Props) => {
 		const indexEndOfGroup = indexStartOfGroup + wordsPerWordList;
 		const wordsFromCurrentGroup = words.slice(indexStartOfGroup, indexEndOfGroup);
 
-		const wordListData: WordListData = { ...list, words: wordsFromCurrentGroup, groupIndex };
+		const wordListData: WordListData = { ...list, words: wordsFromCurrentGroup, groupIndex, answerWith: "definitions" };
 		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(wordListData));
 
 		const listNameAsLink = list.name.replaceAll(" ", "-");

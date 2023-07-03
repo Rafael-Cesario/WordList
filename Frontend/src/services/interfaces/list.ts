@@ -81,4 +81,5 @@ export interface RUpdateConfigs {
 
 export interface WordListData extends ListGlobalState {
 	groupIndex: number;
+	answerWith: "term" | "definitions";
 }

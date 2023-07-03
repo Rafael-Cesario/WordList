@@ -9,6 +9,7 @@ const defaultWordListData: { wordList: WordListData } = {
 		name: "",
 		wordsPerWordList: 10,
 		timesUntilLearning: 10,
+		answerWith: "definitions",
 		words: [],
 	},
 };
