@@ -1,21 +1,21 @@
 import { NotificationContext } from "@/context/notification";
 import { useQueriesWords } from "@/hooks/useQueriesWords";
+import { WordListData } from "@/services/interfaces/list";
+import { StorageKeys } from "@/services/interfaces/storage";
 import { IWord } from "@/services/interfaces/words";
 import { produce } from "immer";
 import { useContext, useEffect, useState } from "react";
 
 interface Props {
 	props: {
-		_id: string;
-		index: number;
-		groupIndex: number;
-		wordsPerWordList: number;
 		words: IWord[];
 		setWords: React.Dispatch<React.SetStateAction<IWord[]>>;
+		index: number;
+		wordList: WordListData;
 	};
 }
 
-export const RemoveWord = ({ props: { words, setWords, index, groupIndex, wordsPerWordList, _id } }: Props) => {
+export const RemoveWord = ({ props: { words, setWords, index, wordList } }: Props) => {
 	const [confirmRemoveWord, setConfirmRemoveWord] = useState(false);
 
 	const { requestUpdateWords } = useQueriesWords();
@@ -26,8 +26,8 @@ export const RemoveWord = ({ props: { words, setWords, index, groupIndex, wordsP
 			draft.splice(index, 1);
 		});
 
-		const firstWordIndex = groupIndex * wordsPerWordList;
-		const { error } = await requestUpdateWords({ updateWords: { listID: _id, newWords, firstWordIndex } });
+		const firstWordIndex = wordList.groupIndex * wordList.wordsPerWordList;
+		const { error } = await requestUpdateWords({ updateWords: { listID: wordList._id, newWords, firstWordIndex } });
 
 		if (error) {
 			return setNotificationValues({
@@ -38,10 +38,12 @@ export const RemoveWord = ({ props: { words, setWords, index, groupIndex, wordsP
 			});
 		}
 
+		const newStorage: WordListData = { ...wordList, words: newWords };
+		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(newStorage));
+
 		setWords(newWords);
 		setConfirmRemoveWord(false);
-
-		// update session storage
+		setNotificationValues({ isOpen: true, type: "success", title: "Palavra removida", message: "" });
 	};
 
 	useEffect(() => {
