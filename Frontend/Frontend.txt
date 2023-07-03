@@ -1,6 +1,5 @@
-Save in the params the index of the group.
-Save in the sessionStorage the listGlobalState.
+TODO 
 
-IndexOfFirstWord = groupIndex * wordsPerWordlist
-RealIndexOfCurrentWord = ( groupIndex * wordsPerWordList ) + IndexWord
-groupWords = allTheWords.slice(indexOfFirstWord, WordsPerWordList)
+Input to search for words
+[ Refactor ] add answerWith on wordListData to use inside question page.
+question page

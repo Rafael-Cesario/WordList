@@ -14,6 +14,7 @@ export const WordsContainer = () => {
 	const { wordList } = useSelector((state: StoreType) => state.wordList);
 	const [words, setWords] = useState(wordList.words);
 	const [haveWordsChanged, setHaveWordsChanged] = useState(false);
+	const { searchValue } = useSelector((state: StoreType) => state.search);
 
 	const { setNotificationValues } = useContext(NotificationContext);
 	const { requestUpdateWords } = useQueriesWords();
@@ -51,6 +52,20 @@ export const WordsContainer = () => {
 		setNotificationValues({ isOpen: true, type: "success", title: "Alterações salvas", message: "Suas palavras foram salvas com sucesso." });
 	};
 
+	const filterWords = () => {
+		if (!searchValue) return words;
+
+		const filterRegExp = new RegExp(searchValue, "i");
+		const filteredWords = words.filter((word) => {
+			const matchTerm = word.term.match(filterRegExp);
+			const matchDefinitions = word.definitions.match(filterRegExp);
+			if (matchTerm) return word;
+			if (matchDefinitions) return word;
+		});
+
+		return filteredWords;
+	};
+
 	return (
 		<StyledWordsContainer>
 			{haveWordsChanged && (
@@ -59,7 +74,7 @@ export const WordsContainer = () => {
 				</button>
 			)}
 
-			{words.map((word, index) => {
+			{filterWords().map((word, index) => {
 				return (
 					<div className="group" key={"group" + index}>
 						<input type="text" className="word" value={word.term} onChange={(e) => renameWord(index, "term", e.target.value)} />
