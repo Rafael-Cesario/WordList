@@ -79,7 +79,14 @@ export interface RUpdateConfigs {
 	updateConfigs: { message: string };
 }
 
+export type AnswerWith = "term" | "definitions";
+
 export interface WordListData extends ListGlobalState {
 	groupIndex: number;
-	answerWith: "term" | "definitions";
+	answerWith: AnswerWith;
 }
+
+export const mapAnswerWith = {
+	term: "Termo",
+	definitions: "Tradução",
+};

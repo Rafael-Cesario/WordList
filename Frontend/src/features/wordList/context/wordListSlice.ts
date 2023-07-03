@@ -1,4 +1,4 @@
-import { WordListData } from "@/services/interfaces/list";
+import { AnswerWith, WordListData } from "@/services/interfaces/list";
 import { createSlice } from "@reduxjs/toolkit";
 
 const defaultWordListData: { wordList: WordListData } = {
@@ -22,7 +22,11 @@ export const wordListSlice = createSlice({
 		setWordList: (state, action: { payload: { wordList: WordListData } }) => {
 			state.wordList = action.payload.wordList;
 		},
+
+		setAnswerWith: (state, action: { payload: { newAnswerWith: AnswerWith } }) => {
+			state.wordList.answerWith = action.payload.newAnswerWith;
+		},
 	},
 });
 
-export const { setWordList } = wordListSlice.actions;
+export const { setWordList, setAnswerWith } = wordListSlice.actions;
