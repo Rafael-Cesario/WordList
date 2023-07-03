@@ -57,6 +57,11 @@ export interface RDeleteList {
 	deleteList: { message: string };
 }
 
+export interface IGetOneList {
+	listID: string;
+	userID: string;
+}
+
 export interface RGetOneList {
 	getOneList: ListGlobalState;
 }

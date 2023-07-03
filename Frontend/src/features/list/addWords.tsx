@@ -8,6 +8,10 @@ import { Cookies } from "@/services/cookies";
 import { CookiesKeys, ListCookies } from "@/services/interfaces/cookies";
 import { useDispatch } from "react-redux";
 import { oneListSlice } from "./context/oneListSlice";
+import { client } from "@/services/client";
+import { QueriesList } from "@/services/queries/list";
+import { IGetOneList, RGetOneList } from "@/services/interfaces/list";
+import { produce } from "immer";
 
 const defaultOneWord = { term: "", definitions: "", correctTimes: 0, learned: false };
 
@@ -58,12 +62,33 @@ export const AddWords = () => {
 		const key: CookiesKeys = "list";
 		const { listID, userID } = await cookies.get<ListCookies>(key);
 
-		const getWords = { listID, userID };
 		const addWords = { addWords: { listID, words } };
+		const { message, error } = await requestAddWords(addWords);
 
-		const { message, error } = await requestAddWords(addWords, { getWords });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao adicionar palavras", message: error });
 
+		// todo > move to a separetd file
+		const updateListCache = () => {
+			const queriesList = new QueriesList();
+			const listCache = client.readQuery<RGetOneList, IGetOneList>({
+				query: queriesList.GET_ONE_LIST,
+				variables: { listID, userID },
+			});
+
+			if (listCache) {
+				listCache.getOneList = produce(listCache.getOneList, (draft) => {
+					draft.words.push(...words);
+				});
+			}
+
+			client.writeQuery({
+				data: listCache,
+				query: queriesList.GET_ONE_LIST,
+				variables: { listID, userID },
+			});
+		};
+
+		updateListCache();
 		dispatch(oneListSlice.actions.addWord({ newWords: words }));
 		setNotificationValues({ isOpen: true, type: "success", title: "Novas palavras adicionadas", message });
 		setOneWord(defaultOneWord);
