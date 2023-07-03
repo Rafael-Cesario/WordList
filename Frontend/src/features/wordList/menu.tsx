@@ -6,9 +6,11 @@ import { StoreType } from "@/context/store";
 import { AnswerWith, WordListData, mapAnswerWith } from "@/services/interfaces/list";
 import { setAnswerWith } from "./context/wordListSlice";
 import { StorageKeys } from "@/services/interfaces/storage";
+import Link from "next/link";
 
 export const Menu = () => {
 	const { wordList } = useSelector((state: StoreType) => state.wordList);
+	const listNameLink = wordList.name.replaceAll(" ", "-");
 	const dispatch = useDispatch();
 
 	const changeAnswerWith = () => {
@@ -22,7 +24,7 @@ export const Menu = () => {
 	return (
 		<StyledMenu>
 			<div className="buttons">
-				<button>Estudar palavras</button>
+				<Link href={`/${listNameLink}/wordlist/question`}>Estudar palavras</Link>
 				<button onClick={() => changeAnswerWith()}>Responder com: {mapAnswerWith[wordList.answerWith]}</button>
 			</div>
 

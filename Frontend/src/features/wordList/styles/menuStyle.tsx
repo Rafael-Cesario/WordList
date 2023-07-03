@@ -8,16 +8,18 @@ export const StyledMenu = styled.div`
 	width: 90vw;
 	max-width: 900px;
 
-	.buttons button,
-	.search {
-		margin-bottom: 2rem;
-	}
-
 	.buttons {
 		display: flex;
 		justify-content: flex-end;
 
-		button {
+		a {
+			background-color: ${theme.primary};
+			color: #ddd;
+		}
+
+		button,
+		a {
+			margin: 0;
 			padding: 10px 40px;
 			font-weight: bold;
 			font-size: 0.8rem;
@@ -45,5 +47,11 @@ export const StyledMenu = styled.div`
 		width: 100%;
 		height: 1rem;
 		background-color: ${theme.primary};
+	}
+
+	.buttons button,
+	.buttons a,
+	.search {
+		margin-bottom: 2rem;
 	}
 `;
