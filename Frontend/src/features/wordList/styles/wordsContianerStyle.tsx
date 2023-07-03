@@ -9,11 +9,27 @@ export const StyledWordsContainer = styled.div`
 	padding: 1rem;
 	border-radius: 2px;
 	width: 100%;
-	max-width: 90vw;
+	width: 90vw;
+	max-width: 900px;
 
 	.group {
 		display: grid;
-		grid-template-columns: 1fr 2fr;
+		grid-template-columns: 1fr 2fr auto;
+		align-items: center;
+		position: relative;
+
+		.remove {
+			background-color: ${theme.error};
+			padding: 5px 10px;
+			margin: 0;
+			font-size: 0.6rem;
+			opacity: 0.8;
+		}
+
+		.confirm {
+			font-size: 0.8rem;
+			opacity: 1;
+		}
 
 		.word {
 			font-size: 0.8rem;

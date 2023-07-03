@@ -8,6 +8,7 @@ import { NotificationContext } from "@/context/notification";
 import { StorageKeys } from "@/services/interfaces/storage";
 import { WordListData } from "@/services/interfaces/list";
 import { useQueriesWords } from "@/hooks/useQueriesWords";
+import { RemoveWord } from "./removeWord";
 
 export const WordsContainer = () => {
 	const { wordList } = useSelector((state: StoreType) => state.wordList);
@@ -31,9 +32,6 @@ export const WordsContainer = () => {
 	}, [wordList]);
 
 	const saveWords = async () => {
-		const newStorage: WordListData = { ...wordList, words };
-		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(newStorage));
-
 		const firstWordIndex = wordList.groupIndex * wordList.wordsPerWordList;
 		const { error } = await requestUpdateWords({ updateWords: { listID: wordList._id, newWords: words, firstWordIndex } });
 
@@ -45,6 +43,9 @@ export const WordsContainer = () => {
 				message: error,
 			});
 		}
+
+		const newStorage: WordListData = { ...wordList, words };
+		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(newStorage));
 
 		setHaveWordsChanged(false);
 		setNotificationValues({ isOpen: true, type: "success", title: "Alterações salvas", message: "Suas palavras foram salvas com sucesso." });
@@ -63,6 +64,8 @@ export const WordsContainer = () => {
 					<div className="group" key={"group" + index}>
 						<input type="text" className="word" value={word.term} onChange={(e) => renameWord(index, "term", e.target.value)} />
 						<input type="text" className="word" value={word.definitions} onChange={(e) => renameWord(index, "definitions", e.target.value)} />
+
+						<RemoveWord />
 					</div>
 				);
 			})}

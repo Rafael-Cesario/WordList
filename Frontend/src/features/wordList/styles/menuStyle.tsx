@@ -5,6 +5,8 @@ export const StyledMenu = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-top: 4rem;
+	width: 90vw;
+	max-width: 900px;
 
 	.buttons button,
 	.search {
@@ -37,7 +39,6 @@ export const StyledMenu = styled.div`
 		font-size: 0.9rem;
 		font-weight: bold;
 		border-left: 0.5rem solid ${theme.primary};
-		width: 50vw;
 	}
 
 	.line {
