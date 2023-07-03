@@ -14,10 +14,11 @@ export const Password = ({ placeholder, changeValue, fieldName, errors }: Passwo
 
 	return (
 		<div key={fieldName} className={`password-input ${errors[fieldName as keyof typeof errors] ? "error" : ""}`}>
-			<label role={fieldName + "-label"} className="label-error">
+			<label htmlFor={fieldName + "input"} role={fieldName + "-label"} className="label-error">
 				{errors[fieldName as keyof typeof errors]}
 			</label>
 			<input
+				id={fieldName + "input"}
 				role="password"
 				type={isPasswordHide ? "password" : "text"}
 				placeholder={placeholder}

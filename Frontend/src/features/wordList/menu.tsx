@@ -27,6 +27,7 @@ export const Menu = () => {
 			</div>
 
 			<input
+				id="search-input"
 				onChange={(e) => dispatch(setSearch({ newSearchValue: e.target.value }))}
 				className="search"
 				type="text"

@@ -79,10 +79,11 @@ export const CreateAccount = ({ props: { setFormName } }: ILogin) => {
 			<h1 className="title">Criar Conta</h1>
 
 			<form className="fields" onSubmit={(e) => submitForm(e)}>
-				<label role="email-label" className="label-error">
+				<label htmlFor="email-input" role="email-label" className="label-error">
 					{errors.email}
 				</label>
 				<input
+					id="email-input"
 					role="input-email"
 					autoFocus={true}
 					type="text"
