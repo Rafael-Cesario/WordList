@@ -4,7 +4,5 @@ const uri = process.env.NEXT_PUBLIC_URI_DATABASE;
 
 export const client = new ApolloClient({
 	link: new HttpLink({ uri }),
-	cache: new InMemoryCache({
-		addTypename: false,
-	}),
+	cache: new InMemoryCache({ addTypename: false }),
 });

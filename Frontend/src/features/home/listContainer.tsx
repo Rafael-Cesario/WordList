@@ -9,6 +9,7 @@ import { List } from "./list";
 import { listSlice } from "./context/listSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "@/context/store";
+import { UserCookies } from "@/services/interfaces/cookies";
 
 export const ListContainer = () => {
 	const { lists } = useSelector((state: StoreType) => state.lists);
@@ -19,7 +20,7 @@ export const ListContainer = () => {
 
 	const loadLists = async () => {
 		const cookies = new Cookies();
-		const userCookies = await cookies.get("user");
+		const userCookies = await cookies.get<UserCookies>("user");
 
 		const { error, lists } = await requestReadLists({ userID: String(userCookies.ID) });
 		if (error || !lists) return setNotificationValues({ isOpen: true, message: error, title: "Erro ao carregar as listas", type: "error" });

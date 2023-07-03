@@ -10,6 +10,9 @@ export const useQueriesWords = () => {
 	const queriesWords = new QueriesWords();
 	const cacheWords = new CacheWords();
 
+	const [mutationAddWords] = useMutation<RAddWords, IAddWords>(queriesWords.ADD_WORDS);
+	const [mutationUpdateWords] = useMutation<RUpdateWords, IUpdateWords>(queriesWords.UPDATE_WORDS);
+
 	const updateCache = ({ getWords }: IGetWords, words: IWord[]) => {
 		const cache = cacheWords.read({ getWords });
 		const newWords = words;
@@ -18,7 +21,6 @@ export const useQueriesWords = () => {
 		cacheWords.update({ getWords }, cache);
 	};
 
-	const [mutationAddWords] = useMutation<RAddWords, IAddWords>(queriesWords.ADD_WORDS);
 	const requestAddWords = async ({ addWords }: IAddWords, getWords: IGetWords) => {
 		let message = "";
 		let error = "";
@@ -62,10 +64,10 @@ export const useQueriesWords = () => {
 		return { list, error };
 	};
 
-	const [mutationUpdateWords] = useMutation<RUpdateWords, IUpdateWords>(queriesWords.UPDATE_WORDS);
 	const requestUpdateWords = async ({ updateWords }: IUpdateWords) => {
 		try {
 			await mutationUpdateWords({ variables: { updateWords } });
+			// todo > update cache
 			return { error: "" };
 		} catch (e: any) {
 			const error = catchError(e.message, "word");

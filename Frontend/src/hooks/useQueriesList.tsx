@@ -48,7 +48,14 @@ export const useQueriesList = () => {
 
 	const requestReadLists = async (readLists: IReadLists) => {
 		try {
-			const { data } = await client.query<RReadLists>({ query: queriesList.READ_LISTS, variables: readLists });
+			const cache = cacheList.read(readLists.userID);
+			if (cache.readLists.length) return { lists: cache.readLists };
+
+			const { data } = await client.query<RReadLists>({
+				query: queriesList.READ_LISTS,
+				variables: readLists,
+			});
+
 			const lists = data.readLists;
 			return { lists };
 		} catch (e: any) {
