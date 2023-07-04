@@ -50,7 +50,7 @@ export class ServiceWord {
 		if (!list) throw new GraphQLError("notFound: List not found");
 		if (firstWordIndex > list.words.length - 1) throw new GraphQLError("notFound: Word index is out of bound.");
 
-		list.words.splice(firstWordIndex, newWords.length, ...newWords);
+		list.words.splice(firstWordIndex, newWords.length + 1, ...newWords);
 		await list.save();
 
 		return { message: `success: ${newWords.length} updated ${newWords.length === 1 ? "word" : "words"}.` };
