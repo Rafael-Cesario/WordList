@@ -38,12 +38,10 @@ const Question = () => {
 		return isCorrect;
 	};
 
-	// todo >
-	// limit the range to 10 words
 	const goToNextWord = () => {
 		let nextWord = currentWord + 1;
 		const lastWordIndex = words.length - 1;
-		nextWord = nextWord > lastWordIndex ? 0 : nextWord;
+		nextWord = nextWord > lastWordIndex ? 0 : nextWord > 9 ? 0 : nextWord;
 		setCurrentWord(nextWord);
 	};
 
