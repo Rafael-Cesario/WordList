@@ -41,6 +41,7 @@ export const StyledQuestion = styled.div<{ isCorrect?: boolean }>`
 		.answer {
 			font-size: 1rem;
 			color: ${({ isCorrect }) => (isCorrect ? theme.success : theme.error)};
+			opacity: 0;
 		}
 
 		#answer {
@@ -56,6 +57,9 @@ export const StyledQuestion = styled.div<{ isCorrect?: boolean }>`
 			margin: 1rem 0;
 
 			button {
+				transition: 0.1s;
+				border: 2px solid transparent;
+
 				&:nth-child(1) {
 					margin-right: 10px;
 				}
@@ -63,12 +67,12 @@ export const StyledQuestion = styled.div<{ isCorrect?: boolean }>`
 				&:nth-child(2) {
 					background-color: ${theme.background};
 					border: 2px solid #202020;
+					opacity: 0;
 				}
+			}
 
-				&:hover {
-					background-color: #ddd;
-					color: #222;
-				}
+			button.active {
+				opacity: 1;
 			}
 		}
 
@@ -76,6 +80,10 @@ export const StyledQuestion = styled.div<{ isCorrect?: boolean }>`
 			font-size: 0.9rem;
 			margin-top: 2rem;
 			color: #555;
+		}
+
+		.active {
+			opacity: 1;
 		}
 	}
 `;
