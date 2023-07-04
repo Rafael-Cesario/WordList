@@ -18,7 +18,7 @@ interface Props {
 export const RemoveWord = ({ props: { words, setWords, index, wordList } }: Props) => {
 	const [confirmRemoveWord, setConfirmRemoveWord] = useState(false);
 
-	const { requestUpdateWords } = useQueriesWords();
+	const { requestRemoveWord } = useQueriesWords();
 	const { setNotificationValues } = useContext(NotificationContext);
 
 	const removeWord = async () => {
@@ -26,8 +26,11 @@ export const RemoveWord = ({ props: { words, setWords, index, wordList } }: Prop
 			draft.splice(index, 1);
 		});
 
-		const firstWordIndex = wordList.groupIndex * wordList.wordsPerWordList;
-		const { error } = await requestUpdateWords({ updateWords: { listID: wordList._id, newWords, firstWordIndex } });
+		console.log({ newWords });
+
+		const globalIndex = wordList.groupIndex * wordList.wordsPerWordList;
+		const wordIndex = globalIndex + index;
+		const { error } = await requestRemoveWord({ removeWord: { listID: wordList._id, wordIndex } });
 
 		if (error) {
 			return setNotificationValues({

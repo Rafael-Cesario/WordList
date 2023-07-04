@@ -3,6 +3,7 @@ import { NavigateToList } from "@/components/navigate";
 import { StoreType } from "@/context/store";
 import { StyledQuestion } from "@/features/question/styles/questionStyle";
 import { setWordList } from "@/features/wordList/context/wordListSlice";
+import { useQueriesWords } from "@/hooks/useQueriesWords";
 import { WordListData } from "@/services/interfaces/list";
 import { StorageKeys } from "@/services/interfaces/storage";
 import { produce } from "immer";
@@ -22,6 +23,7 @@ const Question = () => {
 	const answer = words[currentWord]?.[wordList.answerWith];
 
 	const dispatch = useDispatch();
+	const { requestUpdateWords } = useQueriesWords();
 
 	const getWordList = () => {
 		const storage = sessionStorage.getItem(StorageKeys.wordList);
@@ -45,14 +47,12 @@ const Question = () => {
 		setCurrentWord(nextWord);
 	};
 
-	const removeCurrentWord = () => {
+	const removeCurrentWord = async () => {
 		const newWords = produce(words, (draft) => {
 			draft.splice(currentWord, 1);
 		});
 
-		// todo >
-		// if there is no more words, show text about ending with a button to redo
-		// send a backend request to update the correct times of words.
+		if (!newWords.length) await updateWordsCorrectTimes();
 
 		setWords(newWords);
 	};
@@ -68,6 +68,23 @@ const Question = () => {
 		if (isAnswerCorrect) removeCurrentWord();
 
 		setUserAnswer("");
+	};
+
+	const updateWordsCorrectTimes = async () => {
+		const firstWordIndex = wordList.groupIndex * wordList.wordsPerWordList;
+		const listID = wordList._id;
+
+		const newWords = produce(wordList.words, (draft) => {
+			draft.map((word) => {
+				word.correctTimes += 1;
+			});
+		});
+
+		const response = await requestUpdateWords({
+			updateWords: { firstWordIndex, listID, newWords },
+		});
+
+		console.log({ response });
 	};
 
 	useEffect(() => {
