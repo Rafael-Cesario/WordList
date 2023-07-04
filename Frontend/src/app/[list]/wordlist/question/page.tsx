@@ -38,6 +38,8 @@ const Question = () => {
 		return isCorrect;
 	};
 
+	// todo >
+	// limit the range to 10 words
 	const goToNextWord = () => {
 		let nextWord = currentWord + 1;
 		const lastWordIndex = words.length - 1;
@@ -49,6 +51,11 @@ const Question = () => {
 		const newWords = produce(words, (draft) => {
 			draft.splice(currentWord, 1);
 		});
+
+		// todo >
+		// if there is no more words, show text about ending with a button to redo
+		// send a backend request to update the correct times of words.
+
 		setWords(newWords);
 	};
 
@@ -73,26 +80,38 @@ const Question = () => {
 		<StyledQuestion isCorrect={isAnswerCorrect}>
 			<NavigateToList params="/wordlist" />
 
-			<div className="container">
-				<h1 className="question">{question}</h1>
-				<h2 className={`answer ${showAnswer && "active"}`}>{answer}</h2>
+			{!!words.length || (
+				<>
+					<h1 className="title-end">Lista finalizada</h1>
+					<button className="button-end" onClick={() => setWords(wordList.words)}>
+						Reiniciar
+					</button>
+				</>
+			)}
 
-				<input
-					value={userAnswer}
-					onChange={(e) => setUserAnswer(e.target.value)}
-					placeholder="Resposta..."
-					type="text"
-					id="answer"
-					autoFocus={true}
-				/>
+			{!!words.length && (
+				<div className="container">
+					<h1 className="question">{question}</h1>
+					<h2 className={`answer ${showAnswer && "active"}`}>{answer}</h2>
 
-				<div className="buttons">
-					<button onClick={() => submit()}>Confirmar</button>
-					<button className={showAnswer ? (isAnswerCorrect ? "" : "active") : ""}>Marcar como correta</button>
+					<input
+						onKeyUp={(e) => e.key === "Enter" && submit()}
+						value={userAnswer}
+						onChange={(e) => setUserAnswer(e.target.value)}
+						placeholder="Resposta..."
+						type="text"
+						id="answer"
+						autoFocus={true}
+					/>
+
+					<div className="buttons">
+						<button onClick={() => submit()}>Confirmar</button>
+						<button className={showAnswer ? (isAnswerCorrect ? "" : "active") : ""}>Marcar como correta</button>
+					</div>
+
+					<p className="words-left">{words.length} palavras até o fim da lista</p>
 				</div>
-
-				<p className="words-left">{words.length} palavras até o fim da lista</p>
-			</div>
+			)}
 		</StyledQuestion>
 	);
 };

@@ -86,4 +86,14 @@ export const StyledQuestion = styled.div<{ isCorrect?: boolean }>`
 			opacity: 1;
 		}
 	}
+
+	.title-end {
+		margin-top: 5rem;
+		margin-bottom: 1rem;
+	}
+
+	.button-end {
+		padding: 10px 4rem;
+		font-size: 0.8rem;
+	}
 `;
