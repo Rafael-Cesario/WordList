@@ -7,6 +7,7 @@ import { useQueriesWords } from "@/hooks/useQueriesWords";
 import { WordListData } from "@/services/interfaces/list";
 import { StorageKeys } from "@/services/interfaces/storage";
 import { produce } from "immer";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,6 +24,7 @@ const Question = () => {
 	const answer = words[currentWord]?.[wordList.answerWith];
 
 	const dispatch = useDispatch();
+	const router = useRouter();
 	const { requestUpdateWords } = useQueriesWords();
 
 	const getWordList = () => {
@@ -52,7 +54,7 @@ const Question = () => {
 			draft.splice(currentWord, 1);
 		});
 
-		if (!newWords.length) await updateWordsCorrectTimes();
+		if (!newWords.length) await updateWordsProperty();
 
 		setWords(newWords);
 	};
@@ -70,7 +72,7 @@ const Question = () => {
 		setUserAnswer("");
 	};
 
-	const updateWordsCorrectTimes = async () => {
+	const updateWordsProperty = async () => {
 		const firstWordIndex = wordList.groupIndex * wordList.wordsPerWordList;
 		const listID = wordList._id;
 
@@ -80,11 +82,14 @@ const Question = () => {
 			});
 		});
 
-		const response = await requestUpdateWords({
+		const { error } = await requestUpdateWords({
 			updateWords: { firstWordIndex, listID, newWords },
 		});
 
-		console.log({ response });
+		if (error) return router.refresh();
+
+		const newStorage: WordListData = { ...wordList, words: newWords };
+		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(newStorage));
 	};
 
 	useEffect(() => {
