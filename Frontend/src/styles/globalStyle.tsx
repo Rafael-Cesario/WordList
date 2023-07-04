@@ -36,6 +36,7 @@ export const GlobalStyle = createGlobalStyle`
         color: #ddd;
         border-radius: 2px;
         box-shadow: 5px 5px 2px #11111120;
+        font-weight: bold;
     }
 
     button {
