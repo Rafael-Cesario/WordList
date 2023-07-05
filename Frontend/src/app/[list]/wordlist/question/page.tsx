@@ -19,12 +19,12 @@ const Question = () => {
 	const [showAnswer, setShowAnswer] = useState(false);
 	const [userAnswer, setUserAnswer] = useState("");
 	const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+	const router = useRouter();
 
 	const question = words[currentWord]?.[wordList.answerWith === "term" ? "definitions" : "term"];
 	const answer = words[currentWord]?.[wordList.answerWith];
 
 	const dispatch = useDispatch();
-	const router = useRouter();
 	const { requestUpdateWords } = useQueriesWords();
 
 	const getWordList = () => {
@@ -36,9 +36,7 @@ const Question = () => {
 	};
 
 	const checkAnswer = () => {
-		if (!userAnswer) return false;
-		const userAnswerRegExp = new RegExp(userAnswer, "i");
-		const isCorrect = !!answer.match(userAnswerRegExp);
+		const isCorrect = userAnswer.trim().toLowerCase() === answer.trim().toLowerCase();
 		return isCorrect;
 	};
 

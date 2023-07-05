@@ -1,5 +1,6 @@
 x Question page
-    x mark as right
+    - mark as right
+    x 
 
 x List page
     x Component to show learned words
