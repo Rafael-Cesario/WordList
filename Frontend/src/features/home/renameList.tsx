@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { listSlice } from "./context/listSlice";
 import { IList } from "@/services/interfaces/list";
+import { UserCookies } from "@/services/interfaces/cookies";
 
 interface RenameListProps {
 	props: {
@@ -28,7 +29,7 @@ export const RenameList = ({ props: { editable, setEditable, listName, list, set
 		if (listName === list.name) return;
 
 		const cookies = new Cookies();
-		const userCookies = await cookies.get("user");
+		const userCookies = await cookies.get<UserCookies>("user");
 
 		const { message, error } = await requestRenameList({ renameList: { ID: list._id, userID: String(userCookies.ID), newName: listName } });
 		if (error) return setNotificationValues({ isOpen: true, type: "error", title: "Erro ao tentar renomear lista", message: error });

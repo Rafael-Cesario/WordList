@@ -13,6 +13,7 @@ export const StyledWordsContainer = styled.div`
 		margin-bottom: 1rem;
 		font-size: 1.1rem;
 		box-shadow: 2px 2px 2px #11111120;
+		margin-top: 5rem;
 	}
 
 	.container {
@@ -22,6 +23,7 @@ export const StyledWordsContainer = styled.div`
 		display: grid;
 		grid-template-columns: repeat(auto-fill, 310px);
 		justify-content: center;
+		margin-bottom: 5rem;
 	}
 
 	.group {

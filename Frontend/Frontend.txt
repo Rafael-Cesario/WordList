@@ -1,3 +1,8 @@
-x List page
-    x Component to show learned words
-    x Study learned words
+=== TODO ===
+
+x Logout
+x Reset words
+x Update cache.
+x Cypress e2e tests.
+x Vitest integration and unit tests.
+x [ Refactor ] Hooks useQueries**
