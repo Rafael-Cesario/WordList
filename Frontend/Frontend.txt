@@ -1,2 +1,6 @@
-Question page
-    Style
+x Question page
+    x mark as right
+
+x List page
+    x Component to show learned words
+    x Study learned words

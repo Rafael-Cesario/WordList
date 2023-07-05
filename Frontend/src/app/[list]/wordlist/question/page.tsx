@@ -59,8 +59,8 @@ const Question = () => {
 		setWords(newWords);
 	};
 
-	const submit = () => {
-		const isAnswerCorrect = checkAnswer();
+	const submit = (forceRightAnswer?: true) => {
+		const isAnswerCorrect = forceRightAnswer || checkAnswer();
 		setIsAnswerCorrect(isAnswerCorrect);
 
 		setShowAnswer(!showAnswer);
@@ -90,6 +90,11 @@ const Question = () => {
 
 		const newStorage: WordListData = { ...wordList, words: newWords };
 		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(newStorage));
+	};
+
+	const forceRightAnswer = () => {
+		setUserAnswer(answer);
+		submit(true);
 	};
 
 	useEffect(() => {
@@ -126,7 +131,9 @@ const Question = () => {
 
 					<div className="buttons">
 						<button onClick={() => submit()}>Confirmar</button>
-						<button className={showAnswer ? (isAnswerCorrect ? "" : "active") : ""}>Marcar como correta</button>
+						<button onClick={() => forceRightAnswer()} className={showAnswer ? (isAnswerCorrect ? "" : "active") : ""}>
+							Marcar como correta
+						</button>
 					</div>
 
 					<p className="words-left">{words.length} palavras até o fim da lista</p>
