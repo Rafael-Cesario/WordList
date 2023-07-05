@@ -19,25 +19,46 @@
     Linting: Eslint
 
 ### Preview
+![Authentication](https://github.com/Rafael-Cesario/WordList/assets/88716893/976eecef-e0f1-4e40-b4ac-3d6a470354b7)
+![List](https://github.com/Rafael-Cesario/WordList/assets/88716893/74d8a275-5259-4d3e-988e-dfff4c6ee688)
+![Home](https://github.com/Rafael-Cesario/WordList/assets/88716893/818e88e5-a434-4084-8c8f-a4947a0e2f4f)
+![Wordlist](https://github.com/Rafael-Cesario/WordList/assets/88716893/775ad128-0411-4f18-b285-a7ff54a55b11)
+![Question](https://github.com/Rafael-Cesario/WordList/assets/88716893/c2709f85-e8e0-48b5-b37c-1ca4a5a95ff8)
 
-![Authentication](https://github.com/Rafael-Cesario/WordList-4.0/assets/88716893/7766c03e-f25d-4685-b21c-c8ed912ed170)
 
-</br>
 
-![Home](https://github.com/Rafael-Cesario/WordList-4.0/assets/88716893/6f39350e-684f-408c-99a4-7602417960d6)
 
-</br>
+### How to run the project in dev environment
+###### You will need mongoDB installed.
 
-![List](https://github.com/Rafael-Cesario/WordList-4.0/assets/88716893/d736f401-1bb3-4d4c-ab30-0bee5e66e440)
+##### Clone the repository, and enter the wordList folder
 
-</br>
+        git clone https://github.com/Rafael-Cesario/WordList
+        cd wordList
+        
+##### There are two folders inside wordList, Frontend and Backend
 
-![Configs](https://github.com/Rafael-Cesario/WordList-4.0/assets/88716893/0ebc0876-e855-42c7-be98-6bac22562406)
+##### Backend
+		cd Backend
+		${packageManager} install
 
-</br>
+##### Inside backend folder create a .env with the following properties
+###### This will start mongoDB on localhost
+###### SECRET is a string, a SHA256 hash you  can use this link to create a hash: https://emn178.github.io/online-tools/sha256.html
+		DATABASE="mongodb://127.0.0.1:27017/WordList"
+		SECRET="${secret hash for the jwt Token}"
+		
+##### Backend is ready
+		${packageManager} run dev
 
-![Wordlist](https://github.com/Rafael-Cesario/WordList-4.0/assets/88716893/00955a08-350d-48e2-98d8-eb7488e02430)
+##### Frontend
+###### Open another terminal instance to run the frontend server.
+		cd Frontend
+		${packageManager} install
 
-</br>
+##### Inside the folder we need to create a .env.local with the following property
+		//.env.local
+		NEXT_PUBLIC_URI_DATABASE="http://localhost:4000/"
 
-![Question](https://github.com/Rafael-Cesario/WordList-4.0/assets/88716893/37f13cf2-71d8-4026-8f0c-a9b118d7d77c)
+##### Frontend is ready
+		${packageManager} run dev
