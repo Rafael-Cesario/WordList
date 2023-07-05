@@ -1,7 +1,3 @@
-x Question page
-    - mark as right
-    x 
-
 x List page
     x Component to show learned words
     x Study learned words
