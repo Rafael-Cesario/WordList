@@ -38,6 +38,6 @@ describe("Login component", () => {
 		await user.type(screen.getByRole("email-input"), "email@email.com");
 		await user.type(screen.getByRole("password"), "password123");
 		await user.click(screen.getByRole("submit"));
-		expect(screen.getByRole("notification").querySelector("h1")).toHaveTextContent("Ops, Erro");
+		expect(screen.getByRole("notification").querySelector("h1")).toHaveTextContent("Ops...");
 	});
 });

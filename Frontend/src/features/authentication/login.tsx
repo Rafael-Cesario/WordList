@@ -45,7 +45,7 @@ export const Login = ({ props: { setFormName } }: ILogin) => {
 		if (hasEmptyValues) return setErrors({ ...defaultValues, ...emptyValues });
 
 		const { user, error } = await requestLogin({ login: values });
-		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Ops, Erro", type: "error" });
+		if (error) return setNotificationValues({ isOpen: true, message: error, title: "Ops...", type: "error" });
 
 		const cookies = new Cookies();
 		const userCookie = { email: values.email, ...user } as UserCookies;

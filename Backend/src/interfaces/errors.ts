@@ -3,5 +3,12 @@ export interface IErrorsCode {
 
 	user: {
 		duplicated: string;
+		invalidCredentials: string;
 	};
+}
+
+export const customErrors = {
+	user: {
+		invalidCredentials: "invalidCredentials: Email/password is wrong."
+	}
 }

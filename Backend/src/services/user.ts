@@ -5,6 +5,7 @@ import { checkData } from "../utils/checkData";
 import { decryptPassword } from "../utils/crypt";
 import { generateToken } from "../utils/token";
 import mongoose from "mongoose";
+import { customErrors } from "../interfaces/errors";
 
 export class ServiceUser {
 	async findOneUser({ email }: IFindOneUser): Promise<RFindOneUser> {
@@ -34,10 +35,10 @@ export class ServiceUser {
 		const { email, password } = login;
 
 		const user = await UserModel.findOne({ email });
-		if (!user) throw new GraphQLError("Invalid credentials");
+		if (!user) throw new GraphQLError(customErrors.user.invalidCredentials);
 
 		const isSamePassword = decryptPassword(password, user.password);
-		if (!isSamePassword) throw new GraphQLError("Invalid credentials");
+		if (!isSamePassword) throw new GraphQLError(customErrors.user.invalidCredentials);
 
 		const token = generateToken(email);
 		return { message: "Success", token, ID: user._id };
