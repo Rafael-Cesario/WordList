@@ -15,7 +15,7 @@ export const ListName = ({ props: { editable, setShowMenu, showMenu, list, listN
 	return (
 		<>
 			{editable || (
-				<p className="listName" onClick={() => setShowMenu(!showMenu)}>
+				<p role="list" className="listName" onClick={() => setShowMenu(!showMenu)}>
 					{list.name}
 				</p>
 			)}

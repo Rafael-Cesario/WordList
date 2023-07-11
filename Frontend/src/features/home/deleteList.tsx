@@ -44,10 +44,10 @@ export const DeleteList = ({ props: { list, setConfirmDelete } }: DeleteListProp
 	};
 
 	return (
-		<div className="container">
+		<div role="delete-container" className="container">
 			<div className="delete">
 				<div className="line" />
-				<button className="close" onClick={() => setConfirmDelete(false)}>
+				<button className="close" role="close-delete-list" onClick={() => setConfirmDelete(false)}>
 					x
 				</button>
 

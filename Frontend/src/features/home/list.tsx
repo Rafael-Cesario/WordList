@@ -36,7 +36,7 @@ export const List = ({ props: { list } }: { props: { list: IList } }) => {
 			<ListName props={{ editable, showMenu, setShowMenu, list, listName, setListName }} />
 
 			{showMenu && (
-				<div className="menu">
+				<div role="menu" className="menu">
 					<Link onClick={() => setCookies()} href={`${list.name.replaceAll(" ", "-")}`} className="option">
 						Entrar
 					</Link>
