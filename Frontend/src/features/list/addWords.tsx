@@ -36,6 +36,7 @@ export const AddWords = () => {
 		return menuAddWords === name ? "active" : "";
 	};
 
+	// todo > If bad template send notification.
 	const getTextareaWords = () => {
 		const separatedWords = manyWords.split("\n");
 
@@ -110,18 +111,18 @@ export const AddWords = () => {
 
 	return (
 		<>
-			<button onClick={() => setMenuAddWords("one")} className="add-words-button">
+			<button role="open-menu" onClick={() => setMenuAddWords("one")} className="add-words-button">
 				Adicionar palavras
 			</button>
 
 			{menuAddWords && (
 				<StyledAddWords>
-					<div className="container">
+					<div role="menu-container" className="container">
 						<div className="menu">
 							<button onClick={() => setMenuAddWords("one")} className={generateClass("one")}>
 								Individual
 							</button>
-							<button onClick={() => setMenuAddWords("many")} className={generateClass("many")}>
+							<button role="menu-change-many" onClick={() => setMenuAddWords("many")} className={generateClass("many")}>
 								Adicionar várias
 							</button>
 						</div>
@@ -135,6 +136,7 @@ export const AddWords = () => {
 						{menuAddWords === "one" && (
 							<>
 								<input
+									role="input-term"
 									id={"one-word"}
 									onKeyUp={(e) => e.key === "Enter" && submitWords()}
 									autoFocus={true}
@@ -145,6 +147,7 @@ export const AddWords = () => {
 									onChange={(e) => setOneWord({ ...oneWord, term: e.target.value })}
 								/>
 								<input
+									role="input-translation"
 									value={oneWord.definitions}
 									onKeyUp={(e) => e.key === "Enter" && submitWords()}
 									type="text"
@@ -159,13 +162,14 @@ export const AddWords = () => {
 							<>
 								<p className="info">Siga o template abaixo para adicionar novas palavras.</p>
 								<textarea
+									role="many-words"
 									id={"many-words"}
 									onChange={(e) => setManyWords(e.target.value)}
 									placeholder={`Termo : Definição01, Definição02, Definição03\nOutro termo : Outra definição `}></textarea>
 							</>
 						)}
 
-						<button onClick={() => submitWords()} className="submit">
+						<button role="add-words" onClick={() => submitWords()} className="submit">
 							Adicionar
 						</button>
 					</div>

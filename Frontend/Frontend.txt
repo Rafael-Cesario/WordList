@@ -1,10 +1,10 @@
 === TODO ===
 
+> Vitest integration and unit tests.
 x Logout
 x Reset words
 x Update cache.
 x Cypress e2e tests.
-x Vitest integration and unit tests.
 x [ Refactor ] Hooks useQueries**
 x Responsive
 x One time password
