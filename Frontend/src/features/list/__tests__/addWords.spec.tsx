@@ -1,15 +1,17 @@
 import "@testing-library/jest-dom";
-import userEvent from "@testing-library/user-event";
+import UserEvent from "@testing-library/user-event";
 import { renderWithProviders } from "@/utils/renderWithProviders";
 import { AddWords } from "../addWords";
 import { Notification } from "@/components/notification";
+import { WordsContainer } from "../wordsContainer";
 import { cleanup, screen } from "@testing-library/react";
+import { RGetOneList } from "@/services/interfaces/list";
 
 import * as QueriesWords from "@/hooks/useQueriesWords";
 const mockQueriesWords = QueriesWords as { useQueriesWords: object };
 
 describe("Add Words component", () => {
-	const user = userEvent.setup();
+	const user = UserEvent.setup();
 
 	const message = "";
 	let error = "";
@@ -19,10 +21,13 @@ describe("Add Words component", () => {
 	});
 
 	beforeEach(async () => {
-		renderWithProviders(<Component />);
+		await renderWithProviders(<Component />);
 	});
 
-	afterEach(() => cleanup());
+	afterEach(() => {
+		cleanup();
+		error = "";
+	});
 
 	it("Open and close menu", async () => {
 		await user.click(screen.getByRole("open-menu"));
@@ -57,7 +62,16 @@ describe("Add Words component", () => {
 		expect(screen.getByRole("notification").querySelector(".description")).toHaveTextContent(error);
 	});
 
-	it.todo("Show new words on the page and a success notification");
+	it("Show new words on the page and a success notification", async () => {
+		await user.click(screen.getByRole("open-menu"));
+		await user.type(screen.getByRole("input-term"), "Hello");
+		await user.type(screen.getByRole("input-translation"), "Olá");
+		await user.click(screen.getByRole("add-words"));
+		const newWord = screen.getByText("Hello");
+		expect(newWord).toBeInTheDocument();
+		expect(screen.getByRole("notification").querySelector(".title")?.textContent).toBe("Novas palavras adicionadas");
+	});
+
 	it.todo("Focus again on the first input");
 	it.todo("Clear all the words inside textarea");
 });
@@ -67,9 +81,15 @@ const Component = () => {
 		<>
 			<Notification />
 			<AddWords />
+			<WordsContainer list={{ listID: "123", userID: "123" }} />
 		</>
 	);
 };
+
+vi.mock("next/navigation", async () => ({
+	useRouter: vi.fn(),
+	useServerInsertedHTML: vi.fn(),
+}));
 
 vi.mock("@/hooks/useQueriesWords", () => ({
 	useQueriesWords: vi.fn(),
@@ -80,4 +100,25 @@ vi.mock("@/services/cookies", () => {
 	const user = { listID: "123", userID: "123" };
 	Cookies.prototype.get = () => user;
 	return { Cookies };
+});
+
+vi.mock("@/services/client", () => {
+	const list: RGetOneList = {
+		getOneList: {
+			_id: "",
+			userID: "",
+			name: "",
+			wordsPerWordList: 20,
+			timesUntilLearning: 20,
+			words: [],
+		},
+	};
+
+	const client = {
+		query: () => ({ list }),
+		readQuery: () => list,
+		writeQuery: vi.fn(),
+	};
+
+	return { client };
 });

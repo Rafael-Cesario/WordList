@@ -1,6 +1,7 @@
 === TODO ===
 
 > Vitest integration and unit tests.
+    - add words
 x Logout
 x Reset words
 x Update cache.
