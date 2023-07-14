@@ -72,7 +72,14 @@ describe("Add Words component", () => {
 		expect(screen.getByRole("notification").querySelector(".title")?.textContent).toBe("Novas palavras adicionadas");
 	});
 
-	it.todo("Focus again on the first input");
+	it("Focus on the term input after adding a new word", async () => {
+		await user.click(screen.getByRole("open-menu"));
+		await user.type(screen.getByRole("input-term"), "Hello");
+		await user.type(screen.getByRole("input-translation"), "Olá");
+		await user.click(screen.getByRole("add-words"));
+		expect(screen.getByRole("input-term")).toHaveFocus();
+	});
+
 	it.todo("Clear all the words inside textarea");
 });
 
