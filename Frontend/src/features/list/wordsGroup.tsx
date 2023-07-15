@@ -36,9 +36,9 @@ export const WordsGroup = ({ title, words }: Props) => {
 				{words.map((group, index) => {
 					return (
 						<div onClick={() => goToWordList(index)} key={group[0].term + "group"} className="group">
-							{group.map((word) => {
+							{group.map((word, index) => {
 								return (
-									<div className="word" key={word.term + "word"}>
+									<div className="word" key={word.term + "word" + index}>
 										<p className="term">{word.term}</p>
 										<p className="definitions">{word.definitions}</p>
 									</div>

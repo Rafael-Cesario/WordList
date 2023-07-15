@@ -2,6 +2,7 @@
 
 > Vitest integration and unit tests.
     - add words
+
 x Logout
 x Reset words
 x Update cache.
@@ -11,3 +12,4 @@ x Responsive
 x One time password
 x user can change password
 x If user has no list show text
+x [ readme ] Separate into a file the "How to run" section.

@@ -6,6 +6,7 @@ import { Notification } from "@/components/notification";
 import { WordsContainer } from "../wordsContainer";
 import { cleanup, screen } from "@testing-library/react";
 import { RGetOneList } from "@/services/interfaces/list";
+import { IAddWords } from "@/services/interfaces/words";
 
 import * as QueriesWords from "@/hooks/useQueriesWords";
 const mockQueriesWords = QueriesWords as { useQueriesWords: object };
@@ -13,11 +14,14 @@ const mockQueriesWords = QueriesWords as { useQueriesWords: object };
 describe("Add Words component", () => {
 	const user = UserEvent.setup();
 
-	const message = "";
+	let message = "";
 	let error = "";
 
 	mockQueriesWords.useQueriesWords = () => ({
-		requestAddWords: () => ({ message, error }),
+		requestAddWords: ({ addWords }: IAddWords) => {
+			message = String(addWords.words.length);
+			return { message, error };
+		},
 	});
 
 	beforeEach(async () => {
@@ -62,14 +66,14 @@ describe("Add Words component", () => {
 		expect(screen.getByRole("notification").querySelector(".description")).toHaveTextContent(error);
 	});
 
-	it("Show new words on the page and a success notification", async () => {
+	it("Add new words using the individual method", async () => {
 		await user.click(screen.getByRole("open-menu"));
 		await user.type(screen.getByRole("input-term"), "Hello");
 		await user.type(screen.getByRole("input-translation"), "Olá");
 		await user.click(screen.getByRole("add-words"));
 		const newWord = screen.getByText("Hello");
 		expect(newWord).toBeInTheDocument();
-		expect(screen.getByRole("notification").querySelector(".title")?.textContent).toBe("Novas palavras adicionadas");
+		expect(screen.getByRole("notification").querySelector(".description")?.textContent).toBe("1");
 	});
 
 	it("Focus on the term input after adding a new word", async () => {
@@ -80,7 +84,17 @@ describe("Add Words component", () => {
 		expect(screen.getByRole("input-term")).toHaveFocus();
 	});
 
-	it.todo("Clear all the words inside textarea");
+	it("Add new words using the many method", async () => {
+		await user.click(screen.getByRole("open-menu"));
+		await user.click(screen.getByRole("menu-change-many"));
+		await user.type(screen.getByRole("many-words"), "Hello: Olá\nBottle: Garrafa");
+		await user.click(screen.getByRole("add-words"));
+		expect(screen.getByRole("many-words")).toHaveValue("");
+
+		const newWord = screen.getByText("Bottle");
+		expect(newWord).toBeInTheDocument();
+		expect(screen.getByRole("notification").querySelector(".description")?.textContent).toBe("2");
+	});
 });
 
 const Component = () => {
