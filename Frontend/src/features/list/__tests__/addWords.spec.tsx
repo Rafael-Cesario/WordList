@@ -5,7 +5,6 @@ import { AddWords } from "../addWords";
 import { Notification } from "@/components/notification";
 import { WordsContainer } from "../wordsContainer";
 import { cleanup, screen } from "@testing-library/react";
-import { RGetOneList } from "@/services/interfaces/list";
 import { IAddWords } from "@/services/interfaces/words";
 
 import * as QueriesWords from "@/hooks/useQueriesWords";
@@ -106,40 +105,3 @@ const Component = () => {
 		</>
 	);
 };
-
-vi.mock("next/navigation", async () => ({
-	useRouter: vi.fn(),
-	useServerInsertedHTML: vi.fn(),
-}));
-
-vi.mock("@/hooks/useQueriesWords", () => ({
-	useQueriesWords: vi.fn(),
-}));
-
-vi.mock("@/services/cookies", () => {
-	const Cookies = vi.fn();
-	const user = { listID: "123", userID: "123" };
-	Cookies.prototype.get = () => user;
-	return { Cookies };
-});
-
-vi.mock("@/services/client", () => {
-	const list: RGetOneList = {
-		getOneList: {
-			_id: "",
-			userID: "",
-			name: "",
-			wordsPerWordList: 20,
-			timesUntilLearning: 20,
-			words: [],
-		},
-	};
-
-	const client = {
-		query: () => ({ list }),
-		readQuery: () => list,
-		writeQuery: vi.fn(),
-	};
-
-	return { client };
-});
