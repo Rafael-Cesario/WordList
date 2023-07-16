@@ -5,15 +5,9 @@ import { Login } from "../login";
 import { AllProviders } from "@/components/providers";
 import { Notification } from "@/components/notification";
 
-vi.mock("next/navigation", async () => {
-	const actual: object = await vi.importActual("next/navigation");
-	return {
-		...actual,
-		useRouter: () => ({
-			push: vi.fn(),
-		}),
-	};
-});
+vi.mock("@/hooks/useQueriesUser");
+import * as QueriesUser from "@/hooks/useQueriesUser";
+const mockedQueriesUser = QueriesUser as { useQueriesUser: object };
 
 const renderComponent = () => {
 	render(
@@ -27,6 +21,13 @@ const renderComponent = () => {
 describe("Login component", () => {
 	const user = userEvent.setup();
 
+	const userData = {};
+	let error = "";
+
+	mockedQueriesUser.useQueriesUser = () => ({
+		requestLogin: () => ({ user: userData, error }),
+	});
+
 	it("Show errors on label", async () => {
 		renderComponent();
 		await user.click(screen.getByRole("submit"));
@@ -34,6 +35,7 @@ describe("Login component", () => {
 	});
 
 	it("Show a notification for response errors", async () => {
+		error = "Error trying to login";
 		renderComponent();
 		await user.type(screen.getByRole("email-input"), "email@email.com");
 		await user.type(screen.getByRole("password"), "password123");
