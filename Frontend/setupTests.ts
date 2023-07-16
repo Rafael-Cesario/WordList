@@ -2,7 +2,7 @@ import { RGetOneList } from "@/services/interfaces/list";
 import { vi } from "vitest";
 
 vi.mock("next/navigation", async () => ({
-	useRouter: vi.fn(),
+	useRouter: () => ({ push: vi.fn() }),
 	useServerInsertedHTML: vi.fn(),
 }));
 
