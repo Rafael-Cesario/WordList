@@ -47,13 +47,13 @@ export const Configs = () => {
 
 	return (
 		<>
-			<button className="configs-button" onClick={() => setIsOpen(true)}>
+			<button role="open-close-configs" className="configs-button" onClick={() => setIsOpen(true)}>
 				Configs
 			</button>
 
 			{isOpen && (
 				<StyledConfigs>
-					<div className="container">
+					<div className="container" role="configs-container">
 						<button className="close" onClick={() => setIsOpen(false)}>
 							x
 						</button>
@@ -81,6 +81,7 @@ export const Configs = () => {
 									/>
 								</div>
 							</div>
+							{/* Todo > remove placeholder values */}
 							<div className="stats">
 								<p>Palavras na lista: 150</p>
 								<p>Palavras aprendidas: 100</p>
