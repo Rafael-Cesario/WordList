@@ -12,18 +12,21 @@ const mockedQueriesList = QueriesList as { useQueriesList: object };
 describe("Configs component", () => {
 	const user = userEvent.setup();
 
-	const data = "";
+	const data = "Hello, your new configs have been saved";
 	let error = "";
 
 	mockedQueriesList.useQueriesList = () => ({
 		requestUpdateConfigs: () => ({ data, error }),
 	});
 
-	beforeAll(async () => {
+	beforeEach(async () => {
 		await renderWithProviders(<Component />);
 	});
 
-	afterEach(() => cleanup());
+	afterEach(() => {
+		cleanup();
+		error = "";
+	});
 
 	it("Open and close configs", async () => {
 		await user.click(screen.getByRole("open-close-configs"));
@@ -42,7 +45,7 @@ describe("Configs component", () => {
 		expect(notification).toHaveTextContent("Você não pode deixar campos vazios.");
 	});
 
-	it.only("Open notification due to a request error", async () => {
+	it("Open notification due to a request error", async () => {
 		error = "Hello, I'm a request error";
 		await user.click(screen.getByRole("open-close-configs"));
 		await user.click(screen.getByRole("save-configs"));
@@ -50,7 +53,14 @@ describe("Configs component", () => {
 		expect(notification).toHaveTextContent(error);
 	});
 
-	it.todo("close configs after saving");
+	it("close configs after saving", async () => {
+		await user.click(screen.getByRole("open-close-configs"));
+		await user.click(screen.getByRole("save-configs"));
+		const notification = screen.getByRole("notification").querySelector(".description");
+		expect(notification).toHaveTextContent(data);
+		expect(screen.queryByRole("configs-container")).not.toBeInTheDocument();
+	});
+
 	it.todo("Update the group of words in the page");
 });
 
