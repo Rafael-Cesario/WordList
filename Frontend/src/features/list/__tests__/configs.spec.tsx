@@ -6,8 +6,18 @@ import { Notification } from "@/components/notification";
 import { WordsContainer } from "../wordsContainer";
 import { cleanup, screen } from "@testing-library/react";
 
+import * as QueriesList from "@/hooks/useQueriesList";
+const mockedQueriesList = QueriesList as { useQueriesList: object };
+
 describe("Configs component", () => {
 	const user = userEvent.setup();
+
+	const data = "";
+	let error = "";
+
+	mockedQueriesList.useQueriesList = () => ({
+		requestUpdateConfigs: () => ({ data, error }),
+	});
 
 	beforeAll(async () => {
 		await renderWithProviders(<Component />);
@@ -32,7 +42,14 @@ describe("Configs component", () => {
 		expect(notification).toHaveTextContent("Você não pode deixar campos vazios.");
 	});
 
-	it.todo("Open notification due to a request error");
+	it.only("Open notification due to a request error", async () => {
+		error = "Hello, I'm a request error";
+		await user.click(screen.getByRole("open-close-configs"));
+		await user.click(screen.getByRole("save-configs"));
+		const notification = screen.getByRole("notification").querySelector(".description");
+		expect(notification).toHaveTextContent(error);
+	});
+
 	it.todo("close configs after saving");
 	it.todo("Update the group of words in the page");
 });

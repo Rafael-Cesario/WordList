@@ -10,6 +10,10 @@ vi.mock("@/hooks/useQueriesWords", () => ({
 	useQueriesWords: vi.fn(),
 }));
 
+vi.mock("@/hooks/useQueriesList", () => ({
+	useQueriesList: vi.fn(),
+}));
+
 vi.mock("@/services/cookies", () => {
 	const Cookies = vi.fn();
 	const user = { listID: "123", userID: "123" };
