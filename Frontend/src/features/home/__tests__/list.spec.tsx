@@ -4,8 +4,15 @@ import { renderWithProviders } from "@/utils/renderWithProviders";
 import { List } from "../list";
 import { screen } from "@testing-library/react";
 
+import * as QueriesList from "@/hooks/useQueriesList";
+const mockedQueriesList = QueriesList as { useQueriesList: object };
+
 describe("[ Unit ] List component", () => {
 	const user = userEvent.setup();
+
+	mockedQueriesList.useQueriesList = () => ({
+		requestRenameList: vi.fn(),
+	});
 
 	beforeEach(async () => {
 		await renderWithProviders(<List props={{ list: { _id: "123", userID: "321", name: "ListName" } }} />);

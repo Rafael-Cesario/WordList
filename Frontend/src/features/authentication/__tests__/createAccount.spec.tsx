@@ -5,6 +5,9 @@ import { CreateAccount } from "../createAccount";
 import { AllProviders } from "@/components/providers";
 import { Notification } from "@/components/notification";
 
+import * as QueriesUser from "@/hooks/useQueriesUser";
+const mockedQueriesUser = QueriesUser as { useQueriesUser: object };
+
 const renderComponent = () => {
 	render(
 		<AllProviders>
@@ -16,6 +19,12 @@ const renderComponent = () => {
 
 describe("Create account component", () => {
 	const user = userEvent.setup();
+
+	let error = "";
+
+	mockedQueriesUser.useQueriesUser = () => ({
+		requestCreateUser: () => ({ error }),
+	});
 
 	it("Show errors on the label", async () => {
 		renderComponent();
@@ -36,6 +45,7 @@ describe("Create account component", () => {
 	});
 
 	it("Catch the response error and show in the notification", async () => {
+		error = "Error trying to create account";
 		renderComponent();
 		await user.type(screen.getByRole("input-email"), "valid@domain.com");
 		await user.type(screen.getAllByRole("password")[0], "Password123");
@@ -44,3 +54,5 @@ describe("Create account component", () => {
 		expect(screen.getByRole("notification")).toBeInTheDocument();
 	});
 });
+
+vi.mock("@/hooks/useQueriesUser");

@@ -37,6 +37,7 @@ vi.mock("@/services/client", () => {
 		query: () => ({ list }),
 		readQuery: () => list,
 		writeQuery: vi.fn(),
+		mutate: vi.fn(),
 	};
 
 	return { client };

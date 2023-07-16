@@ -10,7 +10,7 @@ export default defineConfig({
 		environment: "jsdom",
 		globals: true,
 		watch: false,
-		reporters: "verbose",
+		// reporters: "verbose",
 		exclude: ["node_modules", "**/__utils__/**"],
 	},
 });
