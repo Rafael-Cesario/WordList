@@ -7,6 +7,7 @@ import { WordsContainer } from "../wordsContainer";
 import { cleanup, screen } from "@testing-library/react";
 
 import * as QueriesList from "@/hooks/useQueriesList";
+import { RGetOneList } from "@/services/interfaces/list";
 const mockedQueriesList = QueriesList as { useQueriesList: object };
 
 describe("Configs component", () => {
@@ -61,7 +62,17 @@ describe("Configs component", () => {
 		expect(screen.queryByRole("configs-container")).not.toBeInTheDocument();
 	});
 
-	it.todo("Update the group of words in the page");
+	it("Update the group of words in the page", async () => {
+		let groups = screen.getAllByRole("words-group");
+		expect(groups.length).toBe(1);
+
+		await user.click(screen.getByRole("open-close-configs"));
+		await user.type(screen.getByRole("input-words-per-wordlist"), "1");
+		await user.click(screen.getByRole("save-configs"));
+
+		groups = screen.getAllByRole("words-group");
+		expect(groups.length).toBe(6);
+	});
 });
 
 const Component = () => (
@@ -71,3 +82,31 @@ const Component = () => (
 		<WordsContainer list={{ listID: "123", userID: "123" }} />
 	</>
 );
+
+vi.mock("@/services/client", () => {
+	const list: RGetOneList = {
+		getOneList: {
+			_id: "",
+			userID: "",
+			name: "",
+			wordsPerWordList: 20,
+			timesUntilLearning: 20,
+			words: [
+				{ term: "dummyWord-01", definitions: "Olá", correctTimes: 0, learned: false },
+				{ term: "dummyWord-02", definitions: "Olá", correctTimes: 0, learned: false },
+				{ term: "dummyWord-03", definitions: "Olá", correctTimes: 0, learned: false },
+				{ term: "dummyWord-04", definitions: "Olá", correctTimes: 0, learned: false },
+				{ term: "dummyWord-05", definitions: "Olá", correctTimes: 0, learned: false },
+				{ term: "dummyWord-06", definitions: "Olá", correctTimes: 0, learned: false },
+			],
+		},
+	};
+
+	const client = {
+		query: () => ({ list }),
+		readQuery: () => list,
+		writeQuery: vi.fn(),
+	};
+
+	return { client };
+});
