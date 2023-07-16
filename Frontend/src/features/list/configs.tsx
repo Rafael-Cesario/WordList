@@ -65,6 +65,7 @@ export const Configs = () => {
 								<div className="config">
 									<label htmlFor="words-per-wordlist">Palavras por lista de palavras :</label>
 									<input
+										role="input-words-per-wordlist"
 										onChange={(e) => setConfigValues({ ...configValues, wordsPerWordList: Number(e.target.value) })}
 										type="text"
 										id="words-per-wordlist"
@@ -90,7 +91,9 @@ export const Configs = () => {
 						</div>
 
 						<div className="buttons">
-							<button onClick={() => saveConfigs()}>Salvar</button>
+							<button onClick={() => saveConfigs()} role="save-configs">
+								Salvar
+							</button>
 							<button>Resetar palavras aprendidas</button>
 						</div>
 					</div>

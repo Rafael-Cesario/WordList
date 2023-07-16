@@ -20,7 +20,18 @@ describe("Configs component", () => {
 		expect(screen.getByRole("configs-container")).toBeInTheDocument();
 	});
 
-	it.todo("Open a notification due to empty fields");
+	it("Open a notification due to empty fields", async () => {
+		await user.click(screen.getByRole("open-close-configs"));
+
+		const inputWordsPerWordList = screen.getByRole("input-words-per-wordlist");
+		await user.type(inputWordsPerWordList, "20");
+		await user.clear(inputWordsPerWordList);
+		await user.click(screen.getByRole("save-configs"));
+
+		const notification = screen.getByRole("notification").querySelector(".description");
+		expect(notification).toHaveTextContent("Você não pode deixar campos vazios.");
+	});
+
 	it.todo("Open notification due to a request error");
 	it.todo("close configs after saving");
 	it.todo("Update the group of words in the page");
