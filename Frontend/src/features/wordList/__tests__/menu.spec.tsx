@@ -1,10 +1,11 @@
+import * as QueriesWords from "@/hooks/useQueriesWords";
 import WordListPage from "@/app/[list]/wordlist/page";
 import userEvent from "@testing-library/user-event";
-import { renderWithProviders } from "@/utils/renderWithProviders";
+import { renderWithProviders } from "@/utils/tests/renderWithProviders";
 import { cleanup, screen } from "@testing-library/react";
-import * as QueriesWords from "@/hooks/useQueriesWords";
 import { StorageKeys } from "@/services/interfaces/storage";
 import { WordListData } from "@/services/interfaces/list";
+import { wordListDataMock } from "@/utils/tests/wordListDataMock";
 
 const mockedQueriesWords = QueriesWords as { useQueriesWords: object };
 
@@ -21,23 +22,7 @@ describe("WordList - Menu component", () => {
 	};
 
 	beforeAll(async () => {
-		const wordList: WordListData = {
-			_id: "123",
-			userID: "123",
-			name: "list01",
-			answerWith: "term",
-			groupIndex: 1,
-			timesUntilLearning: 10,
-			wordsPerWordList: 10,
-			words: [
-				{ term: "term01", definitions: "def01", correctTimes: 0, learned: false },
-				{ term: "term02", definitions: "def02", correctTimes: 0, learned: false },
-				{ term: "term03", definitions: "def03", correctTimes: 0, learned: false },
-				{ term: "term04", definitions: "def04", correctTimes: 0, learned: false },
-			],
-		};
-
-		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(wordList));
+		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(wordListDataMock));
 		await renderWithProviders(<WordListPage />);
 	});
 

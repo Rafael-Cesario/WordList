@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { groupWords } from "../utils/groupWords";
-import { renderWithProviders } from "@/utils/renderWithProviders";
+import { renderWithProviders } from "@/utils/tests/renderWithProviders";
 import { WordsGroup } from "../wordsGroup";
 import { IWord } from "@/services/interfaces/words";
 import { screen } from "@testing-library/dom";

@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import { renderWithProviders } from "@/utils/renderWithProviders";
+import { renderWithProviders } from "@/utils/tests/renderWithProviders";
 import { List } from "../list";
 import { screen } from "@testing-library/react";
 
