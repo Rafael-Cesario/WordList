@@ -26,8 +26,6 @@ export const RemoveWord = ({ props: { words, setWords, index, wordList } }: Prop
 			draft.splice(index, 1);
 		});
 
-		console.log({ newWords });
-
 		const globalIndex = wordList.groupIndex * wordList.wordsPerWordList;
 		const wordIndex = globalIndex + index;
 		const { error } = await requestRemoveWord({ removeWord: { listID: wordList._id, wordIndex } });

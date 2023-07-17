@@ -25,7 +25,9 @@ export const Menu = () => {
 		<StyledMenu>
 			<div className="buttons">
 				<Link href={`/${listNameLink}/wordlist/question`}>Estudar palavras</Link>
-				<button onClick={() => changeAnswerWith()}>Responder com: {mapAnswerWith[wordList.answerWith]}</button>
+				<button role="answer-with" onClick={() => changeAnswerWith()}>
+					Responder com: {mapAnswerWith[wordList.answerWith]}
+				</button>
 			</div>
 
 			<input

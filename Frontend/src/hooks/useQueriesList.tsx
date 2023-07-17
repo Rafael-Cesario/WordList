@@ -60,7 +60,6 @@ export const useQueriesList = () => {
 			const lists = data.readLists;
 			return { lists };
 		} catch (e: any) {
-			console.log(e.message);
 			return { error: "Um erro ocorreu tentando carregar suas listas, por favor recarregue a página." };
 		}
 	};
@@ -93,7 +92,6 @@ export const useQueriesList = () => {
 			cache.readLists = produce(cache.readLists, (draft) => draft.splice(listIndex, 1));
 			cacheList.update(deleteList.userID, cache);
 		} catch (e: any) {
-			console.log(e);
 			error = catchError(e.message, "list");
 		}
 
