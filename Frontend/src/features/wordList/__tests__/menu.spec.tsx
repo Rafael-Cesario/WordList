@@ -31,9 +31,9 @@ describe("WordList - Menu component", () => {
 			wordsPerWordList: 10,
 			words: [
 				{ term: "term01", definitions: "def01", correctTimes: 0, learned: false },
-				{ term: "term01", definitions: "def01", correctTimes: 0, learned: false },
-				{ term: "term01", definitions: "def01", correctTimes: 0, learned: false },
-				{ term: "term01", definitions: "def01", correctTimes: 0, learned: false },
+				{ term: "term02", definitions: "def02", correctTimes: 0, learned: false },
+				{ term: "term03", definitions: "def03", correctTimes: 0, learned: false },
+				{ term: "term04", definitions: "def04", correctTimes: 0, learned: false },
 			],
 		};
 
@@ -43,7 +43,7 @@ describe("WordList - Menu component", () => {
 
 	afterEach(() => cleanup());
 
-	it.only("Saves how the user wants to answer", async () => {
+	it("Saves how the user wants to answer", async () => {
 		let data = getStorage();
 		expect(data.answerWith).toBe("term");
 		await user.click(screen.getByRole("answer-with"));
@@ -51,5 +51,22 @@ describe("WordList - Menu component", () => {
 		expect(data.answerWith).toBe("definitions");
 	});
 
-	it.todo("Search for words");
+	it("Search for words", async () => {
+		expect(screen.queryAllByRole("group-words")).toHaveLength(4);
+
+		await user.type(screen.getByRole("search-input"), "Hello");
+		expect(screen.queryAllByRole("group-words")).toHaveLength(0);
+
+		await user.clear(screen.getByRole("search-input"));
+		await user.type(screen.getByRole("search-input"), "02");
+		expect(screen.queryAllByRole("group-words")).toHaveLength(1);
+
+		await user.clear(screen.getByRole("search-input"));
+		await user.type(screen.getByRole("search-input"), "term");
+		expect(screen.queryAllByRole("group-words")).toHaveLength(4);
+
+		await user.clear(screen.getByRole("search-input"));
+		await user.type(screen.getByRole("search-input"), "def02");
+		expect(screen.queryAllByRole("group-words")).toHaveLength(1);
+	});
 });

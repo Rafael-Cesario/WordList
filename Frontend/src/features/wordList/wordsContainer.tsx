@@ -76,9 +76,15 @@ export const WordsContainer = () => {
 
 			{filterWords().map((word, index) => {
 				return (
-					<div className="group" key={"group" + index}>
+					<div role="group-words" className="group" key={"group" + index}>
 						<input id={"term" + index} type="text" className="word" value={word.term} onChange={(e) => renameWord(index, "term", e.target.value)} />
-						<input id={"definitions" + index} type="text" className="word" value={word.definitions} onChange={(e) => renameWord(index, "definitions", e.target.value)} />
+						<input
+							id={"definitions" + index}
+							type="text"
+							className="word"
+							value={word.definitions}
+							onChange={(e) => renameWord(index, "definitions", e.target.value)}
+						/>
 
 						<RemoveWord props={{ words, setWords, index, wordList }} />
 					</div>
