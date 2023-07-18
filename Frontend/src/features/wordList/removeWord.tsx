@@ -55,13 +55,18 @@ export const RemoveWord = ({ props: { words, setWords, index, wordList } }: Prop
 	return (
 		<>
 			{confirmRemoveWord && (
-				<button onClick={() => removeWord()} autoFocus={true} onBlur={() => setConfirmRemoveWord(false)} className="remove confirm">
+				<button
+					role="remove-word-confirm"
+					onClick={() => removeWord()}
+					autoFocus={true}
+					onBlur={() => setConfirmRemoveWord(false)}
+					className="remove confirm">
 					Clique novamente para remover esta palavra
 				</button>
 			)}
 
 			{confirmRemoveWord || (
-				<button onClick={() => setConfirmRemoveWord(true)} title="Remover palavra" className="remove">
+				<button role="remove-word" onClick={() => setConfirmRemoveWord(true)} title="Remover palavra" className="remove">
 					x
 				</button>
 			)}
