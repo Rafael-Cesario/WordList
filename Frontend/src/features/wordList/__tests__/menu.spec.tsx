@@ -21,8 +21,11 @@ describe("WordList - Menu component", () => {
 		return JSON.parse(storage || "") as WordListData;
 	};
 
-	beforeAll(async () => {
+	beforeAll(() => {
 		sessionStorage.setItem(StorageKeys.wordList, JSON.stringify(wordListDataMock));
+	});
+
+	beforeEach(async () => {
 		await renderWithProviders(<WordListPage />);
 	});
 
