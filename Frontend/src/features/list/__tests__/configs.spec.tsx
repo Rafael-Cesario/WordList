@@ -2,7 +2,6 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "@/utils/tests/renderWithProviders";
 import { Configs } from "../configs";
-import { Notification } from "@/components/notification";
 import { WordsContainer } from "../wordsContainer";
 import { cleanup, screen } from "@testing-library/react";
 
@@ -78,7 +77,6 @@ describe("Configs component", () => {
 const Component = () => (
 	<>
 		<Configs />
-		<Notification />
 		<WordsContainer list={{ listID: "123", userID: "123" }} />
 	</>
 );
