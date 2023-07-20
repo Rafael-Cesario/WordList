@@ -32,7 +32,7 @@ export const RemoveWord = ({ props: { words, setWords, index, wordList } }: Prop
 
 		if (error) {
 			return setNotificationValues({
-				isOpen: false,
+				isOpen: true,
 				type: "error",
 				title: "Ops, um erro ocorreu ao tentar remover uma de suas palavras",
 				message: error,
