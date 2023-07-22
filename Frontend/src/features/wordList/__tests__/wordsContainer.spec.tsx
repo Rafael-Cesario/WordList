@@ -50,5 +50,12 @@ describe("WordsContainer", () => {
 		expect(screen.getAllByRole("input-term")[0]).toHaveValue(newWord);
 	});
 
-	it.todo("Show a notification due to response error");
+	it("Show a notification due to response error", async () => {
+		error = "Hello, i'm a error";
+		const newWord = "Edited word";
+		await user.clear(screen.getAllByRole("input-term")[0]);
+		await user.type(screen.getAllByRole("input-term")[0], newWord);
+		await user.click(screen.getByRole("save-changes"));
+		expect(screen.getByRole("notification").querySelector(".description")).toHaveTextContent(error);
+	});
 });
