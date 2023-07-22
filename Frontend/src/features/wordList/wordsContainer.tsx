@@ -69,7 +69,7 @@ export const WordsContainer = () => {
 	return (
 		<StyledWordsContainer>
 			{haveWordsChanged && (
-				<button onClick={() => saveWords()} className="save">
+				<button role="save-changes" onClick={() => saveWords()} className="save">
 					Salvar alterações
 				</button>
 			)}
@@ -77,7 +77,7 @@ export const WordsContainer = () => {
 			{filterWords().map((word, index) => {
 				return (
 					<div role="group-words" className="group" key={"group" + index}>
-						<input id={"term" + index} type="text" className="word" value={word.term} onChange={(e) => renameWord(index, "term", e.target.value)} />
+						<input role="input-term" id={"term" + index} type="text" className="word" value={word.term} onChange={(e) => renameWord(index, "term", e.target.value)} />
 						<input
 							id={"definitions" + index}
 							type="text"
