@@ -38,7 +38,7 @@ export const WordsContainer = () => {
 
 		if (error) {
 			return setNotificationValues({
-				isOpen: false,
+				isOpen: true,
 				type: "error",
 				title: "Ops, um erro ocorreu ao tentar salvar suas palavras",
 				message: error,
