@@ -1,0 +1,3 @@
+- GraphQL
+- Docker + Postgres
+- Prisma

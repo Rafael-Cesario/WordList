@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  database:
+    container_name: wordlist
+    image: postgres:alpine3.19
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=wordlist
+    ports:
+      - 9090:5432
+    expose:
+      - 9090
+    volumes:
+      - './database:/var/lib/postgresql/data/'
+
+volumes:
+  database:
