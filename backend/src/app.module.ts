@@ -5,6 +5,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
 import { join } from "path";
 import { AppResolver } from "./app.resolver";
 import { PrismaModule } from "./prisma.module";
+import { UserModule } from "./models/user/user.module";
 
 const graphqlModule = GraphQLModule.forRoot<ApolloDriverConfig>({
 	driver: ApolloDriver,
@@ -12,10 +13,11 @@ const graphqlModule = GraphQLModule.forRoot<ApolloDriverConfig>({
 	sortSchema: true,
 	playground: false,
 	plugins: [ApolloServerPluginLandingPageLocalDefault()],
+	formatError: (error: any) => ({ message: error.extensions?.originalError?.message || error.message }),
 });
 
 @Module({
-	imports: [graphqlModule, PrismaModule],
+	imports: [graphqlModule, PrismaModule, UserModule],
 	providers: [AppResolver],
 })
 export class AppModule {}
