@@ -36,7 +36,12 @@ describe("User e2e", () => {
 			expect(user.email).toBe(createUserData.email.toLowerCase());
 		});
 
-		it.todo("Throws an error due to invalid email");
+		it("Throws an error due to invalid email", async () => {
+			const createUserData = { email: "not valid", name: "user 01", password: "Password123" };
+			const { errors } = await createUserRequest({ createUserData });
+			const message = errors[0].message[0];
+			expect(message).toBe("email must be an email");
+		});
 
 		it.todo("Throws an error due to name length");
 
