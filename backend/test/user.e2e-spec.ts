@@ -3,10 +3,11 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "src/app.module";
 import request from "supertest-graphql";
 import { userQueries } from "./__queries__/user";
-import { CreateUserInput, CreateUserResponse } from "./__interfaces__/user";
+import { CreateUserInput, CreateUserResponse, UserInput } from "./__interfaces__/user";
 import { PrismaService } from "src/prisma.service";
 
 describe("User e2e", () => {
+	const defaultUser: UserInput = { email: "user01@email.com", name: "user 01", password: "Password123" };
 	let app: INestApplication;
 	let prisma: PrismaService;
 
@@ -30,20 +31,30 @@ describe("User e2e", () => {
 		});
 
 		it("Saves all emails in lowercase", async () => {
-			const createUserData = { email: "USER01@EMAIL.COM", name: "user01", password: "Password123" };
+			const createUserData = { ...defaultUser, email: "USER01@EMAIL.COM" };
 			await createUserRequest({ createUserData });
 			const user = await prisma.user.findFirst({ where: { email: createUserData.email.toLowerCase() } });
 			expect(user.email).toBe(createUserData.email.toLowerCase());
 		});
 
 		it("Throws an error due to invalid email", async () => {
-			const createUserData = { email: "not valid", name: "user 01", password: "Password123" };
+			const createUserData = { ...defaultUser, email: "not valid" };
 			const { errors } = await createUserRequest({ createUserData });
 			const message = errors[0].message[0];
 			expect(message).toBe("email must be an email");
 		});
 
-		it.todo("Throws an error due to name length");
+		it("Throws an error due to name length", async () => {
+			let createUserData = { ...defaultUser, name: "U" };
+			let { errors } = await createUserRequest({ createUserData });
+			let message = errors[0].message[0];
+			expect(message).toBe("name must be longer than or equal to 3 characters");
+
+			createUserData = { ...defaultUser, name: "qweasdzxcrtyfghvbnuiojklmqweasd" };
+			({ errors } = await createUserRequest({ createUserData }));
+			message = errors[0].message[0];
+			expect(message).toBe("name must be shorter than or equal to 30 characters");
+		});
 
 		it.todo("Throws an error due to invalid password length or type");
 
