@@ -20,4 +20,8 @@ export class CreateUserInput {
 }
 
 @InputType()
-export class LoginInput extends PickType(CreateUserInput, ["email", "password"]) {}
+export class LoginInput extends PickType(CreateUserInput, ["email"]) {
+	@IsString()
+	@Field()
+	password: string;
+}

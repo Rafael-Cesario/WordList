@@ -3,7 +3,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "src/app.module";
 import request from "supertest-graphql";
 import { userQueries } from "./__queries__/user";
-import { CreateUserInput, CreateUserResponse, UserInput } from "./__interfaces__/user";
+import { CreateUserInput, CreateUserResponse, LoginInput, LoginResponse, UserInput } from "./__interfaces__/user";
 import { PrismaService } from "src/prisma.service";
 
 describe("User e2e", () => {
@@ -17,7 +17,11 @@ describe("User e2e", () => {
 			.variables({ ...variables });
 	};
 
-	beforeEach(async () => {
+	const loginRequest = async (variables: LoginInput) => {
+		return await request<LoginResponse, LoginInput>(app.getHttpServer()).mutate(userQueries.LOGIN).variables(variables);
+	};
+
+	beforeAll(async () => {
 		const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();
 		prisma = moduleFixture.get(PrismaService);
 		app = moduleFixture.createNestApplication();
@@ -80,6 +84,40 @@ describe("User e2e", () => {
 			await createUserRequest({ createUserData: defaultUser });
 			const users = await prisma.user.findMany();
 			expect(users.length).toBe(1);
+		});
+	});
+
+	describe("Login", () => {
+		beforeAll(async () => {
+			await createUserRequest({ createUserData: { ...defaultUser } });
+		});
+
+		afterAll(async () => {
+			await prisma.user.deleteMany();
+		});
+
+		it("Throws an error due to invalid email", async () => {
+			const { errors } = await loginRequest({ loginData: { email: "wrong@email.com", password: defaultUser.password } });
+			const message = errors[0].message;
+			expect(message).toBe("Unauthorized: Invalid Credentials");
+		});
+
+		it("Throws an error due to invalid password", async () => {
+			const { errors } = await loginRequest({ loginData: { email: defaultUser.email, password: "wrong" } });
+			const message = errors[0].message;
+			expect(message).toBe("Unauthorized: Invalid Credentials");
+		});
+
+		it("Removes password from response", async () => {
+			const { email, password } = defaultUser;
+			const { data } = await loginRequest({ loginData: { email, password } });
+			expect(data.login).not.toHaveProperty("password");
+		});
+
+		it("Generates a token", async () => {
+			const { email, name, password } = defaultUser;
+			const { data } = await loginRequest({ loginData: { email, password } });
+			expect(data.login).toEqual({ id: expect.any(String), token: expect.any(String), email, name });
 		});
 	});
 });
