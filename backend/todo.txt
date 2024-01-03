@@ -4,6 +4,6 @@
 
 ===== User =====
 
-x Create user
-x login
+- Create user
+> login
 x Validate token

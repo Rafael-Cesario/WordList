@@ -14,3 +14,18 @@ export class User {
 	@Field()
 	password: string;
 }
+
+@ObjectType()
+export class LoginData {
+	@Field()
+	id: string;
+
+	@Field()
+	email: string;
+
+	@Field()
+	name: string;
+
+	@Field()
+	token: string;
+}

@@ -1,4 +1,4 @@
-import { Field, InputType } from "@nestjs/graphql";
+import { Field, InputType, PickType } from "@nestjs/graphql";
 import { IsString, Length, IsEmail, MinLength } from "class-validator";
 import { Transform } from "class-transformer";
 
@@ -18,3 +18,6 @@ export class CreateUserInput {
 	@Field()
 	password: string;
 }
+
+@InputType()
+export class LoginInput extends PickType(CreateUserInput, ["email", "password"]) {}

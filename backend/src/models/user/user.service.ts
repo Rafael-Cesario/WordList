@@ -1,7 +1,8 @@
-import { ConflictException, Injectable } from "@nestjs/common";
-import { CreateUserInput } from "./user.dto";
+import { ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
+import { CreateUserInput, LoginInput } from "./user.dto";
 import { PrismaService } from "src/prisma.service";
-import { hashPassword } from "src/utils/crypt";
+import { comparePasswords, hashPassword } from "src/utils/crypt";
+import { generateToken } from "src/utils/token";
 
 @Injectable()
 export class UserService {
@@ -15,5 +16,20 @@ export class UserService {
 
 		await this.prisma.user.create({ data: createUserData });
 		return `New user ${createUserData.name} created with success.`;
+	}
+
+	async login(loginData: LoginInput) {
+		const { email, password } = loginData;
+
+		const user = await this.prisma.user.findFirst({ where: { email } });
+		if (!user) throw new UnauthorizedException("Unauthorized: Invalid Credentials");
+
+		const isPasswordCorrect = comparePasswords(password, user.password);
+		if (!isPasswordCorrect) throw new UnauthorizedException("Unauthorized: Invalid Credentials");
+
+		const token = generateToken(email);
+		delete user.password;
+
+		return { ...user, token };
 	}
 }
