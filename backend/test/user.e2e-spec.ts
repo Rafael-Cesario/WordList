@@ -70,7 +70,11 @@ describe("User e2e", () => {
 			expect(errorCode).toBe("duplicated");
 		});
 
-		it.todo("Saves password as a hash");
+		it("Saves password as a hash", async () => {
+			await createUserRequest({ createUserData: defaultUser });
+			const user = await prisma.user.findFirst({ where: { email: defaultUser.email } });
+			expect(user.password).not.toBe(defaultUser.password);
+		});
 
 		it.todo("Creates a new user");
 	});
