@@ -56,7 +56,12 @@ describe("User e2e", () => {
 			expect(message).toBe("name must be shorter than or equal to 30 characters");
 		});
 
-		it.todo("Throws an error due to invalid password length or type");
+		it("Throws an error due to invalid password length or type", async () => {
+			const createUserData = { ...defaultUser, password: "short" };
+			const { errors } = await createUserRequest({ createUserData });
+			const message = errors[0].message[0];
+			expect(message).toBe("password must be longer than or equal to 10 characters");
+		});
 
 		it.todo("Throws an error due to duplicated email");
 
