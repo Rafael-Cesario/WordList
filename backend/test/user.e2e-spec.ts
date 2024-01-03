@@ -63,7 +63,12 @@ describe("User e2e", () => {
 			expect(message).toBe("password must be longer than or equal to 10 characters");
 		});
 
-		it.todo("Throws an error due to duplicated email");
+		it("Throws an error due to duplicated email", async () => {
+			await createUserRequest({ createUserData: defaultUser });
+			const { errors } = await createUserRequest({ createUserData: defaultUser });
+			const [errorCode] = errors[0].message.split(":");
+			expect(errorCode).toBe("duplicated");
+		});
 
 		it.todo("Saves password as a hash");
 
