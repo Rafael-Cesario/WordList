@@ -30,7 +30,7 @@ describe("User e2e", () => {
 			await prisma.user.deleteMany();
 		});
 
-		it("Saves all emails in lowercase", async () => {
+		it("Transform email to lowercase", async () => {
 			const createUserData = { ...defaultUser, email: "USER01@EMAIL.COM" };
 			await createUserRequest({ createUserData });
 			const user = await prisma.user.findFirst({ where: { email: createUserData.email.toLowerCase() } });
@@ -70,12 +70,16 @@ describe("User e2e", () => {
 			expect(errorCode).toBe("duplicated");
 		});
 
-		it("Saves password as a hash", async () => {
+		it("Hashes user password", async () => {
 			await createUserRequest({ createUserData: defaultUser });
 			const user = await prisma.user.findFirst({ where: { email: defaultUser.email } });
 			expect(user.password).not.toBe(defaultUser.password);
 		});
 
-		it.todo("Creates a new user");
+		it("Creates a new user", async () => {
+			await createUserRequest({ createUserData: defaultUser });
+			const users = await prisma.user.findMany();
+			expect(users.length).toBe(1);
+		});
 	});
 });
