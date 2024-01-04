@@ -1,5 +1,5 @@
 import { Field, InputType, PickType } from "@nestjs/graphql";
-import { IsString, Length, IsEmail, MinLength } from "class-validator";
+import { IsString, Length, IsEmail, MinLength, IsJWT } from "class-validator";
 import { Transform } from "class-transformer";
 
 @InputType()
@@ -24,4 +24,11 @@ export class LoginInput extends PickType(CreateUserInput, ["email"]) {
 	@IsString()
 	@Field()
 	password: string;
+}
+
+@InputType()
+export class ValidateTokenInput {
+	@IsJWT()
+	@Field()
+	token: string;
 }

@@ -5,5 +5,5 @@
 ===== User =====
 
 - Create user
-> login
-x Validate token
+- login
+> Validate token

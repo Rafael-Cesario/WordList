@@ -1,8 +1,8 @@
 import { ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
-import { CreateUserInput, LoginInput } from "./user.dto";
+import { CreateUserInput, LoginInput, ValidateTokenInput } from "./user.dto";
 import { PrismaService } from "src/prisma.service";
 import { comparePasswords, hashPassword } from "src/utils/crypt";
-import { generateToken } from "src/utils/token";
+import { generateToken, verifyToken } from "src/utils/token";
 
 @Injectable()
 export class UserService {
@@ -31,5 +31,10 @@ export class UserService {
 		delete user.password;
 
 		return { ...user, token };
+	}
+
+	async validateToken({ token }: ValidateTokenInput) {
+		const isValid = verifyToken(token);
+		return isValid;
 	}
 }

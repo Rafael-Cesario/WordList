@@ -27,4 +27,9 @@ type Mutation {
 
 type Query {
   hello: String!
+  validateToken(tokenData: ValidateTokenInput!): Boolean!
+}
+
+input ValidateTokenInput {
+  token: String!
 }
