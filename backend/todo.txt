@@ -6,4 +6,4 @@
 
 - Create user
 - login
-> Validate token
+- Validate token

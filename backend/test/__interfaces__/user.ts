@@ -27,3 +27,13 @@ export interface LoginResponse {
 		token: string;
 	};
 }
+
+export type ValidateTokenInput = {
+	tokenData: {
+		token: string;
+	};
+};
+
+export interface ValidateTokenResponse {
+	validateToken: boolean;
+}

@@ -17,6 +17,12 @@ class UserQueries {
 			}
 		}
 	`;
+
+	VALIDATE_TOKEN = gql`
+		query Query($tokenData: ValidateTokenInput!) {
+			validateToken(tokenData: $tokenData)
+		}
+	`;
 }
 
 export const userQueries = new UserQueries();

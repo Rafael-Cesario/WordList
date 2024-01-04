@@ -3,8 +3,9 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "src/app.module";
 import request from "supertest-graphql";
 import { userQueries } from "./__queries__/user";
-import { CreateUserInput, CreateUserResponse, LoginInput, LoginResponse, UserInput } from "./__interfaces__/user";
+import { CreateUserInput, CreateUserResponse, LoginInput, LoginResponse, UserInput, ValidateTokenResponse } from "./__interfaces__/user";
 import { PrismaService } from "src/prisma.service";
+import { ValidateTokenInput } from "./__interfaces__/user";
 
 describe("User e2e", () => {
 	const defaultUser: UserInput = { email: "user01@email.com", name: "user 01", password: "Password123" };
@@ -19,6 +20,10 @@ describe("User e2e", () => {
 
 	const loginRequest = async (variables: LoginInput) => {
 		return await request<LoginResponse, LoginInput>(app.getHttpServer()).mutate(userQueries.LOGIN).variables(variables);
+	};
+
+	const validateTokenRequest = async (variables: ValidateTokenInput) => {
+		return await request<ValidateTokenResponse, ValidateTokenInput>(app.getHttpServer()).mutate(userQueries.VALIDATE_TOKEN).variables(variables);
 	};
 
 	beforeAll(async () => {
@@ -118,6 +123,24 @@ describe("User e2e", () => {
 			const { email, name, password } = defaultUser;
 			const { data } = await loginRequest({ loginData: { email, password } });
 			expect(data.login).toEqual({ id: expect.any(String), token: expect.any(String), email, name });
+		});
+	});
+
+	describe("Validate Token", () => {
+		it("Throws an error due to string is not a valid JWT token", async () => {
+			const { errors } = await validateTokenRequest({ tokenData: { token: "123" } });
+			const message = errors[0].message[0];
+			expect(message).toBe("token must be a jwt string");
+		});
+
+		it("Validates a token", async () => {
+			const invalidToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIwMUBlbWFpbC5jb20iLCJpYXQiOjE3MDQzODg1MjAsImV4cCI6MTcwNDk5MzMyMH0.BiMqhpHD5TveKjewDG9TFZJzh3ArrEmNZfIch5MBi50";
+			let { data } = await validateTokenRequest({ tokenData: { token: invalidToken } });
+			expect(data.validateToken).toBeFalsy();
+
+			const validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIwMUBlbWFpbC5jb20iLCJpYXQiOjE3MDQzODg1MjAsImV4cCI6MTcwNDk5MzMyMH0.BiMqhpHD5TveKjewDG9TFZJzh3ArrEmNZfIch5MBi58";
+			({ data } = await validateTokenRequest({ tokenData: { token: validToken } }));
+			expect(data.validateToken).toBeTruthy();
 		});
 	});
 });
