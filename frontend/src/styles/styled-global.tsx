@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as styled from "styled-components";
 import { theme } from "./theme";
 
@@ -12,5 +12,9 @@ export const StyledGlobal = styled.createGlobalStyle`
 	body {
 		background-color: ${theme.background};
 		color: ${theme.text};
+	}
+
+	button {
+		cursor: pointer;
 	}
 `;

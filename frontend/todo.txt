@@ -1,1 +1,7 @@
-x Styled Components
+- Styled Components
+x Cypress
+
+===== Authentication =====
+
+x Create account
+x Login

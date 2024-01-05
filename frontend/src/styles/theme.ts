@@ -1,4 +1,7 @@
 export const theme = {
   background: "#101010",
-  text: "#aaaaaa"
+  container: "#181818",
+  primary: "#205090",
+  text: "#aaaaaa",
+  radius: "2px"
 }
