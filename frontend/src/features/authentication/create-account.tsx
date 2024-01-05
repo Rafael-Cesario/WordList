@@ -1,7 +1,11 @@
 import { Field } from "./components/field";
 import { StyledForm } from "./components/styles/styled-form";
 
-export const CreateAccount = () => {
+interface Props {
+	setActiveForm(form: "login" | "create"): void;
+}
+
+export const CreateAccount = ({ setActiveForm }: Props) => {
 	return (
 		<StyledForm>
 			<h1 className="title">Criar conta</h1>
@@ -13,7 +17,10 @@ export const CreateAccount = () => {
 				<Field label="Confirme sua senha" name="password-check" placeholder="Digite sua senha" type="password" />
 
 				<button className="submit">Criar</button>
-				<button className="change-form" type="button">Já tem uma conta? Clique aqui para entrar.</button>
+
+				<button onClick={() => setActiveForm("login")} className="change-form" type="button">
+					Já tem uma conta? Clique aqui para entrar.
+				</button>
 			</form>
 		</StyledForm>
 	);

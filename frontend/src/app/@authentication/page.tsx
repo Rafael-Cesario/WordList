@@ -8,8 +8,8 @@ const Authentication = () => {
 
 	return (
 		<>
-			{activeForm === "login" && <Login />}
-			{activeForm === "create" && <CreateAccount />}
+			{activeForm === "login" && <Login setActiveForm={setActiveForm} />}
+			{activeForm === "create" && <CreateAccount setActiveForm={setActiveForm} />}
 		</>
 	);
 };
