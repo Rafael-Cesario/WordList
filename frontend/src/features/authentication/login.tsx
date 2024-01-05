@@ -8,7 +8,9 @@ interface Props {
 export const Login = ({ setActiveForm }: Props) => {
 	return (
 		<StyledForm>
-			<h1 className="title">Login</h1>
+			<h1 className="title" data-cy="title-login">
+				Login
+			</h1>
 
 			<form>
 				<Field label="Email" name="email" placeholder="Digite seu email" type="text" />
@@ -16,7 +18,7 @@ export const Login = ({ setActiveForm }: Props) => {
 
 				<button className="submit">Entrar</button>
 
-				<button onClick={() => setActiveForm("create")} className="change-form" type="button">
+				<button data-cy="change-form" onClick={() => setActiveForm("create")} className="change-form" type="button">
 					Não tem uma conta? Clique aqui para criar.
 				</button>
 			</form>
