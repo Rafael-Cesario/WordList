@@ -26,7 +26,7 @@ export const Field = ({ name, type, label, placeholder }: Props) => {
 		<StyledField>
 			<label htmlFor={name}>{label}</label>
 			<div className="container">
-				<input id={name} type={fieldType} placeholder={placeholder} />
+				<input data-cy={name + "-input"} id={name} type={fieldType} placeholder={placeholder} />
 				{type === "password" && <PasswordButton props={{ fieldType, setFieldType }} />}
 			</div>
 		</StyledField>
@@ -37,13 +37,13 @@ const PasswordButton = ({ props: { fieldType, setFieldType } }: IPasswordButtonP
 	return (
 		<>
 			{fieldType === "password" && (
-				<span className="icon" onClick={() => setFieldType("text")}>
+				<span data-cy="show-password" className="icon" onClick={() => setFieldType("text")}>
 					<LuEyeOff title="Mostrar" />
 				</span>
 			)}
 
 			{fieldType === "text" && (
-				<span className="icon" onClick={() => setFieldType("password")}>
+				<span data-cy="hide-password" className="icon" onClick={() => setFieldType("password")}>
 					<LuEye title="Esconder" />
 				</span>
 			)}
