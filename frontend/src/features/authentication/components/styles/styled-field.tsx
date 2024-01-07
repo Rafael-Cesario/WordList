@@ -7,6 +7,21 @@ export const StyledField = styled.div`
 	flex-direction: column;
 	margin: 1rem 0;
 
+	.container {
+		display: flex;
+		align-items: center;
+
+		border-radius: ${theme.radius};
+		background-color: ${theme.container};
+
+		.icon {
+			padding: 4px 12px;
+			font-size: 0.7rem;
+			user-select: none;
+			cursor: pointer;
+		}
+	}
+
 	label {
 		font-size: 0.8rem;
 		padding: 4px 20px;
@@ -14,11 +29,11 @@ export const StyledField = styled.div`
 	}
 
 	input {
+		width: 100%;
 		border: none;
 		outline: none;
 		padding: 10px 20px;
-		border-radius: ${theme.radius};
-		background-color: ${theme.container};
 		color: ${theme.text};
+		background-color: transparent;
 	}
 `;

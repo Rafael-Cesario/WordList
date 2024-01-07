@@ -1,7 +1,17 @@
 - Styled Components
-x Cypress
+- Cypress
 
 ===== Authentication =====
 
 x Create account
 x Login
+
+  x Show and hide password
+  x Capture values
+  x Validate values
+  x Show errors
+  x Clean errors
+  x Notification
+  x Mutations and interfaces
+  x Create account mutation
+  x Login Mutation 
