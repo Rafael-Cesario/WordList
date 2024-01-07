@@ -10,6 +10,7 @@ interface Props {
 	type: IFieldType;
 	placeholder: string;
 	label: string;
+	onChange(newValue: string): void;
 }
 
 interface IPasswordButtonProps {
@@ -19,14 +20,14 @@ interface IPasswordButtonProps {
 	};
 }
 
-export const Field = ({ name, type, label, placeholder }: Props) => {
+export const Field = ({ name, type, label, placeholder, onChange }: Props) => {
 	const [fieldType, setFieldType] = useState(type);
 
 	return (
 		<StyledField>
 			<label htmlFor={name}>{label}</label>
 			<div className="container">
-				<input data-cy={name + "-input"} id={name} type={fieldType} placeholder={placeholder} />
+				<input onChange={(e) => onChange(e.target.value.trim())} data-cy={name + "-input"} id={name} type={fieldType} placeholder={placeholder} />
 				{type === "password" && <PasswordButton props={{ fieldType, setFieldType }} />}
 			</div>
 		</StyledField>
