@@ -26,17 +26,24 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 	};
 
 	const validateAll = () => {
-		// formData validate each field
-		// return hasErrors
+		const formKeys = Object.keys(formData) as IFormKeys[];
+		const errors = formKeys.map((key) => validations[key](formData)).filter((error) => error);
+		const hasErrors = errors.length > 0;
+		return hasErrors;
 	};
 
 	const createAccount = (e: React.FormEvent) => {
 		e.preventDefault();
-
 		console.log({ formData });
 
-		// const hasErrors = validateAll();
-		// if ( hasErrors ) return;
+		const hasErrors = validateAll();
+		if (hasErrors) return;
+
+		// create user request
+		// clear form
+		// notification
+		// change to login form
+		// catch errors
 	};
 
 	return (
