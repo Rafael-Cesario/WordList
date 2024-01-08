@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const StyledField = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin: 1rem 0;
+	margin: 4px 0;
 
 	.container {
 		display: flex;
@@ -35,5 +35,11 @@ export const StyledField = styled.div`
 		padding: 10px 20px;
 		color: ${theme.text};
 		background-color: transparent;
+	}
+
+	.error {
+		font-size: 0.8rem;
+		margin: 10px 20px;
+		color: ${theme.error};
 	}
 `;

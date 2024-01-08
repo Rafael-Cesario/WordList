@@ -6,7 +6,6 @@
 x Create account
 x Login
 
-  x Capture values
   x Validate values
   x Show errors
   x Clean errors

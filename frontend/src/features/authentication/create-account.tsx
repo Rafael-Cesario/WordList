@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Field } from "./components/field";
 import { StyledForm } from "./components/styles/styled-form";
+import { validations } from "./utils/validations";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -9,10 +10,33 @@ interface Props {
 export const CreateAccount = ({ setActiveForm }: Props) => {
 	const defaultValues = { email: "", name: "", password: "", passwordCheck: "" };
 	const [formData, setFormData] = useState(defaultValues);
+	const [formErrors, setFormErrors] = useState(defaultValues);
+
+	type IFormKeys = keyof typeof formData;
+
+	const updateValues = (key: IFormKeys, value: string) => {
+		const state = { ...formData, [key]: value };
+		setFormData(state);
+		validate(key, state);
+	};
+
+	const validate = (key: IFormKeys, state: typeof formData) => {
+		const error = validations[key](state);
+		setFormErrors({ ...formErrors, [key]: error });
+	};
+
+	const validateAll = () => {
+		// formData validate each field
+		// return hasErrors
+	};
 
 	const createAccount = (e: React.FormEvent) => {
 		e.preventDefault();
+
 		console.log({ formData });
+
+		// const hasErrors = validateAll();
+		// if ( hasErrors ) return;
 	};
 
 	return (
@@ -22,10 +46,18 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 			</h1>
 
 			<form onSubmit={(e) => createAccount(e)}>
-				<Field onChange={(newValue: string) => setFormData({ ...formData, email: newValue })} label="Email" name="email" placeholder="Digite seu email" type="text" />
-				<Field onChange={(newValue: string) => setFormData({ ...formData, name: newValue })} label="Nome" name="name" placeholder="Digite seu nome" type="text" />
-				<Field onChange={(newValue: string) => setFormData({ ...formData, password: newValue })} label="Senha" name="password" placeholder="Digite sua senha" type="password" />
-				<Field onChange={(newValue: string) => setFormData({ ...formData, passwordCheck: newValue })} label="Confirme sua senha" name="password-check" placeholder="Digite sua senha" type="password" />
+				<Field onChange={(newValue: string) => updateValues("email", newValue)} label="Email" name="email" placeholder="Digite seu email" type="text" error={formErrors.email} />
+				<Field onChange={(newValue: string) => updateValues("name", newValue)} label="Nome" name="name" placeholder="Digite seu nome" type="text" error={formErrors.name} />
+				<Field onChange={(newValue: string) => updateValues("password", newValue)} label="Senha" name="password" placeholder="Digite sua senha" type="password" error={formErrors.password} />
+
+				<Field
+					onChange={(newValue: string) => updateValues("passwordCheck", newValue)}
+					label="Confirme sua senha"
+					name="password-check"
+					placeholder="Digite sua senha"
+					type="password"
+					error={formErrors.passwordCheck}
+				/>
 
 				<button className="submit">Criar</button>
 

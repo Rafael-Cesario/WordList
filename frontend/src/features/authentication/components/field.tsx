@@ -10,6 +10,7 @@ interface Props {
 	type: IFieldType;
 	placeholder: string;
 	label: string;
+	error: string;
 	onChange(newValue: string): void;
 }
 
@@ -20,7 +21,7 @@ interface IPasswordButtonProps {
 	};
 }
 
-export const Field = ({ name, type, label, placeholder, onChange }: Props) => {
+export const Field = ({ name, type, label, placeholder, onChange, error }: Props) => {
 	const [fieldType, setFieldType] = useState(type);
 
 	return (
@@ -30,6 +31,7 @@ export const Field = ({ name, type, label, placeholder, onChange }: Props) => {
 				<input onChange={(e) => onChange(e.target.value.trim())} data-cy={name + "-input"} id={name} type={fieldType} placeholder={placeholder} />
 				{type === "password" && <PasswordButton props={{ fieldType, setFieldType }} />}
 			</div>
+			<span className="error">{error}</span>
 		</StyledField>
 	);
 };
