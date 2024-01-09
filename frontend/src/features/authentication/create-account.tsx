@@ -27,8 +27,13 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 
 	const validateAll = () => {
 		const formKeys = Object.keys(formData) as IFormKeys[];
-		const errors = formKeys.map((key) => validations[key](formData)).filter((error) => error);
-		const hasErrors = errors.length > 0;
+		const errors = defaultValues;
+
+		formKeys.forEach((key) => (errors[key] = validations[key](formData)));
+
+		setFormErrors(errors);
+
+		const hasErrors = Object.values(errors).filter((error) => error).length > 0;
 		return hasErrors;
 	};
 
@@ -39,6 +44,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 		const hasErrors = validateAll();
 		if (hasErrors) return;
 
+		// Todo >
 		// create user request
 		// clear form
 		// notification
@@ -66,7 +72,9 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 					error={formErrors.passwordCheck}
 				/>
 
-				<button className="submit">Criar</button>
+				<button data-cy="submit-form" className="submit">
+					Criar
+				</button>
 
 				<button data-cy="change-form" onClick={() => setActiveForm("login")} className="change-form" type="button">
 					Já tem uma conta? Clique aqui para entrar.
