@@ -1,3 +1,4 @@
+import { produce } from "immer";
 import { useState } from "react";
 import { Field } from "./components/field";
 import { StyledForm } from "./components/styles/styled-form";
@@ -9,25 +10,26 @@ interface Props {
 
 export const CreateAccount = ({ setActiveForm }: Props) => {
 	const defaultValues = { email: "", name: "", password: "", passwordCheck: "" };
-	const [formData, setFormData] = useState(defaultValues);
-	const [formErrors, setFormErrors] = useState(defaultValues);
+	const [formData, setFormData] = useState({ ...defaultValues });
+	const [formErrors, setFormErrors] = useState({ ...defaultValues });
 
 	type IFormKeys = keyof typeof formData;
 
 	const updateValues = (key: IFormKeys, value: string) => {
-		const state = { ...formData, [key]: value };
+		const state = produce(formData, (draft) => void (draft[key] = value));
 		setFormData(state);
 		validate(key, state);
 	};
 
 	const validate = (key: IFormKeys, state: typeof formData) => {
 		const error = validations[key](state);
-		setFormErrors({ ...formErrors, [key]: error });
+		const newState = produce(formErrors, (draft) => void (draft[key] = error));
+		setFormErrors(newState);
 	};
 
 	const validateAll = () => {
 		const formKeys = Object.keys(formData) as IFormKeys[];
-		const errors = defaultValues;
+		const errors = { ...defaultValues };
 
 		formKeys.forEach((key) => (errors[key] = validations[key](formData)));
 
@@ -39,7 +41,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 
 	const createAccount = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log({ formData });
+		console.log({ formData, formErrors });
 
 		const hasErrors = validateAll();
 		if (hasErrors) return;
