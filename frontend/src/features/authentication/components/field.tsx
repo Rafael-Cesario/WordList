@@ -31,7 +31,9 @@ export const Field = ({ name, type, label, placeholder, onChange, error }: Props
 				<input onChange={(e) => onChange(e.target.value.trim())} data-cy={name + "-input"} id={name} type={fieldType} placeholder={placeholder} />
 				{type === "password" && <PasswordButton props={{ fieldType, setFieldType }} />}
 			</div>
-			<span className="error">{error}</span>
+			<span data-cy={name + "-error"} className="error">
+				{error}
+			</span>
 		</StyledField>
 	);
 };
