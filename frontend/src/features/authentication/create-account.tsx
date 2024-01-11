@@ -5,6 +5,7 @@ import { StyledForm } from "./components/styles/styled-form";
 import { validations } from "./utils/validations";
 import { useMutation } from "@apollo/client";
 import { userQueries } from "@/services/queries/user";
+import { catchErrors } from "@/utils/catchErrors";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -59,6 +60,11 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 		await createAccount();
 	};
 
+	// Todo >
+	// notification
+	// change to login form
+	// catch errors
+	// Loading button
 	const createAccount = async () => {
 		const { email, name, password } = formData;
 
@@ -67,16 +73,13 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 				variables: { createUserData: { email, name, password } },
 			});
 		} catch (error: any) {
-			console.log({ error: error.message });
+			const message = catchErrors(error.message, "user");
+			console.log({ message });
+			// setNotificationError({message})
 			return;
 		}
 
 		setFormData(defaultValues);
-
-		// Todo >
-		// notification
-		// change to login form
-		// catch errors
 	};
 
 	return (

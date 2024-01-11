@@ -12,9 +12,29 @@ describe("Create account", () => {
 
 	it("Validates all fields when form is submited", () => {
 		cy.get('[data-cy="submit-form"]').click();
-		cy.get(`[data-cy="email-error"]`).should("have.text", "Este campo não pode ficar vazio");
-		cy.get(`[data-cy="name-error"]`).should("have.text", "Este campo não pode ficar vazio");
-		cy.get(`[data-cy="password-error"]`).should("have.text", "Este campo não pode ficar vazio");
-		cy.get(`[data-cy="password-check-error"]`).should("have.text", "Este campo não pode ficar vazio");
+		cy.get(`[data-cy="email-error"]`).should(
+			"have.text",
+			"Este campo não pode ficar vazio"
+		);
+		cy.get(`[data-cy="name-error"]`).should(
+			"have.text",
+			"Este campo não pode ficar vazio"
+		);
+		cy.get(`[data-cy="password-error"]`).should(
+			"have.text",
+			"Este campo não pode ficar vazio"
+		);
+		cy.get(`[data-cy="password-check-error"]`).should(
+			"have.text",
+			"Este campo não pode ficar vazio"
+		);
 	});
+
+	it.skip("Cleans the form after a successful mutation");
+
+	it.skip("Displays a successful notification");
+
+	it.skip("Catches requests errors");
+
+	it.skip("Changes form to login");
 });
