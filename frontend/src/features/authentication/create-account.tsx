@@ -9,7 +9,13 @@ interface Props {
 }
 
 export const CreateAccount = ({ setActiveForm }: Props) => {
-	const defaultValues = { email: "", name: "", password: "", passwordCheck: "" };
+	const defaultValues = {
+		email: "",
+		name: "",
+		password: "",
+		passwordCheck: "",
+	};
+
 	const [formData, setFormData] = useState({ ...defaultValues });
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
 
@@ -61,12 +67,35 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 			</h1>
 
 			<form onSubmit={(e) => createAccount(e)}>
-				<Field onChange={(newValue: string) => updateValues("email", newValue)} label="Email" name="email" placeholder="Digite seu email" type="text" error={formErrors.email} />
-				<Field onChange={(newValue: string) => updateValues("name", newValue)} label="Nome" name="name" placeholder="Digite seu nome" type="text" error={formErrors.name} />
-				<Field onChange={(newValue: string) => updateValues("password", newValue)} label="Senha" name="password" placeholder="Digite sua senha" type="password" error={formErrors.password} />
+				<Field
+					onChange={(newValue: string) => updateValues("email", newValue)}
+					label="Email"
+					name="email"
+					placeholder="Digite seu email"
+					type="text"
+					error={formErrors.email}
+				/>
+				<Field
+					onChange={(newValue: string) => updateValues("name", newValue)}
+					label="Nome"
+					name="name"
+					placeholder="Digite seu nome"
+					type="text"
+					error={formErrors.name}
+				/>
+				<Field
+					onChange={(newValue: string) => updateValues("password", newValue)}
+					label="Senha"
+					name="password"
+					placeholder="Digite sua senha"
+					type="password"
+					error={formErrors.password}
+				/>
 
 				<Field
-					onChange={(newValue: string) => updateValues("passwordCheck", newValue)}
+					onChange={(newValue: string) =>
+						updateValues("passwordCheck", newValue)
+					}
 					label="Confirme sua senha"
 					name="password-check"
 					placeholder="Digite sua senha"
@@ -78,7 +107,11 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 					Criar
 				</button>
 
-				<button data-cy="change-form" onClick={() => setActiveForm("login")} className="change-form" type="button">
+				<button
+					data-cy="change-form"
+					onClick={() => setActiveForm("login")}
+					className="change-form"
+					type="button">
 					Já tem uma conta? Clique aqui para entrar.
 				</button>
 			</form>

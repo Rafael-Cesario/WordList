@@ -4,12 +4,9 @@
 ===== Authentication =====
 
 x Create account
-x Login
-
-  x Validate values
-  x Show errors
-  x Clean errors
-  x Notification
   x Mutations and interfaces
   x Create account mutation
-  x Login Mutation 
+  x catch errors
+  x Notification
+
+x Login
