@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Field } from "./components/field";
 import { StyledForm } from "./components/styles/styled-form";
 import { validations } from "./utils/validations";
+import { useMutation } from "@apollo/client";
+import { userQueries } from "@/services/queries/user";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -18,6 +20,9 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 
 	const [formData, setFormData] = useState({ ...defaultValues });
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
+	const [createUserMutation] = useMutation<CreateUserResponse, CreateUserInput>(
+		userQueries.CREATE_USER
+	);
 
 	type IFormKeys = keyof typeof formData;
 
@@ -45,16 +50,30 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 		return hasErrors;
 	};
 
-	const createAccount = (e: React.FormEvent) => {
+	const submitForm = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log({ formData, formErrors });
 
 		const hasErrors = validateAll();
 		if (hasErrors) return;
 
+		await createAccount();
+	};
+
+	const createAccount = async () => {
+		const { email, name, password } = formData;
+
+		try {
+			await createUserMutation({
+				variables: { createUserData: { email, name, password } },
+			});
+		} catch (error: any) {
+			console.log({ error: error.message });
+			return;
+		}
+
+		setFormData(defaultValues);
+
 		// Todo >
-		// create user request
-		// clear form
 		// notification
 		// change to login form
 		// catch errors
@@ -66,8 +85,9 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 				Criar conta
 			</h1>
 
-			<form onSubmit={(e) => createAccount(e)}>
+			<form onSubmit={(e) => submitForm(e)}>
 				<Field
+					value={formData.email}
 					onChange={(newValue: string) => updateValues("email", newValue)}
 					label="Email"
 					name="email"
@@ -76,6 +96,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 					error={formErrors.email}
 				/>
 				<Field
+					value={formData.name}
 					onChange={(newValue: string) => updateValues("name", newValue)}
 					label="Nome"
 					name="name"
@@ -84,6 +105,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 					error={formErrors.name}
 				/>
 				<Field
+					value={formData.password}
 					onChange={(newValue: string) => updateValues("password", newValue)}
 					label="Senha"
 					name="password"
@@ -93,6 +115,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 				/>
 
 				<Field
+					value={formData.passwordCheck}
 					onChange={(newValue: string) =>
 						updateValues("passwordCheck", newValue)
 					}
