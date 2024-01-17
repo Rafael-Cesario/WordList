@@ -6,24 +6,19 @@ import { validations } from "./utils/validations";
 import { useMutation } from "@apollo/client";
 import { userQueries } from "@/services/queries/user";
 import { catchErrors } from "@/utils/catchErrors";
+import { LoadingButton } from "./components/loading-button";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
 }
 
 export const CreateAccount = ({ setActiveForm }: Props) => {
-	const defaultValues = {
-		email: "",
-		name: "",
-		password: "",
-		passwordCheck: "",
-	};
+	const defaultValues = { email: "", name: "", password: "", passwordCheck: "" };
 
 	const [formData, setFormData] = useState({ ...defaultValues });
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
-	const [createUserMutation] = useMutation<CreateUserResponse, CreateUserInput>(
-		userQueries.CREATE_USER
-	);
+
+	const [createUserMutation, { loading }] = useMutation<CreateUserResponse, CreateUserInput>(userQueries.CREATE_USER);
 
 	type IFormKeys = keyof typeof formData;
 
@@ -64,7 +59,6 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 	// notification
 	// change to login form
 	// catch errors
-	// Loading button
 	const createAccount = async () => {
 		const { email, name, password } = formData;
 
@@ -119,9 +113,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 
 				<Field
 					value={formData.passwordCheck}
-					onChange={(newValue: string) =>
-						updateValues("passwordCheck", newValue)
-					}
+					onChange={(newValue: string) => updateValues("passwordCheck", newValue)}
 					label="Confirme sua senha"
 					name="password-check"
 					placeholder="Digite sua senha"
@@ -129,15 +121,15 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 					error={formErrors.passwordCheck}
 				/>
 
-				<button data-cy="submit-form" className="submit">
-					Criar
-				</button>
+				{loading || (
+					<button data-cy="submit-form" className="submit">
+						Criar
+					</button>
+				)}
 
-				<button
-					data-cy="change-form"
-					onClick={() => setActiveForm("login")}
-					className="change-form"
-					type="button">
+				{loading && <LoadingButton className="submit" />}
+
+				<button data-cy="change-form" onClick={() => setActiveForm("login")} className="change-form" type="button">
 					Já tem uma conta? Clique aqui para entrar.
 				</button>
 			</form>

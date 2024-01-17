@@ -9,16 +9,16 @@ export const StyledForm = styled.div`
 	justify-content: center;
 	align-items: center;
 
+	.title {
+		margin-bottom: 2rem;
+	}
+
 	form {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
 		max-width: 300px;
 		min-width: 250px;
-	}
-
-	.title {
-		margin-bottom: 2rem;
 	}
 
 	button {
