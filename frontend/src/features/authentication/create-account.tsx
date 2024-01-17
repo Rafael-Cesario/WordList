@@ -7,6 +7,8 @@ import { useMutation } from "@apollo/client";
 import { userQueries } from "@/services/queries/user";
 import { catchErrors } from "@/utils/catchErrors";
 import { LoadingButton } from "./components/loading-button";
+import { useDispatch } from "react-redux";
+import { setNotificationError } from "@/context/slices/notification-slice";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -19,6 +21,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
 
 	const [createUserMutation, { loading }] = useMutation<CreateUserResponse, CreateUserInput>(userQueries.CREATE_USER);
+	const dispatch = useDispatch();
 
 	type IFormKeys = keyof typeof formData;
 
@@ -67,7 +70,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 		} catch (error: any) {
 			const message = catchErrors(error.message, "user");
 			console.log({ message });
-			// setNotificationError({message})
+			dispatch(setNotificationError({ message }));
 			return;
 		}
 

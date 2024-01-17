@@ -19,10 +19,7 @@ export const notificationSlice = createSlice({
 	initialState,
 
 	reducers: {
-		setNotificationSuccess(
-			state,
-			action: { payload: { title?: string; message: string } }
-		) {
+		setNotificationSuccess(state, action: { payload: { title?: string; message: string } }) {
 			const { title, message } = action.payload;
 			state.isOpen = true;
 			state.type = "success";
@@ -30,10 +27,7 @@ export const notificationSlice = createSlice({
 			state.message = message;
 		},
 
-		setNotificationError(
-			state,
-			action: { payload: { title?: string; message: string } }
-		) {
+		setNotificationError(state, action: { payload: { title?: string; message: string } }) {
 			const { title, message } = action.payload;
 			state.isOpen = true;
 			state.type = "error";
@@ -46,3 +40,5 @@ export const notificationSlice = createSlice({
 		},
 	},
 });
+
+export const { setNotificationSuccess, setNotificationError, setNotificationClose } = notificationSlice.actions;
