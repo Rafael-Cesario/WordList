@@ -63,9 +63,7 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 		const { email, name, password } = formData;
 
 		try {
-			await createUserMutation({
-				variables: { createUserData: { email, name, password } },
-			});
+			await createUserMutation({ variables: { createUserData: { email, name, password } } });
 		} catch (error: any) {
 			const message = catchErrors(error.message, "user");
 			console.log({ message });
@@ -74,6 +72,8 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 		}
 
 		setFormData(defaultValues);
+		// Notifiaciton new user created
+		// change form to login
 	};
 
 	return (

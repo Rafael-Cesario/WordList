@@ -1,5 +1,6 @@
 - Styled Components
 - Cypress
+- Redux
 
 ===== Authentication =====
 
