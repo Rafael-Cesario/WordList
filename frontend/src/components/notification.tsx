@@ -8,7 +8,7 @@ export const Notification = () => {
 	if (!isOpen) return;
 
 	return (
-		<StyledNotification type={type}>
+		<StyledNotification type={type} data-cy="notification">
 			<div className="top">
 				<h1 className="title">{title}</h1>
 				<button className="close">x</button>

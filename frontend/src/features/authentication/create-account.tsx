@@ -69,7 +69,6 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 			await createUserMutation({ variables: { createUserData: { email, name, password } } });
 		} catch (error: any) {
 			const message = catchErrors(error.message, "user");
-			console.log({ message });
 			dispatch(setNotificationError({ message }));
 			return;
 		}
