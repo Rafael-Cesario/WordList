@@ -1,8 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { CyHttpMessages } from "cypress/types/net-stubbing";
 
-const { databaseURL } = Cypress.env();
-
 const mockMutation = (req: CyHttpMessages.IncomingHttpRequest, operationName: string, response: any) => {
 	if (req.body.operationName === operationName) {
 		req.alias = operationName;
@@ -11,27 +9,41 @@ const mockMutation = (req: CyHttpMessages.IncomingHttpRequest, operationName: st
 };
 
 describe("template spec", () => {
-	before(() => {
+	const { databaseURL } = Cypress.env();
+
+	const userData = {
+		email: faker.internet.email(),
+		name: faker.person.firstName(),
+		password: faker.internet.password({ length: 10, prefix: "Ab1" }),
+	};
+
+	beforeEach(() => {
 		cy.visit("/");
 	});
 
 	describe("Create user", () => {
-		it("Catch response errors", () => {
-			const password = faker.internet.password({ length: 10, prefix: "Ab1" });
-			const error = { errors: [{ message: "duplicated:" }] };
-
-			cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", error));
+		beforeEach(() => {
 			cy.get('[data-cy="change-form"]').click();
-			cy.get('[data-cy="email-input"]').type(faker.internet.email());
-			cy.get('[data-cy="name-input"]').type(faker.person.firstName());
-			cy.get('[data-cy="password-input"]').type(password);
-			cy.get('[data-cy="password-check-input"]').type(password);
-			cy.get('[data-cy="submit-form"]').click();
+			cy.get('[data-cy="email-input"]').type(userData.email);
+			cy.get('[data-cy="name-input"]').type(userData.name);
+			cy.get('[data-cy="password-input"]').type(userData.password);
+			cy.get('[data-cy="password-check-input"]').type(userData.password);
+			cy.get(`[data-cy="submit-form"]`).click();
+		});
+
+		it("Catch response errors", () => {
+			const errors = [{ message: "duplicated:" }];
+			cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", { errors }));
 			cy.wait("@CreateUser");
 			cy.get(`[data-cy="notification"] > .message`).should("have.text", "Um usuário com o mesmo e-mail já existe.");
 		});
 
-		it.skip("Creates a new user");
+		it("Creates a new user", () => {
+			const data: CreateUserResponse = { createUser: "success: new user created." };
+			cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", { data }));
+			cy.wait("@CreateUser");
+			cy.get(`[data-cy="notification"] > .message`).should("include.text", `${userData.name}, boas vindas`);
+		});
 	});
 
 	describe("Login", () => {

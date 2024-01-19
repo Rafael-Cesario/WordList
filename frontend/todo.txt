@@ -4,6 +4,8 @@
 
 ===== Authentication =====
 
+x Fix component tests, add providers to cypress mount 
+
 x Create account
   x Notification
 
