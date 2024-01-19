@@ -31,18 +31,34 @@ describe("template spec", () => {
 			cy.get(`[data-cy="submit-form"]`).click();
 		});
 
-		it("Catch response errors", () => {
-			const errors = [{ message: "duplicated:" }];
-			cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", { errors }));
-			cy.wait("@CreateUser");
-			cy.get(`[data-cy="notification"] > .message`).should("have.text", "Um usuário com o mesmo e-mail já existe.");
+		describe("Error", () => {
+			it("Catch response errors", () => {
+				const errors = [{ message: "duplicated:" }];
+				cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", { errors }));
+				cy.wait("@CreateUser");
+				cy.get(`[data-cy="notification"] > .message`).should("have.text", "Um usuário com o mesmo e-mail já existe.");
+			});
 		});
 
-		it("Creates a new user", () => {
-			const data: CreateUserResponse = { createUser: "success: new user created." };
-			cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", { data }));
-			cy.wait("@CreateUser");
-			cy.get(`[data-cy="notification"] > .message`).should("include.text", `${userData.name}, boas vindas`);
+		describe("Success", () => {
+			beforeEach(() => {
+				const data: CreateUserResponse = { createUser: "success: new user created." };
+				cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", { data }));
+				cy.wait("@CreateUser");
+			});
+
+			it("Display a success notification", () => {
+				cy.get(`[data-cy="notification"] > .message`).should("include.text", `${userData.name}, boas vindas`);
+			});
+
+			it("Changes the current form to login", () => {
+				cy.get('[data-cy="title-login"]').should("exist");
+			});
+
+			it("Cleans the create form", () => {
+				cy.get('[data-cy="change-form"]').click();
+				cy.get('[data-cy="email-input"]').should("have.value", "");
+			});
 		});
 	});
 
