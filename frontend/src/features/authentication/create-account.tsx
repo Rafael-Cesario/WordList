@@ -8,7 +8,7 @@ import { userQueries } from "@/services/queries/user";
 import { catchErrors } from "@/utils/catchErrors";
 import { LoadingButton } from "./components/loading-button";
 import { useDispatch } from "react-redux";
-import { setNotificationError } from "@/context/slices/notification-slice";
+import { setNotificationError, setNotificationSuccess } from "@/context/slices/notification-slice";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -55,27 +55,25 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 		const hasErrors = validateAll();
 		if (hasErrors) return;
 
-		await createAccount();
+		const success = await createAccount();
+		if (!success) return;
+
+		setFormData(defaultValues);
+		dispatch(setNotificationSuccess({ message: `${formData.name}, boas vindas, sua conta foi criada com sucesso.` }));
+		setActiveForm("login");
 	};
 
-	// Todo >
-	// notification
-	// change to login form
-	// catch errors
 	const createAccount = async () => {
 		const { email, name, password } = formData;
 
 		try {
 			await createUserMutation({ variables: { createUserData: { email, name, password } } });
+			return true;
 		} catch (error: any) {
 			const message = catchErrors(error.message, "user");
 			dispatch(setNotificationError({ message }));
-			return;
+			return false;
 		}
-
-		setFormData(defaultValues);
-		// Notifiaciton new user created
-		// change form to login
 	};
 
 	return (

@@ -40,4 +40,8 @@ export const StyledNotification = styled.div<{ type: "success" | "error" }>`
 			}
 		}
 	}
+
+	.message ::first-letter {
+		text-transform: capitalize;
+	}
 `;
