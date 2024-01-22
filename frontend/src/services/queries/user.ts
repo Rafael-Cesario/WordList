@@ -6,6 +6,17 @@ class UserQueries {
 			createUser(createUserData: $createUserData)
 		}
 	`;
+
+	LOGIN = gql`
+		mutation login($loginData: LoginInput!) {
+			login(loginData: $loginData) {
+				id
+				email
+				name
+				token
+			}
+		}
+	`;
 }
 
 export const userQueries = new UserQueries();

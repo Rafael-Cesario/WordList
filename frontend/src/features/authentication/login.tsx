@@ -41,6 +41,15 @@ export const Login = ({ setActiveForm }: Props) => {
 		return hasEmpty;
 	};
 
+	// Todo >
+	// login mutation
+	// loading button
+	// catch errors, invalid credentials
+	// create cookies api GET and POST route
+	// helper functions to create cookies
+	// save token on cookies
+	// save user data on local storage
+	// send user to home page
 	const login = () => {
 		console.log({ formData, formErrors });
 		return;
@@ -73,7 +82,9 @@ export const Login = ({ setActiveForm }: Props) => {
 					type="password"
 				/>
 
-				<button data-cy="submit-form" className="submit">Entrar</button>
+				<button data-cy="submit-form" className="submit">
+					Entrar
+				</button>
 
 				<button data-cy="change-form" onClick={() => setActiveForm("create")} className="change-form" type="button">
 					Não tem uma conta? Clique aqui para criar.

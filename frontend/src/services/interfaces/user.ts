@@ -9,3 +9,19 @@ interface CreateUserInput {
 interface CreateUserResponse {
 	createUser: string;
 }
+
+interface LoginInput {
+	loginData: {
+		email: string;
+		password: string;
+	};
+}
+
+interface LoginResponse {
+	login: {
+		id: string;
+		email: string;
+		name: string;
+		token: string;
+	};
+}
