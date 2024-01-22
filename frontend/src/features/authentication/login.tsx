@@ -1,20 +1,55 @@
 import { Field } from "./components/field";
 import { StyledForm } from "./components/styles/styled-form";
+import { useState } from "react";
+import { produce } from "immer";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
 }
 
 export const Login = ({ setActiveForm }: Props) => {
+	const defaultValues = { email: "", password: "" };
+	type FormKeys = keyof typeof defaultValues;
+
+	const [formData, setFormData] = useState({ ...defaultValues });
+	const [formErrors, setFormErrors] = useState({ ...defaultValues });
+
+	const updateValue = (key: FormKeys, value: string) => {
+		const newState = produce(formData, (draft) => void (draft[key] = value));
+		setFormData(newState);
+	};
+
+	const login = () => {
+		console.log({ formData, formErrors });
+		return;
+	};
+
 	return (
 		<StyledForm>
 			<h1 className="title" data-cy="title-login">
 				Login
 			</h1>
 
-			<form>
-				<Field label="Email" name="email" placeholder="Digite seu email" type="text" />
-				<Field label="Senha" name="password" placeholder="Digite sua senha" type="password" />
+			<form onSubmit={(e) => void (e.preventDefault(), login())}>
+				<Field
+					value={formData.email}
+					error={formErrors.email}
+					onChange={(value: string) => updateValue("email", value)}
+					label="Email"
+					name="email"
+					placeholder="Digite seu email"
+					type="text"
+				/>
+
+				<Field
+					value={formData.password}
+					error={formErrors.password}
+					onChange={(value: string) => updateValue("password", value)}
+					label="Senha"
+					name="password"
+					placeholder="Digite sua senha"
+					type="password"
+				/>
 
 				<button className="submit">Entrar</button>
 
