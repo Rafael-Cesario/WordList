@@ -73,7 +73,7 @@ export const Login = ({ setActiveForm }: Props) => {
 					type="password"
 				/>
 
-				<button className="submit">Entrar</button>
+				<button data-cy="submit-form" className="submit">Entrar</button>
 
 				<button data-cy="change-form" onClick={() => setActiveForm("create")} className="change-form" type="button">
 					Não tem uma conta? Clique aqui para criar.
