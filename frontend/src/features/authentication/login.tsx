@@ -19,6 +19,28 @@ export const Login = ({ setActiveForm }: Props) => {
 		setFormData(newState);
 	};
 
+	const submitForm = (e: React.FormEvent) => {
+		e.preventDefault();
+		if (hasEmptyValues()) return;
+		login();
+	};
+
+	const hasEmptyValues = () => {
+		const entries = Object.entries(formData);
+		const errors = { ...defaultValues };
+		let hasEmpty = false;
+
+		entries.forEach(([key, value]) => {
+			if (value) return;
+
+			hasEmpty = true;
+			errors[key as FormKeys] = "Este campo não pode ficar vazio.";
+		});
+
+		setFormErrors(errors);
+		return hasEmpty;
+	};
+
 	const login = () => {
 		console.log({ formData, formErrors });
 		return;
@@ -30,7 +52,7 @@ export const Login = ({ setActiveForm }: Props) => {
 				Login
 			</h1>
 
-			<form onSubmit={(e) => void (e.preventDefault(), login())}>
+			<form onSubmit={(e) => submitForm(e)}>
 				<Field
 					value={formData.email}
 					error={formErrors.email}
