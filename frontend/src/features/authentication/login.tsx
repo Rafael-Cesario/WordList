@@ -5,6 +5,9 @@ import { produce } from "immer";
 import { useMutation } from "@apollo/client";
 import { userQueries } from "@/services/queries/user";
 import { LoadingButton } from "./components/loading-button";
+import { catchErrors } from "@/utils/catchErrors";
+import { useDispatch } from "react-redux";
+import { setNotificationError } from "@/context/slices/notification-slice";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -18,6 +21,7 @@ export const Login = ({ setActiveForm }: Props) => {
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
 
 	const [loginMutation, { loading }] = useMutation<LoginResponse, LoginInput>(userQueries.LOGIN);
+	const dispatch = useDispatch();
 
 	const updateValue = (key: FormKeys, value: string) => {
 		const newState = produce(formData, (draft) => void (draft[key] = value));
@@ -48,9 +52,9 @@ export const Login = ({ setActiveForm }: Props) => {
 
 	// Todo >
 	// - login mutation
-	// > loading button
-	// x catch errors, invalid credentials
-	// x create cookies api GET and POST route
+	// - loading button
+	// - catch errors, invalid credentials
+	// > create cookies api GET and POST route
 	// x helper functions to create cookies
 	// x save token on cookies
 	// x save user data on local storage
@@ -63,8 +67,9 @@ export const Login = ({ setActiveForm }: Props) => {
 			if (!data) throw new Error("Server didn't return data");
 
 			console.log(data?.login);
-		} catch (error) {
-			console.log({ error });
+		} catch (error: any) {
+			const message = catchErrors(error.message, "user");
+			dispatch(setNotificationError({ message }));
 		}
 	};
 
