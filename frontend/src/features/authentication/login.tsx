@@ -4,6 +4,7 @@ import { useState } from "react";
 import { produce } from "immer";
 import { useMutation } from "@apollo/client";
 import { userQueries } from "@/services/queries/user";
+import { LoadingButton } from "./components/loading-button";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -16,7 +17,7 @@ export const Login = ({ setActiveForm }: Props) => {
 	const [formData, setFormData] = useState({ ...defaultValues });
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
 
-	const [loginMutation] = useMutation<LoginResponse, LoginInput>(userQueries.LOGIN);
+	const [loginMutation, { loading }] = useMutation<LoginResponse, LoginInput>(userQueries.LOGIN);
 
 	const updateValue = (key: FormKeys, value: string) => {
 		const newState = produce(formData, (draft) => void (draft[key] = value));
@@ -47,7 +48,7 @@ export const Login = ({ setActiveForm }: Props) => {
 
 	// Todo >
 	// - login mutation
-	// x loading button
+	// > loading button
 	// x catch errors, invalid credentials
 	// x create cookies api GET and POST route
 	// x helper functions to create cookies
@@ -94,9 +95,13 @@ export const Login = ({ setActiveForm }: Props) => {
 					type="password"
 				/>
 
-				<button data-cy="submit-form" className="submit">
-					Entrar
-				</button>
+				{loading || (
+					<button data-cy="submit-form" className="submit">
+						Entrar
+					</button>
+				)}
+
+				{loading && <LoadingButton className="submit" />}
 
 				<button data-cy="change-form" onClick={() => setActiveForm("create")} className="change-form" type="button">
 					Não tem uma conta? Clique aqui para criar.
