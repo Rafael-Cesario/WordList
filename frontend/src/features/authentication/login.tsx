@@ -2,6 +2,8 @@ import { Field } from "./components/field";
 import { StyledForm } from "./components/styles/styled-form";
 import { useState } from "react";
 import { produce } from "immer";
+import { useMutation } from "@apollo/client";
+import { userQueries } from "@/services/queries/user";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -13,6 +15,8 @@ export const Login = ({ setActiveForm }: Props) => {
 
 	const [formData, setFormData] = useState({ ...defaultValues });
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
+
+	const [loginMutation] = useMutation<LoginResponse, LoginInput>(userQueries.LOGIN);
 
 	const updateValue = (key: FormKeys, value: string) => {
 		const newState = produce(formData, (draft) => void (draft[key] = value));
@@ -42,17 +46,25 @@ export const Login = ({ setActiveForm }: Props) => {
 	};
 
 	// Todo >
-	// login mutation
-	// loading button
-	// catch errors, invalid credentials
-	// create cookies api GET and POST route
-	// helper functions to create cookies
-	// save token on cookies
-	// save user data on local storage
-	// send user to home page
-	const login = () => {
+	// - login mutation
+	// x loading button
+	// x catch errors, invalid credentials
+	// x create cookies api GET and POST route
+	// x helper functions to create cookies
+	// x save token on cookies
+	// x save user data on local storage
+	// x Reset form values
+	// x send user to home page
+	const login = async () => {
 		console.log({ formData, formErrors });
-		return;
+		try {
+			const { data } = await loginMutation({ variables: { loginData: formData } });
+			if (!data) throw new Error("Server didn't return data");
+
+			console.log(data?.login);
+		} catch (error) {
+			console.log({ error });
+		}
 	};
 
 	return (
