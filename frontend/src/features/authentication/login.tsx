@@ -54,8 +54,8 @@ export const Login = ({ setActiveForm }: Props) => {
 	// - login mutation
 	// - loading button
 	// - catch errors, invalid credentials
-	// > create cookies api GET and POST route
-	// x helper functions to create cookies
+	// - create cookies api POST route
+	// > helper functions to create cookies
 	// x save token on cookies
 	// x save user data on local storage
 	// x Reset form values
