@@ -6,3 +6,4 @@
 
 - Create account
 > Login
+  x Tests

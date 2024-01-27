@@ -9,6 +9,7 @@ import { catchErrors } from "@/utils/catchErrors";
 import { LoadingButton } from "./components/loading-button";
 import { useDispatch } from "react-redux";
 import { setNotificationError, setNotificationSuccess } from "@/context/slices/notification-slice";
+import { CreateUserResponse, CreateUserInput } from "@/services/interfaces/user";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;

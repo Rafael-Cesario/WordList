@@ -1,4 +1,4 @@
-interface CreateUserInput {
+export interface CreateUserInput {
 	createUserData: {
 		email: string;
 		name: string;
@@ -6,18 +6,18 @@ interface CreateUserInput {
 	};
 }
 
-interface CreateUserResponse {
+export interface CreateUserResponse {
 	createUser: string;
 }
 
-interface LoginInput {
+export interface LoginInput {
 	loginData: {
 		email: string;
 		password: string;
 	};
 }
 
-interface LoginResponse {
+export interface LoginResponse {
 	login: {
 		id: string;
 		email: string;

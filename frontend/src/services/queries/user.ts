@@ -8,7 +8,7 @@ class UserQueries {
 	`;
 
 	LOGIN = gql`
-		mutation login($loginData: LoginInput!) {
+		mutation Login($loginData: LoginInput!) {
 			login(loginData: $loginData) {
 				id
 				email

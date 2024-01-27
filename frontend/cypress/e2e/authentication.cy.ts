@@ -67,8 +67,8 @@ describe("template spec", () => {
 
 		it.skip("Creates a cookie with authentication token");
 
-		it.skip("Saves user data into local storage");
-
 		it.skip("Successfully login a user");
+
+		it.skip('Sends user to home page after login')
 	});
 });

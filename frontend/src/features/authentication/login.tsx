@@ -1,3 +1,4 @@
+"use client";
 import { Field } from "./components/field";
 import { StyledForm } from "./components/styles/styled-form";
 import { useState } from "react";
@@ -10,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { setNotificationError } from "@/context/slices/notification-slice";
 import { userCookies } from "@/services/cookies";
 import { useRouter } from "next/navigation";
+import { LoginResponse, LoginInput } from "@/services/interfaces/user";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -60,20 +62,11 @@ export const Login = ({ setActiveForm }: Props) => {
 		return hasEmpty;
 	};
 
-	// Todo >
-	// - login mutation
-	// - loading button
-	// - catch errors, invalid credentials
-	// - create cookies api POST route
-	// - helper functions to create cookies
-	// - save token on cookies
-	// - Reset form values
-	// - send user to home page
 	const login = async () => {
 		try {
 			const { data } = await loginMutation({ variables: { loginData: formData } });
 			if (!data) throw new Error("Server didn't return data");
-			userCookies.set(data.login);
+			await userCookies.set(data.login);
 		} catch (error: any) {
 			const message = catchErrors(error.message, "user");
 			dispatch(setNotificationError({ message }));
