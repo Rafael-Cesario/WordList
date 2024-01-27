@@ -9,6 +9,7 @@ import { catchErrors } from "@/utils/catchErrors";
 import { useDispatch } from "react-redux";
 import { setNotificationError } from "@/context/slices/notification-slice";
 import { userCookies } from "@/services/cookies";
+import { useRouter } from "next/navigation";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -20,6 +21,7 @@ export const Login = ({ setActiveForm }: Props) => {
 
 	const [formData, setFormData] = useState({ ...defaultValues });
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
+	const router = useRouter();
 
 	const [loginMutation, { loading }] = useMutation<LoginResponse, LoginInput>(userQueries.LOGIN);
 	const dispatch = useDispatch();
@@ -29,13 +31,20 @@ export const Login = ({ setActiveForm }: Props) => {
 		setFormData(newState);
 	};
 
-	const submitForm = (e: React.FormEvent) => {
+	const submitForm = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (hasEmptyValues()) return;
-		login();
+
+		const hasEmptyValues = emptyValues();
+		if (hasEmptyValues) return;
+
+		const success = await login();
+		if (!success) return;
+
+		setFormData({ ...defaultValues });
+		router.refresh();
 	};
 
-	const hasEmptyValues = () => {
+	const emptyValues = () => {
 		const entries = Object.entries(formData);
 		const errors = { ...defaultValues };
 		let hasEmpty = false;
@@ -57,23 +66,21 @@ export const Login = ({ setActiveForm }: Props) => {
 	// - catch errors, invalid credentials
 	// - create cookies api POST route
 	// - helper functions to create cookies
-	// x save token on cookies
-	// x save user data on local storage
-	// x Reset form values
-	// x send user to home page
+	// - save token on cookies
+	// - Reset form values
+	// - send user to home page
 	const login = async () => {
-		console.log({ formData, formErrors });
-
 		try {
 			const { data } = await loginMutation({ variables: { loginData: formData } });
 			if (!data) throw new Error("Server didn't return data");
-
 			userCookies.set(data.login);
 		} catch (error: any) {
 			const message = catchErrors(error.message, "user");
 			dispatch(setNotificationError({ message }));
-			return;
+			return false;
 		}
+
+		return true;
 	};
 
 	return (
