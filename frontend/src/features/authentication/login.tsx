@@ -8,6 +8,7 @@ import { LoadingButton } from "./components/loading-button";
 import { catchErrors } from "@/utils/catchErrors";
 import { useDispatch } from "react-redux";
 import { setNotificationError } from "@/context/slices/notification-slice";
+import { userCookies } from "@/services/cookies";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -55,21 +56,23 @@ export const Login = ({ setActiveForm }: Props) => {
 	// - loading button
 	// - catch errors, invalid credentials
 	// - create cookies api POST route
-	// > helper functions to create cookies
+	// - helper functions to create cookies
 	// x save token on cookies
 	// x save user data on local storage
 	// x Reset form values
 	// x send user to home page
 	const login = async () => {
 		console.log({ formData, formErrors });
+
 		try {
 			const { data } = await loginMutation({ variables: { loginData: formData } });
 			if (!data) throw new Error("Server didn't return data");
 
-			console.log(data?.login);
+			userCookies.set(data.login);
 		} catch (error: any) {
 			const message = catchErrors(error.message, "user");
 			dispatch(setNotificationError({ message }));
+			return;
 		}
 	};
 

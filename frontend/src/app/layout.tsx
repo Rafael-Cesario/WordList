@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
 import { StyledGlobal } from "@/styles/styled-global";
-import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 
 interface Props {
@@ -29,3 +29,4 @@ export default function RootLayout({ children, authentication }: Props) {
 		</html>
 	);
 }
+
