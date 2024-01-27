@@ -5,5 +5,20 @@
 ===== Authentication =====
 
 - Create account
+  - On change validate fields
+  - Create user mutation 
+  - Catch response errors 
+  - Dispatch notification
+  - Change current form to login
+  x Hook useQueriesUser, createUserRequest
+  - Tests
+
 > Login
+  - Validate fields
+  - Login mutation 
+  - Catch response errors 
+  - Dispatch notification
+  - Save token on cookies
+  - Send user to home page
+  x Hook useQueriesUser, loginRequest
   x Tests
