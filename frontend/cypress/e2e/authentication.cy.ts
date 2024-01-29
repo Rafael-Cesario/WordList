@@ -1,3 +1,4 @@
+import { CreateUserResponse } from "@/services/interfaces/user";
 import { faker } from "@faker-js/faker";
 import { CyHttpMessages } from "cypress/types/net-stubbing";
 
@@ -8,13 +9,17 @@ const mockMutation = (req: CyHttpMessages.IncomingHttpRequest, operationName: st
 	}
 };
 
-describe("template spec", () => {
+describe("Authentication page", () => {
 	const { databaseURL } = Cypress.env();
 
 	const userData = {
 		email: faker.internet.email(),
 		name: faker.person.firstName(),
 		password: faker.internet.password({ length: 10, prefix: "Ab1" }),
+	};
+
+	const intercept = (operationName: string, response: object) => {
+		cy.intercept("POST", databaseURL, (req) => mockMutation(req, operationName, response));
 	};
 
 	beforeEach(() => {
@@ -63,12 +68,37 @@ describe("template spec", () => {
 	});
 
 	describe("Login", () => {
-		it.skip("Catch response errors");
+		const fillFormData = () => {
+			cy.get(`[data-cy="email-input"]`).type(userData.email);
+			cy.get(`[data-cy="password-input"]`).type(userData.password);
+		};
+
+		beforeEach(() => {
+			fillFormData();
+		});
+
+		it("Catch response error for invalid credentials", () => {
+			const errors = [{ message: "Unauthorized: Invalid credentials" }];
+			intercept("Login", { errors });
+
+			cy.get(`[data-cy="submit-form"]`).click();
+			cy.wait("@Login");
+			cy.get(`[data-cy="notification"] > .message`).should("have.text", "Seu email ou sua senha não estão corretos.");
+		});
+
+		it("Catch response error for unexpected errors", () => {
+			const errors = [{ message: "unexpected error" }];
+			intercept("Login", { errors });
+
+			cy.get(`[data-cy="submit-form"]`).click();
+			cy.wait("@Login");
+			cy.get(`[data-cy="notification"] > .message`).should("have.text", "Um erro inesperado ocorreu.");
+		});
 
 		it.skip("Creates a cookie with authentication token");
 
 		it.skip("Successfully login a user");
 
-		it.skip('Sends user to home page after login')
+		it.skip("Sends user to home page after login");
 	});
 });
