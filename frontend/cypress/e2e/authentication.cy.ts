@@ -1,4 +1,4 @@
-import { CreateUserResponse } from "@/services/interfaces/user";
+import { CreateUserResponse, LoginResponse } from "@/services/interfaces/user";
 import { faker } from "@faker-js/faker";
 import { CyHttpMessages } from "cypress/types/net-stubbing";
 
@@ -33,13 +33,13 @@ describe("Authentication page", () => {
 			cy.get('[data-cy="name-input"]').type(userData.name);
 			cy.get('[data-cy="password-input"]').type(userData.password);
 			cy.get('[data-cy="password-check-input"]').type(userData.password);
-			cy.get(`[data-cy="submit-form"]`).click();
 		});
 
 		describe("Error", () => {
 			it("Catch response errors", () => {
 				const errors = [{ message: "duplicated:" }];
 				cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", { errors }));
+				cy.get(`[data-cy="submit-form"]`).click();
 				cy.wait("@CreateUser");
 				cy.get(`[data-cy="notification"] > .message`).should("have.text", "Um usuário com o mesmo e-mail já existe.");
 			});
@@ -49,6 +49,7 @@ describe("Authentication page", () => {
 			beforeEach(() => {
 				const data: CreateUserResponse = { createUser: "success: new user created." };
 				cy.intercept("POST", databaseURL, (req) => mockMutation(req, "CreateUser", { data }));
+				cy.get(`[data-cy="submit-form"]`).click();
 				cy.wait("@CreateUser");
 			});
 
@@ -68,37 +69,51 @@ describe("Authentication page", () => {
 	});
 
 	describe("Login", () => {
-		const fillFormData = () => {
+		beforeEach(() => {
 			cy.get(`[data-cy="email-input"]`).type(userData.email);
 			cy.get(`[data-cy="password-input"]`).type(userData.password);
-		};
-
-		beforeEach(() => {
-			fillFormData();
 		});
 
-		it("Catch response error for invalid credentials", () => {
-			const errors = [{ message: "Unauthorized: Invalid credentials" }];
-			intercept("Login", { errors });
+		describe("Errors", () => {
+			it("Catch response error for invalid credentials", () => {
+				const errors = [{ message: "Unauthorized: Invalid credentials" }];
+				intercept("Login", { errors });
 
-			cy.get(`[data-cy="submit-form"]`).click();
-			cy.wait("@Login");
-			cy.get(`[data-cy="notification"] > .message`).should("have.text", "Seu email ou sua senha não estão corretos.");
+				cy.get(`[data-cy="submit-form"]`).click();
+				cy.wait("@Login");
+				cy.get(`[data-cy="notification"] > .message`).should("have.text", "Seu email ou sua senha não estão corretos.");
+			});
+
+			it("Catch response error for unexpected errors", () => {
+				const errors = [{ message: "unexpected error" }];
+				intercept("Login", { errors });
+
+				cy.get(`[data-cy="submit-form"]`).click();
+				cy.wait("@Login");
+				cy.get(`[data-cy="notification"] > .message`).should("have.text", "Um erro inesperado ocorreu.");
+			});
 		});
 
-		it("Catch response error for unexpected errors", () => {
-			const errors = [{ message: "unexpected error" }];
-			intercept("Login", { errors });
+		describe("Success", () => {
+			const data: LoginResponse = {
+				login: { id: "123", email: userData.email, name: userData.name, token: "18138372fad4b94533cd4881f03dc6c6" },
+			};
 
-			cy.get(`[data-cy="submit-form"]`).click();
-			cy.wait("@Login");
-			cy.get(`[data-cy="notification"] > .message`).should("have.text", "Um erro inesperado ocorreu.");
+			beforeEach(() => {
+				intercept("Login", { data });
+				cy.intercept("/api/cookies/user").as("setCookies");
+				cy.get(`[data-cy="submit-form"]`).click();
+				cy.wait("@Login");
+				cy.wait("@setCookies");
+			});
+
+			it("Creates a cookie for the user", () => {
+				cy.getCookie("user").should("exist");
+			});
+
+			it("Sends user to home page after login", () => {
+				cy.get(`[data-cy="title-login"]`).should("not.exist");
+			});
 		});
-
-		it.skip("Creates a cookie with authentication token");
-
-		it.skip("Successfully login a user");
-
-		it.skip("Sends user to home page after login");
 	});
 });
