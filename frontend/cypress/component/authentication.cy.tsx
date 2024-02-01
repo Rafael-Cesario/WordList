@@ -1,12 +1,18 @@
 import Authentication from "@/app/@authentication/page";
 import { Providers } from "@/components/providers";
+import { createRouter } from "../support/routerMock";
+import { AppRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 describe("authentication.cy.tsx", () => {
 	it("Changes the current form", () => {
+		const router = createRouter();
+
 		cy.mount(
-			<Providers>
-				<Authentication />
-			</Providers>
+			<AppRouterContext.Provider value={router}>
+				<Providers>
+					<Authentication />
+				</Providers>
+			</AppRouterContext.Provider>
 		);
 
 		cy.get('[data-cy="change-form"]').click();

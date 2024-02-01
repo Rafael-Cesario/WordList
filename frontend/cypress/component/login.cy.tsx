@@ -1,14 +1,24 @@
 import { Providers } from "@/components/providers";
 import { Login } from "@/features/authentication/login";
+import { createRouter } from "../support/routerMock";
+import { AppRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-const Component = () => (
-	<Providers>
-		<Login setActiveForm={cy.stub()} />
-	</Providers>
-);
+const Component = () => {
+	const router = createRouter();
+
+	return (
+		<AppRouterContext.Provider value={router}>
+			<Providers>
+				<Login setActiveForm={cy.stub()} />
+			</Providers>
+		</AppRouterContext.Provider>
+	);
+};
 
 describe("Login component", () => {
-	beforeEach(() => cy.mount(<Component />));
+	beforeEach(() => {
+		cy.mount(<Component />);
+	});
 
 	describe("Validate errors", () => {
 		beforeEach(() => {

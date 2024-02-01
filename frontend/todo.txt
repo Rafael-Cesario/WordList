@@ -25,7 +25,8 @@ Authentication is a parallel page rendered conditionally if the user has no cook
   - Dispatch notification
   - Change current form to login
   - Tests
-  x Refactor Hook useQueriesUser, method createUserRequest
+  > Refactor Hook useQueriesUser, method createUserRequest
+    x Fix test errors, router not mounted
 
 > Login
   - Validate fields
