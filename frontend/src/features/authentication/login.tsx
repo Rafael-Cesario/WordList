@@ -3,15 +3,12 @@ import { Field } from "./components/field";
 import { StyledForm } from "./components/styles/styled-form";
 import { useState } from "react";
 import { produce } from "immer";
-import { useMutation } from "@apollo/client";
-import { userQueries } from "@/services/queries/user";
 import { LoadingButton } from "./components/loading-button";
-import { catchErrors } from "@/utils/catchErrors";
 import { useDispatch } from "react-redux";
 import { setNotificationError } from "@/context/slices/notification-slice";
 import { userCookies } from "@/services/cookies";
 import { useRouter } from "next/navigation";
-import { LoginResponse, LoginInput } from "@/services/interfaces/user";
+import { useQueriesUser } from "@/utils/hooks/useQueriesUser";
 
 interface Props {
 	setActiveForm(form: "login" | "create"): void;
@@ -25,7 +22,7 @@ export const Login = ({ setActiveForm }: Props) => {
 	const [formErrors, setFormErrors] = useState({ ...defaultValues });
 	const router = useRouter();
 
-	const [loginMutation, { loading }] = useMutation<LoginResponse, LoginInput>(userQueries.LOGIN);
+	const { loginMutation, loginLoading: loading } = useQueriesUser();
 	const dispatch = useDispatch();
 
 	const updateValue = (key: FormKeys, value: string) => {
@@ -39,8 +36,10 @@ export const Login = ({ setActiveForm }: Props) => {
 		const hasEmptyValues = emptyValues();
 		if (hasEmptyValues) return;
 
-		const success = await login();
-		if (!success) return;
+		const { data, error } = await loginMutation({ loginData: formData });
+		if (error || !data) return dispatch(setNotificationError({ message: error }));
+
+		await userCookies.set(data.login);
 
 		setFormData({ ...defaultValues });
 		router.refresh();
@@ -60,20 +59,6 @@ export const Login = ({ setActiveForm }: Props) => {
 
 		setFormErrors(errors);
 		return hasEmpty;
-	};
-
-	const login = async () => {
-		try {
-			const { data } = await loginMutation({ variables: { loginData: formData } });
-			if (!data) throw new Error("Server didn't return data");
-			await userCookies.set(data.login);
-		} catch (error: any) {
-			const message = catchErrors(error.message, "user");
-			dispatch(setNotificationError({ message }));
-			return false;
-		}
-
-		return true;
 	};
 
 	return (
