@@ -35,4 +35,4 @@ Authentication is a parallel page rendered conditionally if the user has no cook
   - Save token on cookies
   - Send user to home page
   - Tests
-  x Refactor Hook useQueriesUser, method loginRequest
+  - Refactor Hook useQueriesUser, method loginRequest

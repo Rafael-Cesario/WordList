@@ -58,8 +58,8 @@ export const CreateAccount = ({ setActiveForm }: Props) => {
 		if (hasErrors) return;
 
 		const { email, name, password } = formData;
-		const success = await createUserMutation({ createUserData: { email, name, password } });
-		if (!success) return;
+		const { error } = await createUserMutation({ createUserData: { email, name, password } });
+		if (error) return dispatch(setNotificationError({ message: error }));
 
 		dispatch(setNotificationSuccess({ message: `${formData.name}, boas vindas, sua conta foi criada com sucesso.` }));
 		setFormData(defaultValues);
