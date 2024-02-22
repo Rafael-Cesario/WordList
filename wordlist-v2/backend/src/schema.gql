@@ -1,0 +1,35 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+type LoginData {
+  email: String!
+  id: String!
+  name: String!
+  token: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createUser(createUserData: CreateUserInput!): String!
+  login(loginData: LoginInput!): LoginData!
+}
+
+type Query {
+  hello: String!
+  validateToken(tokenData: ValidateTokenInput!): Boolean!
+}
+
+input ValidateTokenInput {
+  token: String!
+}

@@ -1,0 +1,9 @@
+- GraphQL
+- Docker + Postgres
+- Prisma
+
+===== User =====
+
+- Create user
+- login
+- Validate token

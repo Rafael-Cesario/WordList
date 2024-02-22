@@ -1,0 +1,38 @@
+- Nextjs v13
+- Styled Components
+- Cypress
+- Redux
+
+===== Authentication =====
+
+Authentication is a parallel page rendered conditionally if the user has no cookies.
+
+- Features
+  - Create account 
+  - Login
+
+- Api cookies user
+  - POST set cookies
+
+- Layout 
+  - Component for all client providers
+  - Check if user is authenticated
+
+> Create account
+  - On change validate fields
+  - Create user mutation + interfaces
+  - Catch response errors 
+  - Dispatch notification
+  - Change current form to login
+  - Tests
+  - Refactor Hook useQueriesUser, method createUserRequest
+
+> Login
+  - Validate fields
+  - Login mutation + interfaces
+  - Catch response errors 
+  - Dispatch notification
+  - Save token on cookies
+  - Send user to home page
+  - Tests
+  - Refactor Hook useQueriesUser, method loginRequest
